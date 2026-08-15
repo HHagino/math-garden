@@ -63,7 +63,21 @@ $public = @(
   '離散直線はRnに埋め込めない_2026-06-02.md',
   '何を解と呼ぶのか_2026-06-02.md',
   '素数の足し算は人類に向いていない_2026-06-02.md',
-  'math-history-meaning-catches-up-later.md'
+  'math-history-meaning-catches-up-later.md',
+
+  # --- 2026-08-15 追加(第2便) ---
+  # 数論・ガロア理論
+  '無限次Galois対応は位相が決める_2026-06-19.md',
+  'なぜZariskiでは点が数えられないか_Weil予想とGrothendieck位相_2026-06-19.md',
+  # 幾何・トポロジー
+  '弧状連結単連結可縮_不変量は何を見て何を見落とすか_2026-06-19.md',
+  # 作用素環・作用素空間
+  '実構造は非可換でmodular共役Jになる_2026-06-20.md',
+  '作用素空間_行列ノルムの塔が入り方を覚えている_2026-07-09.md',
+  # LAOX 三部作
+  'LAOX性とは何か何でないか_隣接概念との微差_2026-06-19.md',
+  'LAOX曲線_局所在庫あり大域在庫なし_2026-06-19.md',
+  'LAOX多様体_次元を上げると障害が増える_2026-06-19.md'
 )
 
 # --- 保留中(本人確認後に $public へ移す) ---
@@ -71,8 +85,24 @@ $held = @(
   'nakayama-and-basu-reflects-zero-parallel.md',       # 第一論文の核心(Basu=中山0次)に近い
   'probability-space-stone-reading-galois-tower.md',   # 同上(filtration↔Galois)
   'dei-markov-kernel-mathematical-perfume.md',         # DEI フレーム(実名公開で政治色)
-  'moral-hazard-as-welfare-dissipation-observation-kernel.md'  # モラルハザード/厚生フレーム
+  'moral-hazard-as-welfare-dissipation-observation-kernel.md',  # モラルハザード/厚生フレーム
+
+  # --- 2026-08-15 追加。理由は「次の一本(トラック2)の候補そのもの」 ---
+  # ⚠️ paper1 は「正しく新しい」が 0 件でトラック1(Expositiones)へ回した。
+  #    トラック2 = 次の一本が研究の本体。その探索の中身を先に公開するかは戦略判断。
+  '伊藤補正は幾何ではない_Fisher弧長とDirichlet周期_2026-08-03.md',   # TODO が「切り出すならこちらが先」と名指し
+  '高さは単体上の平均エントロピーである_調和数が二度出る_2026-08-03.md', # 同日の対になる探索
+  '非可換性は情報を覚えているか_遠アーベル幾何と局所体の反例_2026-08-10.md', # Galois 側の核心に寄る
+  '補集合は複素共役ではない_確率のStone読みの三つのZ2_2026-06-19.md',  # 「Stone 読み」= filtration↔Galois の語彙
+  'Ihara三項式は木の初到達母関数である_2026-08-11.md',                  # 8/11 の探索。ゼータ×木
+  'ゼータは記憶から生まれる_ランダムウォークのゼータはGreen核に潰れる_2026-08-11.md', # 同上・対になる一本
+  'Basuの定理はscore空間の直交分解_0次vanishingの起動例_2026-06-20.md'  # Basu = 第一論文の核心
 )
+
+# --- 公開対象外(記事ではない) ---
+# デザイン規則2本・庭のマップ・引継ぎメモ2本・algebraic-gr-READING-BEFORE-REOPEN
+# --- 凍結中(アラケロフ影プログラム。趣味として凍結) ---
+# algebraic-gr-map-clifford-holonomy-h1.md / algebraic-gr-minimality-postulate-proposal.md
 
 # 記事/ をクリーンに作り直す
 if (Test-Path $dst) { Remove-Item $dst -Recurse -Force }
