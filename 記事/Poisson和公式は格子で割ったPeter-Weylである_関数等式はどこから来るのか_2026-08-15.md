@@ -1,0 +1,234 @@
+---
+title: "Poisson 和公式は格子で割った Peter–Weyl である ── 関数等式はどこから来るのか"
+date: 2026-08-15
+lang: ja
+tags: [Poisson和公式, Peter-Weyl, Pontryagin双対, テータ関数, ゼータ関数, 関数等式, Mellin変換, 双対格子, Selberg跡公式, 調和解析]
+status: done
+level: 数学解説(フーリエ級数と広義積分。ゼータの知識は仮定しない)
+---
+
+# Poisson 和公式は格子で割った Peter–Weyl である ── 関数等式はどこから来るのか
+
+## 1. 導入：$\zeta$ の関数等式は、総和公式の系である
+
+$\zeta(s)$ の関数等式 $\xi(s) = \xi(1-s)$ は、たいてい「Riemann が示した驚くべき対称性」として登場する。$s$ と $1-s$ を入れ替えても変わらない、という主張だけが残り、**なぜそんな対称性が湧いてくるのか**は説明されないことが多い。
+
+この記事の主張はひとつ。
+
+> **関数等式は、Poisson 和公式を Mellin 変換した姿である。**
+> そして Poisson 和公式は、[有限群のフーリエ ＝ Peter–Weyl](有限群のフーリエはPeter-Weylである_指標表はどこから来るのか_2026-08-15.md) を、格子で割った商に適用しただけのものである。
+
+歴史も同じ順に進んだ。Jacobi は 1828 年の *Suite des Notices sur les Fonctions Elliptiques* で、テータ関数の変換公式が **Poisson の 1823 年の論文に既にある**と注記している。Riemann は 1859 年の *Über die Anzahl der Primzahlen unter einer gegebenen Grösse* で関数等式に二つの証明を与えたが、そのうち一つがこのテータ変換を経由する道だった。**総和公式が先にあり、関数等式が後から出てきた。**
+
+対応を先に置く。
+
+| 前記事（有限群） | この記事（$\mathbb{R}$ と格子 $\mathbb{Z}$） |
+|---|---|
+| 群環 $\mathbb{C}[G]$ の分解 | $L^2(\mathbb{R}/\mathbb{Z})$ のフーリエ級数展開 |
+| 既約表現 $\rho_i$ | 指標 $x\mapsto e^{2\pi i k x}$（すべて 1 次元） |
+| $\displaystyle |G| = \sum_i d_i^2$ | $\displaystyle \sum_{n\in\mathbb{Z}} f(n) = \sum_{k\in\mathbb{Z}} \hat f(k)$ |
+| ブロックが $1$ に潰れる＝可換 | $\mathbb{R}$ が可換だから指標は全部 1 次元 |
+| 部分群 $H$ で割る | 格子 $\mathbb{Z}$ で割る |
+| 崩れる条件：標数 $p \mid |G|$ | 崩れる条件：$f$ の減衰・連続性 |
+
+---
+
+## 2. 手で確かめる ── まず有限群で、部分群和公式を数える
+
+いきなり $\mathbb{R}$ に行かず、前記事の道具がそのまま効くことを確かめる。$G = \mathbb{Z}/6$、部分群 $H = \{0,2,4\} \cong \mathbb{Z}/3$ を取る。
+
+$G$ の指標は $\chi_j(x) = \omega^{jx}$（$\omega = e^{2\pi i/6}$、$j=0,\dots,5$）。このうち **$H$ 上で恒等的に $1$ になるもの**を探す。$\chi_j(2) = \omega^{2j} = 1$ となるのは $2j \equiv 0 \pmod 6$、すなわち $j \in \{0,3\}$。
+
+$$H^{\perp} = \{\chi_0, \chi_3\}, \qquad |H^\perp| = 2 = [G:H].$$
+
+これが**双対格子**（消滅部分群）である。ここで有限版の総和公式は
+
+$$\sum_{x\in H} f(x) \;=\; \frac{|H|}{|G|}\sum_{\chi\in H^\perp} \hat f(\chi), \qquad \hat f(\chi) = \sum_{x\in G} f(x)\overline{\chi(x)}.$$
+
+実際に数えてみる。$f$ を $f(0)=1$、それ以外 $0$ とする（デルタ関数）。左辺は $\sum_{x\in\{0,2,4\}} f(x) = 1$。右辺は $\hat f(\chi) = 1$（すべての $\chi$ で）だから $\frac{3}{6}\cdot 2 = 1$。**合う。**
+
+もう一つ、$f(x) = 1$（定数）で試す。左辺は $3$。右辺は $\hat f(\chi_0) = 6$、$\hat f(\chi_3) = \sum_x \omega^{-3x} = 1-1+1-1+1-1 = 0$ なので、$\frac{3}{6}(6+0) = 3$。**合う。**
+
+★ **この式の中身は、前記事の分解そのものである。** $H$ 上の和を取るという操作は、$\mathbb{C}[G]$ の中で $H$ に台を持つ部分を取り出すことで、それを既約成分（＝指標）の側に翻訳すると、$H$ 上で $1$ になる指標だけが生き残る。**「部分群で足す」と「双対で部分群が生き残る」が同じ操作の裏表になっている。**
+
+$\mathbb{R}$ と $\mathbb{Z}$ でやることは、これと一字一句同じである。ただし $G$ が無限になるので、$|H|/|G|$ の代わりに格子の共体積が出る。
+
+---
+
+## 3. Poisson 和公式と、その 3 行の証明
+
+**定理.** $f:\mathbb{R}\to\mathbb{C}$ が十分速く減衰する滑らかな関数（Schwartz 級で十分）なら
+
+$$\sum_{n\in\mathbb{Z}} f(n) \;=\; \sum_{k\in\mathbb{Z}} \hat f(k), \qquad \hat f(\xi) = \int_{\mathbb{R}} f(x)\,e^{-2\pi i x\xi}\,dx.$$
+
+証明は短い。**周期化して、フーリエ係数を計算し、$x=0$ を代入するだけ**である。
+
+$$F(x) := \sum_{n\in\mathbb{Z}} f(x+n)$$
+
+は周期 $1$ の関数である（$x\mapsto x+1$ で和が並び替わるだけ）。そのフーリエ係数は
+
+$$c_k = \int_0^1 F(x)e^{-2\pi i k x}dx = \sum_n \int_0^1 f(x+n)e^{-2\pi ikx}dx = \int_{\mathbb{R}} f(x)e^{-2\pi i kx}dx = \hat f(k)$$
+
+（$e^{-2\pi ikn} = 1$ を使って積分区間を繋いだ）。$F$ のフーリエ級数を $x=0$ で評価すれば
+
+$$\sum_n f(n) = F(0) = \sum_k c_k = \sum_k \hat f(k). \qquad \blacksquare$$
+
+**やっているのは「$\mathbb{R}$ を $\mathbb{Z}$ で割って $\mathbb{R}/\mathbb{Z}$ にし、そこで Peter–Weyl（＝フーリエ級数展開）を使う」ことだけである。** 新しい原理は入っていない。前記事の $|G| = \sum d_i^2$ が「群環の次元を二通りに数えた式」だったのと同じで、こちらは「周期化した関数の $x=0$ での値を二通りに書いた式」である。
+
+<figure>
+<svg viewBox="0 0 470 170" width="100%" role="img" aria-label="関数を格子だけずらして足し合わせ、周期関数に畳む図">
+  <line x1="20" y1="70" x2="450" y2="70" stroke="#b8b0a2" stroke-width="1"/>
+  <path d="M20 70 Q 90 70 110 68 Q 145 20 180 68 Q 200 70 260 70" fill="none" stroke="#7a7266" stroke-width="2"/>
+  <path d="M110 70 Q 145 32 180 70" fill="none" stroke="#c9b98f" stroke-width="1.5" stroke-dasharray="3 3" transform="translate(70,0)"/>
+  <path d="M110 70 Q 145 32 180 70" fill="none" stroke="#c9b98f" stroke-width="1.5" stroke-dasharray="3 3" transform="translate(140,0)"/>
+  <path d="M110 70 Q 145 32 180 70" fill="none" stroke="#c9b98f" stroke-width="1.5" stroke-dasharray="3 3" transform="translate(-70,0)"/>
+  <g fill="#3a3630">
+    <circle cx="75" cy="70" r="2.5"/><circle cx="145" cy="70" r="2.5"/><circle cx="215" cy="70" r="2.5"/><circle cx="285" cy="70" r="2.5"/><circle cx="355" cy="70" r="2.5"/>
+  </g>
+  <text x="20" y="92" font-size="11" fill="#6b6459">格子 Z の点で切り取って足す ＝ 周期化 F(x)=Σf(x+n)</text>
+  <line x1="20" y1="140" x2="450" y2="140" stroke="#b8b0a2" stroke-width="1"/>
+  <path d="M75 140 Q 110 108 145 140 Q 180 108 215 140 Q 250 108 285 140 Q 320 108 355 140" fill="none" stroke="#8fa9c9" stroke-width="2"/>
+  <text x="20" y="160" font-size="11" fill="#6b6459">周期 1 の関数になる ⟹ フーリエ係数は f̂(k)、x=0 を代入すれば公式</text>
+</svg>
+<figcaption>Poisson 和公式の全内容。左辺は「格子点での値を足す」、右辺は「畳んだ関数のフーリエ係数を足す」。同じ数 $F(0)$ を二通りに書いている。</figcaption>
+</figure>
+
+---
+
+## 4. どこで崩れるか ── 手で壊せる反例
+
+「両辺が収束すれば等しい」は**偽**である。減衰と滑らかさの条件は飾りではない。最小の反例を手で作る。
+
+$f = \mathbf{1}_{[0,1]}$（区間 $[0,1]$ の定義関数）とする。
+
+- **左辺**：$\sum_{n\in\mathbb{Z}} f(n) = f(0) + f(1) = 1 + 1 = 2$
+- **右辺**：$\hat f(k) = \int_0^1 e^{-2\pi ikx}dx = \delta_{k,0}$ なので $\sum_k \hat f(k) = 1$
+
+**$2 \ne 1$。** 公式は破れている。
+
+破れの機構ははっきりしている。周期化 $F(x) = \sum_n f(x+n)$ は、この $f$ では $F \equiv 1$（$x$ が整数でないとき）になる一方、整数点では $f$ の跳びが二枚重なる。フーリエ級数は跳びの点で**両側極限の中点**に収束するから、$F(0)$ としてフーリエ級数が返すのは $1$ であって $2$ ではない。左辺の $2$ は、$f$ の値を跳びの点で「両側とも $1$」と数えた人為的な数である。
+
+⟹ **破れているのは公式ではなく、「$f(0)$ と $f(1)$ をそのまま足してよい」という前提の方である。** 滑らかさを仮定するのは、この曖昧さを消すためだった。
+
+もう一段の破れもある。$f$ の減衰が足りないと、そもそも $F(x)=\sum_n f(x+n)$ が収束しない。$f(x) = 1/(1+|x|)$ なら $\sum_n f(x+n)$ は調和級数的に発散する。**収束・連続・級数の各点収束の三つが揃って初めて等号が立つ。** Schwartz 級を仮定するのは、三つを一度に保証する安全側の条件である。
+
+---
+
+## 5. Gauss 関数を入れる ── テータの変換公式
+
+公式に入れる $f$ を一つ選ぶ。Gauss 関数 $f(x) = e^{-\pi t x^2}$（$t>0$）である。この関数のフーリエ変換は
+
+$$\hat f(\xi) = t^{-1/2}\,e^{-\pi \xi^2/t}$$
+
+（Gauss 積分の平方完成で出る。$t=1$ なら $\hat f = f$ ── **Gauss 関数はフーリエ変換の固有関数**である）。Poisson に代入すると
+
+$$\sum_{n} e^{-\pi t n^2} \;=\; t^{-1/2}\sum_{k} e^{-\pi k^2/t}.$$
+
+$\theta(t) := \sum_{n\in\mathbb{Z}} e^{-\pi n^2 t}$ と置けば、これは
+
+$$\boxed{\ \theta(t) = t^{-1/2}\,\theta(1/t)\ }$$
+
+すなわち $\theta(1/t) = \sqrt{t}\,\theta(t)$。**Jacobi のテータ変換公式が、Poisson 和公式に Gauss 関数を一つ入れるだけで出る。**
+
+★ ここで起きていることを一言でいえば、**$t$ と $1/t$ の交換は、格子 $\mathbb{Z}$ と双対格子の交換である。** 幅 $L$ の格子の双対は幅 $1/L$ の格子で、Gauss 関数は幅を $\sqrt{t}$ 倍することと双対を取ることが同じになる唯一の形をしている。**対称性 $t\leftrightarrow 1/t$ は、Gauss 関数の性質ではなく、双対性の性質である。**
+
+<figure>
+<svg viewBox="0 0 470 150" width="100%" role="img" aria-label="格子と双対格子の間隔が逆数になることを示す図">
+  <text x="20" y="20" font-size="11" fill="#3a3630">格子 Λ（間隔 L）</text>
+  <line x1="20" y1="42" x2="450" y2="42" stroke="#b8b0a2" stroke-width="1"/>
+  <g fill="#c9b98f" stroke="#7a7266" stroke-width="1">
+    <circle cx="60" cy="42" r="5"/><circle cx="150" cy="42" r="5"/><circle cx="240" cy="42" r="5"/><circle cx="330" cy="42" r="5"/><circle cx="420" cy="42" r="5"/>
+  </g>
+  <path d="M60 56 L150 56" stroke="#7a7266" stroke-width="1"/>
+  <text x="105" y="70" font-size="10" text-anchor="middle" fill="#6b6459">L</text>
+  <text x="20" y="98" font-size="11" fill="#3a3630">双対格子 Λ<tspan baseline-shift="super" font-size="8">⊥</tspan>（間隔 1/L）</text>
+  <line x1="20" y1="118" x2="450" y2="118" stroke="#b8b0a2" stroke-width="1"/>
+  <g fill="#8fa9c9" stroke="#7a7266" stroke-width="1">
+    <circle cx="60" cy="118" r="4"/><circle cx="90" cy="118" r="4"/><circle cx="120" cy="118" r="4"/><circle cx="150" cy="118" r="4"/><circle cx="180" cy="118" r="4"/><circle cx="210" cy="118" r="4"/><circle cx="240" cy="118" r="4"/><circle cx="270" cy="118" r="4"/><circle cx="300" cy="118" r="4"/><circle cx="330" cy="118" r="4"/><circle cx="360" cy="118" r="4"/><circle cx="390" cy="118" r="4"/><circle cx="420" cy="118" r="4"/>
+  </g>
+  <path d="M60 132 L90 132" stroke="#7a7266" stroke-width="1"/>
+  <text x="75" y="146" font-size="10" text-anchor="middle" fill="#6b6459">1/L</text>
+</svg>
+<figcaption>粗い格子の双対は細かい格子になる。Poisson 和公式の左辺は上の点で、右辺は下の点で足している。$t\leftrightarrow 1/t$ はこの上下の入れ替えである。</figcaption>
+</figure>
+
+---
+
+## 6. Mellin 変換で $\zeta$ に渡す ── 関数等式が落ちてくる
+
+テータの $t \leftrightarrow 1/t$ を、$s \leftrightarrow 1-s$ に翻訳する装置が Mellin 変換である。
+
+$\omega(t) := \sum_{n\ge 1} e^{-\pi n^2 t} = \frac{\theta(t)-1}{2}$ と置く。$\mathrm{Re}\,s > 1$ で
+
+$$\int_0^\infty \omega(t)\,t^{s/2-1}\,dt = \sum_{n\ge1}\int_0^\infty e^{-\pi n^2 t}t^{s/2-1}dt = \sum_{n\ge1}\frac{\Gamma(s/2)}{(\pi n^2)^{s/2}} = \pi^{-s/2}\Gamma(s/2)\,\zeta(s) =: \xi(s).$$
+
+（各項は $u = \pi n^2 t$ の置換で $\Gamma$ 関数になる。$\zeta$ が出るのは $n^{-s}$ が集まるからで、**$\zeta$ の側には何も仕込んでいない**。）
+
+積分を $t=1$ で切り、$0<t<1$ の側に $t\to 1/t$ を施す。テータの変換公式は $\omega(1/t) = \sqrt{t}\,\omega(t) + \frac{\sqrt t - 1}{2}$ を与えるから、
+
+$$\xi(s) \;=\; \frac{1}{s-1} - \frac{1}{s} \;+\; \int_1^\infty \omega(t)\Bigl(t^{s/2-1} + t^{(1-s)/2-1}\Bigr)dt .$$
+
+右辺を見る。積分の中身は $s \mapsto 1-s$ で二項が入れ替わるだけ。前の二項は $\frac{1}{-s} - \frac{1}{1-s} = -\frac1s + \frac1{s-1}$ となって元に戻る。したがって
+
+$$\boxed{\ \xi(s) = \xi(1-s)\ }$$
+
+**関数等式は、テータの $t\leftrightarrow1/t$ を積分区間の折り返しに使った結果である。** そしてテータの変換は Poisson 和公式であり、Poisson 和公式は $\mathbb{R}/\mathbb{Z}$ 上のフーリエ級数だった。$s\leftrightarrow 1-s$ の対称性の出所は、**格子と双対格子の入れ替え**まで遡る。
+
+副産物として、この式は $\xi$ の解析接続と極の位置（$s=0,1$ の単純極）も同時に与えている。積分は全平面で正則だからである。$\zeta$ の「自明な零点」も、$\Gamma(s/2)$ の極を打ち消すために $\zeta$ が消えねばならない点として、ここから読める。
+
+---
+
+## 7. 非可換では成り立たない ── 跡公式が代わりに立つ
+
+前記事では、分解が崩れる境界が「標数 $p \mid |G|$」だった。こちらの境界は**非可換性**である。
+
+Poisson 和公式が使えたのは、$\mathbb{R}$ が可換で、$\mathbb{Z}$ が正規部分群で、商 $\mathbb{R}/\mathbb{Z}$ がまた群だったからである。$G$ が非可換で $\Gamma \subset G$ が離散部分群のとき、$\Gamma\backslash G$ は一般に群にならない。指標は 1 次元でなくなり、「双対格子」に相当するものも素朴には作れない。
+
+代わりに立つのが **Selberg 跡公式**で、形はこうなる：
+
+$$\sum_{\text{固有値}} \hat h(\lambda_j) \;=\; \sum_{\text{共役類}} (\text{測地線の寄与}).$$
+
+左辺がスペクトル側、右辺が幾何側。Poisson 和公式は、この構造が可換な場合に退化したものと見なせる（$\mathbb{R}/\mathbb{Z}$ 上では「測地線の長さ」が格子点 $n$、「固有値」が $k$ に当たる）。**可換なら両側とも格子の点で数えられ、非可換だと片側が共役類になる** ── 前記事で「共役類の個数と既約表現の個数が一致するが自然な対応はない」と述べたことの、無限次元版がここにある。
+
+---
+
+## 8. 横断：この双対はどこで再会するか
+
+**素点の側。** [有限素点と無限素点 ── Dirichlet の単数定理](finite-infinite-primes-dirichlet-unit-theorem.md) では、積公式 $\prod_v |x|_v = 1$ が有限素点と無限素点を対等に扱う話をした。$\xi(s) = \pi^{-s/2}\Gamma(s/2)\zeta(s)$ の $\pi^{-s/2}\Gamma(s/2)$ は**無限素点における局所因子**であり、$\zeta(s) = \prod_p (1-p^{-s})^{-1}$ が有限素点の寄与である。**関数等式が $\xi$ でしか綺麗にならないのは、無限素点を勘定に入れて初めて全素点が揃うからである。** Tate の学位論文は、この記事の Poisson 和公式をアデール上で回して、関数等式を全素点一様に導いた。
+
+**素数分布の側。** [素数の足し算は人類に向いていない](素数の足し算は人類に向いていない_2026-06-02.md) で見たように、素数は乗法的な対象で、加法的な問いは途端に難しくなる。Riemann の明示公式は、その乗法的な情報（$\zeta$ の零点）と加法的な計数（$\pi(x)$）を繋ぐが、その形もまた「スペクトル側の和 ＝ 幾何側の和」という跡公式の形をしている。**本記事の $\sum_n f(n) = \sum_k \hat f(k)$ は、その原型である。**
+
+**可換⇄分解の側。** [可換な対角化可能行列は同時対角化できる](simultaneous-diagonalization-commuting-matrices.md)。$\mathbb{R}$ 上の平行移動作用素の族は互いに可換で、その同時固有関数が $e^{2\pi i\xi x}$ である。フーリエ変換とは、平行移動を同時対角化する基底変換だった。**Poisson 和公式は、その対角化を格子で切った標本に制限したときに現れる整合条件**である。
+
+**岩澤の側。** [岩澤理論と Selmer 群](iwasawa-theory-selmer-introduction.md) の主予想は「解析的な $p$ 進 $L$ 関数 ＝ 代数的な特性イデアル」という形をしている。左辺と右辺が別々の方法で作られ、等しいと主張される点で、跡公式・関数等式と同じ骨格を持つ。**二通りに数えて等号を立てる、という手つきが共通している。**
+
+---
+
+## 9. 査読・限界
+
+**確立している事実**
+
+- Poisson 和公式、Jacobi のテータ変換公式、$\xi(s)=\xi(1-s)$、Mellin 変換による導出は、いずれも標準的な解析的整数論の内容である（Titchmarsh *The Theory of the Riemann Zeta-Function*、Iwaniec–Kowalski、Stein–Shakarchi など）。**本記事に新規な数学的主張はない。**
+- 歴史：Riemann の論文は *Über die Anzahl der Primzahlen unter einer gegebenen Grösse*, Monatsberichte der Berliner Akademie (1859), 671–680。関数等式に二つの証明を与え、一方がテータ変換を経由する。Jacobi は 1828 年の *Suite des Notices sur les Fonctions Elliptiques* で、当該の変換公式が Poisson の 1823 年の論文にあると注記している。**「総和公式が先、関数等式が後」という §1 の順序は、この帰属に基づく。**
+- §4 の反例（$f=\mathbf{1}_{[0,1]}$ で左辺 $2$・右辺 $1$）は手計算で確認できる。破れの機構が「跳びの点でフーリエ級数が中点に収束すること」である点も標準的な事実。
+
+**私見・見立てとして書いた部分**
+
+- 「Poisson 和公式は格子で割った Peter–Weyl である」という言い方そのもの。数学的には $\mathbb{R}/\mathbb{Z}$ 上のフーリエ級数を使っているだけで、Peter–Weyl の定理を引用しているわけではない。**視点の配置換えであり、定理の適用ではない。**
+- §7 の「Poisson 和公式は Selberg 跡公式の可換な退化」という言い方は、構造の類比である。両者を統一的に導く枠組み（跡公式の一般論）は存在するが、本記事はその一般論を経由していない。**類比であって、証明を伴っていない。**
+- §8 の岩澤主予想との対比（「二通りに数えて等号を立てる」）は、さらに緩い形式的な相似の指摘であって、技術的な関係を主張していない。
+
+**書かなかったこと・限界**
+
+- 高次元の格子・一般の局所コンパクト可換群（Pontryagin 双対）での定式化に触れていない。§5 の「双対格子」は $\mathbb{Z}\subset\mathbb{R}$ の場合しか扱っていない。
+- Tate の学位論文（アデール上の Poisson 和公式）は §8 で名前を出しただけ。Hecke $L$ 関数の関数等式まで行くのが本筋だが、そこは別記事の仕事。
+- Selberg 跡公式は形だけを示し、導出も収束条件も扱っていない。
+- $\zeta$ の零点の位置（Riemann 予想）には**一切触れていない**。関数等式は零点を $\mathrm{Re}\,s = 1/2$ に関して対称に配置するが、**対称軸上にあることを意味しない。**この二つは繰り返し混同されるので明記しておく。
+
+**未解決と既知の線引き**
+
+本記事の内容はすべて 19 世紀に決着している。**関数等式は定理であって予想ではない。**未解決なのは零点の位置であり、それは本記事の範囲外である。
+
+---
+
+前記事では、群環を割ると指標表が出た。ここでは、実数直線を格子で割ると関数等式が出た。どちらも**「同じものを二通りに数える」**という一つの操作で、割り方が違うだけである。では**何で割ると、何が出るのか。** Selberg は双曲面を離散群で割って測地線を出し、Tate はアデールを有理数で割って全素点を出した。割る対象と割る道具の組を選ぶことが、そのまま出てくる不変量を選ぶことになっている。**不変量が解像度を決める。**
