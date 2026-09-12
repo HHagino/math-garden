@@ -16,7 +16,7 @@
 $$\Sigma = \Psi \otimes \Omega, \qquad \Psi \in \mathrm{PD}(p), \;\Omega \in \mathrm{PD}(q)$$
 で書ける Gaussian model(matrix normal model)の周辺論文を漁っていた。その参考文献欄に **quiver representation** が登場する論文があり、何の気なしに開いたら、これが想像以上に面白かった。
 
-開いたのは Derksen–Makam の arXiv:2007.10206。タイトルは matrix normal model の MLE 存在・一意性に関するもので、ツールとして **quiver representation の安定性理論**(Kac, King, Schofield)が使われている。
+開いたのは Derksen–Makam の [arXiv:2007.10206](https://arxiv.org/abs/2007.10206)。タイトルは matrix normal model の MLE 存在・一意性に関するもので、ツールとして **quiver representation の安定性理論**(Kac, King, Schofield)が使われている。
 
 私の研究テーマ(算術幾何寄り)にすぐ流用したい、という話ではない。ただ、**統計の最尤推定問題が代数幾何的な GIT 安定性判定にきれいに翻訳される**という事実そのものが、深く面白い。今回はその辞書を整理したくて書く。
 

@@ -155,12 +155,12 @@ Zariski が荒いのは欠陥ではない。多項式の零点で閉集合を定
 **確立した事実(証明済み).**
 - $\#\mathbb P^1(\mathbb F_{q^n})=q^n+1$。合同ゼータ $Z(\mathbb P^1,t)=1/((1-t)(1-qt))$。初等的事実。
 - 既約多様体上、定数層は flasque で $H^i_{\mathrm{Zar}}(X,\underline A)=0\ (i>0)$。標準的事実(例えば Hartshorne, *Algebraic Geometry* III の演習;巻頁未照合・無印)。
-- **Weil 予想**:Weil(1949), "Numbers of solutions of equations in finite fields," *Bull. AMS* ★(Weil conjectures, HandWiki)。
+- **Weil 予想**:Weil(1949), "Numbers of solutions of equations in finite fields," *Bull. AMS* ★([Weil conjectures, HandWiki](https://handwiki.org/wiki/Weil_conjectures))。
 - **有理性**を最初に証明:Dwork(1960), $p$ 進解析 ★(同上)。
-- **étale コホモロジー**は Grothendieck と M. Artin が Weil 予想攻略のため開発。Grothendieck(1965 頃)が有理性・関数等式・Betti 数との関係を確立 ★(Weil conjectures, HandWiki;Étale cohomology, HandWiki)。
-- **Riemann 予想の類似**:Deligne(1974), "La conjecture de Weil I," *Publ. IHÉS* ★(Weil conjectures, HandWiki;英訳 arXiv:1807.10810)。
-- **Artin 比較定理**:$\mathbb C$ 上で有限係数 $\mathbb Z/m$ に対し $H^i_{\text{ét}}(X,\mathbb Z/m)\cong H^i_{\mathrm{sing}}(X(\mathbb C),\mathbb Z/m)$ ★(comparison theorem (étale cohomology), nLab))。
-- $\ell\neq p$ の必要性、$\mathbb Z/p$ 係数 étale の不備(Artin–Schreier)と $p$ 進の代替=結晶コホモロジー ★(Zariski-Étale Comparison, Kummer and Artin–Schreier (Conrad, Stanford 講義ノート))。
+- **étale コホモロジー**は Grothendieck と M. Artin が Weil 予想攻略のため開発。Grothendieck(1965 頃)が有理性・関数等式・Betti 数との関係を確立 ★([Weil conjectures, HandWiki](https://handwiki.org/wiki/Weil_conjectures);[Étale cohomology, HandWiki](https://handwiki.org/wiki/%C3%89tale_cohomology))。
+- **Riemann 予想の類似**:Deligne(1974), "La conjecture de Weil I," *Publ. IHÉS* ★([Weil conjectures, HandWiki](https://handwiki.org/wiki/Weil_conjectures);英訳 [arXiv:1807.10810](https://arxiv.org/pdf/1807.10810))。
+- **Artin 比較定理**:$\mathbb C$ 上で有限係数 $\mathbb Z/m$ に対し $H^i_{\text{ét}}(X,\mathbb Z/m)\cong H^i_{\mathrm{sing}}(X(\mathbb C),\mathbb Z/m)$ ★([comparison theorem (étale cohomology), nLab](https://ncatlab.org/nlab/show/comparison+theorem+%28%C3%A9tale+cohomology%29))。
+- $\ell\neq p$ の必要性、$\mathbb Z/p$ 係数 étale の不備(Artin–Schreier)と $p$ 進の代替=結晶コホモロジー ★([Zariski-Étale Comparison, Kummer and Artin–Schreier (Conrad, Stanford 講義ノート)](http://virtualmath1.stanford.edu/~conrad/Weil2seminar/Notes/L4.pdf))。
 
 **スコープと留保.**
 - 跡公式は固有(proper)な $X$ では通常のコホモロジー、非固有ではコンパクト台コホモロジー $H^i_c$ を要する。本稿は $\mathbb P^1$(固有)で書いたのでこの区別を表に出していない。

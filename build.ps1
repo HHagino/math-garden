@@ -140,6 +140,10 @@ foreach ($file in Get-ChildItem $dst -Filter *.md) {
       $u = $u -replace '^<','' -replace '>$',''      # <...> 形式
       $u = $u -replace '^\./',''                      # 先頭 ./
       $u = ($u -split '#')[0]                          # アンカー除去
+      # ★ 外部リンク・アンカー・絶対パスは触らない（2026-09-13 追加）
+      #   ⚠️ これが無いと、記事中の【出典リンクが全部剥がれる】。
+      #      公開中の57本が外部リンク0本になっていた（LAOX曲線は原稿13本→写し0本）。
+      if ($u -match '^(https?://|mailto:|/)' -or $u -eq '') { return $m.Value }
       if ($pubSet.ContainsKey($u)) { return $m.Value } # 公開先 → そのまま
       # 未公開先 → リンク解除。テキストがファイル名なら行ごと落とす印
       $script:txt = $m.Groups['t'].Value
