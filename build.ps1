@@ -162,6 +162,36 @@ foreach ($file in Get-ChildItem $dst -Filter *.md) {
 }
 Write-Host "サニタイズ: $sanitized 本の内部リンクを調整" -ForegroundColor Cyan
 
+# --- サニタイズ2: [[二重括弧]] の内部リンク記法 ---
+# ⚠️ 2026-09-16 発見：サニタイザは [text](url) しか見ておらず、[[name]] が素通りしていた。
+#   ★ 公開中の記事に [[probability-space-stone-reading-galois-tower]] が生で出ていた。
+#     これは $held（第一論文の核心に近いので非公開）の記事名。★ 存在とタイトルが漏れていた。
+# ⚠️ ★ 数式を壊さないこと。[[T]] [[\Gamma]] [[X, Y]] [[t]] は交換子・生成元の記法で、
+#   本文に 10 箇所ある。★ 一括置換すると記事が壊れる。
+#   ⟹ ★ **既知の記事名（public か held）に一致したものだけ**を触る。
+$known = @{}
+foreach ($f in $public) { $known[[IO.Path]::GetFileNameWithoutExtension($f)] = 'public' }
+foreach ($f in $held)   { $known[[IO.Path]::GetFileNameWithoutExtension($f)] = 'held' }
+# ★ 前後の括弧ごと拾う。未公開を消したとき、空の () が残るのを防ぐ（2026-09-16 に実際に残った）
+$wikiRe = [regex]'(?<open>[(（])?\[\[(?<n>[^\]\[]+)\]\](?<close>[)）])?'
+$wiki = 0; $wikiHeld = 0
+foreach ($file in Get-ChildItem $dst -Filter *.md) {
+  $text = Get-Content $file.FullName -Raw
+  $new = $wikiRe.Replace($text, {
+    param($m)
+    $n = $m.Groups['n'].Value.Trim()
+    if (-not $known.ContainsKey($n)) { return $m.Value }   # ★ 数式など、記事名でないものは触らない
+    $script:wiki++
+    $o = $m.Groups['open'].Value; $cl = $m.Groups['close'].Value
+    if ($known[$n] -eq 'public') { return "$o[$n]($n.md)$cl" }  # 公開先 → 本物のリンクにする
+    $script:wikiHeld++
+    return ''                                              # 未公開 → ★ 括弧ごと消す
+  })
+  if ($new -ne $text) { Set-Content -Path $file.FullName -Value $new -NoNewline -Encoding utf8 }
+}
+Write-Host "サニタイズ2: [[...]] を $wiki 箇所処理（うち未公開ゆえ削除 $wikiHeld 箇所）" -ForegroundColor Cyan
+
+
 # レンダリング
 Push-Location $PSScriptRoot
 try { & quarto render } finally { Pop-Location }
