@@ -281,7 +281,7 @@ l = p の世界に踏み込むと p 進ホッジ理論が必要になる。「�
 ## 参考文献
 
 - Silverman, *The Arithmetic of Elliptic Curves* III.7 (Tate 加群), IV (formal group)
-- Silverman, *Advanced Topics in the Arithmetic of Elliptic Curves* II (CM, Tate-Honda)
+- Silverman, *Advanced Topics in the Arithmetic of Elliptic Curves* II (CM)
 - Milne, *Étale Cohomology* (Princeton) — 標準的入門
 - Milne, *Lectures on Étale Cohomology* — 公開 lecture notes 版
 - Deligne, *La conjecture de Weil II* (Publ. IHES 1980)

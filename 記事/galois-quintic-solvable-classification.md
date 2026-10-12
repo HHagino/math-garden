@@ -217,7 +217,7 @@ x⁵ − 2 や円分体の例は、可解だと「見れば分かる」種類の
 
 ## 参考文献（目安）
 
-- D. S. Dummit, *Solving Solvable Quintics*, Mathematics of Computation, 1991. ―― 6次リゾルベントによる可解5次の判定と、根の冪根表示の構成。
+- D. S. Dummit, *Solving Solvable Quintics*, Mathematics of Computation **57** (1991), no. 195, 387–401 (Corrigenda: **59** (1992), no. 199, 309). ―― 6次リゾルベントによる可解5次の判定と、根の冪根表示の構成。
 - D. S. Dummit and R. M. Foote, *Abstract Algebra*. ―― ガロア理論の基本定理、可解群、5次方程式の章。標準的な代数学の教科書。
 - ガロア理論の入門書（I. Stewart, *Galois Theory*; D. A. Cox, *Galois Theory* など）の、推移的置換群と可解性を扱う章。
 

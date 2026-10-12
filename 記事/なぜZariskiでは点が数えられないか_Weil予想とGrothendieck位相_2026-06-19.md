@@ -132,7 +132,7 @@ Zariski の「開部分集合への制限」をやめ、**étale 射**(平坦か
 
 ここに見落としやすい一線がある。étale コホモロジーで「正しい」Betti 数を出すには、**係数の素数 $\ell$ は基礎体の標数 $p$ と異なる**($\ell\neq p$)必要がある。
 
-理由は否定形で言うのが早い。$\mathbb Z/p$ 係数の étale コホモロジーは、正標数では**正しい答えを返さない** ── Artin–Schreier 系列(加法群の $x\mapsto x^p-x$)が効いて、位相的に期待する次元とずれる。$p$ 進の情報を正しく拾うには étale ではなく別の器、**結晶コホモロジー**(Grothendieck・Berthelot)が要る。$\ell$ 進($\ell\neq p$)と $p$ 進(結晶)は、同じ多様体の別々の顔だ。この $\ell$ と $p$ の食い違いは、庭の [係数の素数とガロワ表現 ── l 進と p 進の差異](l-adic-vs-p-adic-galois-representation.md) の主題そのものである。
+理由は否定形で言うのが早い。$\mathbb Z/p$ 係数の étale コホモロジーは、正標数では**正しい答えを返さない** ── Artin–Schreier 系列(加法群の $x\mapsto x^p-x$)が効いて、位相的に期待する次元とずれる。$p$ 進の情報を正しく拾うには étale ではなく別の器、**結晶コホモロジー**(Grothendieck・Berthelot)が要る。$\ell$ 進($\ell\neq p$)と $p$ 進(結晶)は、同じ多様体の別々の顔だ。この $\ell$ と $p$ の食い違いは、庭の 係数の素数とガロワ表現 ── l 進と p 進の差異 の主題そのものである。
 
 Frobenius が主役を張れるのも、$\overline{\mathbb F_q}$ 上の幾何に効く $\mathrm{Frob}_q$ が、§ 今日のもう一本 [無限次 Galois 対応は位相が決める](無限次Galois対応は位相が決める_2026-06-19.md) で見た $\mathrm{Gal}(\overline{\mathbb F_q}/\mathbb F_q)\cong\widehat{\mathbb Z}$ の生成元だからだ。点を数える跡公式は、無限次 Galois 群の生成元の作用を $\ell$ 進コホモロジー上で読む装置にほかならない。étale コホモロジーの供給源としての Tate 加群は [Tate 加群とエタールコホモロジー](tate-module-and-etale-cohomology.md) に譲る。
 
@@ -170,4 +170,4 @@ Zariski が荒いのは欠陥ではない。多項式の零点で閉集合を定
 
 ---
 
-*関連:[点ではなく、開集合の代数で登る ── Zariski→étale](<開集合の代数で登る_Rdiscと Zariski étale_2026-06-02.md>)(母言語側)・[無限次 Galois 対応は位相が決める](無限次Galois対応は位相が決める_2026-06-19.md)(Frobenius $=\widehat{\mathbb Z}$ の生成元)・[Tate 加群とエタールコホモロジー](tate-module-and-etale-cohomology.md)・[l 進と p 進のガロワ表現](l-adic-vs-p-adic-galois-representation.md)($\ell\neq p$)。*
+*関連:[点ではなく、開集合の代数で登る ── Zariski→étale](<開集合の代数で登る_Rdiscと Zariski étale_2026-06-02.md>)(母言語側)・[無限次 Galois 対応は位相が決める](無限次Galois対応は位相が決める_2026-06-19.md)(Frobenius $=\widehat{\mathbb Z}$ の生成元)・[Tate 加群とエタールコホモロジー](tate-module-and-etale-cohomology.md)・l 進と p 進のガロワ表現($\ell\neq p$)。*

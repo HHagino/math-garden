@@ -118,7 +118,11 @@ $fixHold = @(
   'perfectoid-tilting-motivation.md',
   'relativity-algebraic-rta-clifford-hurwitz.md',
   'witt-vectors-artin-schreier-witt.md',
-  '弧状連結単連結可縮_不変量は何を見て何を見落とすか_2026-06-19.md'
+  '弧状連結単連結可縮_不変量は何を見て何を見落とすか_2026-06-19.md',
+  # 10/13 朝：前半21〜28の検算で見つかった3本
+  'l-adic-vs-p-adic-galois-representation.md',
+  'kpz-universality-class-introduction.md',
+  'laplace-beltrami-hodge-global-device.md'
 )
 $public = @($public | Where-Object { $fixHold -notcontains $_ })
 $held   = @($held) + $fixHold

@@ -160,8 +160,10 @@ $$
 情報幾何では、KL divergence や Bregman divergence に対して、類似の **一般化ピタゴラス定理** が成り立つ場合がある:
 
 $$
-D(p \| r) \;=\; D(p \| q) + D(q \| r), \quad \text{$q$ が $p$ から制約集合への $I$-projection のとき。}
+D(p \| r) \;=\; D(p \| q) + D(q \| r), \quad \text{$E$ が指数型族、$q=\operatorname{argmin}_{x\in E}D(p\|x)$ が $p$ から $E$ への射影で、$r\in E$ のとき。}
 $$
+
+(Csiszár の $I$-projection $q=\operatorname{argmin}_{x\in E}D(x\|p)$ と線形族 $E$ に対しては、引数を入れ替えた $D(r\|p)=D(r\|q)+D(q\|p)$($r\in E$)の形で成り立つ。)
 
 直観としては:
 
