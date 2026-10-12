@@ -19,13 +19,13 @@ $$ E[n] := \{P \in E(\bar K) \mid nP = O\} $$
 
 $$ \rho_{E,n} \colon G_K \to \operatorname{GL}_2(\mathbb{Z}/n\mathbb{Z}) $$
 
-が得られる。これは mod n ガロワ表現と呼ばれ、数論的に重要(Serre の谷山予想、Khare-Wintenberger の証明の出発点はここ)。
+が得られる。これは mod n ガロワ表現と呼ばれ、数論的に重要(Serre の保型性予想、その Khare-Wintenberger による証明の出発点はここ)。
 
 しかし mod n の情報だけを見ていると、n の異なる値を「縦に統一して」追跡できない。たとえば
 
 - L 関数のオイラー因子は、フロベニウスの固有値を要する
 - BSD 予想は、E(K) の階数を Selmer 群経由で議論する
-- Faltings の同型定理は、すべての l に渡って Tate 加群がほぼ一致することを使う
+- Faltings の同型定理は、Tate 加群 T_l(A) の G_K 加群としての構造を使う(§2.3)
 
 そこで n を l のべき乗に限り、射影極限を取って統一する:
 
@@ -75,7 +75,7 @@ $$ T_l(E) \cong \mathbb{Z}_l^2 $$
 
 特殊な状況:
 
-- char(K) = p, l = p の場合: E[p^n] は p < (good reduction), ≦ ℤ/p^n ℤ となる(supersingular 楕円曲線では E[p^n] = 0)。このとき T_p(E) は階数 0 か 1 で、構造が全く違う
+- char(K) = p, l = p の場合: Ep^n は ordinary なら ℤ/p^n ℤ、supersingular なら 0 となる。このとき T_p(E) は階数 1 か 0 で、構造が全く違う
 - アーベル多様体 A/K の場合: dim A = g として T_l(A) ≅ ℤ_l^{2g}
 
 ### 2.2 円分指標との接続
@@ -171,7 +171,7 @@ A. Weil (1949) が予想し、Grothendieck 学派(Deligne 1974 で完結)が証�
 
 ### 4.2 フロベニウスの幾何的意味
 
-X/𝔽_q に対し、絶対フロベニウス F: X → X (x ↦ x^q on coordinates) が定義される。これは l-進エタールコホモロジー H^i_ét(X_{\bar{𝔽}_q}, ℚ_l) に作用し、その固有値が Weil 予想の対象となる。
+X/𝔽_q に対し、𝔽_q 上のフロベニウス F: X → X (x ↦ x^q on coordinates) が定義される。これは l-進エタールコホモロジー H^i_ét(X_{\bar{𝔽}_q}, ℚ_l) に作用し、その固有値が Weil 予想の対象となる。
 
 特に X = E が楕円曲線なら
 
@@ -226,7 +226,7 @@ $$ \{\text{l 進 lisse sheaves on } X\} \xleftrightarrow{\sim} \{\text{連続 } 
 
 これは局所定数化された Galois 表現と層が同じものであることを示しており、Galois 表現の「幾何化」の出発点である。
 
-X = E が楕円曲線、l ≠ char(K) のときは、Tate 加群 T_l(E) が canonical な l 進 lisse sheaf に対応する。
+E/K が楕円曲線、l ≠ char(K) のときは、Tate 加群 T_l(E) が Spec K 上の canonical な l 進 lisse sheaf に対応する。
 
 ### 5.3 六関手主義
 
@@ -249,9 +249,9 @@ K = 数体上の Galois 表現 ρ_{E,l}: G_K → GL_2(ℚ_l) は、ほとんど�
 
 を満たす。L 関数
 
-$$ L(E, s) := \prod_v \det(1 - \operatorname{Frob}_v q_v^{-s} | T_l(E))^{-1} $$
+$$ L(E, s) := \prod_v \det(1 - \operatorname{Frob}_v q_v^{-s} | T_l(E)^{I_v})^{-1} $$
 
-は (a_v) の族から直接構成される。
+(I_v は v の惰性群。不分岐な v では T_l(E)^{I_v} = T_l(E))は (a_v) の族から直接構成される。
 
 Faltings の同型定理(§2.3 で述べた)は、E と E' が K-同種(K-isogenous)であることと、すべての a_v が一致することが同値であることを示し、楕円曲線の数論的同種類は L 関数で決まることが示される。
 
@@ -280,7 +280,7 @@ l = p の世界に踏み込むと p 進ホッジ理論が必要になる。「�
 
 ## 参考文献
 
-- Silverman, *The Arithmetic of Elliptic Curves* III.7 (Tate 加群), V.2 (formal group)
+- Silverman, *The Arithmetic of Elliptic Curves* III.7 (Tate 加群), IV (formal group)
 - Silverman, *Advanced Topics in the Arithmetic of Elliptic Curves* II (CM, Tate-Honda)
 - Milne, *Étale Cohomology* (Princeton) — 標準的入門
 - Milne, *Lectures on Étale Cohomology* — 公開 lecture notes 版

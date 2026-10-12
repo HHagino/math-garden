@@ -1,15 +1,5 @@
 # 最尤推定が軌道閉包の問題になるとき ── Derksen–Makam の Kronecker quiver
 
-## タイトル案
-
-1. 最尤推定が軌道閉包の問題になるとき ── Derksen–Makam の Kronecker quiver
-2. Kronecker 共分散の参考文献に quiver が出てきた話
-3. 統計と GIT 安定性の辞書 ── matrix normal model と quiver representation
-4. 尤度が無限に逃げない条件は何か ── semistable / polystable / stable の統計的意味
-5. $p^2 + q^2 - mpq$ という閾値 ── matrix normal model の MLE が決まる場所
-
----
-
 ## 1. 導入 ── Kronecker covariance を見ていたら quiver が出てきた
 
 ある夜、Kronecker covariance、つまり共分散行列が二つの行列のテンソル積

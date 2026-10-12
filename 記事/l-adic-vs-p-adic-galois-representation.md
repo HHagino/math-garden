@@ -348,7 +348,6 @@ $$ 0 \to \mathbb{Z}/p^n\mathbb{Z} \to W_n(K^{\text{sep}}) \xrightarrow{\wp} W_n(
 
 これにより H^1(G_K, ℤ/p^n) ≅ W_n(K)/℘W_n(K)。Witt ベクトルの計算は明示的だが煩雑(典型例として加法則が多項式的に複雑)。
 
-> 関連: Witt ベクトル環の明示的構成と Artin-Schreier-Witt 完全列の独立扱いは [`witt-vectors-artin-schreier-witt.md`](./witt-vectors-artin-schreier-witt.md)。
 
 ### 5.4 Lubin-Tate 形式群による局所類体論
 
@@ -417,7 +416,6 @@ $$ \text{Perfectoid 空間}(K) \xleftrightarrow{\sim} \text{Perfectoid 空間}(K
 
 混標数の rigid analytic 幾何が、等標数の世界に完全に翻訳される。p 進ホッジ理論の多くの問題が、この tilting を経由して扱いやすい等標数側で解かれた後、混標数側に戻される。Fargues-Fontaine 曲線、prismatic site、近年の Langlands 局所対応の証明など、いずれも perfectoid 機構の上で進展した。
 
-> 関連: Perfectoid 体の定義、tilting の動機、Fontaine-Wintenberger との関係の独立扱いは [`perfectoid-tilting-motivation.md`](./perfectoid-tilting-motivation.md)。
 
 ---
 
@@ -485,7 +483,6 @@ CM 楕円曲線のガロワ表現 ρ_{E,l}: G_ℚ → GL_2(ℚ_l) は次の特�
 
 K = 虚二次体に対し、E を K による CM 楕円曲線とする。E の n 等分点の座標 j(E), x(P)(P ∈ E[n]) を K に添加して得られる体 K(E[n]) は、K のアーベル拡大の本質的部分を生成する(Hasse, Weber, Takagi)。これが Kronecker の青春の夢 (Jugendtraum) の K = 虚二次体での具現化、Hilbert 第 12 問題の唯一完全解決された場合である。
 
-> 関連: CM 楕円曲線の定義、Hecke 指標との対応、Hilbert 第12問題の現状の独立扱いは [`cm-elliptic-curves-kronecker-jugendtraum.md`](./cm-elliptic-curves-kronecker-jugendtraum.md)。
 
 ### 8.3 岩澤理論
 
@@ -525,7 +522,6 @@ $$ \operatorname{Sel}_{p^\infty}(E/\mathbb{Q}) := \ker\left( H^1(G_\mathbb{Q}, E
 
 CM 楕円曲線 E/ℚ で L(E, 1) ≠ 0 ならば、E(ℚ) は有限群である(Coates-Wiles 1977)。これは BSD 予想の(一方向の)最初の証明例で、岩澤理論と CM の特殊性を使う。Gross-Zagier, Kolyvagin の Euler system による拡張を経て、Skinner-Urban, Wan などの現代の進展に至る。
 
-> 関連: 円分塔・岩澤代数 Λ・主予想・Selmer 群の独立した導入は [`iwasawa-theory-selmer-introduction.md`](./iwasawa-theory-selmer-introduction.md)。
 
 ---
 

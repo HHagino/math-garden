@@ -62,7 +62,7 @@ $$\delta L := \left.\frac{dL_s}{ds}\right|_{0}, \qquad \frac{dg}{dt} := \frac{d}
 
 ## 5. ネーターの保存量
 
-$\delta L=dg/dt$ を Euler–Lagrange 方程式 $\frac{\partial L}{\partial q}-\frac{d}{dt}\frac{\partial L}{\partial\dot q}=0$ と組むと
+$\delta L=dg/dt$ を Euler–Lagrange 方程式 $\frac{\partial L}{\partial q}-\frac{d}{dt}\frac{\partial L}{\partial\dot q}=0$ と組む($t$ を動かさない変換なので $\delta\dot q=\frac{d}{dt}\delta q$ が使える)と
 
 $$\frac{d}{dt}\left(\frac{\partial L}{\partial\dot q}\,\delta q - g\right)=0,\qquad\text{すなわち}\quad \boxed{Q:=\frac{\partial L}{\partial\dot q}\,\delta q - g}$$
 
@@ -111,7 +111,7 @@ $$Q=\frac{\partial L}{\partial\dot q}\,\delta q-g=m\dot q\cdot t-mq=m(\dot q\,t-
 
 ## まとめ
 
-冒頭の素朴な直観 ──「$dG/dt(\text{前}\to\text{後})-dG/dt(\text{前}\to\text{前})$ を $s$ で割って微分」── はほぼ正しかった。正確には、有限変換の条件 $L_s-L_0=\frac{d}{dt}(G_s-G_0)$ を $s$ 方向に微分して $\delta L=dg/dt$ が出る($g=\frac{dG_s}{ds}|_0$)。あとは Euler–Lagrange と組んで $Q=\frac{\partial L}{\partial\dot q}\delta q-g$ を構成する ── それがネーターの定理本体だ。自由粒子のガリレイ・ブースト($g=mq$)が、境界項 $g$ の働きを一番はっきり見せてくれる。
+冒頭の素朴な直観(「$dG/dt(\text{前}\to\text{後})-dG/dt(\text{前}\to\text{前})$ を $s$ で割って微分」)はほぼ正しかった。正確には、有限変換の条件 $L_s-L_0=\frac{d}{dt}(G_s-G_0)$ を $s$ 方向に微分して $\delta L=dg/dt$ が出る($g=\frac{dG_s}{ds}|_0$)。あとは Euler–Lagrange と組んで $Q=\frac{\partial L}{\partial\dot q}\delta q-g$ を構成する ── それがネーターの定理本体だ。自由粒子のガリレイ・ブースト($g=mq$)が、境界項 $g$ の働きを一番はっきり見せてくれる。
 
 > **横断メモ.** この「連続対称性 → 保存量」は、量子力学では「$H$ と可換な観測量(生成子)が保存する」として現れる(別記事「生成子が見えると量子力学はわかる」§5)。Noether はその**古典・ラグランジアン側の相方**だ。さらに、対称性を生成子(無限小変換)に落とす操作そのものは、有限変換 $U(s)=e^{-isG/\hbar}$ を $s=0$ で微分して $G$ を取り出す手つきと同じ ── 本記事の「有限変換を $s$ で微分して微小版を得る」は、生成子を取り出す所作の解析力学版である。次の一歩(位相空間での括弧)は別記事「ポアソン括弧」へ。
 

@@ -70,7 +70,7 @@ $\dot F=\{F,H\}$ から直ちに:**$\{F,H\}=0$(かつ $\partial F/\partial t=0$)
 
 $$\{F,G\}_{\text{Poisson}} \;\longleftrightarrow\; \frac{1}{i\hbar}[\hat F,\hat G]_{\text{commutator}}$$
 
-で対応する。量子化とは(おおまかには)ポアソン括弧を $i\hbar$ 倍の交換子に置き換える操作 ── 正準量子化の素朴な表現だ。
+で対応する。量子化とは(おおまかには)ポアソン括弧を交換子の $\frac{1}{i\hbar}$ 倍に置き換える操作($[\hat F,\hat G]=i\hbar\{F,G\}$) ── 正準量子化の素朴な表現だ。
 
 <figure>
 <svg viewBox="0 0 470 168" width="100%" style="max-width:470px;display:block;margin:8px auto" role="img" aria-label="ポアソン括弧と交換子の対応とその限界">

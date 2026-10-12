@@ -10,16 +10,6 @@ abstract: |
 
 # デデキント拡大における $e$ と $f$ ── 拡大は $e$、ノルムは $f$
 
-## タイトル案
-
-1. 拡大は $e$、ノルムは $f$ ── デデキント環の有限拡大に潜む二つの数の役割分担
-2. なぜノルム側に剰余体次数が出てくるのか ── イデアル拡大とイデアルノルムの対比
-3. 垂直の厚みと水平の重み ── デデキント拡大の $e$ と $f$ の物語
-4. 上へ伸びる $e$、下へ畳む $f$ ── 素イデアル分解とイデアルノルム
-5. 拡大次数 $[L:K]$ を $e$ と $f$ で回収する ── デデキント環の基本対比
-
----
-
 ## 素朴な驚きから
 
 デデキント環 $A \subset B$ の有限拡大があり、それぞれの商体を $K \subset L$ とする。このとき、イデアルの間には自然な二つの対応がある。
@@ -83,7 +73,7 @@ $$N_{L/K}(\mathfrak P) \;=\; \mathfrak p^{f_{\mathfrak P}}, \qquad f_{\mathfrak 
 
 ここで $\mathfrak p = \mathfrak P \cap A$ である。
 
-注目すべきは、**ノルムが単に $\mathfrak p$ を返すのではなく、$\mathfrak p^{f_{\mathfrak P}}$ を返す**という点だ。$\mathfrak P$ を下に押し戻すと、ただの $\mathfrak p$ ではなく、$\mathfrak p$ の $f_{\mathfrak P}$ 乗が出てくる。
+**ノルムは単に $\mathfrak p$ を返すのではなく、$\mathfrak p^{f_{\mathfrak P}}$ を返す**。$\mathfrak P$ を下に押し戻すと、ただの $\mathfrak p$ ではなく、$\mathfrak p$ の $f_{\mathfrak P}$ 乗が出てくる。
 
 なぜ $f$ なのか。直感はこうだ。
 

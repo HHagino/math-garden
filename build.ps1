@@ -103,6 +103,26 @@ $held = @(
   'Basuの定理はscore空間の直交分解_0次vanishingの起動例_2026-06-20.md'  # Basu = 第一論文の核心
 )
 
+# 【10/13】確実な数学の誤りが見つかった13本は、直しが済むまで公開から外す（検算記録/庭_*_2026-10-12.md）。
+#   直して検算が済んだ記事から、この $fixHold の一覧を消す（全部消えたら、この節ごと消してよい）。
+$fixHold = @(
+  'Euler因子は局所Mellin変換である_ガンマ因子だけ形が違って見える理由_2026-08-15.md',
+  'LAOX多様体_次元を上げると障害が増える_2026-06-19.md',
+  'LAOX性とは何か何でないか_隣接概念との微差_2026-06-19.md',
+  'LAOX曲線_局所在庫あり大域在庫なし_2026-06-19.md',
+  'Poisson和公式は格子で割ったPeter-Weylである_関数等式はどこから来るのか_2026-08-15.md',
+  'cm-elliptic-curves-kronecker-jugendtraum.md',
+  'de-morgan-as-categorical-complement-duality.md',
+  'epic-surjection-cover-distinction.md',
+  'iwasawa-theory-selmer-introduction.md',
+  'perfectoid-tilting-motivation.md',
+  'relativity-algebraic-rta-clifford-hurwitz.md',
+  'witt-vectors-artin-schreier-witt.md',
+  '弧状連結単連結可縮_不変量は何を見て何を見落とすか_2026-06-19.md'
+)
+$public = @($public | Where-Object { $fixHold -notcontains $_ })
+$held   = @($held) + $fixHold
+
 # --- 公開対象外(記事ではない) ---
 # デザイン規則2本・庭のマップ・引継ぎメモ2本・algebraic-gr-READING-BEFORE-REOPEN
 # --- 凍結中(アラケロフ影プログラム。趣味として凍結) ---
