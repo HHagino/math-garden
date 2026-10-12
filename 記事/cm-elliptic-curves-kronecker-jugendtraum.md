@@ -6,7 +6,7 @@ status: 墓場
 audience: 楕円曲線・類体論の基礎を一度通った人向け
 prerequisite: 楕円曲線(Silverman 第 1 部)、二次体、Hilbert 類体
 abstract: |
-  Hilbert 第 12 問題(数体の最大 abelian 拡大を解析関数の特殊値で明示構成せよ)は、K=ℚ(円分関数 e^{2πi/n}、Kronecker–Weber)と K=虚二次体(楕円関数・CM 楕円曲線の特殊値)でのみ完全解決されている。CM 楕円曲線は End(E)⊗ℚ が虚二次体になるもので、j(E) が Hilbert 類体を、Weber 関数の値 (g₂g₃/Δ)℘(α)(α ∈ F)が最大 abelian 拡大を生成する(Kronecker の青春の夢)。その l 進 Galois 表現は abelian で二つの Hecke 指標の和に分解し、L 関数は Hecke L 関数の積として明示的に解析接続される。Coates–Wiles(BSD の最初の突破口)もこの CM の特殊性から来る。
+  Hilbert 第 12 問題(数体の最大 abelian 拡大を解析関数の特殊値で明示構成せよ)は、K=ℚ(円分関数 e^{2πi/n}、Kronecker–Weber)と K=虚二次体(楕円関数・CM 楕円曲線の特殊値)でのみ完全解決されている。CM 楕円曲線は End(E)⊗ℚ が虚二次体になるもので、j(E) が Hilbert 類体を、Weber 関数の値 h_F(α)(α ∈ F。j ≠ 0, 1728 なら (g₂g₃/Δ)℘(α)、j = 0, 1728 では別の正規化)が最大 abelian 拡大を生成する(Kronecker の青春の夢)。その l 進 Galois 表現は abelian で二つの Hecke 指標の和に分解し、L 関数は Hecke L 関数の積として明示的に解析接続される。Coates–Wiles(BSD の最初の突破口)もこの CM の特殊性から来る。
 ---
 
 ## 1. Hilbert 第 12 問題と Kronecker の青春の夢
@@ -163,7 +163,9 @@ F の元 α と CM 楕円曲線 E = ℂ/𝒪_F に対し、Weierstrass の楕円
 
 具体的には:
 
-$$ F\Bigl(j(E),\ \tfrac{g_2 g_3}{\Delta}\,\wp(α; \mathcal{O}_F): α \in F\Bigr) = F^{ab}. $$
+$$ F\Bigl(j(E),\ h_F(α): α \in F\Bigr) = F^{ab}, \qquad h_F = \begin{cases} \tfrac{g_2 g_3}{\Delta}\,\wp & (j(E) \neq 0, 1728) \\ \tfrac{g_2^2}{\Delta}\,\wp^2 & (j(E) = 1728) \\ \tfrac{g_3}{\Delta}\,\wp^3 & (j(E) = 0) \end{cases} $$
+
+(ここで ℘ = ℘(α; 𝒪_F)。F = ℚ(i) では g₃ = 0、F = ℚ(√−3) では g₂ = 0 なので、(g₂g₃/Δ)℘ を一律に使うと何も生成しない。)
 
 これが「楕円関数の特殊値で abelian 拡大を生成する」Kronecker の青春の夢の精密な実現である。
 

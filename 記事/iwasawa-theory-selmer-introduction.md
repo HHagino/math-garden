@@ -165,7 +165,7 @@ $$ L_p(\chi_{cyc}^{1-k}) = L(\chi^{-1}, 1 - k) \cdot (\text{Euler factor at p}).
 
 **岩澤の主予想** (Mazur-Wiles 1984、Wiles 1990 で完成):
 
-> 岩澤加群の特性イデアルと p 進 L 関数が、Δ の奇指標成分ごとに等しい(i は奇数、ω は Teichmüller 指標、右辺は Kubota-Leopoldt の L_p(s, ω^{1-i}) を Λ の元として見たもの):
+> 岩澤加群の特性イデアルと p 進 L 関数が、Δ の奇指標成分ごとに等しい(i は奇数で i ≢ 1 (mod p−1)〔i ≡ 1 では右辺の L_p が極を持ち、左辺の成分は 0〕、ω は Teichmüller 指標、右辺は Kubota-Leopoldt の L_p(s, ω^{1-i}) を Λ の元として見たもの):
 > $$ \text{char}_\Lambda(X_\infty^{(\omega^i)}) = (L_p(\omega^{1-i})). $$
 
 すなわち、解析側(p 進 L 関数 L_p ∈ Λ)と代数側(岩澤加群 X_∞ の characteristic ideal)が完全に一致する。
@@ -284,7 +284,7 @@ Euler system は「L 関数の特殊値情報を運ぶコホモロジー類の�
 1. 円分 ℤ_p 塔 K_∞^{(p)} 上の Galois 加群を、岩澤代数 Λ = ℤ_p[[T]] 上の加群として体系化
 2. 岩澤の構造定理(1959): 類数の p 部分が漸近的に μ p^n + λ n + ν と振る舞う
 3. Kubota-Leopoldt の p 進 L 関数 L_p ∈ Λ が、古典 L 関数の特殊値を p 進的に補間
-4. **岩澤主予想**: char_Λ(X_∞^{(ω^i)}) = (L_p(ω^{1-i}))(奇指標成分ごと)、すなわち解析と代数の同一性
+4. **岩澤主予想**: char_Λ(X_∞^{(ω^i)}) = (L_p(ω^{1-i}))(奇数 i ≢ 1 (mod p−1) の成分ごと)、すなわち解析と代数の同一性
 5. 楕円曲線方向: char_Λ(X_∞(E)) = (L_p(E)) (Skinner-Urban 2014)
 6. Selmer 群が Mordell-Weil 群と Tate-Shafarevich 群を符号化、BSD 予想と直結
 7. Coates-Wiles 1977 が CM の場合の analytic rank 0 ⇒ algebraic rank 0 を証明、のちの Euler system 技術の先駆(名称は Kolyvagin 以後)

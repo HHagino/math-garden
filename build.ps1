@@ -106,9 +106,7 @@ $held = @(
 # 【10/13】確実な数学の誤りが見つかった13本は、直しが済むまで公開から外す（検算記録/庭_*_2026-10-12.md）。
 #   直して検算が済んだ記事から、この $fixHold の一覧を消す（全部消えたら、この節ごと消してよい）。
 $fixHold = @(
-  'l-adic-vs-p-adic-galois-representation.md',
-  'kpz-universality-class-introduction.md',
-  'laplace-beltrami-hodge-global-device.md'
+  # （10/13 朝：全部直して公開に戻した。今は無し）
 )
 $public = @($public | Where-Object { $fixHold -notcontains $_ })
 $held   = @($held) + $fixHold

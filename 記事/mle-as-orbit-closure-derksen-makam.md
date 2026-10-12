@@ -31,7 +31,7 @@ MLE を求めるとは、サンプル $Y$ に対し、log-likelihood 関数 $\el
 
 である。
 
-ここで Derksen–Makam の論文の主張が登場する:**これらの統計的問いは、群 $G$ の作用に関する GIT 安定性で完全に判定できる**。
+ここで Derksen–Makam の論文が出発点にする事実が登場する(論文の Theorem 2.5。論文自身が書くとおり、Améndola–Kohn–Reichenbach–Seigal が証明した結果を一般の形に書き直したもの):**これらの統計的問いは、群 $G$ の作用に関する GIT 安定性で完全に判定できる**。
 
 ## 3. Theorem 2.5 ── MLE と GIT 安定性の辞書
 
@@ -107,9 +107,9 @@ Kac、King、Schofield ら quiver の表現論の人々が長年作ってきた*
 
 - **$p^2 + q^2 - mpq < 0$ のとき**:generic な $Y$ に対し、**unique MLE がほとんど確実に存在する**。
 - **$p^2 + q^2 - mpq = 0$ または $p^2 + q^2 - mpq = d^2$ のとき**:**MLE はほとんど確実に存在する**が、**$d = 1$ のときだけ一意**。
-- **それ以外(主に $p^2 + q^2 - mpq$ がより正に大きい場合)**:**log-likelihood は有界でなく、MLE は存在しない**。
+- **それ以外($p^2 + q^2 - mpq$ は $d^2$ の倍数なので、$p^2 + q^2 - mpq \geq 2d^2$ の場合)**:**log-likelihood は有界でなく、MLE は存在しない**。
 
-ここに**$d = \gcd(p,q)$ が顔を出す**のがエレガントで、$p$ と $q$ の数論的関係が「MLE が一意になるか退化対称性が残るか」を分けている。条件式 $p^2 + q^2 - mpq$ は、quiver 表現の安定性条件における dimension vector $(p, q)$ と矢の本数 $m$ の組合せ的な式そのものだ(Schofield の安定性条件に対応する量)。
+ここに**$d = \gcd(p,q)$ が顔を出す**のがエレガントで、$p$ と $q$ の数論的関係が「MLE が一意になるか退化対称性が残るか」を分けている。条件式 $p^2 + q^2 - mpq$ は、quiver 表現の安定性条件における dimension vector $(p, q)$ と矢の本数 $m$ の組合せ的な式そのものだ($m$-Kronecker quiver の Euler 形式(Tits 形式)$\langle\alpha,\alpha\rangle$、$\alpha=(p,q)$ の値で、Kac による根の分類(実根・虚根)と canonical decomposition の判定に使う量)。
 
 ここは数式や不等号を間違えやすいので、本記事の表現が引っかかった読者は Derksen–Makam 原文の Theorem 1.2 を直接確認してほしい(arXiv:2007.10206)。
 
@@ -147,5 +147,6 @@ Kronecker 共分散モデルの MLE 問題は、単にパラメータ推定の�
 ### 参照
 
 - H. Derksen, V. Makam, *Maximum Likelihood Estimation for Matrix Normal Models via Quiver Representations*, arXiv:2007.10206 (2020).
+- C. Améndola, K. Kohn, P. Reichenbach, A. Seigal, *Invariant theory and scaling algorithms for maximum likelihood estimation*, arXiv:2003.13662 (2020). Derksen–Makam の Theorem 2.5 の出典。
 - A. King, *Moduli of representations of finite-dimensional algebras*, Quart. J. Math. (1994).
 - A. Schofield, *Semi-invariants of quivers*, J. London Math. Soc. (1991).
