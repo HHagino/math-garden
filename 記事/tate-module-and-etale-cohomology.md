@@ -6,7 +6,7 @@ status: 墓場
 audience: 代数曲線・代数幾何の基礎を一度通った人向け
 prerequisite: 楕円曲線の基本(Silverman 第 1 部程度)、層と前層の概念、Galois 理論
 abstract: |
-  楕円曲線の l 等分点を l のべきで射影極限して得る Tate 加群 T_l(E)≅ℤ_l² は、絶対 Galois 群の連続表現(l 進ガロワ表現)を供給する。これを任意の代数多様体へ一般化したのがエタールコホモロジーで、π_1^ét=G_K の表現=l 進局所系として Galois 表現を幾何化する。Weil 予想(Frobenius 固有値・Riemann 仮説)から Faltings・Mordell まで、l 進ガロワ表現が舞台になる。l=p では破綻し p 進ホッジ理論/prismatic を要する。
+  楕円曲線の l 等分点を l のべきで射影極限して得る Tate 加群 T_l(E)≅ℤ_l² は、絶対 Galois 群の連続表現(l 進ガロワ表現)を供給する。これを任意の代数多様体へ一般化したのがエタールコホモロジーで、π_1^ét=G_K の表現=l 進局所系として Galois 表現を幾何化する。Weil 予想(Frobenius 固有値・Riemann 仮説)から Faltings・Mordell まで、l 進ガロワ表現が舞台になる。係数の素数 l が基底の標数 p と一致するとこの枠組みは破綻し、p 進の側は結晶・prismatic 系のコホモロジーが受け持つ(数体上の表現を l の上の素点で局所的に見るときは p 進ホッジ理論)。
 ---
 
 ## 1. 動機 — なぜ「Tate 加群」が要るのか
@@ -236,16 +236,16 @@ $$ f^*, f_*, f^!, f_!, \otimes, \mathcal{H}om $$
 
 が完備に振る舞う。これによって perverse sheaf 論、Lefschetz の不動点公式、Deligne の Weil II 証明、Lafforgue の Langlands などが体系化される。
 
-l = p の場合この形式主義は破綻し、対応物として prismatic site が必要になる。
+X が標数 p の上にあって係数に l = p を取る場合、この形式主義はそのままでは働かない(たとえば代数閉体上の 𝔸^1 の ℤ/p 係数の H^1 は、Artin–Schreier 列から無限次元になる)。p 進係数の側の対応物は結晶コホモロジーや prismatic cohomology が受け持つ。数体のような標数 0 の体の上では、係数に l = p を取ってもエタールコホモロジーは普通に働く。
 
 ---
 
 ## 6. 大域への接続 — Chebotarev とテンソル積定理
 
-K = 数体上の Galois 表現 ρ_{E,l}: G_K → GL_2(ℚ_l) は、ほとんどの素点で不分岐(E が good reduction を持つ素点で)。各不分岐素点 v でのフロベニウス Frob_v の像が
+K = 数体上の Galois 表現 ρ_{E,l}: G_K → GL_2(ℚ_l) は、ほとんどの素点で不分岐(E が good reduction を持ち、v ∤ l である素点 v で)。各不分岐素点 v でのフロベニウス Frob_v は、v の上の素点の選び方で共役だけ動くので、共役類としてしか決まらない。その共役類について
 
-- ρ(G_K) の中で稠密(Chebotarev 密度定理)
-- a_v := tr(ρ(Frob_v)) は l に依らない有理整数
+- 共役類 ρ(Frob_v) の和集合が ρ(G_K) の中で稠密(Chebotarev 密度定理。ρ(G_K) のどの有限商のどの共役類にも、無限個の v のフロベニウス類が現れる。代表元を一つずつ選んだだけの集合が稠密になるとは限らない)
+- a_v := tr(ρ(Frob_v)) は l に依らない有理整数(トレースは共役で変わらないので、代表元の取り方によらない)
 
 を満たす。L 関数
 
@@ -264,18 +264,18 @@ Faltings の同型定理(§2.3 で述べた)は、E と E' が K-同種(K-isogen
 3. 滑らかな射影多様体 X/K の **エタールコホモロジー** H^i_ét(X_{\bar K}, ℚ_l)
 4. 一般に、X 上の **l 進局所系** = π_1^ét(X) の連続表現
 
-これらは l ≠ p の世界で線型代数の延長として扱える。L 関数、Weil 予想、Faltings の定理、Mordell 予想、すべてここを舞台とする。
+これらは l ≠ p の世界(p は基底の体の標数、または局所的に見る素点の剰余標数)で線型代数の延長として扱える。L 関数、Weil 予想、Faltings の定理、Mordell 予想、すべてここを舞台とする。
 
-l = p の世界に踏み込むと p 進ホッジ理論が必要になる。「係数の素数とガロワ表現 — l 進と p 進の差異、p 進ホッジ理論への入口」を参照。
+l = p の世界、つまり標数 p の多様体を p 進係数で見るときは結晶・prismatic コホモロジーが、数体上の l 進表現を l の上の素点で局所的に見るときは p 進ホッジ理論が必要になる。「係数の素数とガロワ表現 — l 進と p 進の差異、p 進ホッジ理論への入口」を参照。
 
 ---
 
-> **横断メモ(on-mission・Galois/étale 中核).** 本記事は庭の数論・Galois 側の深部ハブだ。π_1^ét=G_K とエタール位相は別記事「点ではなく、開集合の代数で登る」の étale 基本群の深掘り版。l 進ガロワ表現 ρ:G_K→GL₂ は「Galois 群が線形に作用する」そのもので、$\det\rho=\chi_l$(円分指標)は別記事「Galois 理論を線形代数として見る」の固有値=指標(円分指標=Dirichlet 指標)を l 進・2 次元へ持ち上げたもの。Tate 加群 $T_l=\varprojlim E[l^n]$ という pro-finite 逆系の塔は、別記事「確率空間を Stone 的に読み替える」の filtration↔Galois 塔(第一論文の起点)と同じ pro-finite 構造で、l 進(Iwasawa 的)に各段を追う所作も共通。L 関数 $\prod_v$ の素点ごとの Euler 因子は「有限素点と無限素点」の積公式・素点の言語、Frobenius の不分岐性は局所大域(「ハッセ原理」)と地続きだ。**この記事は第一論文(filtration↔Galois)の到達したい地平の一つ**を、線形代数(Galois 表現・固有値)の延長として描いている。
+> **横断メモ(on-mission・Galois/étale 中核).** 本記事は庭の数論・Galois 側の深部ハブだ。π_1^ét=G_K とエタール位相は別記事「点ではなく、開集合の代数で登る」の étale 基本群の深掘り版。l 進ガロワ表現 ρ:G_K→GL₂ は「Galois 群が線形に作用する」そのもので、$\det\rho=\chi_l$(円分指標)は別記事「Galois 理論を線形代数として見る」の固有値=指標(Dirichlet 指標)を l 進・2 次元へ持ち上げたもの(K=ℚ のとき、法 $l^n$ の Dirichlet 指標は、$\chi_l$ を $\bmod l^n$ に落とした $G_{\mathbb Q}\to(\mathbb Z/l^n)^\times$ と合成して $G_{\mathbb Q}$ の指標になる。$\chi_l$ 自身は像が $\mathbb Z_l^\times$ で無限なので、Dirichlet 指標そのものではない)。Tate 加群 $T_l=\varprojlim E[l^n]$ という pro-finite 逆系の塔は、別記事「確率空間を Stone 的に読み替える」の filtration↔Galois 塔(第一論文の起点)と同じ pro-finite 構造で、l 進(Iwasawa 的)に各段を追う所作も共通。L 関数 $\prod_v$ の素点ごとの Euler 因子は「有限素点と無限素点」の積公式・素点の言語、Frobenius の不分岐性は局所大域(「ハッセ原理」)と地続きだ。**この記事は第一論文(filtration↔Galois)の到達したい地平の一つ**を、線形代数(Galois 表現・固有値)の延長として描いている。
 
 ## 査読・限界(解説モード)
 
 - **依拠する標準事実(深い定理群)**:$E[n]\cong(\mathbb Z/n)^2$ と $T_l\cong\mathbb Z_l^2$、Weil ペアリングと $\det\rho=\chi_l$、Faltings の同型定理(1983)、Artin の比較定理、Weil 予想(Deligne 1974/Weil II 1980)、$\pi_1^{\text{ét}}(\operatorname{Spec}K)=G_K$、l 進 lisse 層 ⇄ π_1^ét の連続表現、Chebotarev 密度定理。いずれも引用であって本記事は証明しない(参考文献参照)。
-- **境界(否定形)**:理論は $l\neq\mathrm{char}(K)$ で働く。$l=p$ では $E[p^n]$ の階数が落ち(supersingular で $0$)、六関手形式主義も破綻し、p 進ホッジ理論・prismatic site が要る。
+- **境界(否定形)**:理論は $l\neq\mathrm{char}(K)$ で働く。$l=p=\mathrm{char}(K)$ では $E[p^n]$ の階数が落ち(supersingular で $0$)、六関手形式主義もそのままでは働かず、結晶・prismatic コホモロジーが要る(数体上の表現を $l$ の上の素点で局所的に見るときに要るのは p 進ホッジ理論)。
 - 院生向けの advanced サーベイ。新規定理の主張はなく、l 進ガロワ表現の供給源を一望する地図。
 
 ## 参考文献

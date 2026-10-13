@@ -89,13 +89,15 @@ Grothendieck の処方は、§3 の発想そのものだった。**「開被覆�
 
 $$\mathbb G_m\xrightarrow{\ z\mapsto z^n\ }\mathbb G_m\qquad(n\ \text{は基礎体の標数と互いに素})$$
 
-を考える。微分 $nz^{n-1}$ は $\mathbb G_m$ 上で消えないから、これは**次数 $n$ の有限 étale 被覆**であり、被覆変換群は $1$ の $n$ 乗根のなす群 $\mu_n$ で、Galois だ(Kummer 理論)。解析的に見れば、これは $\mathbb C^\ast$ の $n$ 重被覆 $z\mapsto z^n$ そのものである。ところが **Zariski 位相では、これを局所同相として見られない**:基礎の $\mathbb G_m$ のどんな空でない Zariski 開集合も(既約だから)稠密で大きすぎて、その上で被覆が $n$ 枚の貼り合わせにほどけてくれない。étale 被覆として扱って初めて、$n$ 重性と $\mu_n$ が舞台に乗る。
+を考える。微分 $nz^{n-1}$ は $\mathbb G_m$ 上で消えないから、これは**次数 $n$ の有限 étale 被覆**であり、$1$ の $n$ 乗根の群スキーム $\mu_n$ のトーサーになる(Kummer 理論)。基礎体が $1$ の $n$ 乗根を $n$ 個すべて含めば(たとえば代数閉体なら)、被覆変換 $z\mapsto\zeta z$ のなす群は位数 $n$ の $\mu_n$ で、Galois 被覆だ。含まなければ被覆変換は減る。$\mathbb Q$ 上の $n=3$ では使える $\zeta$ は $1$ だけで、被覆変換群は自明になり Galois ではない。解析的に見れば、これは $\mathbb C^\ast$ の $n$ 重被覆 $z\mapsto z^n$ そのものである。ところが **Zariski 位相では、これを局所同相として見られない**:基礎の $\mathbb G_m$ のどんな空でない Zariski 開集合も(既約だから)稠密で大きすぎて、その上で被覆が $n$ 枚の貼り合わせにほどけてくれない。étale 被覆として扱って初めて、$n$ 重性と $\mu_n$ が舞台に乗る。
 
 なぜ Zariski だと被覆論が潰れるのか、根を一言で言える。既約多様体では空でない開集合はどれも稠密で、**定数層は flasque(脆弱)**になる ── 制限写像がすべて同型に近く、引き伸ばしの自由がない。すると定数係数の高次 Zariski コホモロジーは消え、位相が「何も無い」と言ってくる。一方 étale コホモロジーは、たとえば $\operatorname{Spec}\mathbb R$ 上で係数 $\mathbb Z/2\mathbb Z$ を取ると Galois 群 $\mathbb Z/2\mathbb Z$ をちゃんと拾う。**被覆の定義を取り替えた瞬間に、Zariski が「無」と答えた場所から構造が現れる。**
 
-étale 射の族を被覆とする site(étale site)の上では、**基本群** $\pi_1^{\text{ét}}$ が見える。そして $\pi_1^{\text{ét}}$ は**有限 étale 被覆を分類する**。ここで決定的な合流が起きる。点 $\operatorname{Spec} k$(体 $k$)の上では、有限 étale 被覆は有限分離代数にほかならず、
+étale 射の族を被覆とする site(étale site)の上では、**基本群** $\pi_1^{\text{ét}}$ が見える。そして $\pi_1^{\text{ét}}$ は**有限 étale 被覆を分類する**。ここで決定的な合流が起きる。点 $\operatorname{Spec} k$(体 $k$)の上では、有限 étale 被覆は有限分離代数にほかならず、代数閉包 $\bar k\supset k_{\mathrm{sep}}$ による幾何学的点 $\bar x:\operatorname{Spec}\bar k\to\operatorname{Spec}k$ を基点に選ぶと
 
-$$\pi_1^{\text{ét}}(\operatorname{Spec} k)\ \cong\ \mathrm{Gal}(k_{\mathrm{sep}}/k).$$
+$$\pi_1^{\text{ét}}(\operatorname{Spec} k,\bar x)\ \cong\ \mathrm{Gal}(k_{\mathrm{sep}}/k).$$
+
+(基本群には基点が要る。以下で基点を省いて書くところは、この基点を選んだものとする。)
 
 **位相的な被覆空間論と、体の Galois 理論が、同じ $\pi_1$ の二つの顔として統一される**(Grothendieck の Galois 理論)。
 
