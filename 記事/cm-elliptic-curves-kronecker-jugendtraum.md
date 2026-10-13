@@ -20,20 +20,20 @@ abstract: |
 - **K = ℚ**: 円分関数 e^{2πi/n} の値で K^ab = ℚ(ζ_∞) := ℚ(e^{2πi q}: q ∈ ℚ)。これは **Kronecker-Weber 定理** (1853, Kronecker; 1886, Weber; 完成 Hilbert 1896)
 - **K = 虚二次体**: 楕円関数の特殊値 — CM 楕円曲線の n 等分点の座標で記述
 
-それ以外の数体(実二次体、3 次体以上)については完全な解決はなく、現在も未解決の問題である。本稿では虚二次体の場合を扱う。
+それ以外の数体(実二次体、3 次体以上)については、複素解析的な関数の特殊値による完全な解決はなく、その意味では現在も未解決の問題である(ただし総実体については、無限個の素数での p 進積分を使った無条件の明示構成が Dasgupta–Kakde, arXiv:2103.02516 によって与えられた)。本稿では虚二次体の場合を扱う。
 
 <figure>
 <svg viewBox="0 0 460 156" width="100%" style="max-width:460px;display:block;margin:8px auto" role="img" aria-label="Hilbert第12問題の解決状況">
   <g font-family="serif" font-size="11" fill="#2b2118">
     <text x="230" y="18" text-anchor="middle" font-size="11" fill="#6b5d44">Hilbert 第12問題:K^ab を解析関数の特殊値で明示構成</text>
-    <rect x="20" y="30" width="210" height="34" rx="4" fill="#eef1ea" stroke="#5a6e4a"/><text x="125" y="51" text-anchor="middle">K=ℚ:円分 e^{2πi/n}(Kronecker–Weber)✓</text>
+    <rect x="20" y="30" width="210" height="34" rx="4" fill="#eef1ea" stroke="#5a6e4a"/><text x="125" y="51" text-anchor="middle" font-size="10">K=ℚ:円分 e^{2πi/n}(Kronecker–Weber)✓</text>
     <rect x="20" y="70" width="210" height="34" rx="4" fill="#eef1ea" stroke="#5a6e4a"/><text x="125" y="91" text-anchor="middle">K=虚二次体:楕円関数・CM 値 ✓</text>
     <rect x="250" y="30" width="190" height="74" rx="4" fill="#f6e7e3" stroke="#b1342a"/><text x="345" y="56" text-anchor="middle">実二次体・3次以上</text><text x="345" y="78" text-anchor="middle">── 未解決</text>
     <text x="230" y="128" text-anchor="middle" font-size="9.5" fill="#8a7f6c">解けた二つは「乗法群の torsion(円分)」と「楕円曲線の torsion(CM)」── 本稿は後者</text>
     <text x="230" y="144" text-anchor="middle" font-size="9.5" fill="#b1342a">数論幾何最古級の未解決問題の一つ</text>
   </g>
 </svg>
-<figcaption><b>図1 ─ 第12問題の解決状況.</b> 最大 abelian 拡大を解析関数の特殊値で書けるのは、$K=\mathbb Q$(円分関数、$\mathbb G_m$ の torsion)と $K=$ 虚二次体(楕円関数、CM 楕円曲線の torsion)のみ。実二次体以上は未解決。本稿は虚二次体=楕円曲線側を扱う。<i>(概念図)</i></figcaption>
+<figcaption><b>図1 ─ 第12問題の解決状況.</b> 最大 abelian 拡大を解析関数の特殊値で書けるのは、$K=\mathbb Q$(円分関数、$\mathbb G_m$ の torsion)と $K=$ 虚二次体(楕円関数、CM 楕円曲線の torsion)のみ。実二次体以上は、複素解析的な特殊値としては未解決(総実体には p 進的な明示構成がある。本文 §1)。本稿は虚二次体=楕円曲線側を扱う。<i>(概念図)</i></figcaption>
 </figure>
 
 ---
@@ -269,7 +269,7 @@ CM 理論は、楕円関数論・類体論・Galois 表現論・L 関数論を�
 ## 査読・限界(解説モード)
 
 - **依拠する標準事実**:CM ⟺ End(E)⊗ℚ が虚二次体、$j(E)$ が Hilbert 類体を生成・代数的整数、CM の主定理($F^{ab}=F(j(E),h(E[\infty]))$、$h$ は Weber 関数、Hasse–Weber–Takagi–Shimura–Taniyama)、℘ の特殊値による生成、CM 表現の Hecke 指標分解と $L(E/F,s)=L(\psi_E,s)L(\bar\psi_E,s)$、Coates–Wiles(1977)、Kronecker–Weber。標準的な CM 理論・類体論。
-- **境界(否定形)**:Hilbert 第12問題が完全解決なのは $K=\mathbb Q$ と虚二次体のみ(§6.2)。実二次体(Stark 予想)以上は未解決。CM は「abelian で指標に分解する」特殊な楕円曲線で、一般(非 CM)の楕円曲線は 2 次元既約表現を持ち保型形式(Wiles)を要する。
+- **境界(否定形)**:Hilbert 第12問題が複素解析的な特殊値で完全解決なのは $K=\mathbb Q$ と虚二次体のみ(§6.2)。実二次体(Stark 予想)以上はその意味では未解決(総実体には Dasgupta–Kakde の p 進的な明示構成がある)。CM は「abelian で指標に分解する」特殊な楕円曲線で、一般(非 CM)の楕円曲線は 2 次元既約表現を持ち保型形式(Wiles)を要する。
 - 院生向けサーベイ。新規主張なし。
 
 ## 参考文献

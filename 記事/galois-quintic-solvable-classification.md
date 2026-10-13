@@ -147,7 +147,7 @@ f が既約であることは、ガロア群に強い制約を与える。f の5
     <circle cx="224" cy="108" r="4"/><circle cx="173" cy="38" r="4"/><circle cx="91" cy="65" r="4"/><circle cx="91" cy="151" r="4"/><circle cx="173" cy="178" r="4"/>
   </g>
   <text x="232" y="104" font-family="serif" font-size="9.5" fill="#2b2118">2^{1/5}</text>
-  <text x="150" y="30" font-family="serif" font-size="9" fill="#8a7f6c">ζ₅·2^{1/5}</text>
+  <text x="156" y="30" font-family="serif" font-size="9" fill="#8a7f6c">ζ₅·2^{1/5}</text>
   <!-- rotation arc -->
   <path d="M214,80 A40,40 0 0 0 182,52" fill="none" stroke="#2f5d7c" stroke-width="1.5" marker-end="url(#gq1)"/>
   <text x="210" y="48" font-family="serif" font-size="9" fill="#2f5d7c">×ζ₅(C₅)</text>

@@ -39,7 +39,7 @@ $$ \rho_{E,l} \colon G_K \to \operatorname{GL}_2(\mathbb{Z}_l) \hookrightarrow \
 
 <figure>
 <svg viewBox="0 0 470 152" width="100%" style="max-width:470px;display:block;margin:8px auto" role="img" aria-label="Tate加群は等分点の射影極限">
-  <defs><marker id="tm1" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto"><path d="M6 0 L0 3 L6 6 z" fill="#5a4f3f"/></marker></defs>
+  <defs><marker id="tm1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"/></marker></defs>
   <g font-family="serif" font-size="11" fill="#2b2118">
     <text x="56" y="56" text-anchor="middle">E[l]</text>
     <text x="146" y="56" text-anchor="middle">E[l²]</text>

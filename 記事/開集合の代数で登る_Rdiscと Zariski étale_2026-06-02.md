@@ -122,11 +122,11 @@ $$\operatorname{Spec}\mathbb C\ \longrightarrow\ \operatorname{Spec}\mathbb R\qq
   <!-- left ascent + wall -->
   <line x1="92" y1="200" x2="158" y2="148" stroke="#2f5d7c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#aw)"/>
   <line x1="168" y1="120" x2="168" y2="170" stroke="#b1342a" stroke-width="5"/>
-  <text x="168" y="110" text-anchor="middle" font-family="serif" font-size="12" fill="#b1342a">壁</text>
+  <text x="182" y="150" text-anchor="middle" font-family="serif" font-size="12" fill="#b1342a">壁</text>
   <!-- right ascent + tunnel -->
   <path d="M328,205 a22,30 0 0 1 44,0" fill="#d8cdb8" stroke="#6b5d44" stroke-width="1.6"/>
   <line x1="438" y1="190" x2="320" y2="190" stroke="#5a6e4a" stroke-width="2" marker-end="url(#at)"/>
-  <text x="350" y="150" text-anchor="middle" font-family="serif" font-size="12" fill="#5a6e4a">トンネル</text>
+  <text x="344" y="166" text-anchor="middle" font-family="serif" font-size="12" fill="#5a6e4a">トンネル</text>
   <!-- bottom labels -->
   <text x="118" y="226" text-anchor="middle" font-family="serif" font-size="12.5" fill="#2b2118">第一の登頂:ℝ_disc</text>
   <text x="118" y="241" text-anchor="middle" font-family="serif" font-size="11.5" fill="#6b5d44">可算生成フレーム → 不可能</text>

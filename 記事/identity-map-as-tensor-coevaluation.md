@@ -28,7 +28,7 @@ $$v\otimes\varphi \;\longmapsto\; \big(x\mapsto \varphi(x)\,v\big).$$
 
 では、この同型のもとで恒等写像 $\mathrm{id}_V$ に対応する $V\otimes V^*$ の元は何か。
 
-基底 $(e_1,\dots,e_n)$ を一つ取り、その双対基底を $(e^1,\dots,e^n)$ とする。双対基底とは $e^i(e_j)=\delta^i_j$ を満たすもので、要するに「$j$ 番目の成分を読み取る関数」だ。このとき、候補は
+基底 $(e_1,\dots,e_n)$ を一つ取り、その双対基底を $(e^1,\dots,e^n)$ とする。双対基底とは $e^i(e_j)=\delta^i_j$ を満たすもので、要するに $e^i$ は「$i$ 番目の成分を読み取る関数」だ。このとき、候補は
 
 $$\theta_V \;=\; \sum_{i=1}^{n} e_i\otimes e^i$$
 
@@ -79,7 +79,7 @@ $$\operatorname{coev}_V\colon k \longrightarrow V\otimes V^*, \qquad 1 \longmaps
 
 $$\operatorname{ev}_V\colon V^*\otimes V \longrightarrow k, \qquad \varphi\otimes v \longmapsto \varphi(v)$$
 
-である。$\operatorname{coev}_V$ は「無からペア $\sum e_i\otimes e^i$ を生み出す」射、$\operatorname{ev}_V$ は「ペアを潰してスカラーにする」射。この二つは、いわゆる **cup/cap 図式**の cup（下に開いた弧）と cap（上に開いた弧）に対応する ―― $\operatorname{coev}_V$ が cup、$\operatorname{ev}_V$ が cap だ。
+である。$\operatorname{coev}_V$ は「無からペア $\sum e_i\otimes e^i$ を生み出す」射、$\operatorname{ev}_V$ は「ペアを潰してスカラーにする」射。この二つは、いわゆる **cup/cap 図式**の cup（上に開いた弧）と cap（下に開いた弧）に対応する ―― $\operatorname{coev}_V$ が cup、$\operatorname{ev}_V$ が cap だ。
 
 そして両者は、次の **zigzag 恒等式（三角恒等式）**で結ばれている：
 

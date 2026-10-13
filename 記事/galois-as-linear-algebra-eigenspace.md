@@ -89,9 +89,9 @@ $\alpha$ は $\sigma$ の、したがって $\sigma^k$ の固有ベクトルで�
   <!-- eigenline decomposition -->
   <g font-family="serif" font-size="11" fill="#2b2118">
     <text x="350" y="22" text-anchor="middle" font-size="11">L = 固有直線の直和</text>
-    <rect x="224" y="32" width="252" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="232" y="49">K·1            固有値 1</text>
-    <rect x="224" y="58" width="252" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="232" y="75">K·α           固有値 ζₙ</text>
-    <rect x="224" y="84" width="252" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="232" y="101">K·α²          固有値 ζₙ²</text>
+    <rect x="224" y="32" width="240" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="232" y="49">K·1            固有値 1</text>
+    <rect x="224" y="58" width="240" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="232" y="75">K·α           固有値 ζₙ</text>
+    <rect x="224" y="84" width="240" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="232" y="101">K·α²          固有値 ζₙ²</text>
     <text x="350" y="124" text-anchor="middle" fill="#8a7f6c">⋮  (自明指標の固有空間 K·1 = Lᴳ = K)</text>
   </g>
 </svg>

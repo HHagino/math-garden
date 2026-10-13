@@ -52,7 +52,7 @@ $$\boxed{\ Z_p(s) = \frac{1}{1-p^{-s}}\ }$$
 **Euler 因子が出た。**素数を「数えた」のではない。$\mathbb{Q}_p^\times$ を層に切って、層の体積を足しただけである。$(1-p^{-s})^{-1}$ という有理式の正体は、**層の体積がすべて $1$ で、重みが等比数列であること**だった。
 
 <figure>
-<svg viewBox="0 0 460 190" width="100%" role="img" aria-label="Qp の乗法群が同心の層に分かれ、各層の体積が1で重みが等比数列になる図">
+<svg viewBox="0 0 460 216" width="100%" role="img" aria-label="Qp の乗法群が同心の層に分かれ、各層の体積が1で重みが等比数列になる図">
   <circle cx="150" cy="95" r="82" fill="none" stroke="#b8b0a2" stroke-width="1"/>
   <circle cx="150" cy="95" r="62" fill="none" stroke="#b8b0a2" stroke-width="1"/>
   <circle cx="150" cy="95" r="42" fill="none" stroke="#b8b0a2" stroke-width="1"/>
@@ -68,7 +68,8 @@ $$\boxed{\ Z_p(s) = \frac{1}{1-p^{-s}}\ }$$
   <text x="250" y="106" font-size="11" fill="#6b6459">…（内側へ無限に続く）</text>
   <text x="250" y="140" font-size="11" fill="#3a3630">どの層も体積 1</text>
   <text x="250" y="160" font-size="11" fill="#3a3630">⟹ Σ p<tspan baseline-shift="super" font-size="8">−ns</tspan> = (1−p<tspan baseline-shift="super" font-size="8">−s</tspan>)<tspan baseline-shift="super" font-size="8">−1</tspan></text>
-  <text x="20" y="182" font-size="11" fill="#6b6459">Z_p は「原点に向かって縮む層」を外から内へ足していく積分。1_{Z_p} は n≥0 の層だけを残す。</text>
+  <text x="20" y="196" font-size="11" fill="#6b6459">Z_p は「原点に向かって縮む層」を外から内へ足していく積分。</text>
+  <text x="20" y="211" font-size="11" fill="#6b6459">1_{Z_p} は n≥0 の層だけを残す。</text>
 </svg>
 <figcaption>$\mathbb{Q}_p^\times$ は絶対値の値ごとの同心層に分かれ、各層の乗法的体積は等しい。Euler 因子は、その層の上の等比級数である。</figcaption>
 </figure>
@@ -132,7 +133,7 @@ $(1-p^{-s})^{-1}$ とは**別の関数**である。$\mathbf{1}_{p\mathbb{Z}_p}$
 これは前記事の主題と同じ構造である。あちらでは $t\leftrightarrow 1/t$ が格子と双対格子の交換だった。こちらでは $s\leftrightarrow 1-s$ が、各素点での Fourier 双対の取り替えになっている。**自己双対な関数を選ぶとは、その交換で動かない点に立つということである。**
 
 <figure>
-<svg viewBox="0 0 470 150" width="100%" role="img" aria-label="全素点にわたる局所因子の積として xi が構成される図">
+<svg viewBox="0 0 470 164" width="100%" role="img" aria-label="全素点にわたる局所因子の積として xi が構成される図">
   <text x="18" y="18" font-size="11" fill="#3a3630">ξ(s) ＝ すべての素点の局所積分の積</text>
   <line x1="18" y1="72" x2="452" y2="72" stroke="#d8d2c6" stroke-width="1"/>
   <g>
@@ -158,7 +159,8 @@ $(1-p^{-s})^{-1}$ とは**別の関数**である。$\mathbf{1}_{p\mathbb{Z}_p}$
   <text x="188" y="108" font-size="9" text-anchor="middle" fill="#6b6459">(1−3<tspan baseline-shift="super" font-size="7">−s</tspan>)<tspan baseline-shift="super" font-size="7">−1</tspan></text>
   <text x="252" y="108" font-size="9" text-anchor="middle" fill="#6b6459">(1−5<tspan baseline-shift="super" font-size="7">−s</tspan>)<tspan baseline-shift="super" font-size="7">−1</tspan></text>
   <text x="316" y="108" font-size="9" text-anchor="middle" fill="#6b6459">(1−7<tspan baseline-shift="super" font-size="7">−s</tspan>)<tspan baseline-shift="super" font-size="7">−1</tspan></text>
-  <text x="18" y="136" font-size="11" fill="#3a3630">上段＝素点、中段＝自己双対なテスト関数、下段＝同じ積分 ∫ f<tspan baseline-shift="sub" font-size="8">v</tspan>|x|<tspan baseline-shift="sub" font-size="8">v</tspan><tspan baseline-shift="super" font-size="8">s</tspan> d<tspan baseline-shift="super" font-size="8">×</tspan>x の値。ζ は左端を落とした積。</text>
+  <text x="18" y="136" font-size="11" fill="#3a3630">上段＝素点、中段＝自己双対なテスト関数、下段＝同じ積分 ∫ f<tspan baseline-shift="sub" font-size="8">v</tspan>|x|<tspan baseline-shift="sub" font-size="8">v</tspan><tspan baseline-shift="super" font-size="8">s</tspan> d<tspan baseline-shift="super" font-size="8">×</tspan>x の値。</text>
+  <text x="18" y="157" font-size="11" fill="#3a3630">ζ は左端を落とした積。</text>
 </svg>
 <figcaption>$\infty$ だけが色違いなのは、そこだけ自己双対関数が定義関数でないからである。積分の形は全素点で同一。</figcaption>
 </figure>

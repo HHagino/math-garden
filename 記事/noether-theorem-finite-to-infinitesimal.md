@@ -29,7 +29,7 @@ $$L_s - L_0 = \frac{d}{dt}(G_s - G_0)$$
 と書ける。恒等変換で $G_0=0$(または定数)に取れば、実質 $L_s-L_0=\dfrac{dG_s}{dt}$ ── 冒頭の素朴な書き方の正確版だ。
 
 <figure>
-<svg viewBox="0 0 460 192" width="100%" style="max-width:460px;display:block;margin:8px auto" role="img" aria-label="1パラメータ変換族を s=0 で微分する">
+<svg viewBox="0 0 480 192" width="100%" style="max-width:480px;display:block;margin:8px auto" role="img" aria-label="1パラメータ変換族を s=0 で微分する">
   <defs><marker id="nt1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#b1342a"/></marker></defs>
   <line x1="36" y1="160" x2="430" y2="160" stroke="#6b5d44" stroke-width="1.2"/>
   <text x="434" y="164" font-family="serif" font-size="11" fill="#5a4f3f">t</text>
@@ -41,8 +41,8 @@ $$L_s - L_0 = \frac{d}{dt}(G_s - G_0)$$
   <text x="416" y="34" font-family="serif" font-size="9.5" fill="#8a7f6c">q_s</text>
   <text x="416" y="74" font-family="serif" font-size="9.5" fill="#8a7f6c">q_s</text>
   <!-- vertical arrow = ds derivative -->
-  <line x1="250" y1="100" x2="250" y2="68" stroke="#b1342a" stroke-width="1.6" marker-end="url(#nt1)"/>
-  <text x="256" y="86" font-family="serif" font-size="10" fill="#b1342a">∂/∂s|₀ = δq</text>
+  <line x1="250" y1="94" x2="250" y2="68" stroke="#b1342a" stroke-width="1.6" marker-end="url(#nt1)"/>
+  <text x="244" y="62" text-anchor="end" font-family="serif" font-size="10" fill="#b1342a">∂/∂s|₀ = δq</text>
   <text x="150" y="184" text-anchor="middle" font-family="serif" font-size="10" fill="#8a7f6c">s で微分(s=0)すると δq, δL, g が出る</text>
 </svg>
 <figcaption><b>図1 ─ 有限変換を $s=0$ で微分する.</b> 変換は経路の $1$ パラメータ族 $q_s(t)$。$s=0$ の経路が変換前。パラメータ方向の微分 $\partial/\partial s|_0$ が、微小変位 $\delta q$、ラグランジアンの微小変化 $\delta L$、微小境界関数 $g$ を生む。<i>(概念図)</i></figcaption>

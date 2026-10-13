@@ -74,16 +74,16 @@ $$v_1=(1,1,0),\ v_2=(1,-1,0),\ v_3=(0,0,1),$$
     <rect x="20" y="40" width="120" height="30" fill="#f7f2e6" stroke="#6b5d44"/><text x="80" y="60" text-anchor="middle">ℂ³</text>
     <text x="80" y="30" text-anchor="middle" font-size="9.5" fill="#8a7f6c">出発</text>
     <line x1="142" y1="55" x2="166" y2="55" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#sd1)"/>
-    <text x="154" y="46" text-anchor="middle" font-size="8.5" fill="#8a7f6c">A で分解</text>
+    <text x="154" y="30" text-anchor="middle" font-size="8.5" fill="#8a7f6c">A で分解</text>
     <!-- step 1: A eigenspaces -->
     <rect x="168" y="40" width="80" height="30" fill="#eef5fa" stroke="#2f5d7c"/><text x="208" y="60" text-anchor="middle">V₁ (A=2)</text>
     <rect x="168" y="78" width="80" height="26" fill="#eef5fa" stroke="#2f5d7c"/><text x="208" y="95" text-anchor="middle">V₂ (A=5)</text>
     <line x1="250" y1="55" x2="274" y2="55" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#sd1)"/>
-    <text x="262" y="46" text-anchor="middle" font-size="8.5" fill="#8a7f6c">B で細分</text>
+    <text x="262" y="30" text-anchor="middle" font-size="8.5" fill="#8a7f6c">B で細分</text>
     <!-- step 2: B refines V1 -->
-    <rect x="276" y="34" width="120" height="22" fill="#eef1ea" stroke="#5a6e4a"/><text x="336" y="49" text-anchor="middle">W₁₁: A=2, B=1 → (1,1,0)</text>
-    <rect x="276" y="58" width="120" height="22" fill="#eef1ea" stroke="#5a6e4a"/><text x="336" y="73" text-anchor="middle">W₁₂: A=2, B=−1 → (1,−1,0)</text>
-    <rect x="276" y="82" width="120" height="22" fill="#eef1ea" stroke="#5a6e4a"/><text x="336" y="97" text-anchor="middle">V₂: A=5, B=7 → (0,0,1)</text>
+    <rect x="276" y="34" width="140" height="22" fill="#eef1ea" stroke="#5a6e4a"/><text x="346" y="49" text-anchor="middle">W₁₁: A=2, B=1 → (1,1,0)</text>
+    <rect x="276" y="58" width="140" height="22" fill="#eef1ea" stroke="#5a6e4a"/><text x="346" y="73" text-anchor="middle">W₁₂: A=2, B=−1 → (1,−1,0)</text>
+    <rect x="276" y="82" width="140" height="22" fill="#eef1ea" stroke="#5a6e4a"/><text x="346" y="97" text-anchor="middle">V₂: A=5, B=7 → (0,0,1)</text>
   </g>
   <text x="235" y="138" text-anchor="middle" font-family="serif" font-size="10.5" fill="#8a7f6c">A の縮退(V₁)を B が割り、二量(A,B)で各ベクトルに番地がつく</text>
 </svg>

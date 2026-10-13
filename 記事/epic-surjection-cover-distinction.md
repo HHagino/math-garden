@@ -102,7 +102,7 @@ $$\operatorname{Spec}\mathbb{Q} \longrightarrow \operatorname{Spec}\mathbb{Z}$$
     <text x="240" y="138" text-anchor="middle" font-size="9.5" fill="#b1342a">生成点 (0) だけに当たり、閉点 (p) を覆わない ── ℚ⊗ℤ/p=0 で閉点情報を殺す → cover でない</text>
   </g>
 </svg>
-<figcaption><b>図2 ─ generic すぎる epic.</b> $\operatorname{Spec}\mathbb Q\to\operatorname{Spec}\mathbb Z$ は、稠密な生成点 $(0)$ ただ一つに当たる。閉点 $(p)$ は覆われず、$\mathbb Q\otimes_{\mathbb Z}\mathbb Z/p=0$ がその情報を殺す。射を決めるには十分(epic)だが、局所を全部検出する(cover)には足りない。<i>(概念図)</i></figcaption>
+<figcaption><b>図1 ─ generic すぎる epic.</b> $\operatorname{Spec}\mathbb Q\to\operatorname{Spec}\mathbb Z$ は、稠密な生成点 $(0)$ ただ一つに当たる。閉点 $(p)$ は覆われず、$\mathbb Q\otimes_{\mathbb Z}\mathbb Z/p=0$ がその情報を殺す。射を決めるには十分(epic)だが、局所を全部検出する(cover)には足りない。<i>(概念図)</i></figcaption>
 </figure>
 
 ### しかし、これは cover ではない
@@ -205,10 +205,10 @@ $$\text{cover} \ \approx\ \text{降下の一意性} \ +\ \text{存在}$$
     <rect x="100" y="104" width="260" height="44" rx="4" fill="#eef1ea" stroke="#5a6e4a"/><text x="230" y="130" text-anchor="middle" font-size="10.5" fill="#5a6e4a">iso(全単射・同型)</text>
     <!-- example placements -->
     <circle cx="400" cy="38" r="4" fill="#b1342a"/><text x="330" y="42" font-size="9" fill="#b1342a">ℤ→ℚ(epicのみ)</text>
-    <circle cx="376" cy="66" r="4" fill="#b1342a"/><text x="300" y="70" font-size="9" fill="#b1342a">離散→密着ℕ(全射epic)</text>
+    <circle cx="404" cy="66" r="4" fill="#b1342a"/><text x="300" y="70" font-size="9" fill="#b1342a">離散→密着ℕ(全射epic)</text>
   </g>
 </svg>
-<figcaption><b>図1 ─ 概念の包含と二例の位置.</b> iso ⊂ cover ⊂ 全射epic ⊂ epic(圏ごとに意味が変わる発見法的な図で、どの包含が真の包含になるかも圏による)。包含が成り立つのは、圏と cover の意味を固定したときに限る:$\mathbf{Top}$ では cover＝商写像、環の例では Spec の向き(アフィンスキームの圏)で cover＝fpqc 被覆と読む。環準同型の向きのまま $\mathbf{CRing}$ で読むと cover ⊂ epic は崩れる(faithfully flat な $A\to A[t]$ は epic でない。$t\mapsto0$ と $t\mapsto u$ で定まる二つの $A[t]\to A[u]$ が $A$ 上で一致する)。$\mathbf{Set}$ では epic＝全射＝cover の三つが一致して見分けがつかない(iso は別)。$\mathbf{Top}$ でも epic＝全射で、分かれるのは cover(商写像)との間だけ。$\mathbb Z\to\mathbb Q$ は最外殻($\mathbf{CRing}$ で epic だが全射でない。Spec の向きでも、$\iota$ が単射なのでアフィンスキームの圏で epic、閉点に当たらないので全射でない)、離散→密着 $\mathbb N$ は一つ内側($\mathbf{Top}$ で全射 epic だが cover でない)。どちらも cover の壁の外側で、失敗の仕方が違う。<i>(概念図)</i></figcaption>
+<figcaption><b>図2 ─ 概念の包含と二例の位置.</b> iso ⊂ cover ⊂ 全射epic ⊂ epic(圏ごとに意味が変わる発見法的な図で、どの包含が真の包含になるかも圏による)。包含が成り立つのは、圏と cover の意味を固定したときに限る:$\mathbf{Top}$ では cover＝商写像、環の例では Spec の向き(アフィンスキームの圏)で cover＝fpqc 被覆と読む。環準同型の向きのまま $\mathbf{CRing}$ で読むと cover ⊂ epic は崩れる(faithfully flat な $A\to A[t]$ は epic でない。$t\mapsto0$ と $t\mapsto u$ で定まる二つの $A[t]\to A[u]$ が $A$ 上で一致する)。$\mathbf{Set}$ では epic＝全射＝cover の三つが一致して見分けがつかない(iso は別)。$\mathbf{Top}$ でも epic＝全射で、分かれるのは cover(商写像)との間だけ。$\mathbb Z\to\mathbb Q$ は最外殻($\mathbf{CRing}$ で epic だが全射でない。Spec の向きでも、$\iota$ が単射なのでアフィンスキームの圏で epic、閉点に当たらないので全射でない)、離散→密着 $\mathbb N$ は一つ内側($\mathbf{Top}$ で全射 epic だが cover でない)。どちらも cover の壁の外側で、失敗の仕方が違う。<i>(概念図)</i></figcaption>
 </figure>
 
 本記事の二つの例は、この三つがいかにズレうるかを、異なる仕方で照らし出していた。

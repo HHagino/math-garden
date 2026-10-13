@@ -208,12 +208,12 @@ $$12 \cdot \tfrac14 \cdot \tfrac13 = 1$$
     <line x1="220" y1="78" x2="220" y2="118" stroke="#6b5d44" stroke-width="2"/>
     <!-- left pan -->
     <line x1="120" y1="78" x2="120" y2="96" stroke="#6b5d44" stroke-width="1"/>
-    <path d="M92,96 h56 l-10,20 h-36 z" fill="#eef5fa" stroke="#2f5d7c"/>
+    <path d="M76,96 h88 l-10,20 h-68 z" fill="#eef5fa" stroke="#2f5d7c"/>
     <text x="120" y="111" text-anchor="middle" font-size="10.5">|12|∞ = 12</text>
     <text x="120" y="64" text-anchor="middle" font-size="9.5" fill="#8a7f6c">無限素点(大)</text>
     <!-- right pan -->
     <line x1="320" y1="78" x2="320" y2="96" stroke="#6b5d44" stroke-width="1"/>
-    <path d="M286,96 h68 l-10,20 h-48 z" fill="#eef1ea" stroke="#5a6e4a"/>
+    <path d="M256,96 h128 l-10,20 h-108 z" fill="#eef1ea" stroke="#5a6e4a"/>
     <text x="320" y="111" text-anchor="middle" font-size="10">∏ₚ|12|ₚ = ¼·⅓ = 1/12</text>
     <text x="320" y="64" text-anchor="middle" font-size="9.5" fill="#8a7f6c">有限素点(小)</text>
     <text x="220" y="166" text-anchor="middle" font-size="10.5" fill="#b1342a">積 = 12 · (1/12) = 1 ── 全素点が一つの保存則で釣り合う</text>
@@ -307,10 +307,10 @@ $$\pm (1 + \sqrt{2})^{\,n} \qquad (n \in \mathbb{Z})$$
     <text x="404" y="88" fill="#8a7f6c">log|σ₁|</text><text x="226" y="30" fill="#8a7f6c">log|σ₂|</text>
     <!-- hyperplane x+y=0 (anti-diagonal) -->
     <line x1="92" y1="20" x2="348" y2="148" stroke="#2f5d7c" stroke-width="2"/>
-    <text x="330" y="140" fill="#2f5d7c" font-size="9.5">超平面 x+y=0</text>
+    <text x="330" y="134" fill="#2f5d7c" font-size="9.5">超平面 x+y=0</text>
     <!-- lattice points -->
     <circle cx="220" cy="84" r="3.5" fill="#b1342a"/><text x="224" y="100" font-size="9">1</text>
-    <circle cx="284" cy="116" r="3.5" fill="#b1342a"/><text x="288" y="132" font-size="9">1+√2</text>
+    <circle cx="284" cy="116" r="3.5" fill="#b1342a"/><text x="290" y="108" font-size="9">1+√2</text>
     <circle cx="348" cy="148" r="3" fill="#b1342a"/>
     <circle cx="156" cy="52" r="3.5" fill="#b1342a"/><text x="100" y="50" font-size="9">(1+√2)⁻¹</text>
     <circle cx="92" cy="20" r="3" fill="#b1342a"/>
