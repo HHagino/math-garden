@@ -183,7 +183,7 @@ $$ L(H^i(X), s) = \prod_v L_v(H^i(X), s) $$
 
 ### 3.5 大域: Chebotarev とテンソル積定理
 
-大域体 K = 数体上の幾何的なガロワ表現 ρ: G_K → GL_n(ℚ_l)(代数多様体のエタールコホモロジーから来るもの)は、有限個を除く素点で不分岐 (unramified)。Chebotarev 密度定理により、不分岐素点でのフロベニウスの像が ρ(G_K) の中で稠密。したがってフロベニウスのトレースの族 {tr ρ(Frob_v)}_v が ρ の半単純化を決定する(Brauer–Nesbitt の定理と Chebotarev 密度定理)。
+大域体 K = 数体上の幾何的なガロワ表現 ρ: G_K → GL_n(ℚ_l)(代数多様体のエタールコホモロジーから来るもの)は、有限個を除く素点で不分岐 (unramified)。Chebotarev 密度定理により、不分岐素点でのフロベニウス共役類(Frob_v は v の上の素点の選び方で共役だけ動く)の像の和集合が ρ(G_K) の中で稠密。したがってフロベニウスのトレースの族 {tr ρ(Frob_v)}_v が ρ の半単純化を決定する(Brauer–Nesbitt の定理と Chebotarev 密度定理)。
 
 ここから Galois 表現の「Tannakian な」記述が可能になり、motivic Galois group や Langlands 対応の構成的部分(局所版は Harris-Taylor、Henniart、Scholze; 関数体上の大域版は GL_n の場合 Laurent Lafforgue、一般の簡約群の保型→ガロワの向きは Vincent Lafforgue。数体上の大域版は未解決)が機能する。
 
@@ -191,7 +191,7 @@ $$ L(H^i(X), s) = \prod_v L_v(H^i(X), s) $$
 
 エタールサイト X_ét 上の l 進層 (lisse l-adic sheaf) は、π_1(X)^ét → GL_n(ℚ_l) の連続表現と等価。l ≠ p の世界では、Grothendieck の六関手主義 (six functor formalism) が完備で、Verdier 双対や直像・逆像が綺麗に効く。これが Beilinson-Bernstein-Deligne の perverse sheaf 論や、Lafforgue の Langlands 対応の証明の基盤となる。
 
-l = p ではこの形式主義の多くが破綻し、対応物として **prismatic site** が近年(Bhatt-Scholze, 2018-)整備されつつある。
+l = p では、標数 p の多様体や 𝒪_K 上のモデル(p が可逆でないところ)でこの形式主義の多くが破綻し、対応物として **prismatic site** が近年(Bhatt-Scholze, 2018-)整備されつつある(K 上の多様体そのものでは p が可逆なので、ℚ_p 係数でもエタール層の形式主義は働く)。
 
 > 関連: l 進エタールコホモロジーの Tate 加群を出発点とする入門は [`tate-module-and-etale-cohomology.md`](./tate-module-and-etale-cohomology.md)。
 
@@ -463,7 +463,7 @@ p 進 Hodge 理論 ↔ 古典的 Hodge 理論の対応辞書(粗く):
 
 $$ \xi(s) := \pi^{-s/2} \Gamma(s/2) \zeta(s) $$
 
-の Γ(s/2) 部分が L_∞ である。これは Hodge 構造から(Deligne の公式により)系統的に構成され、関数等式 ξ(s) = ξ(1-s) を実現する。Γ 因子こそ「アルキメデス素点における Frobenius のトレース」の代替物と言える。
+の π^{-s/2} Γ(s/2) の部分が L_∞ である。これは Hodge 構造から(Deligne の公式により)系統的に構成され、関数等式 ξ(s) = ξ(1-s) を実現する。Γ 因子こそ「アルキメデス素点における Frobenius のトレース」の代替物と言える。
 
 ---
 

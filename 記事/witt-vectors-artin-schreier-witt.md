@@ -44,7 +44,7 @@ $$ w_i(a_0, \ldots, a_{n-1}) := \sum_{j=0}^i p^j a_j^{p^{i-j}}, \quad i = 0, 1, 
 
 $$ w_0 = a_0, \quad w_1 = a_0^p + p a_1, \quad w_2 = a_0^{p^2} + p a_1^p + p^2 a_2, \ldots $$
 
-A = ℝ (あるいは ℚ など p で割り切れない係数を持つ)上では、ゴーストベクトルの足し算・掛け算は座標ごとの足し算・掛け算で自明に定義できる。
+A = ℝ (あるいは ℚ など p が可逆な環)上では、ゴーストベクトルの足し算・掛け算は座標ごとの足し算・掛け算で自明に定義できる。
 
 問題: ℤ 係数の多項式として、もとの (a_0, …, a_{n-1}) の演算則を求められるか?
 
@@ -267,7 +267,7 @@ $$ H^i(X, WΩ^\bullet_X) \cong H^i_{\text{cris}}(X/W(k)) $$
 
 1. Witt ベクトル環 W(A) は、可換環 A から canonical に作られる「p 進的な構造を持つ」環で、A が標数 p の完全体なら W(A) は混標数 0 の完備離散付値環(剰余体 A、uniformizer p)
 2. W(𝔽_q) = ℤ_q (= ℤ_p の f 次不分岐拡大) という直接の例
-3. Frobenius F と Verschiebung V が canonical に存在し、FV = VF = p の関係を満たす
+3. Frobenius F と Verschiebung V が canonical に存在し、A が標数 p なら FV = VF = p の関係を満たす
 4. Artin-Schreier-Witt 完全列により、標数 p の体 K の次数が p^n を割る巡回拡大は W_n(K)/(F - id) W_n(K) の巡回部分群で分類される(商そのものは指標 G_K → ℤ/p^n を分類する)
 5. Witt 加法則の重さが、Kummer 理論との対比における「面倒くささ」の実体
 6. de Rham-Witt 複体は crystalline コホモロジーの計算手段として p 進ホッジ理論の核に位置する
@@ -290,5 +290,5 @@ Witt ベクトルは「等標数 p の世界から混標数 0 への canonical �
 - Hazewinkel, *Formal Groups and Applications* — Witt ベクトル, λ-rings の体系
 - Bloch, *Algebraic K-theory and crystalline cohomology* (Publ. Math. IHÉS 47, 1977)
 - Illusie, *Complexe de de Rham–Witt et cohomologie cristalline* (Ann. Sci. ENS (4) 12, 1979)
-- Borger, *The basic geometry of Witt vectors* (preprint, 2011) — Witt ベクトルの幾何学的視点
+- Borger, *The basic geometry of Witt vectors* I・II (Algebra & Number Theory 5, 2011／Math. Ann. 351, 2011) — Witt ベクトルの幾何学的視点
 - Bhatt-Scholze, *Prisms and prismatic cohomology* (Ann. of Math. 2022) — 現代的視点

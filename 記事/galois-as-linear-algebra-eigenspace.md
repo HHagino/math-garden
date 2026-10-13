@@ -192,7 +192,7 @@ $$L = L_{\chi_0} \oplus L_{\chi_1} \oplus \cdots \oplus L_{\chi_{n-1}}$$
   <g font-family="serif" font-size="10" fill="#2b2118">
     <rect x="12" y="40" width="74" height="34" rx="4" fill="#efe6d5" stroke="#6b5d44"/><text x="49" y="55" text-anchor="middle">T(v)=λv</text><text x="49" y="68" text-anchor="middle" font-size="8.5" fill="#8a7f6c">固有値分解</text>
     <line x1="86" y1="57" x2="104" y2="57" stroke="#5a4f3f" stroke-width="1.2" marker-end="url(#ge2)"/>
-    <rect x="106" y="40" width="68" height="34" rx="4" fill="#eef5fa" stroke="#2f5d7c"/><text x="140" y="55" text-anchor="middle">Kummer</text><text x="140" y="68" text-anchor="middle" font-size="8.5" fill="#8a7f6c">ζⁿ で対角化</text>
+    <rect x="106" y="40" width="68" height="34" rx="4" fill="#eef5fa" stroke="#2f5d7c"/><text x="140" y="55" text-anchor="middle">Kummer</text><text x="140" y="68" text-anchor="middle" font-size="8.5" fill="#8a7f6c">ζₙ で対角化</text>
     <line x1="174" y1="57" x2="192" y2="57" stroke="#5a4f3f" stroke-width="1.2" marker-end="url(#ge2)"/>
     <rect x="194" y="40" width="74" height="34" rx="4" fill="#eef5fa" stroke="#2f5d7c"/><text x="231" y="55" text-anchor="middle">円分体</text><text x="231" y="68" text-anchor="middle" font-size="8.5" fill="#8a7f6c">Dirichlet指標</text>
     <line x1="268" y1="57" x2="286" y2="57" stroke="#5a4f3f" stroke-width="1.2" marker-end="url(#ge2)"/>
@@ -209,7 +209,7 @@ $$L = L_{\chi_0} \oplus L_{\chi_1} \oplus \cdots \oplus L_{\chi_{n-1}}$$
 
 **円分拡大。** $\mathbb Q(\zeta_n)$ の Galois 群は $(\mathbb Z/n\mathbb Z)^\times$ と同型で、このアーベル群の指標がまさに **Dirichlet 指標**だ。ただし指標の値は一般に $\mathbb Q$ に入らない。たとえば $n=5$ では Galois 群は位数 $4$ の巡回群で、位数 $4$ の指標は値 $i\notin\mathbb Q$ をとるので、$\mathbb Q(\zeta_5)$ は $\mathbb Q$ 上の固有直線には割れない(§6 の仮定 2 が欠けている)。係数体を指標の値を含む体(たとえば $\mathbb C$)に広げて $\mathbb C\otimes_{\mathbb Q}\mathbb Q(\zeta_n)$ を固有空間に分解することは、Dirichlet 指標で和を分解すること ── $L$ 関数論の入口 ── に直結する(別記事「素数の足し算は人類に向いていない」で、算術級数定理の証明が Dirichlet 指標と $L(1,\chi)\neq0$ に乗るのは、まさにこの固有空間分解だ)。
 
-**類体論。** 一般の体 $K$ のアーベル拡大すべてを統制する。中心は、Galois 群のアーベル化の指標を $K$ 側の数論的データ(イデール類群の指標)と同一視する **Artin 相互法則**。「Galois 群の指標」を主役に据える本記事の見方は、そのまま類体論の言葉づかいだ。
+**類体論。** 一般の数体 $K$ のアーベル拡大すべてを統制する。中心は、Galois 群のアーベル化の指標を $K$ 側の数論的データ(イデール類群の指標)と同一視する **Artin 相互法則**。「Galois 群の指標」を主役に据える本記事の見方は、そのまま類体論の言葉づかいだ。
 
 **Iwasawa 理論。** 体の無限の塔 $\mathbb Z_p$ 拡大の Galois 作用を、岩澤代数 $\Lambda=\mathbb Z_p[[T]]$ 上の加群として調べる。$p$ を奇素数とし、円分の塔 $\mathbb Q(\zeta_{p^\infty})$ を例にとると、その Galois 群は $\Delta\times\Gamma$($\Delta=\mathrm{Gal}(\mathbb Q(\zeta_p)/\mathbb Q)$ は位数 $p-1$、$\Gamma\cong\mathbb Z_p$)と割れる。ここでも、位数が $p$ と素な $\Delta$ の作用で加群を指標(Teichmüller 指標の冪)ごとの **$\chi$-成分に分解**し、各成分を $\Lambda$-加群として解析する。$\Gamma$ の作用そのものは固有直線には割れない($\Lambda$ は局所環で、自明でない冪等元を持たない)ので、「対角化」が効くのは $\Delta$ の部分である。本記事の「対角化して指標ごとの固有空間に分ける」所作が、無限次の塔の上で反復される(この pro-finite な Galois 塔の上で確率の filtration 塔と対応を取る試みが、別記事「確率空間を Stone 的に読み替える」── filtration↔Galois の survey ── だ)。
 

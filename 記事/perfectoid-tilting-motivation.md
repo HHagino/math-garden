@@ -32,7 +32,7 @@ p 進局所体には二つの並行する宇宙がある:
     <rect x="18" y="36" width="172" height="86" rx="5" fill="#eef5fa" stroke="#2f5d7c"/>
     <text x="104" y="30" text-anchor="middle" font-size="11" fill="#2f5d7c">混標数 K</text>
     <text x="104" y="58" text-anchor="middle">char 0 / 剰余 p</text>
-    <text x="104" y="78" text-anchor="middle">ℚ_p, ℂ_p, ℚ_p(p^{1/p^∞})^∧</text>
+    <text x="104" y="78" text-anchor="middle">ℂ_p, ℚ_p(p^{1/p^∞})^∧</text>
     <text x="104" y="98" text-anchor="middle" font-size="9.5" fill="#8a7f6c">数論的応用に必要</text>
     <rect x="280" y="36" width="172" height="86" rx="5" fill="#f6e7e3" stroke="#b1342a"/>
     <text x="366" y="30" text-anchor="middle" font-size="11" fill="#b1342a">等標数 K^♭</text>
@@ -145,7 +145,7 @@ $$ K^\flat = \{(x_0, x_1, x_2, \ldots) \in K^{\mathbb{N}} : x_{i+1}^p = x_i\}. $
 
 <figure>
 <svg viewBox="0 0 460 120" width="100%" style="max-width:460px;display:block;margin:8px auto" role="img" aria-label="K^♭はFrobeniusに沿った逆極限">
-  <defs><marker id="pt2" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto"><path d="M6 0 L0 3 L6 6 z" fill="#5a4f3f"/></marker></defs>
+  <defs><marker id="pt2" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"/></marker></defs>
   <g font-family="serif" font-size="11" fill="#2b2118">
     <text x="60" y="50" text-anchor="middle">x₀</text>
     <text x="150" y="50" text-anchor="middle">x₁</text>
@@ -190,7 +190,7 @@ $$ G_K \cong G_{K^\flat}. $$
 
 ### 4.4 値群と剰余体の対応
 
-- K と K^♭ は同じ値群を持つ(同型な完備位相群)
+- K と K^♭ は同じ値群を持つ(ℝ_{>0} の部分群として一致する: |K^{♭×}| = |K^×|)
 - K と K^♭ の剰余体は一致する(どちらも完全 (perfect) 体)
 
 ---
@@ -228,7 +228,7 @@ tilting を経由する理由は、等標数側のメリットにある。
 
 ### 6.1 Frobenius が canonical
 
-等標数 p の体・空間では、Frobenius が canonical な自己同型として存在する。これにより:
+等標数 p の体・空間では、Frobenius が canonical な自己準同型として存在する(perfect なら、たとえば tilt K^♭ では自己同型)。これにより:
 
 - カテゴリ論的構造が単純化(モナド構造、co-Frobenius など)
 - 不変量計算が直接的(Frobenius の固有値、トレース)
@@ -236,7 +236,7 @@ tilting を経由する理由は、等標数側のメリットにある。
 
 ### 6.2 函数体類似
 
-等標数 p の体は「曲線 𝒞 = Spec 𝔽_q[t] や Spec 𝔽_q((t))」の函数体に近い。函数体類似(Drinfeld, Lafforgue, …)による Langlands の証明が等標数で先に達成されたのも、この構造の単純さによる。
+等標数 p の体は「曲線 𝒞 = Spec 𝔽_q[t]」の函数体 𝔽_q(t) や、その完備化 𝔽_q((t)) に近い。函数体類似(Drinfeld, Lafforgue, …)による Langlands の証明が等標数で先に達成されたのも、この構造の単純さによる。
 
 ### 6.3 例: 重みモノドロミー定理
 

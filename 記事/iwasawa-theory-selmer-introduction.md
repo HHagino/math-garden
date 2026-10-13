@@ -129,7 +129,7 @@ Ferrero-Washington (1979) はさらに次を示した:
 
 ### 4.1 Kubota-Leopoldt の p 進 zeta 関数
 
-Kubota-Leopoldt (1964) は古典的なリーマン zeta 関数 ζ(s) の負の偶数での値
+Kubota-Leopoldt (1964) は古典的なリーマン zeta 関数 ζ(s) の負の奇数での値
 
 $$ \zeta(1-2k) = -\frac{B_{2k}}{2k} \quad (k \geq 1) $$
 
@@ -153,9 +153,9 @@ $$ \zeta(1-2k) = -\frac{B_{2k}}{2k} \quad (k \geq 1) $$
 
 p 進 L 関数 L_p ∈ Λ は、s ∈ ℤ_p に値を取る連続関数として、対応する古典的 L 関数の値を p 進的に補間する:
 
-$$ L_p(\chi_{cyc}^{1-k}) = L(\chi^{-1}, 1 - k) \cdot (\text{Euler factor at p}). $$
+$$ L_p(\chi_{cyc}^{1-k}) = L(\chi\omega^{-k}, 1 - k) \cdot (\text{Euler factor at p}). $$
 
-ここで χ_{cyc}^{1-k} は円分指標の (1-k) 乗を岩澤代数 Λ に持ち込んだもの。
+ここで χ_{cyc}^{1-k} は円分指標の (1-k) 乗を岩澤代数 Λ に持ち込んだもの。右辺の指標は §4.1 と同じく Teichmüller 指標 ω で捻った χω^{-k} で、k によって変わる(捻らずに k によらない指標の値を並べると、偶指標では 3 以上の奇数の k で 0、偶数の k で 0 でなくなり、k について p 進的に連続な関数にならない)。
 
 ---
 
@@ -219,7 +219,7 @@ $$ 0 \to E(K) \otimes \mathbb{Q}_p / \mathbb{Z}_p \to \operatorname{Sel}_{p^\inf
 
 ### 6.3 corank と BSD
 
-Selmer 群の corank (= ℤ_p 上の自由部分の階数)
+Selmer 群の corank (= Pontryagin 双対の ℤ_p 上の階数。Sel_{p^∞}(E/K) ≅ (ℚ_p/ℤ_p)^r ⊕ (有限群) と書いたときの r)
 
 $$ \operatorname{corank}_{\mathbb{Z}_p} \operatorname{Sel}_{p^\infty}(E/K) = \operatorname{rank}(E(K)) + \operatorname{corank} \Sha(E/K)[p^\infty]. $$
 
