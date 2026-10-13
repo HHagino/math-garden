@@ -231,7 +231,7 @@ CM 楕円曲線の高次元化として、CM アーベル多様体 (Shimura-Tani
 
 K = ℚ, 虚二次体以外の数体については、第 12 問題は未解決。
 
-- **実二次体**(stark の予想): Stark 単数の予想、Brumer-Stark 予想を経由した部分的結果(Brumer–Stark 予想自体は Dasgupta–Kakde(2020〜)が証明し、総実体の abelian 拡大を Brumer–Stark 単数で p 進的に明示する結果も得たが、Hilbert の原問題「解析関数の特殊値」の形ではない)
+- **実二次体**(stark の予想): Stark 単数の予想、Brumer-Stark 予想を経由した部分的結果(Brumer–Stark 予想自体は Dasgupta–Kakde が 2 の外で(2020)、Dasgupta–Kakde–Silliman–Wang が ℤ 上で完全に(2023)証明し、総実体の abelian 拡大を Brumer–Stark 単数で p 進的に明示する結果も得たが、Hilbert の原問題「解析関数の特殊値」の形ではない)
 - **CM 体一般**: Shimura–Taniyama の CM アーベル多様体の理論が K^ab の一部を与える、ただし完全な解決には程遠い
 - **CM 多様体の特殊値**: Goren–Lauter(2004〜、種数 2 の類不変量)、Bruinier–Yang(2005〜、Hilbert モジュラー曲面上の CM 値)などの限定的進展
 

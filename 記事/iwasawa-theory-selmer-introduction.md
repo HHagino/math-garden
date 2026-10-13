@@ -145,7 +145,7 @@ $$ \zeta(1-2k) = -\frac{B_{2k}}{2k} \quad (k \geq 1) $$
 
 岩澤 (1969, "On p-adic L-functions", Ann. of Math. 89) は Kubota-Leopoldt L_p(s, χ) (χ ≠ 1) を岩澤代数 Λ の元として表した(Mazur はのちに同じものを p 進測度で構成し直した):
 
-> L_p(χ) ∈ Λ = ℤ_p[[T]] を、各 s = 1 - k での値が古典的 L 関数の特殊値になるような幂級数として canonical に与えられる(χ = 1 のときは s = 1 に極があり、Λ の元ではなく分母 T − (κ − 1) を持つ)。
+> L_p(χ) ∈ Λ_χ = 𝒪_χ[[T]](𝒪_χ は χ の値を ℤ_p に添加した環。§5 で使う χ = ω^j のように値が ℤ_p に入るなら Λ = ℤ_p[[T]] そのもの)を、各 s = 1 - k での値が古典的 L 関数の特殊値になるような幂級数として canonical に与えられる(χ = 1 のときは s = 1 に極があり、Λ の元ではなく分母 T − (κ − 1) を持つ)。
 
 これによって p 進 L 関数は「岩澤代数の中の元」として位置付けられる。
 
@@ -175,7 +175,7 @@ $$ L_p(\chi_{cyc}^{1-k}) = L(\chi^{-1}, 1 - k) \cdot (\text{Euler factor at p}).
 - **解析的**: 古典的 L 関数の特殊値を p 進的に補間したもの
 - **代数的**: イデアル類群の射影極限の Λ-加群構造
 
-の同一性を主張する深い予想で、Mazur-Wiles 1984 が ℚ の円分塔について証明、Wiles 1990 が任意の totally real number field に拡張、Skinner-Urban 2014 が GL_2 over ℚ の場合(楕円曲線方向)を証明した。
+の同一性を主張する深い予想で、Mazur-Wiles 1984 が ℚ の円分塔について証明、Wiles 1990 が任意の totally real number field に拡張、Skinner-Urban 2014 が GL_2 over ℚ の場合(楕円曲線方向)を一定の条件下で証明した(§5.2)。
 
 ### 5.2 楕円曲線方向の岩澤主予想
 
@@ -285,7 +285,7 @@ Euler system は「L 関数の特殊値情報を運ぶコホモロジー類の�
 2. 岩澤の構造定理(1959): 類数の p 部分が漸近的に μ p^n + λ n + ν と振る舞う
 3. Kubota-Leopoldt の p 進 L 関数 L_p ∈ Λ が、古典 L 関数の特殊値を p 進的に補間
 4. **岩澤主予想**: char_Λ(X_∞^{(ω^i)}) = (L_p(ω^{1-i}))(奇数 i ≢ 1 (mod p−1) の成分ごと)、すなわち解析と代数の同一性
-5. 楕円曲線方向: char_Λ(X_∞(E)) = (L_p(E)) (Skinner-Urban 2014)
+5. 楕円曲線方向: char_Λ(X_∞(E)) = (L_p(E)) (Skinner-Urban 2014、p で good ordinary などの条件下)
 6. Selmer 群が Mordell-Weil 群と Tate-Shafarevich 群を符号化、BSD 予想と直結
 7. Coates-Wiles 1977 が CM の場合の analytic rank 0 ⇒ algebraic rank 0 を証明、のちの Euler system 技術の先駆(名称は Kolyvagin 以後)
 8. 現代: Skinner-Urban, Kato, Wan などにより BSD への進展が続く

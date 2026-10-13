@@ -213,7 +213,7 @@ $$ \{\text{perfectoid spaces over } K\} \xleftrightarrow{\sim} \{\text{perfectoi
 
 ### 5.3 応用
 
-- **重み単項化** (weight-monodromy): Scholze の関連論文での、この予想の特別な場合(トーリック多様体内の完全交叉)の証明
+- **重み単項化** (weight-monodromy): Scholze の perfectoid 空間の論文(2012)での、この予想の特別な場合(射影的で滑らかなトーリック多様体内の集合論的完全交叉)の証明
 - **Fargues-Fontaine 曲線**: 局所 Langlands の幾何化の舞台
 - **Prismatic コホモロジー** (Bhatt-Scholze 2018-): perfectoid + Frobenius の枠組みで p 進コホモロジーを統一
 - **Geometrization of local Langlands** (Fargues-Scholze 2021): 局所 Langlands 対応を Fargues-Fontaine 曲線上の sheaf theory として geometrize
@@ -238,7 +238,7 @@ tilting を経由する理由は、等標数側のメリットにある。
 
 ### 6.3 例: 重み単項化定理
 
-Deligne の重み単項化予想は、エタールコホモロジー上のフロベニウス固有値の絶対値に関する精密な予想だった。Scholze はこれを(トーリック多様体内の完全交叉という特別な場合に)混標数で証明するときに、tilting で等標数に翻訳して証明する戦略を取った。等標数では既存の Deligne の Weil II の結果が直接適用できるため、tilting がここで決定的な役割を果たした。
+Deligne の重み単項化予想は、エタールコホモロジー上のフロベニウス固有値の絶対値に関する精密な予想だった。Scholze はこれを(射影的で滑らかなトーリック多様体内の集合論的完全交叉という特別な場合に)混標数で証明するときに、tilting で等標数に翻訳して証明する戦略を取った。等標数では既存の Deligne の Weil II の結果が直接適用できるため、tilting がここで決定的な役割を果たした。
 
 ---
 
