@@ -39,7 +39,7 @@ $$
 \right)
 $$
 
-となる(Einstein の和の規約)。ここに登場するもの:
+となる(Einstein の和の規約。この節の $\Delta$ は、ユークリッド空間で §1 の $\sum_i\partial_i^2$ に戻る解析の規約のもので、$\operatorname{div}\nabla$ に当たる。§4 の Hodge Laplacian とは関数の上で符号が逆になる)。ここに登場するもの:
 
 - 計量 $g_{ij}$ ── 多様体の各点での内積構造
 - その逆行列 $g^{ij}$ ── 余接ベクトルを接ベクトルへ持ち上げる対象
@@ -86,13 +86,13 @@ $$
 \Delta f = \delta\, df
 $$
 
-となり、上の節で書いた局所座標表示
+となる。$\delta$ を §3 の符号で取って局所座標で計算すると
 
 $$
-\Delta f = -\frac{1}{\sqrt{|g|}} \partial_i \left( \sqrt{|g|}\, g^{ij}\, \partial_j f \right)
+\Delta f = \delta\, df = -\frac{1}{\sqrt{|g|}} \partial_i \left( \sqrt{|g|}\, g^{ij}\, \partial_j f \right)
 $$
 
-が(符号規約の差を除いて)再現される。
+となり、§2 の局所座標表示が符号を反転して再現される。つまり関数の上では、Hodge Laplacian $d\delta+\delta d$ は §2 の $\operatorname{div}\nabla$ の $-1$ 倍である。たとえば $\mathbb{R}$ 上の $f(x)=x^2$ に対して、§2 の式は $2$、Hodge Laplacian は $-2$ を返す。§5 以降の $\Delta$ は、すべて Hodge Laplacian $d\delta+\delta d$ を指す(この符号だと §5 のとおり $\langle\Delta\omega,\omega\rangle\ge0$ となる)。
 
 ここが最初の見方の転換点だ。$\Delta$ は「ユークリッドの $\sum \partial_i^2$ を曲がった空間に書き直すために、後付けで作った重い作用素」ではない。それは、Riemann 多様体上にある $d$、$\delta$、計量、内積、向き、体積形式、Hodge star という構造から *自然に* 現れる二階作用素である(唯一ではない。同じ構造から Bochner Laplacian $\nabla^*\nabla$ も出るが、Weitzenböck の公式により両者の差は曲率の項だけである)。
 

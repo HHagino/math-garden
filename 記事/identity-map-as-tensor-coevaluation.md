@@ -105,11 +105,11 @@ $$\theta^i{}_j \;=\; \delta^i_j$$
 
 最後に、混同しやすい一点を切り分けておく。
 
-$V$ に内積、あるいはより一般に非退化双線形形式が入っていると、それを使って $V\cong V^*$ という同一視ができる。この同一視を $\theta_V$ に施すと、$V\otimes V^*$ の元だったものが、$V\otimes V$ の元
+$V$ に実内積、あるいはより一般に非退化双線形形式 $B$ が入っていると、$b\colon v\mapsto B(v,\cdot)$ によって $V\cong V^*$ という線形な同一視ができる（複素内積は Hermite 形式なので、$v\mapsto\langle v,\cdot\rangle$ は線形な同型 $V\to V^*$ を与えない。規約によって、$v$ について共役線形になるか、$\langle v,\cdot\rangle$ が線形形式にならない）。この同一視の逆 $b^{-1}$ を $\theta_V$ の $V^*$ 因子に施すと、$V\otimes V^*$ の元だったものが、$V\otimes V$ の元
 
-$$\sum_i e_i\otimes e_i$$
+$$\sum_i e_i\otimes b^{-1}(e^i)\;=\;\sum_{i,j}(G^{-1})_{ij}\,e_i\otimes e_j\qquad(G_{ij}=B(e_i,e_j))$$
 
-として書き直される（正確には基底と双対基底を計量で対応させたうえでの表示）。リー代数や表現論では、これに近い対象 ―― 不変双線形形式を使って構成される $V\otimes V$（あるいは普遍展開環）の元 ―― が **Casimir element / Casimir tensor** と呼ばれることがある。
+として書き直される。たとえば $V=k\,e$、$B(e,e)=2$ なら $\tfrac12\,e\otimes e$ である。$B(e_i,e_j)=\delta_{ij}$ をみたす基底（実内積空間なら正規直交基底）を選んだときに限り、$G$ が単位行列になって $\sum_i e_i\otimes e_i$ という形になる。リー代数や表現論では、これに近い対象 ―― 不変双線形形式を使って構成される $V\otimes V$（あるいは普遍展開環）の元 ―― が **Casimir element / Casimir tensor** と呼ばれることがある。
 
 ここで注意したいのは、**Casimir と呼ぶには余分な構造が要る**ということだ。Casimir 元の「Casimir らしさ」は、内積や Killing 形式といった不変形式、そしてそれが定める $V\cong V^*$ の同一視に依存している。今回の出発点の問いは、そうした構造を一切仮定せず、ただ
 

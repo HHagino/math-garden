@@ -107,8 +107,7 @@ $held = @(
 #   直して検算が済んだ記事から、この $fixHold の一覧を消す（全部消えたら、この節ごと消してよい）。
 $fixHold = @(
   # （10/13 朝：全部直して公開に戻した）
-  # 10/13 13:1x：Codex が記録なしで読み直し「公開を止めるべき」（中心例 ζ(2,1)=ζ(3) が定義した和では左辺が発散）＝検算記録/codex_別の目_庭13本_2026-10-13.md
-  'truncated-multiple-zeta-sum-hoffman-duality.md'
+  # 10/13 13:1x に truncated-multiple-zeta を外した（中心例が定義した和で発散）→ 14:2x 組A が直し（d12e8a6）、本体が star 版の合同式を31組で検算して戻した。今は無し
 )
 $public = @($public | Where-Object { $fixHold -notcontains $_ })
 $held   = @($held) + $fixHold

@@ -6,7 +6,7 @@ status: 墓場
 audience: p 進数体・形式群論・rigid analytic 幾何の基礎を一度通った人向け
 prerequisite: 完備離散付値体、p 進数 ℚ_p, ℂ_p、Frobenius
 abstract: |
-  p 進局所体には混標数(ℚ_p系、char 0/剰余 p)と等標数(𝔽_p((t))系、char p)の二つの宇宙がある。Frobenius が canonical な等標数の方が解きやすく、数論的応用は混標数を要する。両者を翻訳する道具が、体レベルの Fontaine–Wintenberger(field of norms、G_L≅G_{X_K(L)})と、それを空間レベルへ拡張した Scholze の perfectoid/tilting(K↦K^♭=lim_{x↦x^p}K、G_K≅G_{K^♭})だ。等標数で解いて混標数へ戻す ── 重み単項化・Fargues–Fontaine 曲線・prismatic・局所 Langlands の幾何化を支える機構を概観する。
+  p 進局所体には混標数(ℚ_p系、char 0/剰余 p)と等標数(𝔽_p((t))系、char p)の二つの宇宙がある。Frobenius が canonical な等標数の方が解きやすく、数論的応用は混標数を要する。両者を翻訳する道具が、体レベルの Fontaine–Wintenberger(field of norms、G_L≅G_{X_K(L)})と、それを空間レベルへ拡張した Scholze の perfectoid/tilting(K↦K^♭=lim_{x↦x^p}K、G_K≅G_{K^♭})だ。等標数で解いて混標数へ戻す ── 重みモノドロミー・Fargues–Fontaine 曲線・prismatic・局所 Langlands の幾何化を支える機構を概観する。
 ---
 
 ## 1. 動機 — なぜ二つの世界を「架橋」する必要があるか
@@ -213,7 +213,7 @@ $$ \{\text{perfectoid spaces over } K\} \xleftrightarrow{\sim} \{\text{perfectoi
 
 ### 5.3 応用
 
-- **重み単項化** (weight-monodromy): Scholze の perfectoid 空間の論文(2012)での、この予想の特別な場合(射影的で滑らかなトーリック多様体内の集合論的完全交叉)の証明
+- **重みモノドロミー** (weight-monodromy): Scholze の perfectoid 空間の論文(2012)での、この予想の特別な場合(射影的で滑らかなトーリック多様体内の集合論的完全交叉)の証明
 - **Fargues-Fontaine 曲線**: 局所 Langlands の幾何化の舞台
 - **Prismatic コホモロジー** (Bhatt-Scholze 2018-): perfectoid + Frobenius の枠組みで p 進コホモロジーを統一
 - **Geometrization of local Langlands** (Fargues-Scholze 2021): 局所 Langlands 対応を Fargues-Fontaine 曲線上の sheaf theory として geometrize
@@ -236,9 +236,9 @@ tilting を経由する理由は、等標数側のメリットにある。
 
 等標数 p の体は「曲線 𝒞 = Spec 𝔽_q[t] や Spec 𝔽_q((t))」の函数体に近い。函数体類似(Drinfeld, Lafforgue, …)による Langlands の証明が等標数で先に達成されたのも、この構造の単純さによる。
 
-### 6.3 例: 重み単項化定理
+### 6.3 例: 重みモノドロミー定理
 
-Deligne の重み単項化予想は、エタールコホモロジー上のフロベニウス固有値の絶対値に関する精密な予想だった。Scholze はこれを(射影的で滑らかなトーリック多様体内の集合論的完全交叉という特別な場合に)混標数で証明するときに、tilting で等標数に翻訳して証明する戦略を取った。等標数では既存の Deligne の Weil II の結果が直接適用できるため、tilting がここで決定的な役割を果たした。
+Deligne の重みモノドロミー予想は、p 進体上の滑らかな射影多様体のエタールコホモロジーで、モノドロミー作用素が定めるフィルトレーションが、重み(フロベニウス固有値の絶対値)のフィルトレーションと一致するという精密な予想だった。Scholze はこれを(射影的で滑らかなトーリック多様体内の集合論的完全交叉という特別な場合に)混標数で証明するときに、tilting で等標数に翻訳して証明する戦略を取った。等標数では既存の Deligne の Weil II の結果が直接適用できるため、tilting がここで決定的な役割を果たした。
 
 ---
 
@@ -263,7 +263,7 @@ Prismatic コホモロジー H^i_Δ(X/A, …) は、crystalline, de Rham, Hodge-
 2. Scholze (2012): perfectoid 体 K に対し tilting K^♭ を canonical に構成、G_K ≅ G_{K^♭}
 3. 空間レベルへの拡張: perfectoid 空間と tilting の圏同値
 4. 等標数側で Frobenius が canonical なため、技術的に扱いやすい
-5. 応用: 重み単項化、Fargues-Fontaine 曲線、prismatic コホモロジー、局所 Langlands の geometrization
+5. 応用: 重みモノドロミー、Fargues-Fontaine 曲線、prismatic コホモロジー、局所 Langlands の geometrization
 6. p 進ホッジ理論の現代的言語は、perfectoid 機構の上に再構築されつつある
 
 混標数と等標数の世界は、tilting を経由して構造的に同値であり、それぞれの世界の長所を相補的に活用できる。これが Scholze の発見の数学的意義である。
@@ -274,7 +274,7 @@ Prismatic コホモロジー H^i_Δ(X/A, …) は、crystalline, de Rham, Hodge-
 
 ## 査読・限界(解説モード)
 
-- **引用する標準事実**:Fontaine–Wintenberger(field of norms と $G_L\cong G_{X_K(L)}$、1979)、Scholze の perfectoid 体・tilting・$G_K\cong G_{K^\flat}$・空間レベルの圏同値(2012)、重み単項化の tilting 経由証明(特別な場合)、Bhatt–Scholze の prismatic(2022)、Fargues–Scholze の局所 Langlands 幾何化(2021)。いずれも標準・最新で、本記事は証明せず参照に委ねる。
+- **引用する標準事実**:Fontaine–Wintenberger(field of norms と $G_L\cong G_{X_K(L)}$、1979)、Scholze の perfectoid 体・tilting・$G_K\cong G_{K^\flat}$・空間レベルの圏同値(2012)、重みモノドロミーの tilting 経由証明(特別な場合)、Bhatt–Scholze の prismatic(2022)、Fargues–Scholze の局所 Langlands 幾何化(2021)。いずれも標準・最新で、本記事は証明せず参照に委ねる。
 - **境界(否定形)**:Fontaine–Wintenberger は体レベル・APF 拡大限定で空間に拡張できない(§2.4)── それを克服したのが perfectoid。$\mathbb Q_p$(value 群 $\mathbb Z$ が $p$-可除でない)や $\mathbb F_p((t))$(perfect でない)は perfectoid でない(§3.3)。
 - 院生〜愛好家向け advanced サーベイ。新規主張なし。
 
