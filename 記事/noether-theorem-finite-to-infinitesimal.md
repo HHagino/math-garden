@@ -101,7 +101,7 @@ $L$ は不変ではない($\delta L\neq0$)。だが $m\dot q=\dfrac{d}{dt}(mq)$ 
 
 $$Q=\frac{\partial L}{\partial\dot q}\,\delta q-g=m\dot q\cdot t-mq=m(\dot q\,t-q).$$
 
-検算:$\dot Q=m(\ddot q\,t+\dot q-\dot q)=m\ddot q\,t=0$(自由粒子 $\ddot q=0$)。保存する。$Q=-m\bigl(q-\dot q\,t\bigr)$ は質量×初期位置にあたり、重心が等速直線運動することの保存則だ。**もし $g$ を落としていたら $m\dot q\,t$ だけが残り、保存しない。$g=mq$ こそが保存量を閉じさせている。** これが、本記事が $g$ にこだわった理由である。
+検算:$\dot Q=m(\ddot q\,t+\dot q-\dot q)=m\ddot q\,t=0$(自由粒子 $\ddot q=0$)。保存する。$-Q=m\bigl(q-\dot q\,t\bigr)$ は質量×初期位置にあたり($q(t)=q(0)+vt$ を入れると $-Q=m\,q(0)$)、重心が等速直線運動することの保存則だ。**もし $g$ を落としていたら $m\dot q\,t$ だけが残り、保存しない。$g=mq$ こそが保存量を閉じさせている。** これが、本記事が $g$ にこだわった理由である。
 
 ## 7. 否定形と注意
 

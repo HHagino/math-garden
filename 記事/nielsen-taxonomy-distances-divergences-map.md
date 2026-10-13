@@ -63,7 +63,7 @@ $$
 d_k(p, q) \;=\; \left(\sum_i |p_i - q_i|^k\right)^{1/k}.
 $$
 
-$k = 2$ で Euclidean、$k = 1$ で Manhattan、$k \to \infty$ で Chebyshev(最大成分)。$L^p$ ノルム族の一般化。
+$k = 2$ で Euclidean、$k = 1$ で Manhattan、$k \to \infty$ で Chebyshev(最大成分)。$L^p$ ノルム族の一般化。距離になるのは $k \geq 1$ のとき。$0 < k < 1$ では三角不等式が崩れる($k = \tfrac12$、$p = (0,0)$、$q = (1,0)$、$r = (1,1)$ で $d_k(p,r) = 4 > 2 = d_k(p,q) + d_k(q,r)$)。
 
 ### Hamming distance
 
@@ -75,7 +75,7 @@ $$
 d_M(p, q) \;=\; \sqrt{(p - q)^\top \Sigma^{-1} (p - q)}.
 $$
 
-共分散行列 $\Sigma$ で「縮尺を補正した」ユークリッド距離。統計的にスケール調整した「球面」を作る。
+共分散行列 $\Sigma$(正定値、つまり可逆なものに限る。$\Sigma = \operatorname{diag}(1,0)$ のような退化した共分散では $\Sigma^{-1}$ がない)で「縮尺を補正した」ユークリッド距離。統計的にスケール調整した「球面」を作る。
 
 ここまでは、「ベクトルや点を **座標差** で比べる」という世界観。
 
@@ -179,7 +179,7 @@ $$
 B_F(x \| y) \;=\; F(x) - F(y) - \langle x - y,\, \nabla F(y) \rangle.
 $$
 
-これは、凸関数 $F$ を点 $y$ で接線近似したとき、点 $x$ でどれだけ上に浮くか(Jensen gap)を測る量。$F$ が凸なら $B_F \geq 0$、$B_F = 0 \iff x = y$。一般に非対称。
+これは、凸関数 $F$ を点 $y$ で接線近似したとき、点 $x$ でどれだけ上に浮くか(Jensen gap)を測る量。$F$ が凸なら $B_F \geq 0$。$B_F = 0 \iff x = y$ には狭義凸が要る($F = 0$ は凸だが、すべての $x, y$ で $B_F = 0$)。一般に非対称。
 
 代表的な対応:
 
@@ -229,7 +229,7 @@ KL divergence は「同じ場所で密度を比べる」発想に近い。一方
 - 自然言語の埋め込み
 - 確率測度の幾何
 
-**Sinkhorn divergence** は、エントロピー正則化を加えた最適輸送。計算が劇的に速くなり(Sinkhorn–Knopp 反復)、機械学習で多用される。
+エントロピー正則化を加えた最適輸送のコスト $\mathrm{OT}_\varepsilon$ は計算が劇的に速くなる(Sinkhorn–Knopp 反復)。ただし $\mathrm{OT}_\varepsilon(\mu, \mu)$ は一般に 0 でない。そこで自分自身との項を引いた **Sinkhorn divergence** $S_\varepsilon(\mu, \nu) = \mathrm{OT}_\varepsilon(\mu, \nu) - \tfrac12 \mathrm{OT}_\varepsilon(\mu, \mu) - \tfrac12 \mathrm{OT}_\varepsilon(\nu, \nu)$ を使う($S_\varepsilon(\mu, \mu) = 0$)。機械学習で多用される。
 
 Wasserstein は metric(対称・三角不等式を満たす)なので、これらの応用で「距離」として直接扱える点が強い。
 

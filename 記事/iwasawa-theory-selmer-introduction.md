@@ -33,17 +33,17 @@ L 関数の特殊値が数論的不変量を符号化する、という主題は
 
 $$ K_\infty := \bigcup_{n \geq 0} K(\zeta_{p^{n+1}}) $$
 
-(K_n := K(ζ_{p^{n+1}}))を考える。Gal(K_n/K) は (ℤ/p^{n+1})^× の(部分)群と同型で、p > 2 のとき
+(K_n := K(ζ_{p^{n+1}}))を考える。Gal(K_n/K) は (ℤ/p^{n+1})^× の部分群と同型で(K = ℚ なら全体)、p > 2 のとき
 
-$$ \operatorname{Gal}(K(\zeta_{p^\infty})/K) \cong \mathbb{Z}_p^\times \cong \mathbb{Z}/(p-1) \times \mathbb{Z}_p $$
+$$ \operatorname{Gal}(K(\zeta_{p^\infty})/K) \hookrightarrow \mathbb{Z}_p^\times \cong \mathbb{Z}/(p-1) \times \mathbb{Z}_p $$
 
-と分解する。
+と分解する(K = ℚ なら最初の ↪ は同型。一般の K では像は開部分群で、たとえば K = ℚ(ζ_p) なら像は 1 + pℤ_p)。
 
 純粋に p 進的な情報を取り出すには、torsion 部分 ℤ/(p-1) を割り捨て:
 
-$$ K_\infty^{(p)} := K_\infty^{\Delta}, \quad \Delta := \operatorname{Gal}(K(\zeta_p)/K) \cong (\mathbb{Z}/p)^\times $$
+$$ K_\infty^{(p)} := K_\infty^{\Delta}, \quad \Delta := \operatorname{Gal}(K(\zeta_p)/K) \hookrightarrow (\mathbb{Z}/p)^\times $$
 
-の不変体を取る。これを **円分 ℤ_p 拡大** という。Gal(K_∞^{(p)}/K) ≅ ℤ_p (位相同型)。
+の不変体を取る(Δ は Gal(K_∞/K) の有限な torsion 部分と同一視する。K = ℚ なら Δ ≅ (ℤ/p)^×、K = ℚ(ζ_p) なら Δ = 1)。これを **円分 ℤ_p 拡大** という。Gal(K_∞^{(p)}/K) ≅ ℤ_p (位相同型。一般の K でも、像の pro-p 部分は 1 + pℤ_p の開部分群なので ℤ_p と同型)。
 
 このため、岩澤理論の典型的な舞台は
 
@@ -184,7 +184,7 @@ $$ L_p(\chi_{cyc}^{1-k}) = L(\chi^{-1}, 1 - k) \cdot (\text{Euler factor at p}).
 E/ℚ が good ordinary reduction at p を持つとし、
 
 - 解析側: p 進 L 関数 L_p(E, T) ∈ Λ(Mazur-Swinnerton-Dyer 1974 の構成)
-- 代数側: Selmer 群の双対の射影極限 X_∞(E) := lim_n Sel_{p^∞}(E/K_n)^∨
+- 代数側: ℚ の円分 ℤ_p 拡大 ℚ_∞ := K_∞^{(p)}(§2.1 で K = ℚ。第 n 層 ℚ_n は [ℚ_n : ℚ] = p^n)上の Selmer 群の双対 X_∞(E) := Sel_{p^∞}(E/ℚ_∞)^∨ = lim_n Sel_{p^∞}(E/ℚ_n)^∨。§3 の塔 ℚ(ζ_{p^{n+1}}) で取ると Δ の全指標の成分(L_p(E) を Δ の指標でねじったものに対応する)を含む大きな加群になり、ひとつの L_p(E) とは比べられない(Skinner–Urban も ℚ_∞ で定式化する)
 
 これに対し
 
@@ -233,13 +233,13 @@ Tate-Shafarevich 群が有限(Shafarevich–Tate 予想。BSD とは別の予想
 
 ### 6.4 BSD の p 進版
 
-E/ℚ に対する BSD の p 進版(p-adic BSD conjecture):
+p で good ordinary か乗法的還元を持つ E/ℚ に対する BSD の p 進版(p-adic BSD conjecture):
 
 $$ \operatorname{ord}_{T=0} L_p(E, T) = \operatorname{rank} E(\mathbb{Q}) + \mathbb{1}_{\text{p-adic exceptional}}. $$
 
-ここで右辺の補正項は p における特殊な状況(exceptional zero)で生じる。
+ここで右辺の補正項は、E が p で分裂乗法的還元を持つときだけ 1 になる(補間因子が s = 1 で消えて L_p に余分な零点ができる。exceptional zero)。good ordinary なら補正項は 0。
 
-これは Mazur-Tate-Teitelbaum (1986) の予想で、特殊な状況(p-adic L 関数の Mazur-Tate-Teitelbaum 予想)の精密化を含む。
+これは Mazur-Tate-Teitelbaum (1986) の予想で、先頭係数を p 進 regulator(p 進高さ対の判別式)で表す式も含む(分裂乗法的還元のときは L 不変量の因子が加わる)。good ordinary の場合、主予想が成り立てば、零位がちょうど rank に等しいことは p 進高さ対の非退化性(Schneider の予想)と Ш(E/ℚ)[p^∞] の有限性に当たる。
 
 ---
 
@@ -257,7 +257,7 @@ $$ \operatorname{ord}_{T=0} L_p(E, T) = \operatorname{rank} E(\mathbb{Q}) + \mat
 
 Coates-Wiles の証明は CM の特殊性(対応する Hecke 指標 ψ_E)と岩澤理論を組み合わせる:
 
-1. CM の場合、L(E, s) は二つの Hecke L 関数 L(ψ, s) L(\bar ψ, s) に分解
+1. CM の場合、L(E/ℚ, s) は虚二次体 F の Hecke 指標 ψ の L 関数 L(ψ, s) に一致する(二つの Hecke L 関数の積 L(ψ, s) L(\bar ψ, s) になるのは、F 上に持ち上げた L(E/F, s) のほう)
 2. ψ の岩澤 L 関数 L_p(ψ) を構成し、これと Selmer 群を結びつける
 3. 楕円単数と明示的相互法則(Coates-Wiles 準同型)を用いて Selmer 群を bound する(のちに Rubin がこの議論を **Euler system** (Kolyvagin 1988-90 が導入、Kato が 1990 年代に modular な場合へ拡張) の枠で捉え直した)
 4. これにより L(E, 1) ≠ 0 ⇒ Selmer 群が有限、ゆえに E(ℚ) も有限

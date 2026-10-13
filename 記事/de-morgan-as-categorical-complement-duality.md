@@ -24,7 +24,7 @@ $\mathcal{P}(X)$ を poset category にする:対象は部分集合 $U\subseteq 
 
 ## 3–4. 補集合は反変同値で、極限と余極限を交換する
 
-$U\subseteq V\Rightarrow X\setminus V\subseteq X\setminus U$ より、補集合は射を反転する **反変関手** $c_X:\mathcal{P}(X)\to\mathcal{P}(X)^{\mathrm{op}}$。しかも $c_X\circ c_X=\mathrm{id}$(対合)だから、単なる反変関手でなく **反変同値(順序反転自己同型)** だ。反変同値は $\mathcal{P}(X)$ の余極限を $\mathcal{P}(X)^{\mathrm{op}}$ の余極限へ写すが、$\mathcal{P}(X)^{\mathrm{op}}$ の余極限とは $\mathcal{P}(X)$ の極限のこと。ゆえに:
+$U\subseteq V\Rightarrow X\setminus V\subseteq X\setminus U$ より、補集合は射を反転する **反変関手** $c_X:\mathcal{P}(X)\to\mathcal{P}(X)$、言い換えれば共変関手 $c_X:\mathcal{P}(X)\to\mathcal{P}(X)^{\mathrm{op}}$。しかも $c_X\circ c_X=\mathrm{id}$(対合。共変関手の型で書けば $c_X^{\mathrm{op}}\circ c_X=\mathrm{id}_{\mathcal{P}(X)}$)だから、単なる反変関手でなく **反変同値(順序反転自己同型)** だ。反変同値は $\mathcal{P}(X)$ の余極限を $\mathcal{P}(X)^{\mathrm{op}}$ の余極限へ写すが、$\mathcal{P}(X)^{\mathrm{op}}$ の余極限とは $\mathcal{P}(X)$ の極限のこと。ゆえに:
 
 > **補集合は、$\mathcal{P}(X)$ の極限(meet)と余極限(join)を入れ替える。**
 

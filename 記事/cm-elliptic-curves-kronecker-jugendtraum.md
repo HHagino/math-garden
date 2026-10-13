@@ -6,7 +6,7 @@ status: 墓場
 audience: 楕円曲線・類体論の基礎を一度通った人向け
 prerequisite: 楕円曲線(Silverman 第 1 部)、二次体、Hilbert 類体
 abstract: |
-  Hilbert 第 12 問題(数体の最大 abelian 拡大を解析関数の特殊値で明示構成せよ)は、K=ℚ(円分関数 e^{2πi/n}、Kronecker–Weber)と K=虚二次体(楕円関数・CM 楕円曲線の特殊値)でのみ完全解決されている。CM 楕円曲線は End(E)⊗ℚ が虚二次体になるもので、j(E) が Hilbert 類体を、Weber 関数の値 h_F(α)(α ∈ F。j ≠ 0, 1728 なら (g₂g₃/Δ)℘(α)、j = 0, 1728 では別の正規化)が最大 abelian 拡大を生成する(Kronecker の青春の夢)。その l 進 Galois 表現は abelian で二つの Hecke 指標の和に分解し、L 関数は Hecke L 関数の積として明示的に解析接続される。Coates–Wiles(BSD の最初の突破口)もこの CM の特殊性から来る。
+  Hilbert 第 12 問題(数体の最大 abelian 拡大を解析関数の特殊値で明示構成せよ)は、K=ℚ(円分関数 e^{2πi/n}、Kronecker–Weber)と K=虚二次体(楕円関数・CM 楕円曲線の特殊値)でのみ完全解決されている。CM 楕円曲線は End(E)⊗ℚ が虚二次体になるもので、j(E) が Hilbert 類体を、Weber 関数の値 h_F(α)(α ∈ F ∖ 𝒪_F。j ≠ 0, 1728 なら (g₂g₃/Δ)℘(α)、j = 0, 1728 では別の正規化)が最大 abelian 拡大を生成する(Kronecker の青春の夢)。その l 進 Galois 表現は(CM が定義される体の上に制限し、係数を ℚ_l の代数閉包に広げれば)abelian で二つの Hecke 指標の和に分解し、L 関数は Hecke L 関数の積として明示的に解析接続される。Coates–Wiles(BSD の最初の突破口)もこの CM の特殊性から来る。
 ---
 
 ## 1. Hilbert 第 12 問題と Kronecker の青春の夢
@@ -44,9 +44,9 @@ abstract: |
 
 楕円曲線 E/K に対し、自己準同型環
 
-$$ \operatorname{End}(E) := \{f \colon E \to E : f \text{ は代数射, 群準同型}\} $$
+$$ \operatorname{End}(E) := \{f \colon E \to E : f \text{ は } \bar K \text{ 上で定義された代数射, 群準同型}\} $$
 
-を考える。常に整数 m に対する m 倍写像 [m]: E → E ∈ End(E) があるので、ℤ ⊂ End(E) は常に成立する。
+を考える(K 上で定義された射だけに限ると小さくなりうる。例えば下の y² = x³ - x を ℚ 上で見ると、(x, y) ↦ (-x, iy) は i を使うので ℚ 上では定義されず、ℚ 上の自己準同型環は ℤ になる。以下 End(E) は $\bar K$ 上の射の環を指す)。常に整数 m に対する m 倍写像 [m]: E → E ∈ End(E) があるので、ℤ ⊂ End(E) は常に成立する。
 
 定義: E が **complex multiplication (CM)** を持つとは、End(E) ⊗_ℤ ℚ が ℚ より真に大きいこと。
 
@@ -145,7 +145,7 @@ $$ F^{ab, ram} := F(E[\infty]) $$
 F を虚二次体、𝒪_F をその整数環、E を 𝒪_F による CM 楕円曲線(F の Hilbert 類体 H 上で定義)とする。**Complex Multiplication の主定理**(古典的、Hasse, Weber, Takagi, Shimura-Taniyama):
 
 > F 上の最大 abelian 拡大 F^ab は、F の Hilbert 類体 H に、E のすべての torsion 点の **Weber 関数** の値 h(P) を添加して得られる(h: E → E/Aut(E) ≅ ℙ¹。j(E) ≠ 0, 1728 なら h = (g₂g₃/Δ)·x で、x 座標そのものでよい):
-> $$ F^{ab} = H\bigl(h(P) : P \in E[\infty]\bigr) = F\bigl(j(E),\ h(P) : P \in E[\infty]\bigr). $$
+> $$ F^{ab} = H\bigl(h(P) : P \in E[\infty] \setminus \{O\}\bigr) = F\bigl(j(E),\ h(P) : P \in E[\infty] \setminus \{O\}\bigr). $$
 >
 > 座標そのもの(y 座標まで)を添加した H(E[∞]) は、類数 h_F > 1 のとき一般には F 上 abelian にならない(E の二次捻りで Galois 作用が二次指標分ずれるため)。
 
@@ -159,11 +159,11 @@ F を虚二次体、𝒪_F をその整数環、E を 𝒪_F による CM 楕円
 
 ### 4.3 解析的記述: Weierstrass ℘ 関数の特殊値
 
-F の元 α と CM 楕円曲線 E = ℂ/𝒪_F に対し、Weierstrass の楕円関数 ℘(z; 𝒪_F) の点 α での値を斉次 0 次に正規化した Weber 関数の値 (g₂g₃/Δ)·℘(α; 𝒪_F) は F の abelian 拡大の生成元になる(℘(α; 𝒪_F) そのものは超越数になりうる ── 例えば ℘(1/2; ℤ[i]) = ±√g₂(ℤ[i])/2 は超越数 ── ので、この正規化が要る。j = 1728 なら (g₂²/Δ)℘²、j = 0 なら (g₃/Δ)℘³ を使う)。
+F の元 α(α ∉ 𝒪_F。α ∈ 𝒪_F は格子点で ℘ の極になる)と CM 楕円曲線 E = ℂ/𝒪_F に対し、Weierstrass の楕円関数 ℘(z; 𝒪_F) の点 α での値を斉次 0 次に正規化した Weber 関数の値 (g₂g₃/Δ)·℘(α; 𝒪_F) は F の abelian 拡大の生成元になる(℘(α; 𝒪_F) そのものは超越数になりうる ── 例えば ℘(1/2; ℤ[i]) = ±√g₂(ℤ[i])/2 は超越数 ── ので、この正規化が要る。j = 1728 なら (g₂²/Δ)℘²、j = 0 なら (g₃/Δ)℘³ を使う)。
 
 具体的には:
 
-$$ F\Bigl(j(E),\ h_F(α): α \in F\Bigr) = F^{ab}, \qquad h_F = \begin{cases} \tfrac{g_2 g_3}{\Delta}\,\wp & (j(E) \neq 0, 1728) \\ \tfrac{g_2^2}{\Delta}\,\wp^2 & (j(E) = 1728) \\ \tfrac{g_3}{\Delta}\,\wp^3 & (j(E) = 0) \end{cases} $$
+$$ F\Bigl(j(E),\ h_F(α): α \in F \setminus \mathcal{O}_F\Bigr) = F^{ab}, \qquad h_F = \begin{cases} \tfrac{g_2 g_3}{\Delta}\,\wp & (j(E) \neq 0, 1728) \\ \tfrac{g_2^2}{\Delta}\,\wp^2 & (j(E) = 1728) \\ \tfrac{g_3}{\Delta}\,\wp^3 & (j(E) = 0) \end{cases} $$
 
 (ここで ℘ = ℘(α; 𝒪_F)。F = ℚ(i) では g₃ = 0、F = ℚ(√−3) では g₂ = 0 なので、(g₂g₃/Δ)℘ を一律に使うと何も生成しない。)
 
@@ -183,7 +183,7 @@ $$ T_l(E) := \varprojlim_n E[l^n] \cong \mathbb{Z}_l^2 $$
 
 - G_K の像が **abelian** な部分群に含まれる
 - V_l(E) は F ⊗ ℚ_l 上階数 1 の加群で、G_K は (F ⊗ ℚ_l)^× を通して作用する。l が F で分解するときは ℚ_l 上で二つの 1 次元表現 ψ_l, ψ_l' の直和になる(l が惰性・分岐のときは ℚ_l 上では既約な 2 次元表現で、$\overline{\mathbb{Q}}_l$ に係数拡大してから直和に割れる):
-  $$ V_l(E) \cong \mathbb{Q}_l(\psi_l) \oplus \mathbb{Q}_l(\psi_l') $$
+  $$ V_l(E) \cong \mathbb{Q}_l(\psi_l) \oplus \mathbb{Q}_l(\psi_l') \qquad (l \text{ が } F \text{ で分解するとき}) $$
 - ψ_l と ψ_l' は互いに複素共役で結ばれた Hecke 指標から来る
 
 ### 5.2 Hecke 指標との対応
@@ -225,7 +225,7 @@ $$ L(E, s) = L(\psi, s) = \sum_{(a) \subset \mathbb{Z}[i]} \frac{\psi((a))}{N(a)
 
 CM 楕円曲線の高次元化として、CM アーベル多様体 (Shimura-Taniyama 1961) がある。一般に dim g の単純 abelian variety A/K で End(A) ⊗ ℚ が次数 2g の CM 体 F を含むものを CM アーベル多様体という。
 
-これらの Galois 表現も abelian で、対応する Hecke 指標が存在する。Shimura 多様体は CM アーベル多様体の moduli を一般化したもの。
+これらの Galois 表現も、全ての CM 自己準同型が定義される体の上に制限すれば abelian で、対応する Hecke 指標が存在する(元の体の上では一般に非可換になる。§2.2 の y² = x³ - x を ℚ 上で見ると、Gal(ℚ(E[3])/ℚ) は位数 16 の非可換群)。Shimura 多様体は CM アーベル多様体の moduli を一般化したもの。
 
 ### 6.2 Hilbert 第 12 問題の現状
 
@@ -264,7 +264,7 @@ CM 理論は、楕円関数論・類体論・Galois 表現論・L 関数論を�
 
 ---
 
-> **横断メモ(数論クラスタ).** CM 楕円曲線の l 進表現が二つの Hecke 指標 $\psi_l\oplus\psi_l'$ に分解するのは、別記事「Galois 理論を線形代数として見る」の「**abelian な Galois 群 → 1 次元固有空間(指標)の和**」そのものだ ── $\det\rho=\chi_l$(円分指標)も含め、CM は「Galois 作用を指標で対角化できる」最も数論的な実例。図1 の Jugendtraum の二解(ℚ=円分=$\mu_n$ の torsion / 虚二次体=楕円曲線の torsion)は、円分・Kummer 理論(乗法群)と楕円関数(楕円曲線)の torsion という並行で、別記事「Witt と Artin–Schreier–Witt」の乗法/加法対比とも響く。岩澤・Selmer・Coates–Wiles は別記事「係数の素数とガロワ表現」§8 の CM 部分の深掘り。$j(E)$=Hilbert 類体生成・イデアル上の L 級数は「有限素点と無限素点」の虚二次体・類体の言語だ。
+> **横断メモ(数論クラスタ).** CM 楕円曲線の l 進表現が($\overline{\mathbb{Q}}_l$ 係数で)二つの Hecke 指標 $\psi_l\oplus\psi_l'$ に分解するのは、別記事「Galois 理論を線形代数として見る」の「**abelian な Galois 群 → 1 次元固有空間(指標)の和**」そのものだ ── $\det\rho=\chi_l$(円分指標)も含め、CM は「Galois 作用を指標で対角化できる」最も数論的な実例。図1 の Jugendtraum の二解(ℚ=円分=$\mu_n$ の torsion / 虚二次体=楕円曲線の torsion)は、円分・Kummer 理論(乗法群)と楕円関数(楕円曲線)の torsion という並行で、別記事「Witt と Artin–Schreier–Witt」の乗法/加法対比とも響く。岩澤・Selmer・Coates–Wiles は別記事「係数の素数とガロワ表現」§8 の CM 部分の深掘り。$j(E)$=Hilbert 類体生成・イデアル上の L 級数は「有限素点と無限素点」の虚二次体・類体の言語だ。
 
 ## 査読・限界(解説モード)
 

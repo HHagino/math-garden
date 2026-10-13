@@ -102,9 +102,11 @@ Scholze の perfectoid 理論はこれを克服する。
 
 完備位相体 K が **perfectoid** であるとは:
 
-1. K の位相は階数 1 の非離散付値 |·| で定まる(付値環は 𝒪_K = {x ∈ K : |x| ≤ 1})
-2. K^× の付値群 |K^×| ⊂ ℝ_{>0} は p で割り切れる(value group is p-divisible)
+1. K の位相は階数 1 の非離散付値 |·| で定まり(付値環は 𝒪_K = {x ∈ K : |x| ≤ 1})、剰余体の標数は p > 0
+2. K^× の付値群 |K^×| ⊂ ℝ_{>0} は p で割り切れる(value group is p-divisible。1 と 3 から従う)
 3. Frobenius φ: 𝒪_K/p → 𝒪_K/p (x ↦ x^p) が全射
+
+剰余標数 p の条件は落とせない。剰余体の標数が 0 だと p は 𝒪_K の単元で 𝒪_K/p = 0 となり、3 が空虚に成り立ってしまう(ℂ((t^{1/p^∞}))^∧ は剰余体が ℂ であることを除けば 1・2・3 を満たすが、perfectoid ではない)。
 
 ### 3.2 具体例
 
@@ -118,7 +120,7 @@ Scholze の perfectoid 理論はこれを克服する。
 
 - 𝔽_p((t^{1/p^∞}))^∧
 - (𝔽_p^{alg})((t))^∧ の perfect 化の完備化
-- 一般に、標数 p の完備位相体で Frobenius が全射なもの
+- 一般に、標数 p で、階数 1 の非離散付値について完備な体のうち、Frobenius が全射(= perfect)なもの(自明な付値の 𝔽_p は Frobenius が全射でも perfectoid ではない)
 
 ### 3.3 非例
 
@@ -246,12 +248,12 @@ Deligne の重みモノドロミー予想は、p 進体上の滑らかな射影�
 
 近年(Bhatt-Scholze 2018-)、Witt ベクトル・perfectoid・Frobenius の枠組みを統一する **prismatic site** が整備された。
 
-**Prism** = (A, I): δ-環 A と分歧イデアル I の対(p ∈ I + φ(I) を満たす)。典型例:
+**Prism** = (A, I): δ-環 A とイデアル I の対で、I が Spec A 上の Cartier divisor を定め、A が導来 (p, I) 完備で、p ∈ I + φ(I)A を満たすもの(Bhatt–Scholze の定義 3.2)。最後の条件だけでは足りない。たとえば A = ℤ_p[ε]/(ε²)(φ は ℤ_p 上で恒等、φ(ε) = 0)と I = (p, ε) は p ∈ I を満たすが、I は 2 元を要し Cartier divisor にならない。典型例:
 
 - crystalline prism: A = W(k), I = (p)
 - Breuil–Kisin prism: A = W(k)[[u]](k は K の剰余体), I = (E(u))(K = ℚ_p の場合は A = ℤ_p[[u]], E(u) = u - p)
 - Hodge–Tate: prism ではなく、prism (A, I) の A/I 上への特殊化(prismatic コホモロジー ⊗ A/I)として得られる
-- perfectoid prism: A = W(R^♭), R perfectoid
+- perfectoid prism: A = W(R^♭), I = ker(θ: W(R^♭) → R), R perfectoid
 
 Prismatic コホモロジー H^i_Δ(X/A, …) は、crystalline, de Rham, Hodge-Tate, étale (l=p) コホモロジーをすべて特殊化として含む統一理論を与える。これにより p 進ホッジ理論が新しい geometric framework の中で整理されつつある。
 

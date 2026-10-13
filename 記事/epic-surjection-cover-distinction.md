@@ -166,7 +166,7 @@ $$U \subseteq Y \text{ が開} \quad \Longleftrightarrow \quad f^{-1}(U) \subset
 
 > $f$ は、**点集合としては全部覆っているが、位相構造を正しく押し出していない**全射 epic である。
 
-$f$ は全射であり epic でもあるが、$Y$ の構造を $X$ から再構成する役には立たない。全射 epic であっても cover とは限らない ── この例がそれを示している。
+$f$ は全射であり epic でもあるが、$Y$ の構造を $X$ から再構成する役には立たない。$\mathbf{Top}$ で cover を商写像(この圏の effective epi に当たる)と読めば、全射 epic であっても cover とは限らない ── この例がそれを示している。
 
 ---
 
@@ -208,7 +208,7 @@ $$\text{cover} \ \approx\ \text{降下の一意性} \ +\ \text{存在}$$
     <circle cx="376" cy="66" r="4" fill="#b1342a"/><text x="300" y="70" font-size="9" fill="#b1342a">離散→密着ℕ(全射epic)</text>
   </g>
 </svg>
-<figcaption><b>図1 ─ 概念の包含と二例の位置.</b> iso ⊂ cover ⊂ 全射epic ⊂ epic(圏ごとに意味が変わる発見法的な図で、どの包含が真の包含になるかも圏による)。$\mathbf{Set}$ では epic＝全射＝cover の三つが一致して見分けがつかない(iso は別)。$\mathbf{Top}$ でも epic＝全射で、分かれるのは cover(商写像)との間だけ。$\mathbb Z\to\mathbb Q$ は最外殻($\mathbf{CRing}$ で epic だが全射でない)、離散→密着 $\mathbb N$ は一つ内側($\mathbf{Top}$ で全射 epic だが cover でない)。どちらも cover の壁の外側で、失敗の仕方が違う。<i>(概念図)</i></figcaption>
+<figcaption><b>図1 ─ 概念の包含と二例の位置.</b> iso ⊂ cover ⊂ 全射epic ⊂ epic(圏ごとに意味が変わる発見法的な図で、どの包含が真の包含になるかも圏による)。包含が成り立つのは、圏と cover の意味を固定したときに限る:$\mathbf{Top}$ では cover＝商写像、環の例では Spec の向き(アフィンスキームの圏)で cover＝fpqc 被覆と読む。環準同型の向きのまま $\mathbf{CRing}$ で読むと cover ⊂ epic は崩れる(faithfully flat な $A\to A[t]$ は epic でない。$t\mapsto0$ と $t\mapsto u$ で定まる二つの $A[t]\to A[u]$ が $A$ 上で一致する)。$\mathbf{Set}$ では epic＝全射＝cover の三つが一致して見分けがつかない(iso は別)。$\mathbf{Top}$ でも epic＝全射で、分かれるのは cover(商写像)との間だけ。$\mathbb Z\to\mathbb Q$ は最外殻($\mathbf{CRing}$ で epic だが全射でない。Spec の向きでも、$\iota$ が単射なのでアフィンスキームの圏で epic、閉点に当たらないので全射でない)、離散→密着 $\mathbb N$ は一つ内側($\mathbf{Top}$ で全射 epic だが cover でない)。どちらも cover の壁の外側で、失敗の仕方が違う。<i>(概念図)</i></figcaption>
 </figure>
 
 本記事の二つの例は、この三つがいかにズレうるかを、異なる仕方で照らし出していた。

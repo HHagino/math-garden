@@ -58,7 +58,7 @@ $$\mathfrak p B \;=\; \prod_{\mathfrak P \mid \mathfrak p} \mathfrak P^{e_{\math
 $$\mathrm{Spec}\, B \;\longrightarrow\; \mathrm{Spec}\, A$$
 を考えると、$\mathfrak p \in \mathrm{Spec}\, A$ の逆像は $\mathrm{Spec}\, B$ の中の有限集合で、$\{\mathfrak P_1, \ldots, \mathfrak P_g\}$ という有限個の素イデアルからなる。
 
-ただ「逆像にある」というだけなら $e_{\mathfrak P}$ は出てこない。$e_{\mathfrak P}$ は、その逆像が**重複度込みで**どのくらいの厚みを持って現れるかを測っている。$e_{\mathfrak P} = 1$ なら不分岐、$e_{\mathfrak P} \ge 2$ なら $\mathfrak P$ は $\mathfrak p$ の上で「分岐している」と言う。
+ただ「逆像にある」というだけなら $e_{\mathfrak P}$ は出てこない。$e_{\mathfrak P}$ は、その逆像が**重複度込みで**どのくらいの厚みを持って現れるかを測っている。$e_{\mathfrak P} = 1$ で剰余体の拡大 $A/\mathfrak p \subset B/\mathfrak P$ が分離的なら不分岐、$e_{\mathfrak P} \ge 2$ なら $\mathfrak P$ は $\mathfrak p$ の上で「分岐している」と言う(代数体のように剰余体が有限体なら分離性は自動で、$e_{\mathfrak P} = 1$ だけで決まる。一般には $e_{\mathfrak P} = 1$ だけでは「弱い意味で不分岐」にとどまる)。
 
 イメージとしては、$\mathrm{Spec}\, A$ 上の 1 点 $\mathfrak p$ を $\mathrm{Spec}\, B$ から見たとき、
 
@@ -243,7 +243,7 @@ $e$ は上へ伸びる厚み、$f$ は下から見た重み。素イデアルの
 ## 査読・限界(解説モード)
 
 - **依拠する標準事実**:デデキント環のイデアル一意分解、$\mathfrak pB=\prod\mathfrak P^{e}$、$N_{L/K}(\mathfrak P)=\mathfrak p^{f}$、$N_{L/K}(IB)=I^{[L:K]}$、$\sum_{\mathfrak P|\mathfrak p}e_\mathfrak{P}f_\mathfrak{P}=[L:K]$、局所 DVR での $v_\mathfrak{P}=e\,v_\mathfrak{p}$ と剰余体次数 $f$、$\mathbb Q(i)$ の $5/3/2$ の分解。標準的な代数的整数論。
-- **境界**:$\sum ef=[L:K]$ は良い条件($B$ が $A$ 上有限・整閉、$L/K$ 分離的等)のもとで成立。非分離拡大や悪い条件では崩れうる。完備局所では素イデアルが一つに揃い $ef=[L:K]_{\text{local}}$。
+- **境界**:$\sum ef=[L:K]$ は $B$ が $A$ 上有限(有限生成 $A$ 加群)なら分離性なしで成立する($L/K$ 分離的なら有限性は自動。純非分離の $\mathbb F_p[t]\subset\mathbb F_p[u]$、$t=u^p$ でも $(t)=(u)^p$ で $e=p,\ f=1,\ [L:K]=p$)。崩れうるのは、非分離拡大で整閉包が $A$ 上有限にならないときである。完備局所では素イデアルが一つに揃い $ef=[L:K]_{\text{local}}$。
 - 既知の理論の整理であり、新規主張を含まない。
 
 ## 参考文献
