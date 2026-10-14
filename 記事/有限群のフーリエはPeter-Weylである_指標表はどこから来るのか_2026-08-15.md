@@ -107,12 +107,12 @@ $$e_{\mathbf{1}} + e_{\mathrm{sgn}} + e_{V} = e. \qquad \checkmark$$
   <path d="M158 70 L165 75 L158 80" fill="none" stroke="#7a7266" stroke-width="1.5"/>
   <rect x="180" y="20" width="18" height="18" fill="#c9b98f" stroke="#7a7266" stroke-width="1.2"/>
   <rect x="198" y="38" width="18" height="18" fill="#c9b98f" stroke="#7a7266" stroke-width="1.2"/>
-  <rect x="216" y="56" width="56" height="56" fill="#8fa9c9" stroke="#7a7266" stroke-width="1.2"/>
-  <rect x="180" y="20" width="110" height="110" fill="none" stroke="#7a7266" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <rect x="216" y="56" width="36" height="36" fill="#8fa9c9" stroke="#7a7266" stroke-width="1.2"/>
+  <rect x="180" y="20" width="72" height="72" fill="none" stroke="#7a7266" stroke-width="1.5" stroke-dasharray="3 3"/>
   <text x="235" y="14" font-size="11" text-anchor="middle" fill="#3a3630">ブロック対角</text>
   <text x="310" y="34" font-size="11" fill="#3a3630">C　（1×1・自明）</text>
   <text x="310" y="54" font-size="11" fill="#3a3630">C　（1×1・符号）</text>
-  <text x="310" y="92" font-size="11" fill="#3a3630">M₂(C)（2×2・標準）</text>
+  <text x="310" y="80" font-size="11" fill="#3a3630">M₂(C)（2×2・標準）</text>
   <text x="310" y="126" font-size="11" fill="#6b6459">1 + 1 + 4 = 6</text>
 </svg>
 <figcaption>群環は既約表現ごとの行列ブロックに完全に割れる。ブロックの一辺が既約表現の次元、面積がその寄与。面積の合計が群の位数になる。</figcaption>
@@ -229,7 +229,7 @@ $S_3$ なら $6 > 3$。**指標は $L^2(G)$ の基底にならない。**なる�
   <text x="164" y="107" font-size="11" fill="#6b6459">1²+1²+2² = 6　既約表現 3 個／共役類 3 個</text>
   <text x="14" y="150" font-size="11" fill="#3a3630">個数は減り、一つあたりの面積が増える。合計面積 |G| は変わらない。</text>
 </svg>
-<figcaption>可換化とは、正方形を割って一辺 1 に均すこと。非可換群では割り切れずに大きな正方形が残る。残った正方形の面積が、指標が見ていない自由度である。</figcaption>
+<figcaption>可換群では、正方形がすべて一辺 1 に割れている。非可換群では割り切れずに大きな正方形が残る。残った正方形の面積から 1 を引いたぶん(指標は各ブロックの跡の 1 方向だけを見る。S₃ なら 4−1=3=6−3)が、指標が見ていない自由度である。</figcaption>
 </figure>
 
 ---

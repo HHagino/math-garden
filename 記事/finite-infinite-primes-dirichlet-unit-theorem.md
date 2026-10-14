@@ -167,7 +167,7 @@ $$[K : \mathbb{Q}] = r_1 + 2r_2$$
 
 ## 9. 完備化:各素点で数体を見る
 
-有限素点でも無限素点でも、その素点に付随する絶対値で数体 $K$ を **完備化** することができる。完備化とは、その絶対値に関する「すきま」をすべて埋めて、収束列が必ず収束するようにした体である。
+有限素点でも無限素点でも、その素点に付随する絶対値で数体 $K$ を **完備化** することができる。完備化とは、その絶対値に関する「すきま」をすべて埋めて、Cauchy 列が必ず収束するようにした体である。
 
 - 有限素点 $\mathfrak{p}$ で完備化すると、局所体 $K_{\mathfrak{p}}$ が得られる。これは $p$ 進体 $\mathbb{Q}_p$ の有限次拡大になる。
 - 実無限素点で完備化すると、$K_v \cong \mathbb{R}$。
@@ -398,7 +398,7 @@ Dirichlet の単数定理は、単に「単元群の構造はこうなってい�
 - D. A. Marcus, *Number Fields*, Springer Universitext. 素数の分解・分岐の具体計算が豊富。
 - J. S. Milne, *Algebraic Number Theory* (ANT). 無料講義ノート:<https://www.jmilne.org/math/CourseNotes/ANT.pdf>
 - S. Lang, *Algebraic Number Theory*, Springer GTM 110. 単数定理と積公式の古典的な扱い。
-- Arakelov 幾何の入口としては、Neukirch の最終章や、算術曲線のコンパクト化を扱う入門的な解説を参照。
+- Arakelov 幾何の入口としては、Neukirch の第 III 章(Riemann–Roch Theory。Arakelov イデアル・Arakelov 類群・計量つき加群)や、算術曲線のコンパクト化を扱う入門的な解説を参照。
 
 ---
 

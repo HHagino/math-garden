@@ -248,7 +248,7 @@ $e$ は上へ伸びる厚み、$f$ は下から見た重み。素イデアルの
 
 ## 参考文献
 
-- The Stacks Project, *Dedekind domains* / *Ramification* (タグ 0903 周辺)
+- The Stacks Project, Definition 10.120.14 *Dedekind domain* (タグ 034W) / Section 15.113 *Extensions of discrete valuation rings* (タグ 0EXQ。$e$・$f$ の定義と $\sum e_if_i=[L:K]$)
 - J. Neukirch, *Algebraic Number Theory*, Springer (第 I 章および第 II 章)
 - J.-P. Serre, *Local Fields*, Springer GTM 67
 - J. S. Milne, *Algebraic Number Theory* (オンライン講義ノート)

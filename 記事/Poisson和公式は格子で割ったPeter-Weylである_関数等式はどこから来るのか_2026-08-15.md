@@ -51,7 +51,7 @@ $$\sum_{x\in H} f(x) \;=\; \frac{|H|}{|G|}\sum_{\chi\in H^\perp} \hat f(\chi), \
 
 ★ **この式の中身は、前記事の分解そのものである。** $H$ 上の和を取るという操作は、$\mathbb{C}[G]$ の中で $H$ に台を持つ部分を取り出すことで、それを既約成分（＝指標）の側に翻訳すると、$H$ 上で $1$ になる指標だけが生き残る。**「部分群で足す」と「双対で部分群が生き残る」が同じ操作の裏表になっている。**
 
-$\mathbb{R}$ と $\mathbb{Z}$ でやることは、これと一字一句同じである。ただし $G$ が無限になるので、$|H|/|G|$ の代わりに格子の共体積が出る。
+$\mathbb{R}$ と $\mathbb{Z}$ でやることは、これと一字一句同じである。ただし $G$ が無限になるので、$|H|/|G|$ の代わりに格子の共体積の逆数が出る（$|G|/|H|=[G:H]$ にあたるのが共体積 $\mathrm{vol}(\mathbb{R}/\Lambda)$。$\mathbb{Z}\subset\mathbb{R}$ では $1$）。
 
 ---
 
@@ -87,7 +87,7 @@ $$\sum_n f(n) = F(0) = \sum_k c_k = \sum_k \hat f(k). \qquad \blacksquare$$
   </g>
   <text x="20" y="92" font-size="11" fill="#6b6459">格子 Z の点で切り取って足す ＝ 周期化 F(x)=Σf(x+n)</text>
   <line x1="20" y1="140" x2="450" y2="140" stroke="#b8b0a2" stroke-width="1"/>
-  <path d="M75 140 Q 110 108 145 140 Q 180 108 215 140 Q 250 108 285 140 Q 320 108 355 140" fill="none" stroke="#8fa9c9" stroke-width="2"/>
+  <path d="M40 140 Q 75 108 110 140 Q 145 108 180 140 Q 215 108 250 140 Q 285 108 320 140 Q 355 108 390 140" fill="none" stroke="#8fa9c9" stroke-width="2"/>
   <text x="20" y="160" font-size="11" fill="#6b6459">周期 1 の関数になる ⟹ フーリエ係数は f̂(k)、x=0 を代入すれば公式</text>
 </svg>
 <figcaption>Poisson 和公式の全内容。左辺は「格子点での値を足す」、右辺は「畳んだ関数のフーリエ係数を足す」。同じ数 $F(0)$ を二通りに書いている。</figcaption>

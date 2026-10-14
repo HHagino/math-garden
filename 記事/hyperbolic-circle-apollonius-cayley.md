@@ -255,5 +255,5 @@ $$
 
 - A. F. Beardon, *The Geometry of Discrete Groups*, Springer GTM 91. 上半平面・円盤モデル・双曲距離公式の標準的な扱い。
 - S. Katok, *Fuchsian Groups*, University of Chicago Press. 上半平面モデルとメビウス変換が簡潔。
-- J. W. Anderson, *Hyperbolic Geometry*, Springer Universitext. 学部向けの双曲幾何入門。
+- J. W. Anderson, *Hyperbolic Geometry*, Springer Undergraduate Mathematics Series. 学部向けの双曲幾何入門。
 - H. S. M. Coxeter, *Introduction to Geometry*, Wiley. アポロニウスの円・根軸・同軸円束といった初等幾何の側の古典的な参照先。

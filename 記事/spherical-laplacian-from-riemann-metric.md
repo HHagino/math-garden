@@ -41,7 +41,7 @@ $$ds^2 = dr^2 + r^2\,d\theta^2 + r^2\sin^2\theta\,d\varphi^2.$$
 
 直交座標と違うのは、$d\theta$ と $d\varphi$ の前に**長さスケール**が掛かっていることだ:
 - $d\theta$ の前には $r^2$($\theta$ を少し動かすと、半径 $r$ の球面上で長さ $r\,d\theta$ ぶん動く)
-- $d\varphi$ の前には $r^2\sin^2\theta$($\varphi$ を動かすと、緯度 $\theta$ における半径 $r\sin\theta$ の円上で長さ $r\sin\theta\,d\varphi$ ぶん動く)
+- $d\varphi$ の前には $r^2\sin^2\theta$($\varphi$ を動かすと、余緯度 $\theta$(北極から測った角)における半径 $r\sin\theta$ の円上で長さ $r\sin\theta\,d\varphi$ ぶん動く)
 
 これは球面の幾何そのものだ。
 
@@ -101,7 +101,7 @@ $$= \frac{1}{r^2}\,\frac{\partial}{\partial r}\!\left(r^2\,\frac{\partial f}{\pa
 $g^{\theta\theta} = 1/r^2$ なので、
 $$\frac{1}{r^2\sin\theta}\,\frac{\partial}{\partial \theta}\!\left(r^2\sin\theta \cdot \frac{1}{r^2} \cdot \frac{\partial f}{\partial \theta}\right) = \frac{1}{r^2\sin\theta}\,\frac{\partial}{\partial \theta}\!\left(\sin\theta\,\frac{\partial f}{\partial \theta}\right).$$
 
-$r^2$ がうまくキャンセルして、$\theta$ 方向の作用素から消える。
+$r^2$ がうまくキャンセルして、$\partial_\theta$ の括弧の中から消える。
 
 ### $\varphi$ 方向
 

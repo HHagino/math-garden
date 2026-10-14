@@ -21,9 +21,9 @@ Gaussian group model はざっくり言えば、共分散構造を群作用で�
 - 観測データ $Y = (Y_1, \ldots, Y_m) \in V^m$ は $m$ 個のサンプル。
 - 共分散行列は $\rho(g)\rho(g)^*$ の形に制約される。
 
-Kronecker / matrix normal model は、$V = \mathrm{Mat}_{p,q}$、$G = GL_p \times GL_q$、$(g_1, g_2) \cdot Y = g_1 Y g_2^*$ という作用で具体化される特例だ。
+Kronecker / matrix normal model は、$V = \mathrm{Mat}_{p,q}$、$G = GL_p \times GL_q$、$(g_1, g_2) \cdot Y = g_1 Y g_2^{\top}$ という作用で具体化される特例だ。
 
-MLE を求めるとは、サンプル $Y$ に対し、log-likelihood 関数 $\ell_Y(g)$ を最大化する $g$ を見つけることだ。問題は、
+MLE を求めるとは、サンプル $Y$ に対し、log-likelihood 関数 $\ell_Y(g)$ を最大化する $g$ を見つけ、共分散行列 $\rho(g)\rho(g)^*$ を求めることだ(MLE はこの行列で、$g$ そのものではない。$\rho(k)$ がユニタリな $k$ を右から掛けた $gk$ も同じ行列を与えるので、下の「一意か」は行列について問う)。問題は、
 
 - そもそも $\ell_Y$ は上に有界か?
 - 有界だとして、最大値は達成されるか(MLE は存在するか)?
@@ -91,7 +91,7 @@ $$\bullet_{K^q} \xrightarrow[\;\,\cdots\;\,]{Y_1, Y_2, \ldots, Y_m} \bullet_{K^p
 
 各頂点での基底変換は $GL_q$ と $GL_p$ それぞれの作用で、quiver 表現の同型は
 $$(g_1, g_2) \cdot (Y_1, \ldots, Y_m) = (g_1 Y_1 g_2^{-1}, \ldots, g_1 Y_m g_2^{-1})$$
-で与えられる(matrix normal の作用の真ん中は $g_2^{-1}$ か $g_2^*$ かで convention 差はあるが、Hilbert 空間/正定値性のいい話のためにはほぼ同等)。
+で与えられる(matrix normal の作用の真ん中は $g_2^{-1}$ か $g_2^{\top}$ かで convention 差はあるが($K=\mathbb{C}$ で $g_2^*$ と書くと $g_2$ の複素共役が入り、rational representation にならない)、Hilbert 空間/正定値性のいい話のためにはほぼ同等)。
 
 そして、GIT 安定性の判定では行列式スケールの自由度は捨てるべきなので、$G_{SL} = SL_p \times SL_q$ の作用を見る。
 

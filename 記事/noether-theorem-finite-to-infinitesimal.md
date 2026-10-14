@@ -38,8 +38,8 @@ $$L_s - L_0 = \frac{d}{dt}(G_s - G_0)$$
   <path d="M60,150 C160,108 280,92 410,52" fill="none" stroke="#2f5d7c" stroke-width="2.4"/>
   <path d="M60,150 C160,96 280,74 410,34" fill="none" stroke="#b9ac95" stroke-width="1.4"/>
   <text x="416" y="52" font-family="serif" font-size="10.5" fill="#2f5d7c">q₀=q (s=0)</text>
-  <text x="416" y="34" font-family="serif" font-size="9.5" fill="#8a7f6c">q_s</text>
-  <text x="416" y="74" font-family="serif" font-size="9.5" fill="#8a7f6c">q_s</text>
+  <text x="416" y="34" font-family="serif" font-size="9.5" fill="#8a7f6c">qₛ</text>
+  <text x="416" y="74" font-family="serif" font-size="9.5" fill="#8a7f6c">qₛ</text>
   <!-- vertical arrow = ds derivative -->
   <line x1="250" y1="94" x2="250" y2="68" stroke="#b1342a" stroke-width="1.6" marker-end="url(#nt1)"/>
   <text x="244" y="62" text-anchor="end" font-family="serif" font-size="10" fill="#b1342a">∂/∂s|₀ = δq</text>

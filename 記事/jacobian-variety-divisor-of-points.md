@@ -178,7 +178,7 @@ $$C \;\cong\; C' \;\Longleftrightarrow\; (J(C), \lambda_C) \;\cong\; (J(C'), \la
 
 - 曲線上の**因子・線束**:$\mathrm{Pic}^0(C) = J(C)$ そのもの。
 - 曲線上の**周期**:複素では $J(C) = \mathbb{C}^g/\Lambda$ の格子 $\Lambda$ として現れる。
-- 曲線の**テータ関数**:$J(C)$ 上の関数として定義される。
+- 曲線の**テータ関数**:$\mathbb{C}^g$ 上の準周期関数として定義され、$J(C)$ の上では関数ではなく線束の切断になる(零点の集合がテータ因子)。
 - 曲線の**ゼータ関数**:ヤコビアンのフロベニウス固有値で記述される(Weil 予想の出発点)。
 - 曲線の**モジュライ空間** $\mathcal{M}_g$:ヤコビアンを取る写像 $\mathcal{M}_g \to \mathcal{A}_g$(主偏極アーベル多様体のモジュライへの Torelli 写像)が研究の中心。
 
@@ -206,7 +206,7 @@ $$C(k) \;\longrightarrow\; J(C)(k)$$
 
 ## 参考文献
 
-- The Stacks Project, *Picard scheme of curves* (タグ群 03BR / 0BX0 周辺)
+- The Stacks Project, *Picard Schemes of Curves* (章のタグ 0B92。曲線の Picard スキームの節は 0B9R)
 - J. S. Milne, *Jacobian Varieties* (in *Arithmetic Geometry*, eds. Cornell–Silverman, Springer, 1986)
 - nLab, "Jacobian variety"
 - *Encyclopaedia of Mathematics*, "Jacobi variety"
