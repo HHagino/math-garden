@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -617,7 +653,7 @@ window.Quarto = {
 <p>である。割ると崩れる。最小の例を手で見る。<span class="math inline">G = \mathbb{Z}/p</span>、<span class="math inline">k = \mathbb{F}_p</span> とすると</p>
 <p><span class="math display">k[G] \;=\; k[x]/(x^p-1) \;=\; k[x]/\bigl((x-1)^p\bigr)</span></p>
 <p>（標数 <span class="math inline">p</span> で <span class="math inline">x^p - 1 = (x-1)^p</span>）。右辺は<strong>局所環</strong>であって、直積に割れない。既約表現は自明表現ただ一つしかないのに、<span class="math inline">k[G]</span> は <span class="math inline">p</span> 次元ある。次元の二乗和は <span class="math inline">1 \ne p</span>（<span class="math inline">p&gt;1</span>）で、<span class="math inline">|G| = \sum d_i^2</span> が破れる。</p>
-<p>この破れの先にあるのがモジュラー表現論で、そこでは「割れないぶん」を Brauer 指標や射影加群で測る。<strong>Peter–Weyl 型の分解は、標数 0 という条件つきの定理である。</strong>無条件の主張ではない。</p>
+<p>この破れの先にあるのがモジュラー表現論で、そこでは「割れないぶん」を Brauer 指標や射影加群で測る。<strong>Peter–Weyl 型の分解は、標数が <span class="math inline">|G|</span> を割らない(標数 0 はその特別な場合)という条件つきの定理である。</strong>無条件の主張ではない。</p>
 <hr>
 </section>
 <section id="横断この分解はどこで再会するか" class="level2">
@@ -651,7 +687,7 @@ window.Quarto = {
 <li>コンパクト群への一般化で本当に効く点（Haar 測度の存在、行列成分が<strong>稠密</strong>であって一致ではないこと、無限個の既約表現）は、有限群だけを見ている本記事では見えない。</li>
 </ul>
 <p><strong>未解決だと誤解されないために</strong></p>
-<p>本記事の内容に未解決問題は含まれない。すべて 20 世紀前半に決着している。現代的な未解決性は、有限単純群の表現論（Alperin 予想など、モジュラー表現論側）や、無限次元・非コンパクトな設定にある。<strong>そちらは本記事の範囲外である。</strong></p>
+<p>本記事の内容に未解決問題は含まれない。すべて 20 世紀前半までに決着している(Frobenius の指標 1896、Maschke 1898–99、Peter–Weyl 1927)。現代的な未解決性は、有限単純群の表現論（Alperin 予想など、モジュラー表現論側）や、無限次元・非コンパクトな設定にある。<strong>そちらは本記事の範囲外である。</strong></p>
 <hr>
 <p>指標表を「覚えるもの」から「割った結果」に置き換えると、次の問いが立つ。<span class="math inline">\mathbb{C}</span> の上で <span class="math inline">D_4</span> と <span class="math inline">Q_8</span> が区別できなかったのは、係数体が大きすぎたからだった。では<strong>どの係数体まで小さくすれば、群は群環から復元できるのか。</strong>この問いには一般の答えがなく、群環同型問題として長く追われてきた。分解は情報を整理すると同時に、整理の粒度の分だけ情報を捨てる。<strong>不変量が解像度を決める。</strong></p>
 

@@ -58,9 +58,9 @@ $$A v = \lambda_i v, \qquad B v = \mu_{i,j} v$$
 
 $$A=\begin{pmatrix}2&0&0\\0&2&0\\0&0&5\end{pmatrix},\qquad B=\begin{pmatrix}0&1&0\\1&0&0\\0&0&7\end{pmatrix}.$$
 
-まず $AB=BA$ を確認(両方 $\begin{psmallmatrix}0&2&0\\2&0&0\\0&0&35\end{psmallmatrix}$ になる)。$A$ は固有値 $2$(重複度 $2$)と $5$ を持ち、固有空間は $V_1=\mathrm{span}(e_1,e_2)$、$V_2=\mathrm{span}(e_3)$。$A$ だけでは $V_1$ の中の向きは決まらない(縮退している)。
+まず $AB=BA$ を確認(両方 $\left(\begin{smallmatrix}0&2&0\\2&0&0\\0&0&35\end{smallmatrix}\right)$ になる)。$A$ は固有値 $2$(重複度 $2$)と $5$ を持ち、固有空間は $V_1=\mathrm{span}(e_1,e_2)$、$V_2=\mathrm{span}(e_3)$。$A$ だけでは $V_1$ の中の向きは決まらない(縮退している)。
 
-ここで $B$ が $V_1$ を割る。$B|_{V_1}=\begin{psmallmatrix}0&1\\1&0\end{psmallmatrix}$ の固有値は $\pm1$、固有ベクトルは $(1,1)$ と $(1,-1)$。$V_2$ では $B$ は $7$ 倍。共通固有基底は
+ここで $B$ が $V_1$ を割る。$B|_{V_1}=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ の固有値は $\pm1$、固有ベクトルは $(1,1)$ と $(1,-1)$。$V_2$ では $B$ は $7$ 倍。共通固有基底は
 
 $$v_1=(1,1,0),\ v_2=(1,-1,0),\ v_3=(0,0,1),$$
 
@@ -98,7 +98,7 @@ $$v_1=(1,1,0),\ v_2=(1,-1,0),\ v_3=(0,0,1),$$
 
 $$\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad \sigma_z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$$
 
-を見る。両方とも対角化可能(固有値 $\pm1$)だが、$\sigma_x\sigma_z=\begin{psmallmatrix}0&-1\\1&0\end{psmallmatrix}\neq\sigma_z\sigma_x=\begin{psmallmatrix}0&1\\-1&0\end{psmallmatrix}$ で **非可換**。$\sigma_z$ の固有ベクトルは $e_1,e_2$ だが、$\sigma_x e_1=e_2\notin\mathrm{span}(e_1)$ ── $\sigma_x$ は $\sigma_z$ の固有空間を保たない。実際、両者に共通の固有ベクトルは存在しない。同時対角化は不可能だ。
+を見る。両方とも対角化可能(固有値 $\pm1$)だが、$\sigma_x\sigma_z=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)\neq\sigma_z\sigma_x=\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)$ で **非可換**。$\sigma_z$ の固有ベクトルは $e_1,e_2$ だが、$\sigma_x e_1=e_2\notin\mathrm{span}(e_1)$ ── $\sigma_x$ は $\sigma_z$ の固有空間を保たない。実際、両者に共通の固有ベクトルは存在しない。同時対角化は不可能だ。
 
 <figure>
 <svg viewBox="0 0 460 168" width="100%" style="max-width:460px;display:block;margin:8px auto" role="img" aria-label="可換は固有空間を保つ、非可換は保たない">
@@ -107,16 +107,16 @@ $$\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad \sigma_z=\begin{pmatrix}1
     <marker id="sd3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#b1342a"/></marker>
   </defs>
   <g font-family="serif" font-size="11" fill="#2b2118">
-    <text x="116" y="20" text-anchor="middle" font-size="11" fill="#5a6e4a">可換:B は V_i を保つ</text>
+    <text x="116" y="20" text-anchor="middle" font-size="11" fill="#5a6e4a">可換:B は V<tspan baseline-shift="-0.3em" font-size="75%">i</tspan> を保つ</text>
     <rect x="56" y="34" width="120" height="80" fill="#eef1ea" stroke="#5a6e4a" stroke-width="1.4"/>
     <text x="116" y="50" text-anchor="middle" font-size="10" fill="#8a7f6c">A-固有空間 Vᵢ</text>
     <circle cx="90" cy="84" r="3" fill="#2b2118"/><text x="80" y="80" font-size="9">v</text>
     <line x1="90" y1="84" x2="150" y2="84" stroke="#5a6e4a" stroke-width="1.6" marker-end="url(#sd2)"/>
     <text x="130" y="104" text-anchor="middle" font-size="9" fill="#5a6e4a">Bv も Vᵢ 内</text>
     <line x1="230" y1="14" x2="230" y2="150" stroke="#b9ac95" stroke-width="1" stroke-dasharray="3 3"/>
-    <text x="344" y="20" text-anchor="middle" font-size="11" fill="#b1342a">非可換(σₓ,σ_z):保たない</text>
+    <text x="344" y="20" text-anchor="middle" font-size="11" fill="#b1342a">非可換(σₓ,σ<tspan baseline-shift="-0.3em" font-size="75%">z</tspan>):保たない</text>
     <rect x="284" y="34" width="120" height="80" fill="#f6e7e3" stroke="#b1342a" stroke-width="1.4"/>
-    <text x="344" y="50" text-anchor="middle" font-size="10" fill="#8a7f6c">σ_z-固有空間 span(e₁)</text>
+    <text x="344" y="50" text-anchor="middle" font-size="10" fill="#8a7f6c">σ<tspan baseline-shift="-0.3em" font-size="75%">z</tspan>-固有空間 span(e₁)</text>
     <circle cx="312" cy="88" r="3" fill="#2b2118"/><text x="304" y="84" font-size="9">e₁</text>
     <line x1="312" y1="88" x2="312" y2="128" stroke="#b1342a" stroke-width="1.6" marker-end="url(#sd3)"/>
     <text x="356" y="124" text-anchor="middle" font-size="9" fill="#b1342a">σₓe₁=e₂ は外へ</text>
@@ -144,5 +144,5 @@ $$\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad \sigma_z=\begin{pmatrix}1
 ## 査読・限界(解説モード)
 
 - **依拠する標準事実**:対角化可能 $\iff$ 最小多項式が相異なる一次式の積に分解($\mathbb C$ 上)、制限の最小多項式が全体の最小多項式を割ること、直和分解。標準的な線形代数。
-- **境界**:(i) 対角化可能性が欠けると同時対角化不可、可換性下でも同時上三角化まで。(ii) 可換性が欠けると共通固有基底が一般に存在しない(§8 の Pauli 行列が具体反例)。
+- **境界**:(i) 対角化可能性が欠けると同時対角化不可、可換性下でも同時上三角化まで。(ii) 可換性が欠けると共通固有基底は存在しない(共通固有基底があれば両方が同時に対角になり可換になるため。§8 の Pauli 行列が具体反例)。
 - 本記事は既知の定理の再構成(構造の見える証明＋具体例)であり、新規主張を含まない。

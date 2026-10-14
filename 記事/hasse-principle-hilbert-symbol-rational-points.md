@@ -66,12 +66,12 @@ $$(a,b)_v=+1 \iff z^2=ax^2+by^2 \text{ が } \mathbb{Q}_v \text{ で非自明解
     <rect x="198" y="22" width="64" height="26" fill="#f6e7e3" stroke="#b1342a"/><text x="230" y="39" text-anchor="middle">ℚ₂  −1</text>
     <rect x="38" y="138" width="64" height="26" fill="#eef5fa" stroke="#2f5d7c"/><text x="70" y="155" text-anchor="middle">ℚ₃  +1</text>
     <rect x="356" y="38" width="64" height="26" fill="#f6e7e3" stroke="#b1342a"/><text x="388" y="55" text-anchor="middle">ℚ₅  −1</text>
-    <rect x="372" y="146" width="78" height="26" fill="#eef1ea" stroke="#5a6e4a"/><text x="411" y="163" text-anchor="middle">他の ℚ_p +1</text>
-    <text x="230" y="200" text-anchor="middle" font-size="10.5" fill="#8a7f6c">各 ℚ_v が (a,b)_v を返すセンサー。二次形式なら「全部 +1 ⟺ 大域解」(Hasse–Minkowski)</text>
+    <rect x="372" y="146" width="78" height="26" fill="#eef1ea" stroke="#5a6e4a"/><text x="411" y="163" text-anchor="middle">他の ℚ<tspan baseline-shift="-0.3em" font-size="75%">p</tspan> +1</text>
+    <text x="230" y="200" text-anchor="middle" font-size="10.5" fill="#8a7f6c">各 ℚ<tspan baseline-shift="-0.3em" font-size="75%">v</tspan> が (a,b)<tspan baseline-shift="-0.3em" font-size="75%">v</tspan> を返すセンサー。二次形式なら「全部 +1 ⟺ 大域解」(Hasse–Minkowski)</text>
     <text x="230" y="216" text-anchor="middle" font-size="10" fill="#b1342a">図の符号は §8 の例 a=3, b=−5(2 と 5 で −1 → 大域解なし)</text>
   </g>
 </svg>
-<figcaption><b>図1 ─ ℚ_v は局所センサー群.</b> 各完備化 $\mathbb Q_v$ がヒルベルト記号 $(a,b)_v$ を $\pm1$ で返す。二次形式では「全センサーが $+1$」がちょうど大域解の存在に一致。$-1$ になりうるのは $\infty,2,$ および $a,b$ に現れる素数だけ ── 有限個のセンサーを読めばよい。<i>(概念図・符号は §8 の例)</i></figcaption>
+<figcaption><b>図1 ─ $\mathbb Q_v$ は局所センサー群.</b> 各完備化 $\mathbb Q_v$ がヒルベルト記号 $(a,b)_v$ を $\pm1$ で返す。二次形式では「全センサーが $+1$」がちょうど大域解の存在に一致。$-1$ になりうるのは $\infty,2,$ および $a,b$ に現れる素数だけ ── 有限個のセンサーを読めばよい。<i>(概念図・符号は §8 の例)</i></figcaption>
 </figure>
 
 ## 8. 手で動かす ── $a=3,\ b=-5$ を判定する
@@ -112,13 +112,13 @@ $$3x^3 + 4y^3 + 5z^3 = 0$$
   <g font-family="serif" font-size="11" fill="#2b2118">
     <!-- quadratic row -->
     <text x="60" y="44" font-size="10.5" fill="#5a6e4a">二次形式</text>
-    <rect x="46" y="50" width="150" height="26" fill="#eef1ea" stroke="#5a6e4a"/><text x="121" y="67" text-anchor="middle">全 ℚ_v で +1</text>
+    <rect x="46" y="50" width="150" height="26" fill="#eef1ea" stroke="#5a6e4a"/><text x="121" y="67" text-anchor="middle">全 ℚ<tspan baseline-shift="-0.3em" font-size="75%">v</tspan> で +1</text>
     <line x1="198" y1="63" x2="268" y2="63" stroke="#5a6e4a" stroke-width="1.6" marker-end="url(#hp2)"/>
     <text x="233" y="55" text-anchor="middle" font-size="9.5" fill="#5a6e4a">一致</text>
     <rect x="270" y="50" width="146" height="26" fill="#eef1ea" stroke="#5a6e4a"/><text x="343" y="67" text-anchor="middle">大域解あり ✓</text>
     <!-- cubic row -->
     <text x="60" y="106" font-size="10.5" fill="#b1342a">三次(Selmer)</text>
-    <rect x="46" y="112" width="150" height="26" fill="#f6e7e3" stroke="#b1342a"/><text x="121" y="129" text-anchor="middle">全 ℚ_v で可解</text>
+    <rect x="46" y="112" width="150" height="26" fill="#f6e7e3" stroke="#b1342a"/><text x="121" y="129" text-anchor="middle">全 ℚ<tspan baseline-shift="-0.3em" font-size="75%">v</tspan> で可解</text>
     <line x1="198" y1="125" x2="268" y2="125" stroke="#b1342a" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#hp3)"/>
     <text x="233" y="117" text-anchor="middle" font-size="9" fill="#b1342a">ズレ</text>
     <rect x="270" y="112" width="146" height="26" fill="#f6e7e3" stroke="#b1342a"/><text x="343" y="129" text-anchor="middle">大域解なし ✗</text>

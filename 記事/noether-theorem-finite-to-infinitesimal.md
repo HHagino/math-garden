@@ -76,8 +76,8 @@ $$\frac{d}{dt}\left(\frac{\partial L}{\partial\dot q}\,\delta q - g\right)=0,\qq
     <rect x="16" y="78" width="150" height="30" rx="4" fill="#eef5fa" stroke="#2f5d7c"/><text x="91" y="97" text-anchor="middle">Euler–Lagrange 方程式</text>
     <line x1="166" y1="37" x2="240" y2="58" stroke="#5a4f3f" stroke-width="1.4" marker-end="url(#nt2)"/>
     <line x1="166" y1="93" x2="240" y2="72" stroke="#5a4f3f" stroke-width="1.4" marker-end="url(#nt2)"/>
-    <rect x="244" y="50" width="210" height="30" rx="4" fill="#f0e3c4" stroke="#c89b3c"/><text x="349" y="69" text-anchor="middle">d/dt ( ∂L/∂q̇ · δq − g ) = 0</text>
-    <text x="349" y="98" text-anchor="middle" font-size="9.5" fill="#8a7f6c">保存量 Q = ∂L/∂q̇ · δq − g</text>
+    <rect x="244" y="50" width="210" height="30" rx="4" fill="#f0e3c4" stroke="#c89b3c"/><text x="349" y="69" text-anchor="middle">d/dt ( ∂L/∂<tspan font-family="'Times New Roman',Times,'Liberation Serif',serif">q<tspan dx="-0.4165em">˙</tspan><tspan dx="0.0835em"> </tspan></tspan>· δq − g ) = 0</text>
+    <text x="349" y="98" text-anchor="middle" font-size="9.5" fill="#8a7f6c">保存量 Q = ∂L/∂<tspan font-family="'Times New Roman',Times,'Liberation Serif',serif">q<tspan dx="-0.4165em">˙</tspan><tspan dx="0.0835em"> </tspan></tspan>· δq − g</text>
   </g>
 </svg>
 <figcaption><b>図2 ─ 対称性 × 運動方程式 → 保存量.</b> 微小対称性 $\delta L=dg/dt$ と Euler–Lagrange 方程式を組み合わせると、$Q=\frac{\partial L}{\partial\dot q}\delta q-g$ が保存する。境界補正 $g$ がここで効く。<i>(概念図)</i></figcaption>

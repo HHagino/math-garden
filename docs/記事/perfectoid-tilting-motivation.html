@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -413,8 +449,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="動機-なぜ二つの世界を架橋する必要があるか">1. 動機 — なぜ二つの世界を「架橋」する必要があるか</h2>
 <p>p 進局所体には二つの並行する宇宙がある:</p>
 <ul>
-<li><strong>混標数</strong>: K = ℚ_p の有限拡大、ℂ_p、…(基礎体は標数 0、剰余体は標数 p)</li>
-<li><strong>等標数</strong>: K = 𝔽_p((t)) の有限拡大、…(基礎体も剰余体も標数 p)</li>
+<li><strong>混標数</strong>: <span class="math inline">K = \mathbb{Q}_p</span> の有限拡大、<span class="math inline">\mathbb{C}_p</span>、…(基礎体は標数 0、剰余体は標数 p)</li>
+<li><strong>等標数</strong>: <span class="math inline">K = \mathbb{F}_p((t))</span> の有限拡大、…(基礎体も剰余体も標数 p)</li>
 </ul>
 <p>両者は数論的に多くの並行する構造を持つが、決定的な差もある:</p>
 <ul>
@@ -425,36 +461,36 @@ window.Quarto = {
 <p>この翻訳を最初に与えたのが <strong>Fontaine-Wintenberger (1979)</strong> の field of norms construction、それを <strong>空間レベル</strong> に拡張したのが <strong>Scholze (2012)</strong> の perfectoid 理論である。本稿はその動機と基本構造を扱う。</p>
 <figure class="figure">
 <svg viewbox="0 0 470 168" width="100%" style="max-width:470px;display:block;margin:8px auto" role="img" aria-label="tiltingによる混標数と等標数の架橋">
-<defs><marker id="pt1" markerwidth="8" markerheight="8" refx="6" refy="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"></path></marker></defs> <g font-family="serif" font-size="10.5" fill="#2b2118"> <rect x="18" y="36" width="172" height="86" rx="5" fill="#eef5fa" stroke="#2f5d7c"></rect> <text x="104" y="30" text-anchor="middle" font-size="11" fill="#2f5d7c">混標数 K</text> <text x="104" y="58" text-anchor="middle">char 0 / 剰余 p</text> <text x="104" y="78" text-anchor="middle">ℂ_p, ℚ_p(p</text></g></svg><sup>{1/p</sup>∞})^∧ <text x="104" y="98" text-anchor="middle" font-size="9.5" fill="#8a7f6c">数論的応用に必要</text> <rect x="280" y="36" width="172" height="86" rx="5" fill="#f6e7e3" stroke="#b1342a"> <text x="366" y="30" text-anchor="middle" font-size="11" fill="#b1342a">等標数 K^♭</text> <text x="366" y="58" text-anchor="middle">char p</text> <text x="366" y="78" text-anchor="middle">𝔽_p((t<sup>{1/p</sup>∞}))^∧</text> <text x="366" y="98" text-anchor="middle" font-size="9.5" fill="#8a7f6c">Frobenius canonical・解きやすい</text> <!-- bridge --> <line x1="190" y1="62" x2="280" y2="62" stroke="#5a4f3f" stroke-width="1.4" marker-end="url(#pt1)"><text x="235" y="54" text-anchor="middle" font-size="9.5" fill="#5a4f3f">tilting K↦K^♭</text> <line x1="280" y1="96" x2="190" y2="96" stroke="#c89b3c" stroke-width="1.4" marker-end="url(#pt1)"><text x="235" y="112" text-anchor="middle" font-size="9.5" fill="#c89b3c">解いて戻す</text> <text x="235" y="146" text-anchor="middle" font-size="10" fill="#b1342a">G_K ≅ G_{K^♭}(絶対 Galois 群が同型)</text> 
-
+<defs><marker id="pt1" markerwidth="8" markerheight="8" refx="6" refy="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"></path></marker></defs> <g font-family="serif" font-size="10.5" fill="#2b2118"> <rect x="18" y="36" width="172" height="86" rx="5" fill="#eef5fa" stroke="#2f5d7c"></rect> <text x="104" y="30" text-anchor="middle" font-size="11" fill="#2f5d7c">混標数 K</text> <text x="104" y="58" text-anchor="middle">char 0 / 剰余 p</text> <text x="104" y="78" text-anchor="middle">ℂ<tspan baseline-shift="-0.3em" font-size="75%">p</tspan>, ℚ<tspan baseline-shift="-0.3em" font-size="75%">p</tspan>(p<tspan baseline-shift="0.5em" font-size="75%">1/p∞</tspan>)<tspan baseline-shift="0.5em" font-size="75%">∧</tspan></text> <text x="104" y="98" text-anchor="middle" font-size="9.5" fill="#8a7f6c">数論的応用に必要</text> <rect x="280" y="36" width="172" height="86" rx="5" fill="#f6e7e3" stroke="#b1342a"></rect> <text x="366" y="30" text-anchor="middle" font-size="11" fill="#b1342a">等標数 K<tspan baseline-shift="0.5em" font-size="75%">♭</tspan></text> <text x="366" y="58" text-anchor="middle">char p</text> <text x="366" y="78" text-anchor="middle">𝔽<tspan baseline-shift="-0.3em" font-size="75%">p</tspan>((t<tspan baseline-shift="0.5em" font-size="75%">1/p∞</tspan>))<tspan baseline-shift="0.5em" font-size="75%">∧</tspan></text> <text x="366" y="98" text-anchor="middle" font-size="9.5" fill="#8a7f6c">Frobenius canonical・解きやすい</text> <!-- bridge --> <line x1="190" y1="62" x2="280" y2="62" stroke="#5a4f3f" stroke-width="1.4" marker-end="url(#pt1)"></line><text x="235" y="54" text-anchor="middle" font-size="9.5" fill="#5a4f3f">tilting K↦K<tspan baseline-shift="0.5em" font-size="75%">♭</tspan></text> <line x1="280" y1="96" x2="190" y2="96" stroke="#c89b3c" stroke-width="1.4" marker-end="url(#pt1)"></line><text x="235" y="112" text-anchor="middle" font-size="9.5" fill="#c89b3c">解いて戻す</text> <text x="235" y="146" text-anchor="middle" font-size="10" fill="#b1342a">G<tspan baseline-shift="-0.3em" font-size="75%">K</tspan> ≅ G<tspan baseline-shift="-0.3em" font-size="75%">K♭</tspan>(絶対 Galois 群が同型)</text> </g>
+</svg>
 <figcaption>
 <b>図1 ─ tilting の架橋.</b> 混標数 <span class="math inline">K</span> と等標数 <span class="math inline">K^\flat</span> は tilting で結ばれ、絶対 Galois 群が同型 <span class="math inline">G_K\cong G_{K^\flat}</span>。Frobenius が canonical で解きやすい等標数側で問題を解き、結果を混標数へ戻す ── これが Scholze 機構の戦略だ。<i>(概念図)</i>
 </figcaption>
-</line></line></rect></figure>
+</figure>
 <hr>
 </section>
 <section id="field-of-norms-fontaine-wintenberger-1979" class="level2">
 <h2 class="anchored" data-anchor-id="field-of-norms-fontaine-wintenberger-1979">2. Field of norms (Fontaine-Wintenberger, 1979)</h2>
 <section id="設定" class="level3">
 <h3 class="anchored" data-anchor-id="設定">2.1 設定</h3>
-<p>K を混標数の局所体(典型例: ℚ_p)、L/K を <strong>strictly arithmetically profinite (APF)</strong> 無限拡大とする。これは大まかに</p>
+<p>K を混標数の局所体(典型例: <span class="math inline">\mathbb{Q}_p</span>)、L/K を <strong>strictly arithmetically profinite (APF)</strong> 無限拡大とする。これは大まかに</p>
 <ul>
 <li>L/K が無限次の代数拡大(ガロワでなくてもよい)</li>
-<li>L = ∪_n L_n と有限次部分体の列で書ける</li>
+<li><span class="math inline">L = \bigcup_n L_n</span> と有限次部分体の列で書ける</li>
 <li>分岐の濃度が制御されている(precise definition は技術的)</li>
 </ul>
-<p>典型例: 円分塔 K_∞ := ∪<em>n K(ζ</em>{p^n})。</p>
+<p>典型例: 円分塔 <span class="math inline">K_∞ := \bigcup_n K(ζ_{p^n})</span>。</p>
 </section>
 <section id="ノルム体の構成" class="level3">
 <h3 class="anchored" data-anchor-id="ノルム体の構成">2.2 ノルム体の構成</h3>
-<p>L/K の中の有限次部分拡大 L_n を取り、各レベルの uniformizer π_n ∈ L_n を選ぶ。これらをノルム写像 N_{L_{n+1}/L_n} で繋ぐ:</p>
+<p>L/K の中の有限次部分拡大 <span class="math inline">L_n</span> を取り、各レベルの uniformizer <span class="math inline">π_n ∈ L_n</span> を選ぶ。これらをノルム写像 <span class="math inline">N_{L_{n+1}/L_n}</span> で繋ぐ:</p>
 <p><span class="math display"> X_K(L) := \varprojlim_n L_n^\times \cup \{0\} </span></p>
 <p>(ノルム写像による射影極限)。Fontaine-Wintenberger の構成では、これに環構造を入れる:</p>
 <ul>
 <li>加法は適切な極限操作で定義</li>
 <li>乗法は座標ごとの積</li>
 </ul>
-<p>得られる X_K(L) は <strong>等標数 p の完備離散付値体</strong> となる。</p>
+<p>得られる <span class="math inline">X_K(L)</span> は <strong>等標数 p の完備離散付値体</strong> となる。</p>
 </section>
 <section id="ガロワ群の同型" class="level3">
 <h3 class="anchored" data-anchor-id="ガロワ群の同型">2.3 ガロワ群の同型</h3>
@@ -480,32 +516,32 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="定義scholze-2012">3.1 定義(Scholze 2012)</h3>
 <p>完備位相体 K が <strong>perfectoid</strong> であるとは:</p>
 <ol type="1">
-<li>K の位相は階数 1 の非離散付値 |·| で定まり(付値環は 𝒪_K = {x ∈ K : |x| ≤ 1})、剰余体の標数は p &gt; 0</li>
-<li>K^× の付値群 |K^×| ⊂ ℝ_{&gt;0} は p で割り切れる(value group is p-divisible。1 と 3 から従う)</li>
-<li>Frobenius φ: 𝒪_K/p → 𝒪_K/p (x ↦ x^p) が全射</li>
+<li>K の位相は階数 1 の非離散付値 |·| で定まり(付値環は <span class="math inline">\mathcal{O}_K = \{x ∈ K : |x| ≤ 1\}</span>)、剰余体の標数は p &gt; 0</li>
+<li><span class="math inline">K^×</span> の付値群 <span class="math inline">|K^×| ⊂ \mathbb{R}_{&gt;0}</span> は p で割り切れる(value group is p-divisible。1 と 3 から従う)</li>
+<li>Frobenius <span class="math inline">φ: \mathcal{O}_K/p → \mathcal{O}_K/p (x ↦ x^p)</span> が全射</li>
 </ol>
-<p>剰余標数 p の条件は落とせない。剰余体の標数が 0 だと p は 𝒪_K の単元で 𝒪_K/p = 0 となり、3 が空虚に成り立ってしまう(ℂ((t<sup>{1/p</sup>∞}))^∧ は剰余体が ℂ であることを除けば 1・2・3 を満たすが、perfectoid ではない)。</p>
+<p>剰余標数 p の条件は落とせない。剰余体の標数が 0 だと p は <span class="math inline">\mathcal{O}_K</span> の単元で <span class="math inline">\mathcal{O}_K/p = 0</span> となり、3 が空虚に成り立ってしまう(<span class="math inline">\mathbb{C}((t^{1/p^∞}))^∧</span> は剰余体が ℂ であることを除けば 1・2・3 を満たすが、perfectoid ではない)。</p>
 </section>
 <section id="具体例" class="level3">
 <h3 class="anchored" data-anchor-id="具体例">3.2 具体例</h3>
 <p><strong>混標数の perfectoid 体:</strong></p>
 <ul>
-<li>ℂ_p(ℚ_p の代数閉包の完備化)</li>
-<li>ℚ_p(ζ_{p<sup>∞})</sup>∧ (= ℚ_p^{cycl,∧} とも書く)</li>
-<li>ℚ_p(p<sup>{1/p</sup>∞})^∧</li>
+<li><span class="math inline">\mathbb{C}_p</span>(<span class="math inline">\mathbb{Q}_p</span> の代数閉包の完備化)</li>
+<li><span class="math inline">\mathbb{Q}_p(ζ_{p^∞})^∧</span> (<span class="math inline">= \mathbb{Q}_p^{\mathrm{cycl},∧}</span> とも書く)</li>
+<li><span class="math inline">\mathbb{Q}_p(p^{1/p^∞})^∧</span></li>
 </ul>
 <p><strong>等標数の perfectoid 体:</strong></p>
 <ul>
-<li>𝔽_p((t<sup>{1/p</sup>∞}))^∧</li>
-<li>(𝔽_p<sup>{alg})((t))</sup>∧ の perfect 化の完備化</li>
-<li>一般に、標数 p で、階数 1 の非離散付値について完備な体のうち、Frobenius が全射(= perfect)なもの(自明な付値の 𝔽_p は Frobenius が全射でも perfectoid ではない)</li>
+<li><span class="math inline">\mathbb{F}_p((t^{1/p^∞}))^∧</span></li>
+<li><span class="math inline">(\mathbb{F}_p^{\mathrm{alg}})((t))^∧</span> の perfect 化の完備化</li>
+<li>一般に、標数 p で、階数 1 の非離散付値について完備な体のうち、Frobenius が全射(= perfect)なもの(自明な付値の <span class="math inline">\mathbb{F}_p</span> は Frobenius が全射でも perfectoid ではない)</li>
 </ul>
 </section>
 <section id="非例" class="level3">
 <h3 class="anchored" data-anchor-id="非例">3.3 非例</h3>
 <ul>
-<li>ℚ_p:value group が ℤ で、p で割り切れない。perfectoid ではない</li>
-<li>𝔽_p((t)):Frobenius が 𝔽_p((t))/p = 𝔽_p((t)) 上で全射でない(t に p 乗根がない)し、value group も ℤ なので perfectoid ではない(perfect closure を取って完備化すれば perfectoid)</li>
+<li><span class="math inline">\mathbb{Q}_p</span>:value group が ℤ で、p で割り切れない。perfectoid ではない</li>
+<li><span class="math inline">\mathbb{F}_p((t))</span>:Frobenius が <span class="math inline">\mathbb{F}_p((t))/p = \mathbb{F}_p((t))</span> 上で全射でない(t に p 乗根がない)し、value group も ℤ なので perfectoid ではない(perfect closure を取って完備化すれば perfectoid)</li>
 </ul>
 <p>要点: <strong>典型的な perfectoid 体は通常の局所体に “perfect 化”(p-べき根を全部添加して完備化)した完備化として得られる</strong>。</p>
 <hr>
@@ -521,7 +557,7 @@ window.Quarto = {
 <p><span class="math display"> K^\flat = \{(x_0, x_1, x_2, \ldots) \in K^{\mathbb{N}} : x_{i+1}^p = x_i\}. </span></p>
 <figure class="figure">
 <svg viewbox="0 0 460 120" width="100%" style="max-width:460px;display:block;margin:8px auto" role="img" aria-label="K^♭はFrobeniusに沿った逆極限">
-<defs><marker id="pt2" markerwidth="8" markerheight="8" refx="2" refy="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"></path></marker></defs> <g font-family="serif" font-size="11" fill="#2b2118"> <text x="60" y="50" text-anchor="middle">x₀</text> <text x="150" y="50" text-anchor="middle">x₁</text> <text x="240" y="50" text-anchor="middle">x₂</text> <text x="312" y="50" text-anchor="middle">⋯</text> <line x1="104" y1="46" x2="80" y2="46" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pt2)"></line><text x="92" y="36" font-size="8.5" fill="#8a7f6c">(·)^p</text> <line x1="194" y1="46" x2="170" y2="46" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pt2)"></line><text x="182" y="36" font-size="8.5" fill="#8a7f6c">(·)^p</text> <line x1="284" y1="46" x2="260" y2="46" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pt2)"></line> <text x="60" y="70" text-anchor="middle" font-size="8.5" fill="#8a7f6c">x₁^p=x₀</text> <text x="150" y="70" text-anchor="middle" font-size="8.5" fill="#8a7f6c">x₂^p=x₁</text> <rect x="356" y="32" width="96" height="28" rx="4" fill="#f6e7e3" stroke="#b1342a"></rect><text x="404" y="51" text-anchor="middle" font-size="10">K^♭(char p)</text> <text x="230" y="100" text-anchor="middle" font-size="10" fill="#b1342a">Frobenius (x↦x^p) に沿った逆極限 ── 加法は p^j 乗で極限調整、乗法は座標ごと</text> </g>
+<defs><marker id="pt2" markerwidth="8" markerheight="8" refx="2" refy="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"></path></marker></defs> <g font-family="serif" font-size="11" fill="#2b2118"> <text x="60" y="50" text-anchor="middle">x₀</text> <text x="150" y="50" text-anchor="middle">x₁</text> <text x="240" y="50" text-anchor="middle">x₂</text> <text x="312" y="50" text-anchor="middle">⋯</text> <line x1="104" y1="46" x2="80" y2="46" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pt2)"></line><text x="92" y="36" font-size="8.5" fill="#8a7f6c">(·)<tspan baseline-shift="0.5em" font-size="75%">p</tspan></text> <line x1="194" y1="46" x2="170" y2="46" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pt2)"></line><text x="182" y="36" font-size="8.5" fill="#8a7f6c">(·)<tspan baseline-shift="0.5em" font-size="75%">p</tspan></text> <line x1="284" y1="46" x2="260" y2="46" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pt2)"></line> <text x="60" y="70" text-anchor="middle" font-size="8.5" fill="#8a7f6c">x₁<tspan baseline-shift="0.5em" font-size="75%">p</tspan>=x₀</text> <text x="150" y="70" text-anchor="middle" font-size="8.5" fill="#8a7f6c">x₂<tspan baseline-shift="0.5em" font-size="75%">p</tspan>=x₁</text> <rect x="356" y="32" width="96" height="28" rx="4" fill="#f6e7e3" stroke="#b1342a"></rect><text x="404" y="51" text-anchor="middle" font-size="10">K<tspan baseline-shift="0.5em" font-size="75%">♭</tspan>(char p)</text> <text x="230" y="100" text-anchor="middle" font-size="10" fill="#b1342a">Frobenius (x↦x<tspan baseline-shift="0.5em" font-size="75%">p</tspan>) に沿った逆極限 ── 加法は p<tspan baseline-shift="0.5em" font-size="75%">j</tspan> 乗で極限調整、乗法は座標ごと</text> </g>
 </svg>
 <figcaption>
 <b>図2 ─ <span class="math inline">K^\flat</span> は Frobenius 逆極限.</b> <span class="math inline">p</span> 乗で繋いだ列 <span class="math inline">(x_0,x_1,\dots)</span>(<span class="math inline">x_{i+1}^p=x_i</span>)が tilting <span class="math inline">K^\flat</span>。perfectoid 条件(Frobenius が剰余で全射・value 群が <span class="math inline">p</span>-可除)が、加法の極限 <span class="math inline">\lim_j(x_{i+j}+y_{i+j})^{p^j}</span> の存在を保証する。混標数 <span class="math inline">K</span> から等標数 <span class="math inline">K^\flat</span> が生まれる。<i>(概念図)</i>
@@ -529,29 +565,29 @@ window.Quarto = {
 </figure>
 <p>これに対し:</p>
 <ul>
-<li>加法: (x_i) + (y_i) := (lim_{j → ∞} (x_{i+j} + y_{i+j})<sup>{p</sup>j}) (極限が存在することは perfectoid 条件から保証)</li>
+<li>加法: <span class="math inline">(x_i) + (y_i) := (\lim_{j → ∞} (x_{i+j} + y_{i+j})^{p^j})</span> (極限が存在することは perfectoid 条件から保証)</li>
 <li>乗法: 座標ごとの積</li>
 </ul>
-<p>定理: K が混標数の perfectoid 体なら、K^♭ は等標数 p の perfectoid 体である。</p>
+<p>定理: K が混標数の perfectoid 体なら、<span class="math inline">K^♭</span> は等標数 p の perfectoid 体である。</p>
 </section>
 <section id="例" class="level3">
 <h3 class="anchored" data-anchor-id="例">4.2 例</h3>
-<p><strong>K = ℂ_p:</strong></p>
-<p>K^♭ = ℂ_p^♭ は 𝔽_p^{alg}((t)) の代数閉包の完備化と同型(𝔽_p<sup>{alg}((t</sup>{1/p<sup>∞}))</sup>∧ はその真部分体)</p>
-<p><strong>K = ℚ_p(p<sup>{1/p</sup>∞})^∧:</strong></p>
-<p>K^♭ = 𝔽_p((t<sup>{1/p</sup>∞}))^∧、ここで t = (p<sup>{1/p</sup>∞}) の像</p>
+<p><strong><span class="math inline">K = \mathbb{C}_p</span>:</strong></p>
+<p><span class="math inline">K^♭ = \mathbb{C}_p^♭</span> は <span class="math inline">\mathbb{F}_p^{\mathrm{alg}}((t))</span> の代数閉包の完備化と同型(<span class="math inline">\mathbb{F}_p^{\mathrm{alg}}((t^{1/p^∞}))^∧</span> はその真部分体)</p>
+<p><strong><span class="math inline">K = \mathbb{Q}_p(p^{1/p^∞})^∧</span>:</strong></p>
+<p><span class="math inline">K^♭ = \mathbb{F}_p((t^{1/p^∞}))^∧</span>、ここで <span class="math inline">t = (p^{1/p^∞})</span> の像</p>
 </section>
 <section id="ガロワ群の同型-1" class="level3">
 <h3 class="anchored" data-anchor-id="ガロワ群の同型-1">4.3 ガロワ群の同型</h3>
 <p>Scholze の主定理:</p>
 <p><span class="math display"> G_K \cong G_{K^\flat}. </span></p>
-<p>すなわち、混標数 perfectoid 体 K の絶対 Galois 群と、その tilting K^♭ の絶対 Galois 群は標準的に同型である。これは Fontaine-Wintenberger の体レベルの定理を、(より広いクラスの) perfectoid 体に拡張したものである。</p>
+<p>すなわち、混標数 perfectoid 体 K の絶対 Galois 群と、その tilting <span class="math inline">K^♭</span> の絶対 Galois 群は標準的に同型である。これは Fontaine-Wintenberger の体レベルの定理を、(より広いクラスの) perfectoid 体に拡張したものである。</p>
 </section>
 <section id="値群と剰余体の対応" class="level3">
 <h3 class="anchored" data-anchor-id="値群と剰余体の対応">4.4 値群と剰余体の対応</h3>
 <ul>
-<li>K と K^♭ は同じ値群を持つ(ℝ_{&gt;0} の部分群として一致する: |K^{♭×}| = |K^×|)</li>
-<li>K と K^♭ の剰余体は一致する(どちらも完全 (perfect) 体)</li>
+<li>K と <span class="math inline">K^♭</span> は同じ値群を持つ(<span class="math inline">\mathbb{R}_{&gt;0}</span> の部分群として一致する: <span class="math inline">|K^{♭×}| = |K^×|</span>)</li>
+<li>K と <span class="math inline">K^♭</span> の剰余体は一致する(どちらも完全 (perfect) 体)</li>
 </ul>
 <hr>
 </section>
@@ -561,9 +597,9 @@ window.Quarto = {
 <section id="動機" class="level3">
 <h3 class="anchored" data-anchor-id="動機">5.1 動機</h3>
 <p>体レベルの tilting だけでなく、これを <strong>空間レベル</strong> に拡張したのが Scholze の根本的貢献である。</p>
-<p>Perfectoid 空間 X は、局所的に perfectoid 体上の adic spectra Spa(R, R^+) でモデル化される位相空間。tilting 操作</p>
+<p>Perfectoid 空間 X は、局所的に perfectoid 体上の adic spectra <span class="math inline">\operatorname{Spa}(R, R^+)</span> でモデル化される位相空間。tilting 操作</p>
 <p><span class="math display"> X \mapsto X^\flat </span></p>
-<p>を空間に拡張すると、X が混標数 perfectoid 空間なら X^♭ は等標数 perfectoid 空間になる。</p>
+<p>を空間に拡張すると、X が混標数 perfectoid 空間なら <span class="math inline">X^♭</span> は等標数 perfectoid 空間になる。</p>
 </section>
 <section id="主要定理-同値圏" class="level3">
 <h3 class="anchored" data-anchor-id="主要定理-同値圏">5.2 主要定理: 同値圏</h3>
@@ -586,7 +622,7 @@ window.Quarto = {
 <p>tilting を経由する理由は、等標数側のメリットにある。</p>
 <section id="frobenius-が-canonical" class="level3">
 <h3 class="anchored" data-anchor-id="frobenius-が-canonical">6.1 Frobenius が canonical</h3>
-<p>等標数 p の体・空間では、Frobenius が canonical な自己準同型として存在する(perfect なら、たとえば tilt K^♭ では自己同型)。これにより:</p>
+<p>等標数 p の体・空間では、Frobenius が canonical な自己準同型として存在する(perfect なら、たとえば tilt <span class="math inline">K^♭</span> では自己同型)。これにより:</p>
 <ul>
 <li>カテゴリ論的構造が単純化(モナド構造、co-Frobenius など)</li>
 <li>不変量計算が直接的(Frobenius の固有値、トレース)</li>
@@ -595,7 +631,7 @@ window.Quarto = {
 </section>
 <section id="函数体類似" class="level3">
 <h3 class="anchored" data-anchor-id="函数体類似">6.2 函数体類似</h3>
-<p>等標数 p の体は「曲線 𝒞 = Spec 𝔽_q[t]」の函数体 𝔽_q(t) や、その完備化 𝔽_q((t)) に近い。函数体類似(Drinfeld, Lafforgue, …)による Langlands の証明が等標数で先に達成されたのも、この構造の単純さによる。</p>
+<p>等標数 p の体は「曲線 <span class="math inline">\mathcal{C} = \operatorname{Spec} \mathbb{F}_q[t]</span>」の函数体 <span class="math inline">\mathbb{F}_q(t)</span> や、その完備化 <span class="math inline">\mathbb{F}_q((t))</span> に近い。函数体類似(Drinfeld, Lafforgue, …)による Langlands の証明が等標数で先に達成されたのも、この構造の単純さによる。</p>
 </section>
 <section id="例-重みモノドロミー定理" class="level3">
 <h3 class="anchored" data-anchor-id="例-重みモノドロミー定理">6.3 例: 重みモノドロミー定理</h3>
@@ -606,21 +642,21 @@ window.Quarto = {
 <section id="関連-prismatic-site" class="level2">
 <h2 class="anchored" data-anchor-id="関連-prismatic-site">7. 関連: prismatic site</h2>
 <p>近年(Bhatt-Scholze 2018-)、Witt ベクトル・perfectoid・Frobenius の枠組みを統一する <strong>prismatic site</strong> が整備された。</p>
-<p><strong>Prism</strong> = (A, I): δ-環 A とイデアル I の対で、I が Spec A 上の Cartier divisor を定め、A が導来 (p, I) 完備で、p ∈ I + φ(I)A を満たすもの(Bhatt–Scholze の定義 3.2)。最後の条件だけでは足りない。たとえば A = ℤ_p[ε]/(ε²)(φ は ℤ_p 上で恒等、φ(ε) = 0)と I = (p, ε) は p ∈ I を満たすが、I は 2 元を要し Cartier divisor にならない。典型例:</p>
+<p><strong>Prism</strong> = (A, I): δ-環 A とイデアル I の対で、I が Spec A 上の Cartier divisor を定め、A が導来 (p, I) 完備で、p ∈ I + φ(I)A を満たすもの(Bhatt–Scholze の定義 3.2)。最後の条件だけでは足りない。たとえば <span class="math inline">A = \mathbb{Z}_p[ε]/(ε^2)</span>(φ は <span class="math inline">\mathbb{Z}_p</span> 上で恒等、φ(ε) = 0)と I = (p, ε) は p ∈ I を満たすが、I は 2 元を要し Cartier divisor にならない。典型例:</p>
 <ul>
 <li>crystalline prism: A = W(k), I = (p)</li>
-<li>Breuil–Kisin prism: A = W(k)<a href="k は K の剰余体">[u]</a>, I = (E(u))(K = ℚ_p の場合は A = ℤ_p[[u]], E(u) = u - p)</li>
+<li>Breuil–Kisin prism: A = W(k)<a href="k は K の剰余体">[u]</a>, I = (E(u))(<span class="math inline">K = \mathbb{Q}_p</span> の場合は <span class="math inline">A = \mathbb{Z}_p[[u]]</span>, <span class="math inline">E(u) = u - p</span>)</li>
 <li>Hodge–Tate: prism ではなく、prism (A, I) の A/I 上への特殊化(prismatic コホモロジー ⊗ A/I)として得られる</li>
-<li>perfectoid prism: A = W(R^♭), I = ker(θ: W(R^♭) → R), R perfectoid</li>
+<li>perfectoid prism: <span class="math inline">A = W(R^♭)</span>, <span class="math inline">I = \ker(θ: W(R^♭) → R)</span>, <span class="math inline">R</span> perfectoid</li>
 </ul>
-<p>Prismatic コホモロジー H^i_Δ(X/A, …) は、crystalline, de Rham, Hodge-Tate, étale (l=p) コホモロジーをすべて特殊化として含む統一理論を与える。これにより p 進ホッジ理論が新しい geometric framework の中で整理されつつある。</p>
+<p>Prismatic コホモロジー <span class="math inline">H^i_Δ(X/A, \dots)</span> は、crystalline, de Rham, Hodge-Tate, étale (l=p) コホモロジーをすべて特殊化として含む統一理論を与える。これにより p 進ホッジ理論が新しい geometric framework の中で整理されつつある。</p>
 <hr>
 </section>
 <section id="まとめ" class="level2">
 <h2 class="anchored" data-anchor-id="まとめ">8. まとめ</h2>
 <ol type="1">
 <li>Fontaine-Wintenberger (1979): 混標数の APF 塔から等標数の field of norms を構成、Galois 群の同型</li>
-<li>Scholze (2012): perfectoid 体 K に対し tilting K^♭ を canonical に構成、G_K ≅ G_{K^♭}</li>
+<li>Scholze (2012): perfectoid 体 K に対し tilting <span class="math inline">K^♭</span> を canonical に構成、<span class="math inline">G_K ≅ G_{K^♭}</span></li>
 <li>空間レベルへの拡張: perfectoid 空間と tilting の圏同値</li>
 <li>等標数側で Frobenius が canonical なため、技術的に扱いやすい</li>
 <li>応用: 重みモノドロミー、Fargues-Fontaine 曲線、prismatic コホモロジー、局所 Langlands の geometrization</li>

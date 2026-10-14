@@ -130,9 +130,9 @@ $$f \;=\; \text{水平方向の重み} \;=\; \text{上の点を下から見た�
 
 $$N_{L/K}(\mathfrak p B) \;=\; N_{L/K}\!\left(\prod_{\mathfrak P \mid \mathfrak p} \mathfrak P^{e_{\mathfrak P}}\right) \;=\; \prod_{\mathfrak P \mid \mathfrak p} N_{L/K}(\mathfrak P)^{e_{\mathfrak P}} \;=\; \prod_{\mathfrak P \mid \mathfrak p} \mathfrak p^{e_{\mathfrak P} f_{\mathfrak P}} \;=\; \mathfrak p^{\sum_{\mathfrak P \mid \mathfrak p} e_{\mathfrak P} f_{\mathfrak P}}.$$
 
-一方、$A$ のイデアル $I$ に対しては、定義から
+一方、$A$ のイデアル $I$ に対しては、標準事実として
 $$N_{L/K}(IB) \;=\; I^{[L:K]}$$
-が成り立つ(ノルムの底側への作用は $[L:K]$ 乗)。
+が成り立つ(ノルムの底側への作用は $[L:K]$ 乗)。これは §3 の $N(\mathfrak P)=\mathfrak p^{f}$ から「定義で」出るものではなく(それだと下の式と同値で循環する)、ノルムを $A$ 加群の指数で定義する流儀(局所化 $B_{\mathfrak p}$ が階数 $[L:K]$ の自由 $A_{\mathfrak p}$ 加群であること)と $\mathfrak P\mapsto\mathfrak p^{f}$ の流儀が一致する、という定理である。
 
 したがって、$I = \mathfrak p$ の場合に
 $$\boxed{\;\sum_{\mathfrak P \mid \mathfrak p} e_{\mathfrak P} f_{\mathfrak P} \;=\; [L:K]\;}$$

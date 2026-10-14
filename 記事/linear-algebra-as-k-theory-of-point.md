@@ -118,7 +118,7 @@ $$
 
 この層の違いを混ぜないこと。
 
-上の一覧にあるテンソル積と双対空間のうち、恒等写像に対応する標準元については、[恒等写像 id_V はテンソルとして何者か：V⊗V* の標準元と coevaluation](identity-map-as-tensor-coevaluation.md) で扱った。
+上の一覧にあるテンソル積と双対空間のうち、恒等写像に対応する標準元については、[恒等写像 $\mathrm{id}_V$ はテンソルとして何者か：V⊗V* の標準元と coevaluation](identity-map-as-tensor-coevaluation.md) で扱った。
 
 ## 6. 一般の空間上では、線形代数が「ベクトル束論」になる
 

@@ -62,14 +62,14 @@ $$\boxed{\ Z_p(s) = \frac{1}{1-p^{-s}}\ }$$
   <path d="M150 53 A42 42 0 0 1 192 95 L172 95 A22 22 0 0 0 150 73 Z" fill="#c9b98f" opacity="0.4"/>
   <circle cx="150" cy="95" r="3" fill="#3a3630"/>
   <text x="150" y="112" font-size="10" text-anchor="middle" fill="#3a3630">0</text>
-  <text x="250" y="40" font-size="11" fill="#3a3630">n=0：|x|=1（Z_p<tspan baseline-shift="super" font-size="8">×</tspan>）　重み 1</text>
+  <text x="250" y="40" font-size="11" fill="#3a3630">n=0：|x|=1（Z<tspan baseline-shift="-0.3em" font-size="8">p</tspan><tspan baseline-shift="super" font-size="8">×</tspan>）　重み 1</text>
   <text x="250" y="62" font-size="11" fill="#3a3630">n=1：|x|=1/p　　　　重み p<tspan baseline-shift="super" font-size="8">−s</tspan></text>
   <text x="250" y="84" font-size="11" fill="#3a3630">n=2：|x|=1/p²　　　 重み p<tspan baseline-shift="super" font-size="8">−2s</tspan></text>
   <text x="250" y="106" font-size="11" fill="#6b6459">…（内側へ無限に続く）</text>
   <text x="250" y="140" font-size="11" fill="#3a3630">どの層も体積 1</text>
   <text x="250" y="160" font-size="11" fill="#3a3630">⟹ Σ p<tspan baseline-shift="super" font-size="8">−ns</tspan> = (1−p<tspan baseline-shift="super" font-size="8">−s</tspan>)<tspan baseline-shift="super" font-size="8">−1</tspan></text>
-  <text x="20" y="196" font-size="11" fill="#6b6459">Z_p は「原点に向かって縮む層」を外から内へ足していく積分。</text>
-  <text x="20" y="211" font-size="11" fill="#6b6459">1_{Z_p} は n≥0 の層だけを残す。</text>
+  <text x="20" y="192" font-size="11" fill="#6b6459">Z<tspan baseline-shift="-0.3em" font-size="8">p</tspan> は「原点に向かって縮む層」を外から内へ足していく積分。</text>
+  <text x="20" y="208" font-size="11" fill="#6b6459">1<tspan baseline-shift="-0.3em" font-size="8">Zₚ</tspan> は n≥0 の層だけを残す。</text>
 </svg>
 <figcaption>$\mathbb{Q}_p^\times$ は絶対値の値ごとの同心層に分かれ、各層の乗法的体積は等しい。Euler 因子は、その層の上の等比級数である。</figcaption>
 </figure>
@@ -150,10 +150,10 @@ $(1-p^{-s})^{-1}$ とは**別の関数**である。$\mathbf{1}_{p\mathbb{Z}_p}$
     <text x="380" y="60" font-size="11" fill="#6b6459">…</text>
   </g>
   <text x="55" y="90" font-size="9" text-anchor="middle" fill="#26313d">e<tspan baseline-shift="super" font-size="7">−πx²</tspan></text>
-  <text x="124" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1_{Z₂}</text>
-  <text x="188" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1_{Z₃}</text>
-  <text x="252" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1_{Z₅}</text>
-  <text x="316" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1_{Z₇}</text>
+  <text x="124" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1<tspan baseline-shift="-0.3em" font-size="8">Z₂</tspan></text>
+  <text x="188" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1<tspan baseline-shift="-0.3em" font-size="8">Z₃</tspan></text>
+  <text x="252" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1<tspan baseline-shift="-0.3em" font-size="8">Z₅</tspan></text>
+  <text x="316" y="90" font-size="9" text-anchor="middle" fill="#6b6459">1<tspan baseline-shift="-0.3em" font-size="8">Z₇</tspan></text>
   <text x="55" y="108" font-size="9" text-anchor="middle" fill="#26313d">π<tspan baseline-shift="super" font-size="7">−s/2</tspan>Γ(s/2)</text>
   <text x="124" y="108" font-size="9" text-anchor="middle" fill="#6b6459">(1−2<tspan baseline-shift="super" font-size="7">−s</tspan>)<tspan baseline-shift="super" font-size="7">−1</tspan></text>
   <text x="188" y="108" font-size="9" text-anchor="middle" fill="#6b6459">(1−3<tspan baseline-shift="super" font-size="7">−s</tspan>)<tspan baseline-shift="super" font-size="7">−1</tspan></text>
@@ -196,6 +196,8 @@ $$Z(s,f) = \int_{\mathbb{A}^\times} f(x)\,|x|^{s}\,d^\times x$$
 **$p$ 進の側。** [$\ell$ 進表現と $p$ 進表現](l-adic-vs-p-adic-galois-representation.md) が扱う「係数の $p$ と底の $p$ が一致すると景色が変わる」現象は、本記事の枠内では起きない ── 局所因子はすべて $\mathbb{C}$ 係数で、素点ごとに独立だからである。**その独立性が壊れる場所から $p$ 進 Hodge 理論が始まる。**
 
 **岩澤の側。** [岩澤理論と Selmer 群](iwasawa-theory-selmer-introduction.md) の $p$ 進 $L$ 関数は、この記事の $\mathbb{C}$ 値の積分を $p$ 進側に置き換えたところに立つ。**同じ $\zeta$ を、係数体を変えて二度作る**という手つきが、主予想の両辺を用意している。
+
+**グラフの側。** オイラー積の形は数論の外にもある。有限グラフの非後退な閉路から組む Ihara ゼータは、素な閉路にわたるオイラー積であり、非後退の辺の行列 $B$ の行列式 $\det(I-uB)^{-1}$ に閉じる（[ゼータは記憶から生まれる](ゼータは記憶から生まれる_ランダムウォークのゼータはGreen核に潰れる_2026-08-11.md)）。あちらはオイラー積の出どころを閉路の一意分解に、こちらは局所積分に置いている。
 
 ---
 

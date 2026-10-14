@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -440,10 +476,10 @@ S=J\,\Delta^{1/2},\qquad \Delta=S^*S&gt;0,\quad J:\text{反ユニタリ},\ J=J^*
 <p>複素数の極形式 <span class="math inline">z=(\text{位相})\cdot(\text{絶対値})</span> や作用素の極分解 <span class="math inline">T=U|T|</span> の、<strong>反線形版</strong>だと思えばよい:<span class="math inline">S</span> が「実構造の素」を含む反線形対合で、それを <strong>反ユニタリな位相部分 <span class="math inline">J</span></strong>(共役の本体)と <strong>正の絶対値部分 <span class="math inline">\Delta^{1/2}</span></strong>(時間・重みの本体)に分ける。</p>
 <figure class="figure">
 <svg viewbox="0 0 640 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="対合Sの極分解：反ユニタリJと正のΔ^1/2に分かれる">
-<rect x="0" y="0" width="640" height="230" fill="#ffffff"></rect> <text x="70" y="120" font-size="26" fill="#1f2937" font-style="italic">S</text> <text x="100" y="120" font-size="20" fill="#6b7280">=</text> <text x="135" y="120" font-size="26" fill="#2563eb" font-style="italic">J</text> <text x="170" y="120" font-size="26" fill="#b45309" font-style="italic">Δ</text> <text x="192" y="104" font-size="15" fill="#b45309">1/2</text> <!-- J box --> <rect x="250" y="40" width="160" height="70" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"></rect> <text x="330" y="68" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="bold">J:反ユニタリ位相</text> <text x="330" y="90" font-size="12" fill="#1f2937" text-anchor="middle">共役の本体・J²=1</text> <text x="330" y="104" font-size="11" fill="#6b7280" text-anchor="middle">JMJ=M′(交換子へ)</text> <!-- Delta box --> <rect x="250" y="125" width="160" height="70" rx="8" fill="#fde68a" stroke="#b45309" stroke-width="1.6"></rect> <text x="330" y="153" font-size="14" fill="#b45309" text-anchor="middle" font-weight="bold">Δ^½:正の絶対値</text> <text x="330" y="175" font-size="12" fill="#1f2937" text-anchor="middle">重み・時間の本体</text> <text x="330" y="189" font-size="11" fill="#6b7280" text-anchor="middle">Δ^{it}:modular flow</text> <line x1="220" y1="100" x2="248" y2="75" stroke="#2563eb" stroke-width="1.4"></line> <line x1="220" y1="118" x2="248" y2="158" stroke="#b45309" stroke-width="1.4"></line> <!-- comparison to complex polar --> <text x="500" y="80" font-size="13" fill="#6b7280" text-anchor="middle">複素数の極形式</text> <text x="500" y="104" font-size="15" fill="#1f2937" text-anchor="middle">z = (位相)·(絶対値)</text> <text x="500" y="140" font-size="13" fill="#6b7280" text-anchor="middle">作用素の極分解</text> <text x="500" y="164" font-size="15" fill="#1f2937" text-anchor="middle">T = U · |T|</text> <text x="500" y="196" font-size="11" fill="#6b7280" text-anchor="middle">S はその反線形版</text>
+<rect x="0" y="0" width="640" height="230" fill="#ffffff"></rect> <text x="70" y="120" font-size="26" fill="#1f2937" font-style="italic">S</text> <text x="100" y="120" font-size="20" fill="#6b7280">=</text> <text x="135" y="120" font-size="26" fill="#2563eb" font-style="italic">J</text> <text x="170" y="120" font-size="26" fill="#b45309" font-style="italic">Δ</text> <text x="192" y="104" font-size="15" fill="#b45309">1/2</text> <!-- J box --> <rect x="250" y="40" width="160" height="70" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.6"></rect> <text x="330" y="68" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="bold">J:反ユニタリ位相</text> <text x="330" y="90" font-size="12" fill="#1f2937" text-anchor="middle">共役の本体・J²=1</text> <text x="330" y="104" font-size="11" fill="#6b7280" text-anchor="middle">JMJ=M′(交換子へ)</text> <!-- Delta box --> <rect x="250" y="125" width="160" height="70" rx="8" fill="#fde68a" stroke="#b45309" stroke-width="1.6"></rect> <text x="330" y="153" font-size="14" fill="#b45309" text-anchor="middle" font-weight="bold">Δ<tspan baseline-shift="0.5em" font-size="75%">½</tspan>:正の絶対値</text> <text x="330" y="175" font-size="12" fill="#1f2937" text-anchor="middle">重み・時間の本体</text> <text x="330" y="190" font-size="11" fill="#6b7280" text-anchor="middle">Δ<tspan baseline-shift="0.5em" font-size="75%">it</tspan>:modular flow</text> <line x1="220" y1="100" x2="248" y2="75" stroke="#2563eb" stroke-width="1.4"></line> <line x1="220" y1="118" x2="248" y2="158" stroke="#b45309" stroke-width="1.4"></line> <!-- comparison to complex polar --> <text x="500" y="80" font-size="13" fill="#6b7280" text-anchor="middle">複素数の極形式</text> <text x="500" y="104" font-size="15" fill="#1f2937" text-anchor="middle">z = (位相)·(絶対値)</text> <text x="500" y="140" font-size="13" fill="#6b7280" text-anchor="middle">作用素の極分解</text> <text x="500" y="164" font-size="15" fill="#1f2937" text-anchor="middle">T = U · |T|</text> <text x="500" y="196" font-size="11" fill="#6b7280" text-anchor="middle">S はその反線形版</text>
 </svg>
 <figcaption>
-図(概念図):反線形対合 S の極分解 S=JΔ^{1/2}。共役(実構造)の本体は反ユニタリ位相 J、重み・時間の本体は正作用素 Δ^{1/2}。複素数の極形式 z=(位相)(絶対値)の反線形版。
+図(概念図):反線形対合 S の極分解 <span class="math inline">S=J\,\Delta^{1/2}</span>。共役(実構造)の本体は反ユニタリ位相 J、重み・時間の本体は正作用素 <span class="math inline">\Delta^{1/2}</span>。複素数の極形式 z=(位相)(絶対値)の反線形版。
 </figcaption>
 </figure>
 <p><strong>Tomita の定理</strong>(標準・証明は原典に譲る):すべての <span class="math inline">t</span> で <span class="math display">

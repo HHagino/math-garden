@@ -45,7 +45,7 @@ $$\operatorname{Tr}(\mathrm{Frob}^n\mid H^0_{\mathrm{Zar}})=1$$
 
 <svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="P¹の点の数の内訳：H⁰が1、H²がqⁿ。Zariskiはコ²を消すのでqⁿが欠落">
 <rect x="0" y="0" width="720" height="250" fill="#fbfaf7"/>
-<text x="20" y="28" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">#P¹(F_{qⁿ}) = qⁿ + 1 の内訳（跡公式の帳簿）</text>
+<text x="20" y="28" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">#P¹(F<tspan baseline-shift="-0.3em" font-size="75%">qⁿ</tspan>) = qⁿ + 1 の内訳（跡公式の帳簿）</text>
 <!-- columns header -->
 <text x="60" y="66" font-family="Georgia, serif" font-size="13" fill="#7a6a4f">コホモロジー</text>
 <text x="270" y="66" font-family="Georgia, serif" font-size="13" fill="#7a6a4f">Frob の寄与</text>

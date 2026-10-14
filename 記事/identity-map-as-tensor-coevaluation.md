@@ -1,6 +1,6 @@
 # 恒等写像 id_V はテンソルとして何者か：V⊗V* の標準元と coevaluation
 
-## 1. 問い：id_V に対応するテンソルに名前はあるのか
+## 1. 問い：$\mathrm{id}_V$ に対応するテンソルに名前はあるのか
 
 きっかけは、こんな素朴な質問だった。
 
@@ -24,7 +24,7 @@ $$v\otimes\varphi \;\longmapsto\; \big(x\mapsto \varphi(x)\,v\big).$$
 
 これが同型になるのは、有限次元だからである。階数 1 の写像 $x\mapsto\varphi(x)v$ たちは $\operatorname{End}(V)$ を張り、次元はどちらも $(\dim V)^2$。単射性も次元勘定から従う。無限次元では $V\otimes V^*$ は「有限階数の作用素」しか捉えられず、この同型は崩れる ―― 有限次元という仮定が、地味だが効いている。
 
-## 3. id_V に対応する $\sum_i e_i\otimes e^i$
+## 3. $\mathrm{id}_V$ に対応する $\sum_i e_i\otimes e^i$
 
 では、この同型のもとで恒等写像 $\mathrm{id}_V$ に対応する $V\otimes V^*$ の元は何か。
 
@@ -67,7 +67,7 @@ $$\sum_j f_j\otimes f^j \;=\; \sum_j\Big(\sum_i A_{ij}e_i\Big)\otimes\Big(\sum_k
 
 どれが「正しい」ということはなく、どれが自然かは文脈で決まる。線形代数寄りの話、たとえば「$\operatorname{End}(V)$ と $V\otimes V^*$ の同一視」を語る場面では、**恒等テンソル**あるいは **canonical element** と呼ぶのがいちばん素直だ。「$\mathrm{id}_V$ に対応する元」という出自と、「基底によらない標準元」という性質を、それぞれ過不足なく言い当てているからである。
 
-## 6. 圏論的には coev_V : k → V⊗V*
+## 6. 圏論的には $\operatorname{coev}_V\colon k\to V\otimes V^*$
 
 ところが、視点を一段上げると、この元には「もっと構造的な居場所」がある。
 
@@ -91,7 +91,7 @@ $$(\mathrm{id}_V\otimes\operatorname{ev}_V)\circ(\operatorname{coev}_V\otimes\ma
 
 「ああ、あの $\mathrm{id}_V$ は、テンソルとして見ると coev だったのか」―― この記事で腑に落ちてほしいのは、この一点に尽きる。
 
-## 7. δ^i_j としての見方
+## 7. $\delta^i_j$ としての見方
 
 成分でも見ておこう。$\theta_V=\sum_i e_i\otimes e^i$ を一般のテンソルとして添字で書くと、その成分は
 

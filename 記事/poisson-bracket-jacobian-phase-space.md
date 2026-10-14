@@ -33,7 +33,7 @@ $$\{F, G\} := \frac{\partial F}{\partial q} \frac{\partial G}{\partial p} - \fra
 <svg viewBox="0 0 470 160" width="100%" style="max-width:470px;display:block;margin:8px auto" role="img" aria-label="一つの式の三つの読み方">
   <defs><marker id="pb1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"/></marker></defs>
   <rect x="170" y="62" width="130" height="36" rx="4" fill="#f0e3c4" stroke="#c89b3c" stroke-width="1.4"/>
-  <text x="235" y="85" text-anchor="middle" font-family="serif" font-size="12" fill="#2b2118">F_q G_p − F_p G_q</text>
+  <text x="235" y="85" text-anchor="middle" font-family="serif" font-size="12" fill="#2b2118">F<tspan baseline-shift="-0.3em" font-size="75%">q</tspan> G<tspan baseline-shift="-0.3em" font-size="75%">p</tspan> − F<tspan baseline-shift="-0.3em" font-size="75%">p</tspan> G<tspan baseline-shift="-0.3em" font-size="75%">q</tspan></text>
   <line x1="180" y1="62" x2="125" y2="40" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pb1)"/>
   <line x1="235" y1="98" x2="235" y2="128" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pb1)"/>
   <line x1="290" y1="62" x2="347" y2="40" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#pb1)"/>

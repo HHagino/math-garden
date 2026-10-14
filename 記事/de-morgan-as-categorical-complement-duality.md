@@ -76,10 +76,10 @@ $$\boxed{f_!\dashv f^{-1}\dashv\forall_f}\qquad(f_!=\exists,\ f^{-1}=\text{代�
   <g font-family="serif" font-size="12" fill="#2b2118">
     <rect x="40" y="56" width="96" height="40" rx="4" fill="#eef5fa" stroke="#2f5d7c"/><text x="88" y="80" text-anchor="middle">P(X)</text>
     <rect x="304" y="56" width="96" height="40" rx="4" fill="#eef1ea" stroke="#5a6e4a"/><text x="352" y="80" text-anchor="middle">P(Y)</text>
-    <path d="M136,64 C200,40 256,40 304,64" fill="none" stroke="#5a4f3f" stroke-width="1.3"/><text x="220" y="42" text-anchor="middle" font-size="10" fill="#5a4f3f">f_! = ∃</text>
+    <path d="M136,64 C200,40 256,40 304,64" fill="none" stroke="#5a4f3f" stroke-width="1.3"/><text x="220" y="42" text-anchor="middle" font-size="10" fill="#5a4f3f">f<tspan baseline-shift="-0.3em" font-size="75%">!</tspan> = ∃</text>
     <path d="M304,76 C256,62 200,62 136,76" fill="none" stroke="#5a4f3f" stroke-width="1.3"/><text x="220" y="82" text-anchor="middle" font-size="10" fill="#5a4f3f">f⁻¹ = 代入</text>
-    <path d="M136,90 C200,116 256,116 304,90" fill="none" stroke="#5a4f3f" stroke-width="1.3"/><text x="220" y="128" text-anchor="middle" font-size="10" fill="#5a4f3f">∀_f = ∀</text>
-    <text x="220" y="146" text-anchor="middle" font-size="10.5" fill="#8a7f6c">f_! ⊣ f⁻¹ ⊣ ∀_f(Lawvere:量化子は随伴)</text>
+    <path d="M136,90 C200,116 256,116 304,90" fill="none" stroke="#5a4f3f" stroke-width="1.3"/><text x="220" y="128" text-anchor="middle" font-size="10" fill="#5a4f3f">∀<tspan baseline-shift="-0.3em" font-size="75%">f</tspan> = ∀</text>
+    <text x="220" y="144" text-anchor="middle" font-size="10.5" fill="#8a7f6c">f<tspan baseline-shift="-0.3em" font-size="75%">!</tspan> ⊣ f⁻¹ ⊣ ∀<tspan baseline-shift="-0.3em" font-size="75%">f</tspan>(Lawvere:量化子は随伴)</text>
   </g>
 </svg>
 <figcaption><b>図2 ─ 量化子は随伴.</b> 写像 $f$ に沿って、直像(存在 $\exists$)・逆像(代入)・全称像(全称 $\forall$)が随伴列 $f_!\dashv f^{-1}\dashv\forall_f$ をなす。$\forall_f(S)=Y\setminus f_!(X\setminus S)$ は、$\forall x\,P\iff\neg\exists x\,\neg P$ という量化子のド・モルガン双対そのもの。<i>(概念図)</i></figcaption>

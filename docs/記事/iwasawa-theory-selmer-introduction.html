@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -337,7 +373,7 @@ window.Quarto = {
   <li><a href="#動機-古典-l-関数と数論的不変量の橋渡し" id="toc-動機-古典-l-関数と数論的不変量の橋渡し" class="nav-link active" data-scroll-target="#動機-古典-l-関数と数論的不変量の橋渡し">1. 動機 — 古典 L 関数と数論的不変量の橋渡し</a></li>
   <li><a href="#円分塔と岩澤代数" id="toc-円分塔と岩澤代数" class="nav-link" data-scroll-target="#円分塔と岩澤代数">2. 円分塔と岩澤代数</a>
   <ul class="collapse">
-  <li><a href="#円分-ℤ_p-塔" id="toc-円分-ℤ_p-塔" class="nav-link" data-scroll-target="#円分-ℤ_p-塔">2.1 円分 ℤ_p 塔</a></li>
+  <li><a href="#円分-mathbbz_p-塔" id="toc-円分-mathbbz_p-塔" class="nav-link" data-scroll-target="#円分-mathbbz_p-塔">2.1 円分 <span class="math inline">\mathbb{Z}_p</span> 塔</a></li>
   <li><a href="#岩澤代数" id="toc-岩澤代数" class="nav-link" data-scroll-target="#岩澤代数">2.2 岩澤代数</a></li>
   <li><a href="#λ-の構造" id="toc-λ-の構造" class="nav-link" data-scroll-target="#λ-の構造">2.3 Λ の構造</a></li>
   <li><a href="#円分指標" id="toc-円分指標" class="nav-link" data-scroll-target="#円分指標">2.4 円分指標</a></li>
@@ -411,14 +447,14 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="動機-古典-l-関数と数論的不変量の橋渡し">1. 動機 — 古典 L 関数と数論的不変量の橋渡し</h2>
 <p>L 関数の特殊値が数論的不変量を符号化する、という主題は数論幾何の中心問題群を貫いている:</p>
 <ul>
-<li><strong>類数公式</strong> (Dirichlet 1839 が二次形式で示し、Dedekind が一般の数体へ拡張): 数体 K のデデキント zeta 関数 ζ_K(s) の s = 0 での挙動が、K の類数 h_K と単数群の regulator R_K を符号化</li>
+<li><strong>類数公式</strong> (Dirichlet 1839 が二次形式で示し、Dedekind が一般の数体へ拡張): 数体 K のデデキント zeta 関数 <span class="math inline">ζ_K(s)</span> の s = 0 での挙動が、K の類数 <span class="math inline">h_K</span> と単数群の regulator <span class="math inline">R_K</span> を符号化</li>
 <li><strong>BSD 予想</strong> (Birch, Swinnerton-Dyer, 1965): 楕円曲線 E/ℚ の L 関数 L(E, s) の s = 1 での挙動が Mordell-Weil 群 E(ℚ) のランクと Tate-Shafarevich 群 Ш(E/ℚ) を符号化</li>
 </ul>
 <p>両者ともに、 <strong>解析的な対象(L 関数)</strong> と <strong>代数的な対象(類群・Mordell-Weil 群)</strong> を結びつけている。岩澤理論はこの橋渡しを p 進的に体系化する枠組みである。</p>
 <p>岩澤健吉 (1917-1998) が 1950 年代後半から開発したこの理論は</p>
 <ul>
 <li>古典的な L 関数を p 進的に補間する <strong>p 進 L 関数</strong> を構成</li>
-<li>円分塔上の Galois 加群を <strong>岩澤代数 Λ = ℤ_p[[T]]</strong> 上の加群として体系化</li>
+<li>円分塔上の Galois 加群を <strong>岩澤代数 <span class="math inline">Λ = \mathbb{Z}_p[[T]]</span></strong> 上の加群として体系化</li>
 <li>両者を結びつける <strong>岩澤主予想</strong> を定式化</li>
 </ul>
 <p>という三つの柱で構成される。</p>
@@ -426,23 +462,23 @@ window.Quarto = {
 </section>
 <section id="円分塔と岩澤代数" class="level2">
 <h2 class="anchored" data-anchor-id="円分塔と岩澤代数">2. 円分塔と岩澤代数</h2>
-<section id="円分-ℤ_p-塔" class="level3">
-<h3 class="anchored" data-anchor-id="円分-ℤ_p-塔">2.1 円分 ℤ_p 塔</h3>
+<section id="円分-mathbbz_p-塔" class="level3">
+<h3 class="anchored" data-anchor-id="円分-mathbbz_p-塔">2.1 円分 <span class="math inline">\mathbb{Z}_p</span> 塔</h3>
 <p>数体 K (本稿では主に K = ℚ を扱う)に対し、円分塔</p>
 <p><span class="math display"> K_\infty := \bigcup_{n \geq 0} K(\zeta_{p^{n+1}}) </span></p>
-<p>(K_n := K(ζ_{p^{n+1}}))を考える。Gal(K_n/K) は (ℤ/p<sup>{n+1})</sup>× の部分群と同型で(K = ℚ なら全体)、p &gt; 2 のとき</p>
+<p>(<span class="math inline">K_n := K(ζ_{p^{n+1}})</span>)を考える。<span class="math inline">\operatorname{Gal}(K_n/K)</span> は <span class="math inline">(\mathbb{Z}/p^{n+1})^×</span> の部分群と同型で(K = ℚ なら全体)、p &gt; 2 のとき</p>
 <p><span class="math display"> \operatorname{Gal}(K(\zeta_{p^\infty})/K) \hookrightarrow \mathbb{Z}_p^\times \cong \mathbb{Z}/(p-1) \times \mathbb{Z}_p </span></p>
-<p>と分解する(K = ℚ なら最初の ↪ は同型。一般の K では像は開部分群で、たとえば K = ℚ(ζ_p) なら像は 1 + pℤ_p)。</p>
+<p>と分解する(K = ℚ なら最初の ↪ は同型。一般の K では像は開部分群で、たとえば <span class="math inline">K = \mathbb{Q}(ζ_p)</span> なら像は <span class="math inline">1 + p\mathbb{Z}_p</span>)。</p>
 <p>純粋に p 進的な情報を取り出すには、torsion 部分 ℤ/(p-1) を割り捨て:</p>
 <p><span class="math display"> K_\infty^{(p)} := K_\infty^{\Delta}, \quad \Delta := \operatorname{Gal}(K(\zeta_p)/K) \hookrightarrow (\mathbb{Z}/p)^\times </span></p>
-<p>の不変体を取る(Δ は Gal(K_∞/K) の有限な torsion 部分と同一視する。K = ℚ なら Δ ≅ (ℤ/p)^×、K = ℚ(ζ_p) なら Δ = 1)。これを <strong>円分 ℤ_p 拡大</strong> という。Gal(K_∞^{(p)}/K) ≅ ℤ_p (位相同型。一般の K でも、像の pro-p 部分は 1 + pℤ_p の開部分群なので ℤ_p と同型)。</p>
+<p>の不変体を取る(Δ は <span class="math inline">\operatorname{Gal}(K_∞/K)</span> の有限な torsion 部分と同一視する。K = ℚ なら <span class="math inline">Δ ≅ (\mathbb{Z}/p)^×</span>、<span class="math inline">K = \mathbb{Q}(ζ_p)</span> なら Δ = 1)。これを <strong>円分 <span class="math inline">\mathbb{Z}_p</span> 拡大</strong> という。<span class="math inline">\operatorname{Gal}(K_∞^{(p)}/K) ≅ \mathbb{Z}_p</span> (位相同型。一般の K でも、像の pro-p 部分は <span class="math inline">1 + p\mathbb{Z}_p</span> の開部分群なので <span class="math inline">\mathbb{Z}_p</span> と同型)。</p>
 <p>このため、岩澤理論の典型的な舞台は</p>
 <p><span class="math display"> \Gamma := \operatorname{Gal}(K_\infty^{(p)} / K) \cong \mathbb{Z}_p </span></p>
 <p>である。</p>
 </section>
 <section id="岩澤代数" class="level3">
 <h3 class="anchored" data-anchor-id="岩澤代数">2.2 岩澤代数</h3>
-<p>Γ ≅ ℤ_p の完備群環</p>
+<p><span class="math inline">Γ ≅ \mathbb{Z}_p</span> の完備群環</p>
 <p><span class="math display"> \Lambda := \mathbb{Z}_p[[\Gamma]] := \varprojlim_n \mathbb{Z}_p[\Gamma/\Gamma^{p^n}] </span></p>
 <p>を <strong>岩澤代数</strong> という。Γ の位相生成元 γ を一つ固定すると</p>
 <p><span class="math display"> \Lambda \cong \mathbb{Z}_p[[T]] \quad (\gamma - 1 \leftrightarrow T) </span></p>
@@ -458,15 +494,15 @@ window.Quarto = {
 </ul>
 <p>Weierstrass 予備定理:</p>
 <blockquote class="blockquote">
-<p>任意の 0 ≠ f ∈ Λ は f = p^μ · u · g と一意分解できる(u は単位、g は distinguished polynomial、μ ≥ 0)。</p>
+<p>任意の 0 ≠ f ∈ Λ は <span class="math inline">f = p^μ \cdot u \cdot g</span> と一意分解できる(u は単位、g は distinguished polynomial、μ ≥ 0)。</p>
 </blockquote>
-<p>これにより Λ 加群の構造定理が古典的(有限生成 Λ-加群 M は、擬同型(有限な核と余核を持つ準同型)を除いて Λ^r ⊕ ⊕ Λ/(p^{μ_i}) ⊕ ⊕ Λ/(f_j^{n_j}) の形になる。直和分解そのものは成り立たない:たとえばイデアル (p, T) ⊂ Λ は階数 1 の torsion-free 加群だが自由ではない)。岩澤理論はこの分解と L 関数を結びつける。</p>
+<p>これにより Λ 加群の構造定理が古典的(有限生成 Λ-加群 M は、擬同型(有限な核と余核を持つ準同型)を除いて <span class="math inline">Λ^r ⊕ \bigoplus_i Λ/(p^{μ_i}) ⊕ \bigoplus_j Λ/(f_j^{n_j})</span> の形になる。直和分解そのものは成り立たない:たとえばイデアル (p, T) ⊂ Λ は階数 1 の torsion-free 加群だが自由ではない)。岩澤理論はこの分解と L 関数を結びつける。</p>
 </section>
 <section id="円分指標" class="level3">
 <h3 class="anchored" data-anchor-id="円分指標">2.4 円分指標</h3>
 <p>Γ 上の岩澤代数を扱うとき、円分指標</p>
 <p><span class="math display"> \chi_{cyc} \colon \Gamma \to 1 + p \mathbb{Z}_p \subset \mathbb{Z}_p^\times </span></p>
-<p>(γ ↦ χ_{cyc}(γ) で γ・ζ_{p^n} = ζ_{p<sup>n}</sup>{χ_{cyc}(γ)} を満たす)が canonical に存在する。これは Γ ≅ 1 + pℤ_p の標準的な同型を与え、岩澤理論の指標の基準点となる。</p>
+<p>(<span class="math inline">γ ↦ χ_{\mathrm{cyc}}(γ)</span> で γ・<span class="math inline">ζ_{p^n} = ζ_{p^n}^{χ_{\mathrm{cyc}}(γ)}</span> を満たす)が canonical に存在する。これは <span class="math inline">Γ ≅ 1 + p\mathbb{Z}_p</span> の標準的な同型を与え、岩澤理論の指標の基準点となる。</p>
 <hr>
 </section>
 </section>
@@ -474,7 +510,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="岩澤の構造定理">3. 岩澤の構造定理</h2>
 <section id="設定" class="level3">
 <h3 class="anchored" data-anchor-id="設定">3.1 設定</h3>
-<p>基礎体 ℚ の上に、§2.1 の塔 K_n = ℚ(ζ_{p^{n+1}}) (ζ_p まで含めた円分体の塔。これは K = ℚ(ζ_p) の円分 ℤ_p 拡大の層でもある)を取る。各 K_n のイデアル類群を A_n とし、その p 部分を A_n^{(p)} とする。これらは Galois 群 Γ ≅ ℤ_p と Δ = Gal(ℚ(ζ_p)/ℚ) の作用を受ける。ℚ 自身の円分 ℤ_p 拡大の層を取ると、岩澤の定理(p ただ一つが完全分岐する ℤ_p 拡大では p | h(K_n) ⟺ p | h(K))により各層で p ∤ h となり、以下の X_∞ は 0 になって主張が空になる。</p>
+<p>基礎体 ℚ の上に、§2.1 の塔 <span class="math inline">K_n = \mathbb{Q}(ζ_{p^{n+1}})</span> (<span class="math inline">ζ_p</span> まで含めた円分体の塔。これは <span class="math inline">K = \mathbb{Q}(ζ_p)</span> の円分 <span class="math inline">\mathbb{Z}_p</span> 拡大の層でもある)を取る。各 <span class="math inline">K_n</span> のイデアル類群を <span class="math inline">A_n</span> とし、その p 部分を <span class="math inline">A_n^{(p)}</span> とする。これらは Galois 群 <span class="math inline">Γ ≅ \mathbb{Z}_p</span> と <span class="math inline">Δ = \operatorname{Gal}(\mathbb{Q}(ζ_p)/\mathbb{Q})</span> の作用を受ける。ℚ 自身の円分 <span class="math inline">\mathbb{Z}_p</span> 拡大の層を取ると、岩澤の定理(p ただ一つが完全分岐する <span class="math inline">\mathbb{Z}_p</span> 拡大では <span class="math inline">p \mid h(K_n) ⟺ p \mid h(K)</span>)により各層で p ∤ h となり、以下の <span class="math inline">X_∞</span> は 0 になって主張が空になる。</p>
 <p>射影極限</p>
 <p><span class="math display"> X_\infty := \varprojlim_n A_n^{(p)} </span></p>
 <p>(ノルム写像で射影極限を取る)を考える。これは岩澤代数 Λ 上の有限生成 torsion 加群である(Iwasawa-Serre)。</p>
@@ -482,9 +518,9 @@ window.Quarto = {
 <section id="岩澤の構造定理-1" class="level3">
 <h3 class="anchored" data-anchor-id="岩澤の構造定理-1">3.2 岩澤の構造定理</h3>
 <p><strong>岩澤 1959 (Theorem):</strong></p>
-<p>X_∞ は有限生成 Λ-torsion 加群で、特性多項式 (characteristic ideal) を</p>
+<p><span class="math inline">X_∞</span> は有限生成 Λ-torsion 加群で、特性多項式 (characteristic ideal) を</p>
 <p><span class="math display"> \text{char}_\Lambda(X_\infty) = (p^{\mu}) \cdot (f(T)) </span></p>
-<p>と書くとき、各 K_n の類数 |A_n^{(p)}| は次の漸近公式を満たす:</p>
+<p>と書くとき、各 <span class="math inline">K_n</span> の類数 <span class="math inline">|A_n^{(p)}|</span> は次の漸近公式を満たす:</p>
 <p><span class="math display"> \operatorname{ord}_p(|A_n^{(p)}|) = \mu p^n + \lambda n + \nu \quad (n \gg 0) </span></p>
 <p>ここで μ は p のべき部分、λ = deg f は <strong>岩澤 λ 不変量</strong>、ν は constant。</p>
 <p>これは類数の p 部分が円分塔の各段で「ほぼ線型に」増えることを示す驚くべき主張で、岩澤理論の出発点。</p>
@@ -493,7 +529,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="ferrero-washington-定理">3.3 Ferrero-Washington 定理</h3>
 <p>Ferrero-Washington (1979) はさらに次を示した:</p>
 <blockquote class="blockquote">
-<p>ℚ(ζ_p) (より一般に任意の abelian 数体)の円分 ℤ_p 拡大では μ = 0。</p>
+<p><span class="math inline">\mathbb{Q}(ζ_p)</span> (より一般に任意の abelian 数体)の円分 <span class="math inline">\mathbb{Z}_p</span> 拡大では μ = 0。</p>
 </blockquote>
 <p>これによってこの塔では λ-不変量と ν のみが本質的なパラメータとなり、岩澤主予想の精密化が可能になる。</p>
 <hr>
@@ -505,27 +541,27 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="kubota-leopoldt-の-p-進-zeta-関数">4.1 Kubota-Leopoldt の p 進 zeta 関数</h3>
 <p>Kubota-Leopoldt (1964) は古典的なリーマン zeta 関数 ζ(s) の負の奇数での値</p>
 <p><span class="math display"> \zeta(1-2k) = -\frac{B_{2k}}{2k} \quad (k \geq 1) </span></p>
-<p>(B_{2k} は Bernoulli 数)を、p 進的に補間する p 進 L 関数 L_p(s, χ) を構成した。</p>
+<p>(<span class="math inline">B_{2k}</span> は Bernoulli 数)を、p 進的に補間する p 進 L 関数 <span class="math inline">L_p(s, χ)</span> を構成した。</p>
 <p>性質:</p>
 <ul>
-<li>L_p(s, χ): s ∈ ℤ_p 上で連続(s = 1 を除く)</li>
-<li>χ が偶指標で k ≥ 1 のとき: L_p(1 - k, χ) = -(1 - χω^{-k}(p) p^{k-1}) B_{k, χω^{-k}} / k(ω は Teichmüller 指標。Euler 因子付き)</li>
+<li><span class="math inline">L_p(s, χ): s ∈ \mathbb{Z}_p</span> 上で連続(s = 1 を除く)</li>
+<li>χ が偶指標で k ≥ 1 のとき: <span class="math inline">L_p(1 - k, χ) = -(1 - χω^{-k}(p) p^{k-1}) B_{k, χω^{-k}} / k</span>(ω は Teichmüller 指標。Euler 因子付き)</li>
 <li>これは古典的 L 関数の特殊値を p 進的に補間したもの</li>
 </ul>
 </section>
 <section id="岩澤代数の元としての-p-進-l-関数" class="level3">
 <h3 class="anchored" data-anchor-id="岩澤代数の元としての-p-進-l-関数">4.2 岩澤代数の元としての p 進 L 関数</h3>
-<p>岩澤 (1969, “On p-adic L-functions”, Ann. of Math. 89) は Kubota-Leopoldt L_p(s, χ) (χ ≠ 1) を岩澤代数 Λ の元として表した(Mazur はのちに同じものを p 進測度で構成し直した):</p>
+<p>岩澤 (1969, “On p-adic L-functions”, Ann. of Math. 89) は Kubota-Leopoldt <span class="math inline">L_p(s, χ)</span> (χ ≠ 1) を岩澤代数 Λ の元として表した(Mazur はのちに同じものを p 進測度で構成し直した):</p>
 <blockquote class="blockquote">
-<p>L_p(χ) ∈ Λ_χ = 𝒪_χ<a href="𝒪_χ は χ の値を ℤ_p に添加した環。§5 で使う χ = ω^j のように値が ℤ_p に入るなら Λ = ℤ_p[[T]] そのもの">[T]</a>を、各 s = 1 - k での値が古典的 L 関数の特殊値になるような幂級数として canonical に与えられる(χ = 1 のときは s = 1 に極があり、Λ の元ではなく分母 T − (κ − 1) を持つ)。</p>
+<p><span class="math inline">L_p(χ) ∈ Λ_χ = \mathcal{O}_χ[[T]]</span>(<span class="math inline">\mathcal{O}_χ</span> は χ の値を <span class="math inline">\mathbb{Z}_p</span> に添加した環。§5 で使う <span class="math inline">χ = ω^j</span> のように値が <span class="math inline">\mathbb{Z}_p</span> に入るなら <span class="math inline">Λ = \mathbb{Z}_p[[T]]</span> そのもの)を、各 s = 1 - k での値が古典的 L 関数の特殊値になるような幂級数として canonical に与えられる(χ = 1 のときは s = 1 に極があり、Λ の元ではなく分母 T − (κ − 1) を持つ)。</p>
 </blockquote>
 <p>これによって p 進 L 関数は「岩澤代数の中の元」として位置付けられる。</p>
 </section>
 <section id="補間性" class="level3">
 <h3 class="anchored" data-anchor-id="補間性">4.3 補間性</h3>
-<p>p 進 L 関数 L_p ∈ Λ は、s ∈ ℤ_p に値を取る連続関数として、対応する古典的 L 関数の値を p 進的に補間する:</p>
+<p>p 進 L 関数 <span class="math inline">L_p ∈ Λ</span> は、<span class="math inline">s ∈ \mathbb{Z}_p</span> に値を取る連続関数として、対応する古典的 L 関数の値を p 進的に補間する:</p>
 <p><span class="math display"> L_p(\chi_{cyc}^{1-k}) = L(\chi\omega^{-k}, 1 - k) \cdot (\text{Euler factor at p}). </span></p>
-<p>ここで χ_{cyc}^{1-k} は円分指標の (1-k) 乗を岩澤代数 Λ に持ち込んだもの。右辺の指標は §4.1 と同じく Teichmüller 指標 ω で捻った χω^{-k} で、k によって変わる(捻らずに k によらない指標の値を並べると、偶指標では 3 以上の奇数の k で 0、偶数の k で 0 でなくなり、k について p 進的に連続な関数にならない)。</p>
+<p>ここで <span class="math inline">χ_{\mathrm{cyc}}^{1-k}</span> は円分指標の (1-k) 乗を岩澤代数 Λ に持ち込んだもの。右辺の指標は §4.1 と同じく Teichmüller 指標 ω で捻った <span class="math inline">χω^{-k}</span> で、k によって変わる(捻らずに k によらない指標の値を並べると、偶指標では 3 以上の奇数の k で 0、偶数の k で 0 でなくなり、k について p 進的に連続な関数にならない)。</p>
 <hr>
 </section>
 </section>
@@ -535,27 +571,27 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="主予想-statement">5.1 主予想 (statement)</h3>
 <p><strong>岩澤の主予想</strong> (Mazur-Wiles 1984、Wiles 1990 で完成):</p>
 <blockquote class="blockquote">
-<p>岩澤加群の特性イデアルと p 進 L 関数が、Δ の奇指標成分ごとに等しい(i は奇数で i ≢ 1 (mod p−1)〔i ≡ 1 では右辺の L_p が極を持ち、左辺の成分は 0〕、ω は Teichmüller 指標、右辺は Kubota-Leopoldt の L_p(s, ω^{1-i}) を Λ の元として見たもの): <span class="math display"> \text{char}_\Lambda(X_\infty^{(\omega^i)}) = (L_p(\omega^{1-i})). </span></p>
+<p>岩澤加群の特性イデアルと p 進 L 関数が、Δ の奇指標成分ごとに等しい(i は奇数で i ≢ 1 (mod p−1)〔i ≡ 1 では右辺の <span class="math inline">L_p</span> が極を持ち、左辺の成分は 0〕、ω は Teichmüller 指標、右辺は Kubota-Leopoldt の <span class="math inline">L_p(s, ω^{1-i})</span> を Λ の元として見たもの): <span class="math display"> \text{char}_\Lambda(X_\infty^{(\omega^i)}) = (L_p(\omega^{1-i})). </span></p>
 </blockquote>
-<p>すなわち、解析側(p 進 L 関数 L_p ∈ Λ)と代数側(岩澤加群 X_∞ の characteristic ideal)が完全に一致する。</p>
+<p>すなわち、解析側(p 進 L 関数 <span class="math inline">L_p ∈ Λ</span>)と代数側(岩澤加群 <span class="math inline">X_∞</span> の characteristic ideal)が完全に一致する。</p>
 <p>これは</p>
 <ul>
 <li><strong>解析的</strong>: 古典的 L 関数の特殊値を p 進的に補間したもの</li>
 <li><strong>代数的</strong>: イデアル類群の射影極限の Λ-加群構造</li>
 </ul>
-<p>の同一性を主張する深い予想で、Mazur-Wiles 1984 が ℚ の円分塔について証明、Wiles 1990 が任意の totally real number field に拡張、Skinner-Urban 2014 が GL_2 over ℚ の場合(楕円曲線方向)を一定の条件下で証明した(§5.2)。</p>
+<p>の同一性を主張する深い予想で、Mazur-Wiles 1984 が ℚ の円分塔について証明、Wiles 1990 が任意の totally real number field に拡張、Skinner-Urban 2014 が <span class="math inline">\operatorname{GL}_2</span> over ℚ の場合(楕円曲線方向)を一定の条件下で証明した(§5.2)。</p>
 </section>
 <section id="楕円曲線方向の岩澤主予想" class="level3">
 <h3 class="anchored" data-anchor-id="楕円曲線方向の岩澤主予想">5.2 楕円曲線方向の岩澤主予想</h3>
 <p>楕円曲線 E/ℚ に対する岩澤主予想は次のように述べられる:</p>
 <p>E/ℚ が good ordinary reduction at p を持つとし、</p>
 <ul>
-<li>解析側: p 進 L 関数 L_p(E, T) ∈ Λ(Mazur-Swinnerton-Dyer 1974 の構成)</li>
-<li>代数側: ℚ の円分 ℤ_p 拡大 ℚ_∞ := K_∞^{(p)}(§2.1 で K = ℚ。第 n 層 ℚ_n は [ℚ_n : ℚ] = p^n)上の Selmer 群の双対 X_∞(E) := Sel_{p<sup>∞}(E/ℚ_∞)</sup>∨ = lim_n Sel_{p<sup>∞}(E/ℚ_n)</sup>∨。§3 の塔 ℚ(ζ_{p^{n+1}}) で取ると Δ の全指標の成分(L_p(E) を Δ の指標でねじったものに対応する)を含む大きな加群になり、ひとつの L_p(E) とは比べられない(Skinner–Urban も ℚ_∞ で定式化する)</li>
+<li>解析側: p 進 L 関数 <span class="math inline">L_p(E, T) ∈ Λ</span>(Mazur-Swinnerton-Dyer 1974 の構成)</li>
+<li>代数側: ℚ の円分 <span class="math inline">\mathbb{Z}_p</span> 拡大 <span class="math inline">\mathbb{Q}_∞ := K_∞^{(p)}</span>(§2.1 で K = ℚ。第 n 層 <span class="math inline">\mathbb{Q}_n</span> は <span class="math inline">[\mathbb{Q}_n : \mathbb{Q}] = p^n</span>)上の Selmer 群の双対 <span class="math inline">X_∞(E) := \operatorname{Sel}_{p^∞}(E/\mathbb{Q}_∞)^∨ = \varprojlim_n \operatorname{Sel}_{p^∞}(E/\mathbb{Q}_n)^∨</span>。§3 の塔 <span class="math inline">\mathbb{Q}(ζ_{p^{n+1}})</span> で取ると Δ の全指標の成分(<span class="math inline">L_p(E)</span> を Δ の指標でねじったものに対応する)を含む大きな加群になり、ひとつの <span class="math inline">L_p(E)</span> とは比べられない(Skinner–Urban も <span class="math inline">\mathbb{Q}_∞</span> で定式化する)</li>
 </ul>
 <p>これに対し</p>
 <p><span class="math display"> \text{char}_\Lambda(X_\infty(E)) = (L_p(E)). </span></p>
-<p>Skinner-Urban (2014) はこの予想を、p で good ordinary など一定の条件下で(Kato による片側の割り切りと合わせて)証明し、帰結として「E(ℚ) と Ш(E/ℚ)[p^∞] が有限なら L(E, 1) ≠ 0」(rank 0 の場合の BSD の逆向き)を得た。</p>
+<p>Skinner-Urban (2014) はこの予想を、p で good ordinary など一定の条件下で(Kato による片側の割り切りと合わせて)証明し、帰結として「E(ℚ) と <span class="math inline">\text{Ш}(E/\mathbb{Q})[p^∞]</span> が有限なら L(E, 1) ≠ 0」(rank 0 の場合の BSD の逆向き)を得た。</p>
 <hr>
 </section>
 </section>
@@ -580,21 +616,21 @@ window.Quarto = {
 </section>
 <section id="corank-と-bsd" class="level3">
 <h3 class="anchored" data-anchor-id="corank-と-bsd">6.3 corank と BSD</h3>
-<p>Selmer 群の corank (= Pontryagin 双対の ℤ_p 上の階数。Sel_{p^∞}(E/K) ≅ (ℚ_p/ℤ_p)^r ⊕ (有限群) と書いたときの r)</p>
+<p>Selmer 群の corank (= Pontryagin 双対の <span class="math inline">\mathbb{Z}_p</span> 上の階数。<span class="math inline">\operatorname{Sel}_{p^∞}(E/K) ≅ (\mathbb{Q}_p/\mathbb{Z}_p)^r ⊕ (\text{有限群})</span> と書いたときの r)</p>
 <p><span class="math display"> \operatorname{corank}_{\mathbb{Z}_p} \operatorname{Sel}_{p^\infty}(E/K) = \operatorname{rank}(E(K)) + \operatorname{corank} \Sha(E/K)[p^\infty]. </span></p>
 <p>Tate-Shafarevich 群が有限(Shafarevich–Tate 予想。BSD とは別の予想)と仮定すれば、corank = rank。</p>
 <p>これより BSD 予想は次の同値な定式:</p>
 <blockquote class="blockquote">
-<p>rank E(K) = ord_{s=1} L(E, s) = corank Sel_{p^∞}(E/K) (有限性仮定下).</p>
+<p><span class="math inline">\operatorname{rank} E(K) = \operatorname{ord}_{s=1} L(E, s) = \operatorname{corank} \operatorname{Sel}_{p^∞}(E/K)</span> (有限性仮定下).</p>
 </blockquote>
-<p>岩澤主予想は L(E, s) を p 進的に補間した L_p(E) ∈ Λ の零位を扱うので、これと Selmer 群の岩澤加群構造を結びつけることで BSD の p 進版に向かう。</p>
+<p>岩澤主予想は L(E, s) を p 進的に補間した <span class="math inline">L_p(E) ∈ Λ</span> の零位を扱うので、これと Selmer 群の岩澤加群構造を結びつけることで BSD の p 進版に向かう。</p>
 </section>
 <section id="bsd-の-p-進版" class="level3">
 <h3 class="anchored" data-anchor-id="bsd-の-p-進版">6.4 BSD の p 進版</h3>
 <p>p で good ordinary か乗法的還元を持つ E/ℚ に対する BSD の p 進版(p-adic BSD conjecture):</p>
 <p><span class="math display"> \operatorname{ord}_{T=0} L_p(E, T) = \operatorname{rank} E(\mathbb{Q}) + \mathbb{1}_{\text{p-adic exceptional}}. </span></p>
-<p>ここで右辺の補正項は、E が p で分裂乗法的還元を持つときだけ 1 になる(補間因子が s = 1 で消えて L_p に余分な零点ができる。exceptional zero)。good ordinary なら補正項は 0。</p>
-<p>これは Mazur-Tate-Teitelbaum (1986) の予想で、先頭係数を p 進 regulator(p 進高さ対の判別式)で表す式も含む(分裂乗法的還元のときは L 不変量の因子が加わる)。good ordinary の場合、主予想が成り立てば、零位がちょうど rank に等しいことは p 進高さ対の非退化性(Schneider の予想)と Ш(E/ℚ)[p^∞] の有限性に当たる。</p>
+<p>ここで右辺の補正項は、E が p で分裂乗法的還元を持つときだけ 1 になる(補間因子が s = 1 で消えて <span class="math inline">L_p</span> に余分な零点ができる。exceptional zero)。good ordinary なら補正項は 0。</p>
+<p>これは Mazur-Tate-Teitelbaum (1986) の予想で、先頭係数を p 進 regulator(p 進高さ対の判別式)で表す式も含む(分裂乗法的還元のときは L 不変量の因子が加わる)。good ordinary の場合、主予想が成り立てば、零位がちょうど rank に等しいことは p 進高さ対の非退化性(Schneider の予想)と <span class="math inline">\text{Ш}(E/\mathbb{Q})[p^∞]</span> の有限性に当たる。</p>
 <hr>
 </section>
 </section>
@@ -603,15 +639,15 @@ window.Quarto = {
 <section id="coates-wiles-定理" class="level3">
 <h3 class="anchored" data-anchor-id="coates-wiles-定理">7.1 Coates-Wiles 定理</h3>
 <p>最初の BSD への部分的進展:</p>
-<p><strong>Coates-Wiles (1977):</strong> E/ℚ が CM by 𝒪_F (虚二次体) を持ち、L(E, 1) ≠ 0 ならば、E(ℚ) は有限群。</p>
+<p><strong>Coates-Wiles (1977):</strong> E/ℚ が CM by <span class="math inline">\mathcal{O}_F</span> (虚二次体) を持ち、L(E, 1) ≠ 0 ならば、E(ℚ) は有限群。</p>
 <p>すなわち <strong>analytic rank 0 ⇒ Mordell-Weil rank 0</strong> (CM 楕円曲線の場合)。これは BSD の最初の証明例である。</p>
 </section>
 <section id="証明の概略" class="level3">
 <h3 class="anchored" data-anchor-id="証明の概略">7.2 証明の概略</h3>
-<p>Coates-Wiles の証明は CM の特殊性(対応する Hecke 指標 ψ_E)と岩澤理論を組み合わせる:</p>
+<p>Coates-Wiles の証明は CM の特殊性(対応する Hecke 指標 <span class="math inline">ψ_E</span>)と岩澤理論を組み合わせる:</p>
 <ol type="1">
-<li>CM の場合、L(E/ℚ, s) は虚二次体 F の Hecke 指標 ψ の L 関数 L(ψ, s) に一致する(二つの Hecke L 関数の積 L(ψ, s) L(ψ, s) になるのは、F 上に持ち上げた L(E/F, s) のほう)</li>
-<li>ψ の岩澤 L 関数 L_p(ψ) を構成し、これと Selmer 群を結びつける</li>
+<li>CM の場合、L(E/ℚ, s) は虚二次体 F の Hecke 指標 ψ の L 関数 L(ψ, s) に一致する(二つの Hecke L 関数の積 <span class="math inline">L(ψ, s) L(\bar ψ, s)</span> になるのは、F 上に持ち上げた L(E/F, s) のほう)</li>
+<li>ψ の岩澤 L 関数 <span class="math inline">L_p(ψ)</span> を構成し、これと Selmer 群を結びつける</li>
 <li>楕円単数と明示的相互法則(Coates-Wiles 準同型)を用いて Selmer 群を bound する(のちに Rubin がこの議論を <strong>Euler system</strong> (Kolyvagin 1988-90 が導入、Kato が 1990 年代に modular な場合へ拡張) の枠で捉え直した)</li>
 <li>これにより L(E, 1) ≠ 0 ⇒ Selmer 群が有限、ゆえに E(ℚ) も有限</li>
 </ol>
@@ -627,7 +663,7 @@ window.Quarto = {
 </section>
 <section id="現代-skinner-urban-とその後" class="level3">
 <h3 class="anchored" data-anchor-id="現代-skinner-urban-とその後">7.4 現代: Skinner-Urban とその後</h3>
-<p><strong>Skinner-Urban (2014):</strong> Eisenstein イデアル法を用いて GL_2 over ℚ の岩澤主予想を証明、ordinary な多くの楕円曲線について主予想の両側の割り切り(Kato の片側と合わせて)を確立。</p>
+<p><strong>Skinner-Urban (2014):</strong> Eisenstein イデアル法を用いて <span class="math inline">\operatorname{GL}_2</span> over ℚ の岩澤主予想を証明、ordinary な多くの楕円曲線について主予想の両側の割り切り(Kato の片側と合わせて)を確立。</p>
 <p>最近の進展(Wan, Kato, Liu など)により、BSD は p 進的にはかなり精密に理解されつつある。古典的(complex)BSD の完全証明は依然として未解決。</p>
 <hr>
 </section>
@@ -635,11 +671,11 @@ window.Quarto = {
 <section id="まとめ" class="level2">
 <h2 class="anchored" data-anchor-id="まとめ">8. まとめ</h2>
 <ol type="1">
-<li>円分 ℤ_p 塔 K_∞^{(p)} 上の Galois 加群を、岩澤代数 Λ = ℤ_p[[T]] 上の加群として体系化</li>
-<li>岩澤の構造定理(1959): 類数の p 部分が漸近的に μ p^n + λ n + ν と振る舞う</li>
-<li>Kubota-Leopoldt の p 進 L 関数 L_p ∈ Λ が、古典 L 関数の特殊値を p 進的に補間</li>
-<li><strong>岩澤主予想</strong>: char_Λ(X_∞<sup>{(ω</sup>i)}) = (L_p(ω^{1-i}))(奇数 i ≢ 1 (mod p−1) の成分ごと)、すなわち解析と代数の同一性</li>
-<li>楕円曲線方向: char_Λ(X_∞(E)) = (L_p(E)) (Skinner-Urban 2014、p で good ordinary などの条件下)</li>
+<li>円分 <span class="math inline">\mathbb{Z}_p</span> 塔 <span class="math inline">K_∞^{(p)}</span> 上の Galois 加群を、岩澤代数 <span class="math inline">Λ = \mathbb{Z}_p[[T]]</span> 上の加群として体系化</li>
+<li>岩澤の構造定理(1959): 類数の p 部分が漸近的に <span class="math inline">μ p^n + λ n + ν</span> と振る舞う</li>
+<li>Kubota-Leopoldt の p 進 L 関数 <span class="math inline">L_p ∈ Λ</span> が、古典 L 関数の特殊値を p 進的に補間</li>
+<li><strong>岩澤主予想</strong>: <span class="math inline">\operatorname{char}_Λ(X_∞^{(ω^i)}) = (L_p(ω^{1-i}))</span>(奇数 i ≢ 1 (mod p−1) の成分ごと)、すなわち解析と代数の同一性</li>
+<li>楕円曲線方向: <span class="math inline">\operatorname{char}_Λ(X_∞(E)) = (L_p(E))</span> (Skinner-Urban 2014、p で good ordinary などの条件下)</li>
 <li>Selmer 群が Mordell-Weil 群と Tate-Shafarevich 群を符号化、BSD 予想と直結</li>
 <li>Coates-Wiles 1977 が CM の場合の analytic rank 0 ⇒ algebraic rank 0 を証明、のちの Euler system 技術の先駆(名称は Kolyvagin 以後)</li>
 <li>現代: Skinner-Urban, Kato, Wan などにより BSD への進展が続く</li>
@@ -669,7 +705,7 @@ window.Quarto = {
 <ul>
 <li>Mazur-Wiles, <em>Class fields of abelian extensions of ℚ</em> (Invent. Math. 1984) — 岩澤主予想の最初の証明</li>
 <li>Wiles, <em>The Iwasawa conjecture for totally real fields</em> (Ann. Math. 1990)</li>
-<li>Skinner-Urban, <em>The Iwasawa main conjectures for GL_2</em> (Invent. Math. 2014)</li>
+<li>Skinner-Urban, <em>The Iwasawa main conjectures for <span class="math inline">\mathrm{GL}_2</span></em> (Invent. Math. 2014)</li>
 <li>Kato, <em>p-adic Hodge theory and values of zeta functions of modular forms</em> (Astérisque 2004)</li>
 <li>Coates, Schmidt, <em>Iwasawa theory for the symmetric square of an elliptic curve</em> (J. Reine Angew. Math. 375/376 (1987), 104–156)</li>
 </ul>

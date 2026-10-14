@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -403,7 +439,7 @@ X(K)\ \subseteq\ X(\mathbb A_K)^{\text{ét,Br}}\ \subseteq\ X(\mathbb A_K)^{\mat
 </ul>
 <p>梯子の各隙間が、「ある段の障害では説明できないが、次の段では説明できる欠品」に対応する。LAOX 多様体とは <span class="math inline">X(\mathbb A_K)\neq\varnothing</span> かつ <span class="math inline">X(K)=\varnothing</span> のこと、すなわち梯子の一番上 <span class="math inline">X(\mathbb A_K)</span> は空でないのに一番下 <span class="math inline">X(K)</span> が空、という状態だ。問題は「空になるのが梯子のどの段か」である。</p>
 <svg viewbox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="障害の梯子：入れ子になった集合と、各隙間に住む反例">
-<rect x="0" y="0" width="720" height="300" fill="#fbfaf7"></rect> <text x="20" y="26" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">障害の梯子（外ほど粗い検札）</text> <!-- nested boxes --> <rect x="40" y="45" width="600" height="225" rx="4" fill="#eef2ee" stroke="#2f6258" stroke-width="1.3"></rect> <text x="52" y="64" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">X(A_K) 全局所に在庫</text> <rect x="80" y="80" width="520" height="170" rx="4" fill="#e6ece6" stroke="#2f6258" stroke-width="1.2"></rect> <text x="92" y="99" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">X(A_K)^Br 相互法則を通過</text> <rect x="120" y="115" width="440" height="115" rx="4" fill="#dde6dd" stroke="#2f6258" stroke-width="1.2"></rect> <text x="132" y="134" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">X(A_K)^{ét,Br} 被覆まで検札（=降下）</text> <rect x="160" y="150" width="360" height="62" rx="4" fill="#f6ece9" stroke="#a23b2e" stroke-width="1.5"></rect> <text x="172" y="172" font-family="Georgia, serif" font-size="12.5" fill="#a23b2e">X(K) 本店在庫（大域有理点）</text> <text x="172" y="194" font-family="Georgia, serif" font-size="11.5" fill="#a23b2e">LAOX = 外は非空・ここが空</text> <!-- residents at the gaps --> <g font-family="Georgia, serif" font-size="11.5"> <text x="612" y="120" fill="#7a6a4f">⟵ Skorobogatov</text> <text x="612" y="135" fill="#7a6a4f">　双楕円曲面(’99)</text> <text x="572" y="172" fill="#7a6a4f">⟵ Poonen(’10)</text> <text x="265" y="245" fill="#7a6a4f">曲線：ここで空になると予想（Poonen・Stoll）</text> </g> <text x="20" y="292" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">(概念図) 空になる段が内側ほど「粗い障害では説明できない欠品」。曲線は最も粗い Br で足りると予想、曲面以上は内側の段が要る。</text>
+<rect x="0" y="0" width="720" height="300" fill="#fbfaf7"></rect> <text x="20" y="26" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">障害の梯子（外ほど粗い検札）</text> <!-- nested boxes --> <rect x="40" y="45" width="600" height="225" rx="4" fill="#eef2ee" stroke="#2f6258" stroke-width="1.3"></rect> <text x="52" y="64" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">X(A<tspan baseline-shift="-0.3em" font-size="75%">K</tspan>) 全局所に在庫</text> <rect x="80" y="80" width="520" height="170" rx="4" fill="#e6ece6" stroke="#2f6258" stroke-width="1.2"></rect> <text x="92" y="99" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">X(A<tspan baseline-shift="-0.3em" font-size="75%">K</tspan>)<tspan baseline-shift="0.5em" font-size="75%">Br</tspan> 相互法則を通過</text> <rect x="120" y="115" width="440" height="115" rx="4" fill="#dde6dd" stroke="#2f6258" stroke-width="1.2"></rect> <text x="132" y="134" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">X(A<tspan baseline-shift="-0.3em" font-size="75%">K</tspan>)<tspan baseline-shift="0.5em" font-size="75%">ét,Br</tspan> 被覆まで検札（=降下）</text> <rect x="160" y="150" width="360" height="62" rx="4" fill="#f6ece9" stroke="#a23b2e" stroke-width="1.5"></rect> <text x="172" y="172" font-family="Georgia, serif" font-size="12.5" fill="#a23b2e">X(K) 本店在庫（大域有理点）</text> <text x="172" y="194" font-family="Georgia, serif" font-size="11.5" fill="#a23b2e">LAOX = 外は非空・ここが空</text> <!-- residents at the gaps --> <g font-family="Georgia, serif" font-size="11.5"> <text x="612" y="120" fill="#7a6a4f">⟵ Skorobogatov</text> <text x="612" y="135" fill="#7a6a4f">　双楕円曲面(’99)</text> <text x="572" y="172" fill="#7a6a4f">⟵ Poonen(’10)</text> <text x="265" y="245" fill="#7a6a4f">曲線：ここで空になると予想（Poonen・Stoll）</text> </g> <text x="20" y="292" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">(概念図) 空になる段が内側ほど「粗い障害では説明できない欠品」。曲線は最も粗い Br で足りると予想、曲面以上は内側の段が要る。</text>
 </svg>
 <hr>
 </section>
@@ -489,7 +525,7 @@ X(K)\ \subseteq\ X(\mathbb A_K)^{\text{ét,Br}}\ \subseteq\ X(\mathbb A_K)^{\mat
 <section id="査読限界事実の照合と線引き" class="level2">
 <h2 class="anchored" data-anchor-id="査読限界事実の照合と線引き">査読・限界(事実の照合と線引き)</h2>
 <p>★ は web 照合済み。</p>
-<p><strong>確立した事実(証明済み).</strong> - 障害の包含 <span class="math inline">X(K)\subseteq X(\mathbb A_K)^{\text{ét,Br}}\subseteq X(\mathbb A_K)^{\mathrm{Br}}\subseteq X(\mathbb A_K)</span> は定義から従う(相互法則・被覆の取り扱い)。 - <strong>Skorobogatov(1999)</strong>:Brauer–Manin で説明できない Hasse 原理の反例(双楕円曲面)を初めて構成 ★(<a href="https://link.springer.com/article/10.1007/s00209-015-1565-x">Pathologies of the Brauer–Manin obstruction, Math. Z.</a>)。 - <strong>エタール–Brauer 障害 = 降下障害</strong>(Skorobogatov 2009, Math. Ann.;Demarche 2009, ANT;Cao が反復降下=降下へ一般化)★(<a href="https://link.springer.com/article/10.1007/s00208-008-0314-4">Skorobogatov, Descent obstruction is equivalent to étale Brauer–Manin obstruction, Math. Ann.</a>)。 - <strong>Poonen(2010)</strong>:char <span class="math inline">\ne 2</span> の任意大域体上で、<span class="math inline">X(K)=\varnothing</span> が Brauer–Manin でもエタール–Brauer でも説明できない多様体を構成。“Insufficiency of the Brauer–Manin obstruction applied to étale covers,” <em>Ann. of Math.</em> <strong>171</strong>(3) (2010), 2157–2169 ★(<a href="https://arxiv.org/pdf/0806.1312">arXiv:0806.1312</a>;著者 <a href="https://math.mit.edu/~poonen/papers/cv.pdf">CV/著作リスト (MIT)</a>)。 - アーベル多様体のトーサーでは、<span class="math inline">\Sha</span> 有限性のもとで Brauer–Manin が Hasse 失敗を説明する(Manin)★(<a href="https://math.mit.edu/~poonen/papers/heuristic.pdf">Poonen, Heuristics …</a>)。</p>
+<p><strong>確立した事実(証明済み).</strong> - 障害の包含 <span class="math inline">X(K)\subseteq X(\mathbb A_K)^{\text{ét,Br}}\subseteq X(\mathbb A_K)^{\mathrm{Br}}\subseteq X(\mathbb A_K)</span> は定義から従う(相互法則・被覆の取り扱い)。 - <strong>Skorobogatov(1999)</strong>:Brauer–Manin で説明できない Hasse 原理の反例(双楕円曲面)を初めて構成 ★(原論文:Beyond the Manin obstruction, Invent. Math. <strong>135</strong> (1999) 399–424。「初めて」の二次の根拠:Colliot-Thélène–Pál–Skorobogatov, <a href="https://link.springer.com/article/10.1007/s00209-015-1565-x">Pathologies of the Brauer–Manin obstruction, Math. Z. <strong>282</strong> (2016)</a> の序論)。 - <strong>エタール–Brauer 障害 = 降下障害</strong>(Skorobogatov 2009, Math. Ann.;Demarche 2009, ANT;Cao が反復降下=降下へ一般化)★(<a href="https://link.springer.com/article/10.1007/s00208-008-0314-4">Skorobogatov, Descent obstruction is equivalent to étale Brauer–Manin obstruction, Math. Ann.</a>)。 - <strong>Poonen(2010)</strong>:char <span class="math inline">\ne 2</span> の任意大域体上で、<span class="math inline">X(K)=\varnothing</span> が Brauer–Manin でもエタール–Brauer でも説明できない多様体を構成。“Insufficiency of the Brauer–Manin obstruction applied to étale covers,” <em>Ann. of Math.</em> <strong>171</strong>(3) (2010), 2157–2169 ★(<a href="https://arxiv.org/pdf/0806.1312">arXiv:0806.1312</a>;著者 <a href="https://math.mit.edu/~poonen/papers/cv.pdf">CV/著作リスト (MIT)</a>)。 - アーベル多様体のトーサーでは、<span class="math inline">\Sha</span> 有限性のもとで Brauer–Manin が Hasse 失敗を説明する(Manin)★(<a href="https://math.mit.edu/~poonen/papers/heuristic.pdf">Poonen, Heuristics …</a>)。</p>
 <p><strong>未解決・予想(断言しない).</strong> - <strong>曲線</strong>に対し Brauer–Manin が唯一の障害か(数体上)は<strong>未解決</strong>(Poonen 2006・Stoll 2007 がそれぞれ予想)。関数体上は一般的仮定下で既知 ★(<a href="https://math.mit.edu/~poonen/papers/heuristic.pdf">Poonen, Heuristics …</a>;<a href="https://sites.math.washington.edu/~bviray/papers/CVV_BrdCurves.pdf">Creutz–Viray–Voloch</a>)。よって「次元 1 で梯子が <span class="math inline">\mathrm{Br}</span> 段に畳まれる」は予想であって定理ではない。 - <span class="math inline">\Sha</span> 有限性は一般には予想(BSD の一部)。</p>
 <p><strong>スコープと用語の限界.</strong> - 「LAOX 多様体 / BM-LAOX / non-BM-LAOX / 障害の梯子」は本稿群限りの俗称。検索・引用には Hasse principle / Brauer–Manin obstruction / étale-Brauer (descent) obstruction / Poonen’s example を用いること。 - <span class="math inline">X(\mathbb A_K)=\prod_v X(K_v)</span> は <span class="math inline">X</span> が固有(射影的)だから言える。非固有なら整点と有理点の区別が必要。本稿は滑らか・固有・幾何的整な多様体に限定。 - Poonen の例の次元:曲線上の Châtelet 曲面束として構成され <span class="math inline">2</span> を超える。エタール–Brauer でも足りない例は、のちに曲面でも構成された ★(<a href="https://arxiv.org/abs/1212.6019">Harpaz–Skorobogatov, Singular curves and the étale Brauer–Manin obstruction for surfaces, Ann. Sci. ÉNS 47 (2014)</a>)。§5 の階段は三つの例を並べたもので、段と次元は一対一ではない。 - 比喩について:「検札」「証明書」は障害(<span class="math inline">\mathrm{Br}</span>、ét-Br)の比喩で、それ以上の含意は持たせない。「降下」と「エタール–Brauer」を同一視したのは上記同値定理に基づく文字どおりの内容。</p>
 <hr>

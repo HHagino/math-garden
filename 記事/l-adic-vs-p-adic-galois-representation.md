@@ -11,11 +11,11 @@ abstract: |
 
 ## 1. 問題設定
 
-数論幾何において、絶対ガロワ群 G_K = Gal(K^sep/K) の連続表現
+数論幾何において、絶対ガロワ群 $G_K = \operatorname{Gal}(K^{\mathrm{sep}}/K)$ の連続表現
 
 $$ \rho \colon G_K \longrightarrow \operatorname{GL}_n(R) $$
 
-を考えるとき、係数環 R の取り方は本質的である。R = ℤ_l(または ℚ_l, 𝔽_l)とすることが多いが、ここで現れる素数 l と、基礎体 K の剰余標数 p との関係によって、世界の地形が劇的に変わる:
+を考えるとき、係数環 R の取り方は本質的である。$R = \mathbb{Z}_l$(または $\mathbb{Q}_l, \mathbb{F}_l$)とすることが多いが、ここで現れる素数 l と、基礎体 K の剰余標数 p との関係によって、世界の地形が劇的に変わる:
 
 - **l ≠ p**(係数素数と剰余標数が異なる): 表現論は線型代数の延長として扱える
 - **l = p**(両者が一致): 線型代数では済まず、**p 進ホッジ理論** という独自の領域が必要
@@ -25,14 +25,14 @@ $$ \rho \colon G_K \longrightarrow \operatorname{GL}_n(R) $$
   <g font-family="serif" font-size="10.5" fill="#2b2118">
     <text x="120" y="20" text-anchor="middle" font-size="11.5" fill="#2f5d7c">l ≠ p:線形代数の延長</text>
     <rect x="20" y="30" width="200" height="118" rx="5" fill="#eef5fa" stroke="#2f5d7c"/>
-    <text x="120" y="52" text-anchor="middle">エタールコホモロジー H^i_ét</text>
+    <text x="120" y="52" text-anchor="middle">エタールコホモロジー H<tspan baseline-shift="0.5em" font-size="75%">i</tspan><tspan baseline-shift="-0.3em" font-size="75%">ét</tspan></text>
     <text x="120" y="72" text-anchor="middle">Weil–Deligne 表現 (V,r,N)</text>
     <text x="120" y="92" text-anchor="middle">六関手・perverse sheaf</text>
     <text x="120" y="112" text-anchor="middle">Weil 予想・Frob 固有値</text>
     <text x="120" y="134" text-anchor="middle" font-size="9.5" fill="#8a7f6c">l に依らず綺麗に効く</text>
     <text x="350" y="20" text-anchor="middle" font-size="11.5" fill="#b1342a">l = p:p 進ホッジ理論</text>
     <rect x="250" y="30" width="200" height="118" rx="5" fill="#f6e7e3" stroke="#b1342a"/>
-    <text x="350" y="52" text-anchor="middle">Fontaine 周期環 B_dR,B_cris,B_st</text>
+    <text x="350" y="52" text-anchor="middle">Fontaine 周期環 B<tspan baseline-shift="-0.3em" font-size="75%">dR</tspan>,B<tspan baseline-shift="-0.3em" font-size="75%">cris</tspan>,B<tspan baseline-shift="-0.3em" font-size="75%">st</tspan></text>
     <text x="350" y="72" text-anchor="middle">de Rham/cris 比較定理</text>
     <text x="350" y="92" text-anchor="middle">弱許容 (φ,N)-加群</text>
     <text x="350" y="112" text-anchor="middle">prismatic・perfectoid</text>
@@ -57,7 +57,7 @@ $$ \rho \colon G_K \longrightarrow \operatorname{GL}_n(R) $$
 
 ### 2.1 絶対ガロワ群
 
-体 K の分離閉包 K^sep を一つ固定する。その絶対ガロワ群
+体 K の分離閉包 $K^{\mathrm{sep}}$ を一つ固定する。その絶対ガロワ群
 
 $$ G_K := \operatorname{Gal}(K^{\text{sep}}/K) = \varprojlim_{L/K \text{ finite Galois}} \operatorname{Gal}(L/K) $$
 
@@ -66,33 +66,33 @@ $$ G_K := \operatorname{Gal}(K^{\text{sep}}/K) = \varprojlim_{L/K \text{ finite 
 
 ### 2.2 分解群・惰性群・フロベニウス
 
-K が剰余体 k(K) を持つ完備離散付値体(局所体)で、剰余標数 p のとき、K^sep の付値の延長を一つ固定する。各延長は分解群
+K が剰余体 k(K) を持つ完備離散付値体(局所体)で、剰余標数 p のとき、$K^{\mathrm{sep}}$ の付値の延長を一つ固定する。各延長は分解群
 
 $$ D = \operatorname{Gal}(K^{\text{sep}}/K) $$
 
-(ここでは G_K と同一視)に対して惰性群 I ⊂ G_K を持ち、商
+(ここでは $G_K$ と同一視)に対して惰性群 $I ⊂ G_K$ を持ち、商
 
 $$ G_K / I \cong \operatorname{Gal}(\bar k/k) \cong \hat{\mathbb{Z}} $$
 
-を与える(k が有限体のとき)。この商の標準的な位相的生成元 x ↦ x^q(q = #k)の任意のリフトが **算術フロベニウス** Frob_K である(慣習で幾何的フロベニウスを使うこともある)。
+を与える(k が有限体のとき)。この商の標準的な位相的生成元 $x ↦ x^q(q = \#k)$の任意のリフトが **算術フロベニウス** $\operatorname{Frob}_K$ である(慣習で幾何的フロベニウスを使うこともある)。
 
-さらに惰性群 I は野生惰性群 P(p の Sylow プロ群)と分岐指数の方の商 I/P ≅ ∏_{q ≠ p} ℤ_q(tame 部分)に分かれる。
+さらに惰性群 I は野生惰性群 P(p の Sylow プロ群)と分岐指数の方の商 $I/P ≅ ∏_{q ≠ p} \mathbb{Z}_q$(tame 部分)に分かれる。
 
 > 関連: 分岐指数 e と剰余次数 f の Dedekind 環レベルの扱いは [`dedekind-e-extension-f-norm.md`](./dedekind-e-extension-f-norm.md)、有限/無限素点の対比は [`finite-infinite-primes-dirichlet-unit-theorem.md`](./finite-infinite-primes-dirichlet-unit-theorem.md)。
 
 ### 2.3 連続表現と Tate 加群
 
-具体的な G_K-加群の供給源として、楕円曲線 E/K の Tate 加群
+具体的な $G_K$-加群の供給源として、楕円曲線 E/K の Tate 加群
 
 $$ T_l(E) := \varprojlim_n E[l^n] \cong \mathbb{Z}_l^2 $$
 
-がある(l ≠ char K のとき)。ℤ_l 上自由なランク 2 加群で、G_K が自然に作用する。テンソルして ℚ_l 化したものが
+がある(l ≠ char K のとき)。$\mathbb{Z}_l$ 上自由なランク 2 加群で、$G_K$ が自然に作用する。テンソルして $\mathbb{Q}_l$ 化したものが
 
 $$ V_l(E) := T_l(E) \otimes_{\mathbb{Z}_l} \mathbb{Q}_l \cong \mathbb{Q}_l^2 $$
 
-であり、対応する ρ_{E,l}: G_K → GL_2(ℚ_l) が「楕円曲線の l 進ガロワ表現」である。
+であり、対応する $ρ_{E,l}: G_K → \operatorname{GL}_2(\mathbb{Q}_l)$ が「楕円曲線の l 進ガロワ表現」である。
 
-より一般に、滑らかな代数多様体 X/K のエタールコホモロジー H^i_ét(X_{K^sep}, ℚ_l) が標準的なガロワ表現を与える。
+より一般に、滑らかな代数多様体 X/K のエタールコホモロジー $H^i_{\text{ét}}(X_{K^{\mathrm{sep}}}, \mathbb{Q}_l)$ が標準的なガロワ表現を与える。
 
 > 関連: Tate 加群の具体的構成とエタールコホモロジーの動機は [`tate-module-and-etale-cohomology.md`](./tate-module-and-etale-cohomology.md)、Galois 群を線型代数的に扱う視点は [`galois-as-linear-algebra-eigenspace.md`](./galois-as-linear-algebra-eigenspace.md)、Jacobian の代数多様体としての扱いは [`jacobian-variety-divisor-of-points.md`](./jacobian-variety-divisor-of-points.md)。
 
@@ -102,11 +102,11 @@ $$ V_l(E) := T_l(E) \otimes_{\mathbb{Z}_l} \mathbb{Q}_l \cong \mathbb{Q}_l^2 $$
 
 $$ \chi_l \colon G_K \to \mathbb{Z}_l^\times $$
 
-で、これは G_K の 1 のべき乗根への作用
+で、これは $G_K$ の 1 のべき乗根への作用
 
 $$ \sigma(\zeta_{l^n}) = \zeta_{l^n}^{\chi_l(\sigma) \mod l^n} $$
 
-によって定義される。Tate 加群 ℤ_l(1) := lim μ_{l^n} の上の作用と言ってもよい。任意の G_K-加群 V に対して
+によって定義される。Tate 加群 $\mathbb{Z}_l(1) := \varprojlim_n μ_{l^n}$ の上の作用と言ってもよい。任意の $G_K$-加群 V に対して
 
 $$ V(n) := V \otimes_{\mathbb{Z}_l} \mathbb{Z}_l(1)^{\otimes n} $$
 
@@ -114,11 +114,11 @@ $$ V(n) := V \otimes_{\mathbb{Z}_l} \mathbb{Z}_l(1)^{\otimes n} $$
 
 ### 2.5 ガロワコホモロジー
 
-ガロワ表現 V に対する連続ガロワコホモロジー H^i(G_K, V) は、数論幾何の中心的不変量である。たとえば
+ガロワ表現 V に対する連続ガロワコホモロジー $H^i(G_K, V)$ は、数論幾何の中心的不変量である。たとえば
 
-- H^1(G_K, V): 拡大類、変形空間の接空間
-- H^2(G_K, (K^sep)^×): ブラウアー群 Br(K)(局所体のとき ℚ/ℤ そのもの)
-- Tate の局所双対性: H^i(G_K, V) と H^{2-i}(G_K, V^*(1)) の完全ペアリング
+- $H^1(G_K, V)$: 拡大類、変形空間の接空間
+- $H^2(G_K, (K^{\mathrm{sep}})^×)$: ブラウアー群 Br(K)(局所体のとき ℚ/ℤ そのもの)
+- Tate の局所双対性: $H^i(G_K, V)$ と $H^{2-i}(G_K, V^*(1))$ の完全ペアリング
 - 大域 Euler 標数公式(Tate)
 
 ガロワ表現を「分類」するとき、これらのコホモロジーが基本道具となる。
@@ -137,7 +137,7 @@ K を p 進局所体、l を p と異なる素数とする。
 
 $$ H^i_{\text{ét}}(X_{\bar K}, \mathbb{Q}_l) $$
 
-は有限次元 ℚ_l ベクトル空間で、G_K の連続作用を受ける。これが l ≠ p のときに「正しく」振る舞うエタールコホモロジーである。
+は有限次元 $\mathbb{Q}_l$ ベクトル空間で、$G_K$ の連続作用を受ける。これが l ≠ p のときに「正しく」振る舞うエタールコホモロジーである。
 
 ### 3.2 比較定理
 
@@ -151,15 +151,15 @@ $$ H^i_{\text{ét}}(X_{\mathbb{C}}, \mathbb{Q}_l) \cong H^i_{\text{sing}}(X(\mat
 
 K が p 進局所体で l ≠ p のとき、Grothendieck の局所モノドロミー定理が成り立つ:
 
-> 連続表現 ρ: G_K → GL_n(ℚ_l) に対して、惰性群 I_K の作用は **準ベキ単** (quasi-unipotent)。すなわち、開部分群 I' ⊂ I が存在して ρ(I') がベキ単(各元 g について g − 1 がベキ零)になる。
+> 連続表現 $ρ: G_K → \operatorname{GL}_n(\mathbb{Q}_l)$ に対して、惰性群 $I_K$ の作用は **準ベキ単** (quasi-unipotent)。すなわち、開部分群 I' ⊂ I が存在して ρ(I') がベキ単(各元 g について g − 1 がベキ零)になる。
 
 この定理により、ρ は **Weil-Deligne 表現** (V, r, N) として有限次元データで表せる:
 
-- r: Weil 群 W_K → GL(V) の表現で、惰性群の像 r(I_K) が有限(V に離散位相を入れて連続)
+- r: Weil 群 $W_K → \operatorname{GL}(V)$ の表現で、惰性群の像 $r(I_K)$ が有限(V に離散位相を入れて連続)
 - N: V 上のベキ零自己準同型(モノドロミー作用素)
-- 関係式: r(σ) N r(σ)^{-1} = ‖σ‖ N
+- 関係式: $r(σ) N r(σ)^{-1} = \|σ\| N$
 
-ここで W_K ⊂ G_K は Weil 群(惰性群 I_K と整数べきのフロベニウスで生成される稠密部分群)。ガロワ表現の連続性は ℚ_l 位相に依存していたが、Weil-Deligne 表現では惰性の作用が有限像の r と冪零な N に分かれ、ℚ_l の位相を使わない **代数的データ** になる。ただし V は依然として ℚ_l ベクトル空間で、r と N も ℚ_l 上のデータである。l を動かしたときに l によらない同じデータが得られるのは、幾何由来の表現の族のような特別な場合である(良還元なら、§3.4 のフロベニウスの特性多項式が l によらない)。
+ここで $W_K ⊂ G_K$ は Weil 群(惰性群 $I_K$ と整数べきのフロベニウスで生成される稠密部分群)。ガロワ表現の連続性は $\mathbb{Q}_l$ 位相に依存していたが、Weil-Deligne 表現では惰性の作用が有限像の r と冪零な N に分かれ、$\mathbb{Q}_l$ の位相を使わない **代数的データ** になる。ただし V は依然として $\mathbb{Q}_l$ ベクトル空間で、r と N も $\mathbb{Q}_l$ 上のデータである。l を動かしたときに l によらない同じデータが得られるのは、幾何由来の表現の族のような特別な場合である(良還元なら、§3.4 のフロベニウスの特性多項式が l によらない)。
 
 ### 3.4 フロベニウスのトレースと L 関数
 
@@ -167,11 +167,11 @@ X/K が良還元 (good reduction) を持つとき、フロベニウスのトレ�
 
 $$ a_i := \operatorname{tr}(\operatorname{Frob}_K | H^i_{\text{ét}}(X_{\bar K}, \mathbb{Q}_l)) $$
 
-(この節の Frob_K・Frob_v は幾何的フロベニウス、すなわち §2.2 の算術フロベニウスの逆元)は l に依存しない有理整数で、しかも Weil 予想(Deligne, 1974)により、Frob_K の H^i 上の固有値 α_{i,j} は代数的整数で、どの複素埋め込みでも
+(この節の $\operatorname{Frob}_K$・$\operatorname{Frob}_v$ は幾何的フロベニウス、すなわち §2.2 の算術フロベニウスの逆元)は l に依存しない有理整数で、しかも Weil 予想(Deligne, 1974)により、$\operatorname{Frob}_K$ の $H^i$ 上の固有値 $α_{i,j}$ は代数的整数で、どの複素埋め込みでも
 
 $$ |\alpha_{i,j}| = q_K^{i/2} $$
 
-(q_K は剰余体の位数)を満たす。この絶対値の条件は固有値ごとのもので、その和であるトレース a_i には当てはまらない。たとえば K = ℚ_5 上で良還元を持つ楕円曲線 y^2 = x^3 - x を剰余体 𝔽_5 で数えると点は 8 個で、H^1 のトレースは 5 + 1 - 8 = -2、固有値は -1 ± 2i(絶対値 √5)だが、|-2| ≠ √5 である。これにより次数 i のコホモロジーの局所 L 因子
+($q_K$ は剰余体の位数)を満たす。この絶対値の条件は固有値ごとのもので、その和であるトレース $a_i$ には当てはまらない。たとえば $K = \mathbb{Q}_5$ 上で良還元を持つ楕円曲線 $y^2 = x^3 - x$ を剰余体 $\mathbb{F}_5$ で数えると点は 8 個で、$H^1$ のトレースは 5 + 1 - 8 = -2、固有値は -1 ± 2i(絶対値 √5)だが、|-2| ≠ √5 である。これにより次数 i のコホモロジーの局所 L 因子
 
 $$ L_v(H^i(X), s) = \det(1 - \operatorname{Frob}_v q_v^{-s} | H^i_{\text{ét}}(X_{\bar K_v}, \mathbb{Q}_l))^{-1} $$
 
@@ -179,19 +179,19 @@ $$ L_v(H^i(X), s) = \det(1 - \operatorname{Frob}_v q_v^{-s} | H^i_{\text{ét}}(X
 
 $$ L(H^i(X), s) = \prod_v L_v(H^i(X), s) $$
 
-で定義され、関数等式、解析接続、特殊値の問題が中心問題となる。X 自身のゼータ関数は一つの次数からは作れず、全次数の因子の交代積 ∏_i L(H^i(X), s)^{(-1)^i} になる。たとえば X = ℙ^1 は H^1 = 0 だが、そのゼータ関数 1/((1 - q^{-s})(1 - q^{1-s})) は 0 次と 2 次の因子からなる(𝔽_q 上)。
+で定義され、関数等式、解析接続、特殊値の問題が中心問題となる。X 自身のゼータ関数は一つの次数からは作れず、全次数の因子の交代積 $∏_i L(H^i(X), s)^{(-1)^i}$ になる。たとえば $X = \mathbb{P}^1$ は $H^1 = 0$ だが、そのゼータ関数 $1/((1 - q^{-s})(1 - q^{1-s}))$ は 0 次と 2 次の因子からなる($\mathbb{F}_q$ 上)。
 
 ### 3.5 大域: Chebotarev とテンソル積定理
 
-大域体 K = 数体上の幾何的なガロワ表現 ρ: G_K → GL_n(ℚ_l)(代数多様体のエタールコホモロジーから来るもの)は、有限個を除く素点で不分岐 (unramified)。Chebotarev 密度定理により、不分岐素点でのフロベニウス共役類(Frob_v は v の上の素点の選び方で共役だけ動く)の像の和集合が ρ(G_K) の中で稠密。したがってフロベニウスのトレースの族 {tr ρ(Frob_v)}_v が ρ の半単純化を決定する(Brauer–Nesbitt の定理と Chebotarev 密度定理)。
+大域体 K = 数体上の幾何的なガロワ表現 $ρ: G_K → \operatorname{GL}_n(\mathbb{Q}_l)$(代数多様体のエタールコホモロジーから来るもの)は、有限個を除く素点で不分岐 (unramified)。Chebotarev 密度定理により、不分岐素点でのフロベニウス共役類($\operatorname{Frob}_v$ は v の上の素点の選び方で共役だけ動く)の像の和集合が $ρ(G_K)$ の中で稠密。したがってフロベニウスのトレースの族 $\{\operatorname{tr} ρ(\operatorname{Frob}_v)\}_v$ が ρ の半単純化を決定する(Brauer–Nesbitt の定理と Chebotarev 密度定理)。
 
-ここから Galois 表現の「Tannakian な」記述が可能になり、motivic Galois group や Langlands 対応の構成的部分(局所版は Harris-Taylor、Henniart、Scholze; 関数体上の大域版は GL_n の場合 Laurent Lafforgue、一般の簡約群の保型→ガロワの向きは Vincent Lafforgue。数体上の大域版は未解決)が機能する。
+ここから Galois 表現の「Tannakian な」記述が可能になり、motivic Galois group や Langlands 対応の構成的部分(局所版は Harris-Taylor、Henniart、Scholze; 関数体上の大域版は $\operatorname{GL}_n$ の場合 Laurent Lafforgue、一般の簡約群の保型→ガロワの向きは Vincent Lafforgue。数体上の大域版は未解決)が機能する。
 
 ### 3.6 l 進局所系と層
 
-エタールサイト X_ét 上の l 進層 (lisse l-adic sheaf) は、π_1(X)^ét → GL_n(ℚ_l) の連続表現と等価。l ≠ p の世界では、Grothendieck の六関手主義 (six functor formalism) が完備で、Verdier 双対や直像・逆像が綺麗に効く。これが Beilinson-Bernstein-Deligne の perverse sheaf 論や、Lafforgue の Langlands 対応の証明の基盤となる。
+エタールサイト $X_{\text{ét}}$ 上の l 進層 (lisse l-adic sheaf) は、$π_1(X)^{\text{ét}} → \operatorname{GL}_n(\mathbb{Q}_l)$ の連続表現と等価。l ≠ p の世界では、Grothendieck の六関手主義 (six functor formalism) が完備で、Verdier 双対や直像・逆像が綺麗に効く。これが Beilinson-Bernstein-Deligne の perverse sheaf 論や、Lafforgue の Langlands 対応の証明の基盤となる。
 
-l = p では、標数 p の多様体や 𝒪_K 上のモデル(p が可逆でないところ)でこの形式主義の多くが破綻し、対応物として **prismatic site** が近年(Bhatt-Scholze, 2018-)整備されつつある(K 上の多様体そのものでは p が可逆なので、ℚ_p 係数でもエタール層の形式主義は働く)。
+l = p では、標数 p の多様体や $\mathcal{O}_K$ 上のモデル(p が可逆でないところ)でこの形式主義の多くが破綻し、対応物として **prismatic site** が近年(Bhatt-Scholze, 2018-)整備されつつある(K 上の多様体そのものでは p が可逆なので、$\mathbb{Q}_p$ 係数でもエタール層の形式主義は働く)。
 
 > 関連: l 進エタールコホモロジーの Tate 加群を出発点とする入門は [`tate-module-and-etale-cohomology.md`](./tate-module-and-etale-cohomology.md)。
 
@@ -203,11 +203,11 @@ K を p 進局所体、係数も同じ素数 p で取る。
 
 ### 4.1 困難の所在
 
-形式的には H^i_ét(X_{\bar K}, ℚ_p) を定義することはできる。しかし
+形式的には $H^i_{\text{ét}}(X_{\bar K}, \mathbb{Q}_p)$ を定義することはできる。しかし
 
 - 標数 p の有限体への還元と整合させようとすると、表現論的に「正しい」情報を保たない
 - 比較定理が単純な形では成立しない
-- 例: 楕円曲線 E/ℚ_p について、H^1_ét(E_{\bar{ℚ}_p}, ℚ_p) は ℚ_p^2 だが、その G_{ℚ_p} 加群構造は de Rham コホモロジーや crystalline コホモロジーと "比較" して初めて精緻に解読できる
+- 例: 楕円曲線 $E/\mathbb{Q}_p$ について、$H^1_{\text{ét}}(E_{\bar{\mathbb{Q}}_p}, \mathbb{Q}_p)$ は $\mathbb{Q}_p^2$ だが、その $G_{\mathbb{Q}_p}$ 加群構造は de Rham コホモロジーや crystalline コホモロジーと "比較" して初めて精緻に解読できる
 
 p 進ガロワ表現の研究は、エタール側だけでは閉じない。
 
@@ -219,28 +219,28 @@ $$ \mathbb{Q}_p \subset B_{\text{cris}} \subset B_{\text{st}} \subset B_{\text{d
 
 各々の構成は技術的だが、概要:
 
-- **B_dR**(de Rham 周期環): ℂ_p の完備化に類似の構成、自然なフィルター F^i B_dR を持つ離散付値体
-- **B_HT**(Hodge-Tate 周期環): ⊕_{i ∈ ℤ} ℂ_p(i)、最も粗い
-- **B_cris**(crystalline 周期環): フロベニウス φ を持つ
-- **B_st**(semistable 周期環): モノドロミー作用素 N と φ を持つ、N φ = p φ N
+- **$B_{\mathrm{dR}}$**(de Rham 周期環): $\mathbb{C}_p$ の完備化に類似の構成、自然なフィルター $F^i B_{\mathrm{dR}}$ を持つ離散付値体
+- **$B_{\mathrm{HT}}$**(Hodge-Tate 周期環): $\bigoplus_{i ∈ \mathbb{Z}} \mathbb{C}_p(i)$、最も粗い
+- **$B_{\mathrm{cris}}$**(crystalline 周期環): フロベニウス φ を持つ
+- **$B_{\mathrm{st}}$**(semistable 周期環): モノドロミー作用素 N と φ を持つ、N φ = p φ N
 
-全てに G_{ℚ_p} が自然に連続作用する。これらは p 進的な「周期積分」を係数として実現したものと見なせる。
+全てに $G_{\mathbb{Q}_p}$ が自然に連続作用する。これらは p 進的な「周期積分」を係数として実現したものと見なせる。
 
 ### 4.3 比較定理
 
-X/ℚ_p を滑らかな射影多様体とする。
+$X/\mathbb{Q}_p$ を滑らかな射影多様体とする。
 
 **de Rham 比較**(Faltings, Niziol, Tsuji):
 
 $$ H^i_{\text{ét}}(X_{\bar{\mathbb{Q}}_p}, \mathbb{Q}_p) \otimes_{\mathbb{Q}_p} B_{\text{dR}} \cong H^i_{\text{dR}}(X/\mathbb{Q}_p) \otimes_{\mathbb{Q}_p} B_{\text{dR}} $$
 
-(G_{ℚ_p} 同変, フィルター付き同型)
+($G_{\mathbb{Q}_p}$ 同変, フィルター付き同型)
 
 **crystalline 比較**(良還元のとき):
 
 $$ H^i_{\text{ét}}(X_{\bar{\mathbb{Q}}_p}, \mathbb{Q}_p) \otimes_{\mathbb{Q}_p} B_{\text{cris}} \cong H^i_{\text{cris}}(X_0/\mathbb{Z}_p) \otimes_{\mathbb{Z}_p} B_{\text{cris}} $$
 
-ここで X_0 は X の特殊ファイバー、H^i_cris は crystalline コホモロジー。
+ここで $X_0$ は X の特殊ファイバー、$H^i_{\mathrm{cris}}$ は crystalline コホモロジー。
 
 これらの比較定理によって、p 進ガロワ表現は線型代数的データ(フィルター付き (φ, N)-加群)に翻訳される。
 
@@ -256,18 +256,18 @@ $$ \text{crystalline} \subset \text{semistable} \subset \text{de Rham} \subset \
 
 に従って表現が分類される:
 
-- **Hodge-Tate**: V ⊗ ℂ_p が ⊕ ℂ_p(i_j) と分解(Hodge-Tate 重み)
-- **de Rham**: dim_K D_dR(V) = dim_{ℚ_p} V
-- **semistable**: dim_{K_0} D_st(V) = dim_{ℚ_p} V(N, φ 構造込み。K_0 = W(k)[1/p] は K の最大不分岐部分体)
-- **crystalline**: dim_{K_0} D_cris(V) = dim_{ℚ_p} V
+- **Hodge-Tate**: $V ⊗ \mathbb{C}_p$ が $\bigoplus \mathbb{C}_p(i_j)$ と分解(Hodge-Tate 重み)
+- **de Rham**: $\dim_K D_{\mathrm{dR}}(V) = \dim_{\mathbb{Q}_p} V$
+- **semistable**: $\dim_{K_0} D_{\mathrm{st}}(V) = \dim_{\mathbb{Q}_p} V$(N, φ 構造込み。$K_0 = W(k)[1/p]$ は K の最大不分岐部分体)
+- **crystalline**: $\dim_{K_0} D_{\mathrm{cris}}(V) = \dim_{\mathbb{Q}_p} V$
 
 <figure>
 <svg viewBox="0 0 440 184" width="100%" style="max-width:440px;display:block;margin:8px auto" role="img" aria-label="p進ガロワ表現の分類の階層">
   <g font-family="serif" font-size="10.5" fill="#2b2118">
-    <rect x="20" y="16" width="400" height="152" rx="6" fill="#fbf6ec" stroke="#6b5d44"/><text x="220" y="34" text-anchor="middle" font-size="10.5" fill="#6b5d44">Hodge–Tate(V⊗ℂ_p が ⊕ℂ_p(i) に分解)</text>
-    <rect x="44" y="44" width="352" height="116" rx="5" fill="#f4ede0" stroke="#8a7f6c"/><text x="220" y="62" text-anchor="middle" fill="#8a7f6c">de Rham(D_dR が満次元)── 幾何起源(Faltings)</text>
-    <rect x="70" y="72" width="300" height="80" rx="4" fill="#eef5fa" stroke="#2f5d7c"/><text x="220" y="90" text-anchor="middle" fill="#2f5d7c">semistable(D_st、N・φ 構造)── 半安定還元</text>
-    <rect x="100" y="100" width="240" height="44" rx="4" fill="#eef1ea" stroke="#5a6e4a"/><text x="220" y="120" text-anchor="middle" fill="#5a6e4a">crystalline(D_cris、N=0)</text>
+    <rect x="20" y="16" width="400" height="152" rx="6" fill="#fbf6ec" stroke="#6b5d44"/><text x="220" y="34" text-anchor="middle" font-size="10.5" fill="#6b5d44">Hodge–Tate(V⊗ℂ<tspan baseline-shift="-0.3em" font-size="75%">p</tspan> が ⊕ℂ<tspan baseline-shift="-0.3em" font-size="75%">p</tspan>(i) に分解)</text>
+    <rect x="44" y="44" width="352" height="116" rx="5" fill="#f4ede0" stroke="#8a7f6c"/><text x="220" y="62" text-anchor="middle" fill="#8a7f6c">de Rham(D<tspan baseline-shift="-0.3em" font-size="75%">dR</tspan> が満次元)── 幾何起源(Faltings)</text>
+    <rect x="70" y="72" width="300" height="80" rx="4" fill="#eef5fa" stroke="#2f5d7c"/><text x="220" y="90" text-anchor="middle" fill="#2f5d7c">semistable(D<tspan baseline-shift="-0.3em" font-size="75%">st</tspan>、N・φ 構造)── 半安定還元</text>
+    <rect x="100" y="100" width="240" height="44" rx="4" fill="#eef1ea" stroke="#5a6e4a"/><text x="220" y="120" text-anchor="middle" fill="#5a6e4a">crystalline(D<tspan baseline-shift="-0.3em" font-size="75%">cris</tspan>、N=0)</text>
     <text x="220" y="138" text-anchor="middle" font-size="9.5" fill="#8a7f6c">良還元から来る</text>
   </g>
 </svg>
@@ -278,7 +278,7 @@ $$ \text{crystalline} \subset \text{semistable} \subset \text{de Rham} \subset \
 
 ### 4.5 弱許容加群と Colmez-Fontaine
 
-逆方向: フィルター付き (φ, N)-加群 D から p 進 ガロワ表現 V_st(D) を作る関手が存在する。Colmez-Fontaine (2000) の定理:
+逆方向: フィルター付き (φ, N)-加群 D から p 進 ガロワ表現 $V_{\mathrm{st}}(D)$ を作る関手が存在する。Colmez-Fontaine (2000) の定理:
 
 > 弱許容 (weakly admissible) フィルター付き (φ, N)-加群と semistable p 進ガロワ表現は圏同値。
 
@@ -288,7 +288,7 @@ $$ \text{crystalline} \subset \text{semistable} \subset \text{de Rham} \subset \
 
 Tate (1967) の予想として始まり、Faltings (1988) が証明した:
 
-> p 進体 K(ℚ_p の有限次拡大)上の滑らかな射影多様体 X に対し、自然な G_K-同変同型
+> p 進体 K($\mathbb{Q}_p$ の有限次拡大)上の滑らかな射影多様体 X に対し、自然な $G_K$-同変同型
 
 $$ H^n_{\text{ét}}(X_{\bar K}, \mathbb{Q}_p) \otimes_{\mathbb{Q}_p} \mathbb{C}_p \cong \bigoplus_{i+j=n} H^j(X, \Omega^i_{X/K}) \otimes_K \mathbb{C}_p(-i). $$
 
@@ -302,7 +302,7 @@ p 進と l 進の差異を、最も古典的な場面 — 巡回拡大の構成 
 
 ### 5.1 Kummer 理論(標数が n と素)
 
-体 K が原始 n 乗根 ζ_n を含み、char(K) ∤ n とする。次の自然な完全列(Kummer 完全列)
+体 K が原始 n 乗根 $ζ_n$ を含み、char(K) ∤ n とする。次の自然な完全列(Kummer 完全列)
 
 $$ 1 \to \mu_n \to K^{\text{sep},\times} \xrightarrow{x \mapsto x^n} K^{\text{sep},\times} \to 1 $$
 
@@ -310,15 +310,15 @@ $$ 1 \to \mu_n \to K^{\text{sep},\times} \xrightarrow{x \mapsto x^n} K^{\text{se
 
 $$ H^1(G_K, \mu_n) \cong K^\times / (K^\times)^n. $$
 
-このため K の指数 n の有限 abelian 拡大は K^\times / (K^\times)^n の有限部分群 Δ と一対一対応し(Δ ↔ K(√[n]{Δ}))、巡回拡大は K(√[n]{a}) の形を取る。
+このため K の指数 n の有限 abelian 拡大は $K^\times / (K^\times)^n$ の有限部分群 Δ と一対一対応し(Δ ↔ K(√[n]{Δ}))、巡回拡大は K(√[n]{a}) の形を取る。
 
-要点: **Kummer 理論は K の乗法群 K^\times を扱う。乗法的、(局所体なら K^\times / (K^\times)^n は有限で)計算しやすい**。
+要点: **Kummer 理論は K の乗法群 $K^\times$ を扱う。乗法的、(局所体なら $K^\times / (K^\times)^n$ は有限で)計算しやすい**。
 
 > 関連: Kummer 拡大は可解群 → ラジカル可解性の連鎖の最後の段階を成す。可解群の Galois 理論的特徴づけは [`solvable-group-radical-solvability-galois.md`](./solvable-group-radical-solvability-galois.md)、5 次方程式の可解性分類は [`galois-quintic-solvable-classification.md`](./galois-quintic-solvable-classification.md)。
 
 ### 5.2 Artin-Schreier 理論(標数 p, 指数 p)
 
-K が標数 p の体のとき、x^p = a 型の方程式は分離拡大を作らない(x^p - a = (x - a^{1/p})^p と重根になり、a が p 乗でなければ純非分離拡大になる)。代わりに
+K が標数 p の体のとき、$x^p = a$ 型の方程式は分離拡大を作らない($x^p - a = (x - a^{1/p})^p$ と重根になり、a が p 乗でなければ純非分離拡大になる)。代わりに
 
 $$ \wp \colon K \to K, \quad \wp(x) := x^p - x $$
 
@@ -330,15 +330,15 @@ $$ 0 \to \mathbb{F}_p \to K^{\text{sep}} \xrightarrow{\wp} K^{\text{sep}} \to 0.
 
 $$ H^1(G_K, \mathbb{F}_p) \cong K / \wp(K). $$
 
-K の p 次巡回拡大は K / ℘(K) の 1 次元 𝔽_p 部分空間 ⟨a⟩ と一対一対応し、各拡大は K(α) (℘(α) = a) の形である。
+K の p 次巡回拡大は K / ℘(K) の 1 次元 $\mathbb{F}_p$ 部分空間 ⟨a⟩ と一対一対応し、各拡大は K(α) (℘(α) = a) の形である。
 
 要点: **Artin-Schreier 理論は K の加法群を扱う。加法的、(局所体なら)無限次元(指数 p の場合)**。
 
 Kummer 理論が乗法的だったのに対し、Artin-Schreier 理論は加法的に振る舞う。標数 p の体ではこれが p に関するガロワ理論の標準である。
 
-### 5.3 Artin-Schreier-Witt 理論(p^n 次)
+### 5.3 Artin-Schreier-Witt 理論($p^n$ 次)
 
-p^n 次の巡回拡大を扱うには、Witt ベクトル環 W_n(K) を用いた
+$p^n$ 次の巡回拡大を扱うには、Witt ベクトル環 $W_n(K)$ を用いた
 
 $$ \wp \colon W_n(K) \to W_n(K), \quad \wp(\mathbf{x}) := F(\mathbf{x}) - \mathbf{x} $$
 
@@ -346,15 +346,15 @@ $$ \wp \colon W_n(K) \to W_n(K), \quad \wp(\mathbf{x}) := F(\mathbf{x}) - \mathb
 
 $$ 0 \to \mathbb{Z}/p^n\mathbb{Z} \to W_n(K^{\text{sep}}) \xrightarrow{\wp} W_n(K^{\text{sep}}) \to 0. $$
 
-これにより H^1(G_K, ℤ/p^n) ≅ W_n(K)/℘W_n(K)。Witt ベクトルの計算は明示的だが煩雑(典型例として加法則が多項式的に複雑)。
+これにより $H^1(G_K, \mathbb{Z}/p^n) ≅ W_n(K)/℘W_n(K)$。Witt ベクトルの計算は明示的だが煩雑(典型例として加法則が多項式的に複雑)。
 
 > 関連: Witt ベクトル環の明示的構成と Artin-Schreier-Witt 完全列の独立扱いは [`witt-vectors-artin-schreier-witt.md`](./witt-vectors-artin-schreier-witt.md)。
 
 ### 5.4 Lubin-Tate 形式群による局所類体論
 
-局所体 K(剰余体は有限で標数 p。混標数でも等標数でもよい)の最大 abel 拡大 K^ab の明示的構成は、Lubin-Tate 理論によって与えられる:
+局所体 K(剰余体は有限で標数 p。混標数でも等標数でもよい)の最大 abel 拡大 $K^{\mathrm{ab}}$ の明示的構成は、Lubin-Tate 理論によって与えられる:
 
-K の素元 π を固定し、対応する Lubin-Tate 形式群法則 F(X, Y) ∈ 𝒪_K[[X, Y]] を構成する。F の π べきにおける torsion 点
+K の素元 π を固定し、対応する Lubin-Tate 形式群法則 $F(X, Y) ∈ \mathcal{O}_K[[X, Y]]$ を構成する。F の π べきにおける torsion 点
 
 $$ F[\pi^n] := \{\alpha \in \mathfrak{m}_{\bar K} \mid [\pi^n]_F(\alpha) = 0\} $$
 
@@ -362,9 +362,9 @@ $$ F[\pi^n] := \{\alpha \in \mathfrak{m}_{\bar K} \mid [\pi^n]_F(\alpha) = 0\} $
 
 $$ K \subset K_1 \subset K_2 \subset \cdots, \quad K_n = K(F[\pi^n]) $$
 
-を得る。ここで 𝒢al(K_n/K) ≅ (𝒪_K/π^n)^×。これと不分岐拡大の塔(剰余体側の Frobenius)の合成で K^ab 全体が記述される。
+を得る。ここで $\operatorname{Gal}(K_n/K) ≅ (\mathcal{O}_K/π^n)^×$。これと不分岐拡大の塔(剰余体側の Frobenius)の合成で $K^{\mathrm{ab}}$ 全体が記述される。
 
-Lubin-Tate 形式群は、局所体における「乗法群 𝔾_m の高次類似」と見なせる。ℚ_p の円分拡大が 𝔾_m の torsion(1 のべき乗根)の添加で作られるのと並行する構造である(K = ℚ_p, π = p なら Lubin-Tate 形式群は 𝔾_m の形式群そのもの)。等標数の F_p((t)) 上では Carlitz module や Drinfeld module が類似の役割を果たす。
+Lubin-Tate 形式群は、局所体における「乗法群 $\mathbb{G}_m$ の高次類似」と見なせる。$\mathbb{Q}_p$ の円分拡大が $\mathbb{G}_m$ の torsion(1 のべき乗根)の添加で作られるのと並行する構造である($K = \mathbb{Q}_p, π = p$ なら Lubin-Tate 形式群は $\mathbb{G}_m$ の形式群そのもの)。等標数の $F_p((t))$ 上では Carlitz module や Drinfeld module が類似の役割を果たす。
 
 > 関連: イデアル類群と Hilbert 類体の反変的視点は [`ideal-contravariance-hilbert-class-field.md`](./ideal-contravariance-hilbert-class-field.md)。
 
@@ -376,8 +376,8 @@ Lubin-Tate 形式群は、局所体における「乗法群 𝔾_m の高次類�
 
 完備離散付値体 K の二種類:
 
-- **混標数**: char(K) = 0, char(剰余体) = p > 0。典型例: ℚ_p, ℚ_p の有限拡大
-- **等標数**: char(K) = char(剰余体) = p > 0。典型例: 𝔽_p((t)), 完全 (perfect) でない剰余体の場合は 𝔽_p(u)((t))(剰余体 𝔽_p(u))など
+- **混標数**: char(K) = 0, char(剰余体) = p > 0。典型例: $\mathbb{Q}_p$, $\mathbb{Q}_p$ の有限拡大
+- **等標数**: char(K) = char(剰余体) = p > 0。典型例: $\mathbb{F}_p((t))$, 完全 (perfect) でない剰余体の場合は $\mathbb{F}_p(u)((t))$(剰余体 $\mathbb{F}_p(u)$)など
 
 両者は数論的に並行する側面(p 進ホッジ理論の rigid analytic geometry, 形式群論)を持つ一方、決定的な差もある。
 
@@ -388,7 +388,7 @@ Lubin-Tate 形式群は、局所体における「乗法群 𝔾_m の高次類�
 完備離散付値体の剰余体が **完全 (perfect)** でないことがある(等標数 p の高次元局所体に典型だが、混標数でも起こる)。このとき:
 
 - Frobenius が剰余体上で全射でない
-- 加法的 Kähler 微分 Ω^1 が非自明な役割を果たす
+- 加法的 Kähler 微分 $Ω^1$ が非自明な役割を果たす
 - de Rham-Witt 複体の構造が混標数の場合と異なる
 
 これは現代的な p 進ホッジ理論の難所の一つで、Scholze の perfectoid 理論や Bhatt-Morrow-Scholze の積分的 p 進ホッジ理論が大きな進展を与えた。
@@ -397,7 +397,7 @@ Lubin-Tate 形式群は、局所体における「乗法群 𝔾_m の高次類�
 
 Fontaine-Wintenberger (1979) の根本的観察:
 
-> K を混標数局所体、L/K を **strictly arithmetically profinite (APF)** 無限分岐拡大とする(典型例: 円分塔 K_∞ = ∪ K(ζ_{p^n}))。このとき、L の「ノルム体」 X_K(L) が定義でき、これは等標数 p の局所体である。さらに、両者の絶対ガロワ群は同型:
+> K を混標数局所体、L/K を **strictly arithmetically profinite (APF)** 無限分岐拡大とする(典型例: 円分塔 $K_∞ = \bigcup K(ζ_{p^n})$)。このとき、L の「ノルム体」 $X_K(L)$ が定義でき、これは等標数 p の局所体である。さらに、両者の絶対ガロワ群は同型:
 
 $$ G_L \cong G_{X_K(L)}. $$
 
@@ -407,9 +407,9 @@ $$ G_L \cong G_{X_K(L)}. $$
 
 Scholze の perfectoid 理論は、上の Fontaine-Wintenberger 構成を **空間レベル** に拡張した革命的な発見である。
 
-**Perfectoid 体** K: 値群が離散でない完備非アルキメデス付値体で、𝒪_K/p 上で Frobenius x ↦ x^p が全射なもの(混標数の典型例: ℚ_p(p^{1/p^∞}) の完備化、ℂ_p)。
+**Perfectoid 体** K: 値群が離散でない完備非アルキメデス付値体で、$\mathcal{O}_K/p$ 上で Frobenius $x ↦ x^p$ が全射なもの(混標数の典型例: $\mathbb{Q}_p(p^{1/p^∞})$ の完備化、$\mathbb{C}_p$)。
 
-**Tilting**: K^♭ := lim_{x ↦ x^p} K(積位相)。これは標数 p の perfectoid 体。
+**Tilting**: $K^♭ := \varprojlim_{x ↦ x^p} K$(積位相)。これは標数 p の perfectoid 体。
 
 主要定理(Scholze):
 
@@ -431,17 +431,17 @@ $$ \text{Perfectoid 空間}(K) \xleftrightarrow{\sim} \text{Perfectoid 空間}(K
 
 $$ \operatorname{Gal}(\mathbb{C}/\mathbb{R}) = \langle c \rangle \cong \mathbb{Z}/2\mathbb{Z} $$
 
-(c は複素共役)。これが「無限素点 ∞ の局所ガロワ群」である。ℝ への各埋め込み K ↪ ℝ ごとに G_K 内に「∞ における分解群」を持ち、その作用が複素共役。
+(c は複素共役)。これが「無限素点 ∞ の局所ガロワ群」である。ℝ への各埋め込み K ↪ ℝ ごとに $G_K$ 内に「∞ における分解群」を持ち、その作用が複素共役。
 
 > 関連: 有限素点と無限素点の対比 (Dirichlet の単数定理経由) は [`finite-infinite-primes-dirichlet-unit-theorem.md`](./finite-infinite-primes-dirichlet-unit-theorem.md)。
 
 ### 7.2 Hodge 構造とその混合版
 
-ℂ 上の滑らかで固有な(たとえば滑らかな射影)代数多様体 X に対し、特異コホモロジー H^n(X(ℂ), ℂ) は重さ n の **純 Hodge 構造** を持つ:
+ℂ 上の滑らかで固有な(たとえば滑らかな射影)代数多様体 X に対し、特異コホモロジー $H^n(X(\mathbb{C}), \mathbb{C})$ は重さ n の **純 Hodge 構造** を持つ:
 
 $$ H^n(X(\mathbb{C}), \mathbb{C}) = \bigoplus_{p+q=n} H^{p,q}(X), \quad \overline{H^{p,q}} = H^{q,p}. $$
 
-これに対応する実構造は Gal(ℂ/ℝ) 作用と整合する。Deligne (1971-74) の混合 Hodge 理論はこれを特異・非コンパクト多様体に拡張し、混合 Hodge 構造の概念を与えた。固有性を外すと純性は崩れる。たとえば X = ℂ^× では H^1 は 1 次元で、対数形式 dz/z が代表する型 (1,1)、重さ 2 の部分であり、p+q = 1 の分解にはならない。
+これに対応する実構造は Gal(ℂ/ℝ) 作用と整合する。Deligne (1971-74) の混合 Hodge 理論はこれを特異・非コンパクト多様体に拡張し、混合 Hodge 構造の概念を与えた。固有性を外すと純性は崩れる。たとえば $X = \mathbb{C}^×$ では $H^1$ は 1 次元で、対数形式 dz/z が代表する型 (1,1)、重さ 2 の部分であり、p+q = 1 の分解にはならない。
 
 ### 7.3 p 進 Hodge との対応
 
@@ -449,9 +449,9 @@ p 進 Hodge 理論 ↔ 古典的 Hodge 理論の対応辞書(粗く):
 
 | アルキメデス側 | p 進側 |
 |---|---|
-| Hodge 構造 (H^{p,q}) | Hodge-Tate 重み |
+| Hodge 構造 $(H^{p,q})$ | Hodge-Tate 重み |
 | 複素共役の作用 | Frobenius φ |
-| 実構造 | 自己同型 G_{ℚ_p} 作用 |
+| 実構造 | 自己同型 $G_{\mathbb{Q}_p}$ 作用 |
 | 混合 Hodge 構造 | de Rham 表現の階層構造 |
 | ヤコビアン周期積分 | Fontaine の周期環 |
 
@@ -459,11 +459,11 @@ p 進 Hodge 理論 ↔ 古典的 Hodge 理論の対応辞書(粗く):
 
 ### 7.4 L 関数とアルキメデス・ファクター
 
-大域 L 関数 L(H^i(X), s) には有限素点からの Euler 因子(§3.4 参照)に加えてアルキメデス因子 L_∞(H^i(X), s) が必要である。たとえば Riemann zeta なら
+大域 L 関数 $L(H^i(X), s)$ には有限素点からの Euler 因子(§3.4 参照)に加えてアルキメデス因子 $L_∞(H^i(X), s)$ が必要である。たとえば Riemann zeta なら
 
 $$ \xi(s) := \pi^{-s/2} \Gamma(s/2) \zeta(s) $$
 
-の π^{-s/2} Γ(s/2) の部分が L_∞ である。これは Hodge 構造から(Deligne の公式により)系統的に構成され、関数等式 ξ(s) = ξ(1-s) を実現する。Γ 因子こそ「アルキメデス素点における Frobenius のトレース」の代替物と言える。
+の $π^{-s/2} Γ(s/2)$ の部分が $L_∞$ である。これは Hodge 構造から(Deligne の公式により)系統的に構成され、関数等式 ξ(s) = ξ(1-s) を実現する。Γ 因子こそ「アルキメデス素点における Frobenius のトレース」の代替物と言える。
 
 ---
 
@@ -473,13 +473,13 @@ p 進ガロワ表現論の主要応用領域として、CM 楕円曲線まわり
 
 ### 8.1 CM 楕円曲線
 
-楕円曲線 E が **complex multiplication (CM)** を持つとは、End(E) ⊗ ℚ が虚二次体 K に同型なこと。例: E: y^2 = x^3 - x は CM by ℤ[i]。
+楕円曲線 E が **complex multiplication (CM)** を持つとは、End(E) ⊗ ℚ が虚二次体 K に同型なこと。例: $E: y^2 = x^3 - x$ は CM by ℤ[i]。
 
-CM 楕円曲線のガロワ表現 ρ_{E,l}: G_ℚ → GL_2(ℚ_l) は次の特別な構造を持つ:
+CM 楕円曲線のガロワ表現 $ρ_{E,l}: G_{\mathbb{Q}} → \operatorname{GL}_2(\mathbb{Q}_l)$ は次の特別な構造を持つ:
 
-- G_K 上で abel(G_K ↪ G_ℚ への制限が、係数を \bar{ℚ}_l に広げると 1 次元表現の和)
-- 対応する Hecke 指標 ψ_E: 𝔸_K^× / K^× → ℂ^× が存在
-- L(E, s) = L(ψ_E, s)(E/ℚ のとき。K 上に底変換すると L(E/K, s) = L(ψ_E, s) L(\bar ψ_E, s) と二つの Hecke L 関数の積)
+- $G_K$ 上で abel($G_K ↪ G_{\mathbb{Q}}$ への制限が、係数を $\bar{\mathbb{Q}}_l$ に広げると 1 次元表現の和)
+- 対応する Hecke 指標 $ψ_E: \mathbb{A}_K^× / K^× → \mathbb{C}^×$ が存在
+- $L(E, s) = L(ψ_E, s)$(E/ℚ のとき。K 上に底変換すると $L(E/K, s) = L(ψ_E, s) L(\bar ψ_E, s)$ と二つの Hecke L 関数の積)
 
 ### 8.2 Kronecker の青春の夢
 
@@ -489,17 +489,17 @@ K = 虚二次体に対し、E を K による CM 楕円曲線とする。E の j
 
 ### 8.3 岩澤理論
 
-K の円分 ℤ_p 拡大 K_∞(円分塔 ∪_n K(ζ_{p^n}) の中にただ一つある ℤ_p 拡大)を取り、Γ := Gal(K_∞/K) ≅ ℤ_p とおく。岩澤代数
+K の円分 $\mathbb{Z}_p$ 拡大 $K_∞$(円分塔 $\bigcup_n K(ζ_{p^n})$ の中にただ一つある $\mathbb{Z}_p$ 拡大)を取り、$Γ := \operatorname{Gal}(K_∞/K) ≅ \mathbb{Z}_p$ とおく。岩澤代数
 
 $$ \Lambda := \mathbb{Z}_p[[\Gamma]] \cong \mathbb{Z}_p[[T]] $$
 
 (後者の同型は γ - 1 ↔ T、γ は Γ の生成元)。
 
-岩澤の主予想(Mazur-Wiles 1984, Wiles 1990 for totally real, Skinner-Urban 2014 for GL_2 over ℚ など):
+岩澤の主予想(Mazur-Wiles 1984, Wiles 1990 for totally real, Skinner-Urban 2014 for $\operatorname{GL}_2$ over ℚ など):
 
 $$ \text{char}_\Lambda(X_\infty) = (L_p) $$
 
-ここで X_∞ は岩澤加群(イデアル類群の射影極限あるいは Selmer 群の双対の射影極限)、L_p は p 進 L 関数(Kubota-Leopoldt zeta またはその一般化)。この式は記号を略した形で、たとえば Mazur–Wiles の定理は ℚ(ζ_p) の円分 ℤ_p 拡大の類群の極限を Gal(ℚ(ζ_p)/ℚ) の奇指標ごとの成分に分けて述べる(K = ℚ では類群の極限そのものが 0)。
+ここで $X_∞$ は岩澤加群(イデアル類群の射影極限あるいは Selmer 群の双対の射影極限)、$L_p$ は p 進 L 関数(Kubota-Leopoldt zeta またはその一般化)。この式は記号を略した形で、たとえば Mazur–Wiles の定理は $\mathbb{Q}(ζ_p)$ の円分 $\mathbb{Z}_p$ 拡大の類群の極限を $\operatorname{Gal}(\mathbb{Q}(ζ_p)/\mathbb{Q})$ の奇指標ごとの成分に分けて述べる(K = ℚ では類群の極限そのものが 0)。
 
 これは
 
@@ -516,8 +516,8 @@ $$ \operatorname{Sel}_{p^\infty}(E/\mathbb{Q}) := \ker\left( H^1(G_\mathbb{Q}, E
 
 は
 
-- 完全列 0 → E(ℚ) ⊗ ℚ_p/ℤ_p → Sel_{p^∞}(E/ℚ) → Ш(E/ℚ)[p^∞] → 0
-- Ш(E/ℚ)[p^∞] が有限 ⇔ rank(E(ℚ)) = corank_{ℤ_p}(Sel_{p^∞}(E/ℚ))(BSD 予想は rank を ord_{s=1} L(E, s) と結ぶ別の主張)
+- 完全列 $0 → E(\mathbb{Q}) ⊗ \mathbb{Q}_p/\mathbb{Z}_p → \operatorname{Sel}_{p^∞}(E/\mathbb{Q}) → \text{Ш}(E/\mathbb{Q})[p^∞] → 0$
+- $\text{Ш}(E/\mathbb{Q})[p^∞]$ が有限 ⇔ $\operatorname{rank}(E(\mathbb{Q})) = \operatorname{corank}_{\mathbb{Z}_p}(\operatorname{Sel}_{p^∞}(E/\mathbb{Q}))$(BSD 予想は rank を $\operatorname{ord}_{s=1} L(E, s)$ と結ぶ別の主張)
 
 を介して有理点と直結している。
 
@@ -563,7 +563,7 @@ CM 楕円曲線 E/ℚ で L(E, 1) ≠ 0 ならば、E(ℚ) は有限群である
 - Coates-Sujatha, *Cyclotomic Fields and Zeta Values*
 - Washington, *Introduction to Cyclotomic Fields*
 - Greenberg, *Iwasawa Theory for Elliptic Curves* (CIME notes)
-- Skinner-Urban, *The Iwasawa main conjectures for GL_2* (Invent. Math. 2014)
+- Skinner-Urban, *The Iwasawa main conjectures for $\mathrm{GL}_2$* (Invent. Math. 2014)
 
 #### Perfectoid と現代の発展
 

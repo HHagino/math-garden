@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -455,7 +491,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="合成すると-lk-が回収される">5. 合成すると <span class="math inline">[L:K]</span> が回収される</h2>
 <p>ここからが綺麗なところだ。<span class="math inline">\mathfrak p B</span> にノルムを掛けてみよう:</p>
 <p><span class="math display">N_{L/K}(\mathfrak p B) \;=\; N_{L/K}\!\left(\prod_{\mathfrak P \mid \mathfrak p} \mathfrak P^{e_{\mathfrak P}}\right) \;=\; \prod_{\mathfrak P \mid \mathfrak p} N_{L/K}(\mathfrak P)^{e_{\mathfrak P}} \;=\; \prod_{\mathfrak P \mid \mathfrak p} \mathfrak p^{e_{\mathfrak P} f_{\mathfrak P}} \;=\; \mathfrak p^{\sum_{\mathfrak P \mid \mathfrak p} e_{\mathfrak P} f_{\mathfrak P}}.</span></p>
-<p>一方、<span class="math inline">A</span> のイデアル <span class="math inline">I</span> に対しては、定義から <span class="math display">N_{L/K}(IB) \;=\; I^{[L:K]}</span> が成り立つ(ノルムの底側への作用は <span class="math inline">[L:K]</span> 乗)。</p>
+<p>一方、<span class="math inline">A</span> のイデアル <span class="math inline">I</span> に対しては、標準事実として <span class="math display">N_{L/K}(IB) \;=\; I^{[L:K]}</span> が成り立つ(ノルムの底側への作用は <span class="math inline">[L:K]</span> 乗)。これは §3 の <span class="math inline">N(\mathfrak P)=\mathfrak p^{f}</span> から「定義で」出るものではなく(それだと下の式と同値で循環する)、ノルムを <span class="math inline">A</span> 加群の指数で定義する流儀(局所化 <span class="math inline">B_{\mathfrak p}</span> が階数 <span class="math inline">[L:K]</span> の自由 <span class="math inline">A_{\mathfrak p}</span> 加群であること)と <span class="math inline">\mathfrak P\mapsto\mathfrak p^{f}</span> の流儀が一致する、という定理である。</p>
 <p>したがって、<span class="math inline">I = \mathfrak p</span> の場合に <span class="math display">\boxed{\;\sum_{\mathfrak P \mid \mathfrak p} e_{\mathfrak P} f_{\mathfrak P} \;=\; [L:K]\;}</span></p>
 <p>という公式が得られる。これがデデキント環の有限拡大における<strong>最も基本的な等式</strong>だ(良い条件 ── たとえば <span class="math inline">B</span> が <span class="math inline">A</span> 加群として有限生成(<span class="math inline">L/K</span> が分離的なら自動)かつ整閉、あるいは <span class="math inline">B</span> が代数体の整数環で <span class="math inline">L/K</span> が分離的 ── のもとで)。</p>
 <p><span class="math inline">[L:K]</span> という、見るからに代数的・大域的な量が、各素イデアル <span class="math inline">\mathfrak p</span> の上での <span class="math display">\{e_{\mathfrak P} f_{\mathfrak P}\}_{\mathfrak P \mid \mathfrak p}</span> という局所的なデータの和として回収される。<strong>全体の拡大次数は、垂直方向の厚みと水平方向の重みを掛け合わせ、それらを上にある素イデアルで足し合わせることで再現される</strong>。</p>

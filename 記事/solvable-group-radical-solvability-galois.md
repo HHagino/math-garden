@@ -119,7 +119,7 @@ $$G_i / G_{i+1} \ \text{ がアーベル群}$$
     <!-- field tower (up) and group series (down), each rung -->
     <rect x="40" y="150" width="92" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="86" y="167" text-anchor="middle">K₀=K</text>
     <rect x="40" y="98" width="92" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="86" y="115" text-anchor="middle">K₁</text>
-    <rect x="40" y="46" width="92" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="86" y="63" text-anchor="middle">K_r(根を含む)</text>
+    <rect x="40" y="46" width="92" height="24" fill="#eef5fa" stroke="#2f5d7c"/><text x="86" y="63" text-anchor="middle">K<tspan baseline-shift="-0.3em" font-size="75%">r</tspan>(根を含む)</text>
     <line x1="86" y1="150" x2="86" y2="122" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#sg1)"/>
     <line x1="86" y1="98" x2="86" y2="70" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#sg1)"/>
     <text x="138" y="138" font-size="8.5" fill="#8a7f6c">ⁿ√添加</text>

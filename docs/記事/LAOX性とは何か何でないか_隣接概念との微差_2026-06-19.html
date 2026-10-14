@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -482,7 +518,7 @@ window.Quarto = {
 <p>包含 <span class="math inline">X(K)\subseteq X(\mathbb A_K)^{\mathrm{Br}}</span> から、Brauer–Manin 障害があれば <span class="math inline">X(K)=\varnothing</span>、ゆえに LAOX。逆は成り立たない:後編の Skorobogatov の例のように、<span class="math inline">X(\mathbb A_K)^{\mathrm{Br}}\neq\varnothing</span> でも <span class="math inline">X(K)=\varnothing</span> になる(non-BM-LAOX)。よって一般に <span class="math display">\{\text{BM 障害あり}\}\ \subsetneq\ \{\text{LAOX}\}.</span> (曲線では両者が一致すると予想されている ── Poonen 2006・Stoll 2007 がそれぞれ予想、未解決。)</p>
 <p>微差の核は集合の大小ではなく、<strong>役割</strong>だ。LAOX 性は「大域点が無い」という<strong>事実(説明されるべきもの、explanandum)</strong>。Brauer–Manin 障害は「なぜ無いか」の<strong>理由(説明するもの、explanans)</strong>。在庫の比喩なら、LAOX は「本店欠品」という事実、BM 障害は「相互法則という書式の欠品証明書が出る」という理由。事実は理由より広い ── 既知の書式では証明書が出ない欠品(non-BM-LAOX)があるからだ。事実と理由を同じ言葉で呼ぶと、後編の階層(Br <span class="math inline">\subsetneq</span> ét-Br <span class="math inline">\subsetneq</span> …)が見えなくなる。LAOX 性は理由の層をわざと抽象して、事実だけを名指す。</p>
 <svg viewbox="0 0 720 296" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LAOX性の位置：ELSの中で大域点の有無で割れ、LAOXの中で障害の有無で割れる">
-<rect x="0" y="0" width="720" height="296" fill="#fbfaf7"></rect> <text x="20" y="26" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">LAOX 性の居場所（事実の層）</text> <rect x="40" y="45" width="640" height="210" rx="4" fill="#f0f0ea" stroke="#9a8b6f" stroke-width="1.2"></rect> <text x="52" y="64" font-family="Georgia, serif" font-size="12.5" fill="#7a6a4f">すべての (X/K)</text> <rect x="70" y="78" width="580" height="160" rx="4" fill="#eef2ee" stroke="#2f6258" stroke-width="1.3"></rect> <text x="82" y="97" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">ELS：X(A_K) ≠ ∅（全局所可解）</text> <!-- split: has rational point vs not --> <rect x="90" y="110" width="270" height="115" rx="4" fill="#e6ece6" stroke="#2f6258" stroke-width="1.1"></rect> <text x="102" y="129" font-family="Georgia, serif" font-size="12" fill="#2f6258">X(K) ≠ ∅（本店在庫あり）</text> <text x="102" y="149" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">＝ LAOX でない</text> <text x="102" y="172" font-family="Georgia, serif" font-size="11" fill="#7a6a4f">（弱近似はこの中で別途問う）</text> <rect x="375" y="110" width="260" height="115" rx="4" fill="#f6ece9" stroke="#a23b2e" stroke-width="1.4"></rect> <text x="388" y="129" font-family="Georgia, serif" font-size="12" fill="#a23b2e">X(K)=∅ ＝ LAOX</text> <!-- inside LAOX: BM vs non-BM --> <rect x="390" y="140" width="115" height="70" rx="3" fill="#efd9d4" stroke="#a23b2e" stroke-width="1"></rect> <text x="400" y="160" font-family="Georgia, serif" font-size="11" fill="#a23b2e">BM 障害あり</text> <text x="400" y="178" font-family="Georgia, serif" font-size="10.5" fill="#a23b2e">X(A)ᴮʳ=∅</text> <text x="400" y="196" font-family="Georgia, serif" font-size="10.5" fill="#7a6a4f">理由が出る</text> <rect x="512" y="140" width="115" height="70" rx="3" fill="#f6ece9" stroke="#a23b2e" stroke-width="1" stroke-dasharray="4 3"></rect> <text x="522" y="160" font-family="Georgia, serif" font-size="11" fill="#a23b2e">non-BM</text> <text x="522" y="178" font-family="Georgia, serif" font-size="10.5" fill="#7a6a4f">曲線では例ゼロ</text> <text x="522" y="196" font-family="Georgia, serif" font-size="10.5" fill="#7a6a4f">（予想）</text> <text x="20" y="272" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">(概念図) LAOX は ELS の中で「大域点なし」側。その中をさらに障害の有無（理由の層）で割る。</text> <text x="20" y="289" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">LAOX 自体は理由を問わない事実の述語。</text>
+<rect x="0" y="0" width="720" height="296" fill="#fbfaf7"></rect> <text x="20" y="26" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">LAOX 性の居場所（事実の層）</text> <rect x="40" y="45" width="640" height="210" rx="4" fill="#f0f0ea" stroke="#9a8b6f" stroke-width="1.2"></rect> <text x="52" y="64" font-family="Georgia, serif" font-size="12.5" fill="#7a6a4f">すべての (X/K)</text> <rect x="70" y="78" width="580" height="160" rx="4" fill="#eef2ee" stroke="#2f6258" stroke-width="1.3"></rect> <text x="82" y="97" font-family="Georgia, serif" font-size="12.5" fill="#2f6258">ELS：X(A<tspan baseline-shift="-0.3em" font-size="75%">K</tspan>) ≠ ∅（全局所可解）</text> <!-- split: has rational point vs not --> <rect x="90" y="110" width="270" height="115" rx="4" fill="#e6ece6" stroke="#2f6258" stroke-width="1.1"></rect> <text x="102" y="129" font-family="Georgia, serif" font-size="12" fill="#2f6258">X(K) ≠ ∅（本店在庫あり）</text> <text x="102" y="149" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">＝ LAOX でない</text> <text x="102" y="172" font-family="Georgia, serif" font-size="11" fill="#7a6a4f">（弱近似はこの中で別途問う）</text> <rect x="375" y="110" width="260" height="115" rx="4" fill="#f6ece9" stroke="#a23b2e" stroke-width="1.4"></rect> <text x="388" y="129" font-family="Georgia, serif" font-size="12" fill="#a23b2e">X(K)=∅ ＝ LAOX</text> <!-- inside LAOX: BM vs non-BM --> <rect x="390" y="140" width="115" height="70" rx="3" fill="#efd9d4" stroke="#a23b2e" stroke-width="1"></rect> <text x="400" y="160" font-family="Georgia, serif" font-size="11" fill="#a23b2e">BM 障害あり</text> <text x="400" y="178" font-family="Georgia, serif" font-size="10.5" fill="#a23b2e">X(A)ᴮʳ=∅</text> <text x="400" y="196" font-family="Georgia, serif" font-size="10.5" fill="#7a6a4f">理由が出る</text> <rect x="512" y="140" width="115" height="70" rx="3" fill="#f6ece9" stroke="#a23b2e" stroke-width="1" stroke-dasharray="4 3"></rect> <text x="522" y="160" font-family="Georgia, serif" font-size="11" fill="#a23b2e">non-BM</text> <text x="522" y="178" font-family="Georgia, serif" font-size="10.5" fill="#7a6a4f">曲線では例ゼロ</text> <text x="522" y="196" font-family="Georgia, serif" font-size="10.5" fill="#7a6a4f">（予想）</text> <text x="20" y="272" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">(概念図) LAOX は ELS の中で「大域点なし」側。その中をさらに障害の有無（理由の層）で割る。</text> <text x="20" y="289" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">LAOX 自体は理由を問わない事実の述語。</text>
 </svg>
 <hr>
 </section>

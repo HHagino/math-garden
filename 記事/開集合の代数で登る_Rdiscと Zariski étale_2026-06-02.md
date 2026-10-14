@@ -128,7 +128,7 @@ $$\operatorname{Spec}\mathbb C\ \longrightarrow\ \operatorname{Spec}\mathbb R\qq
   <line x1="438" y1="190" x2="320" y2="190" stroke="#5a6e4a" stroke-width="2" marker-end="url(#at)"/>
   <text x="344" y="166" text-anchor="middle" font-family="serif" font-size="12" fill="#5a6e4a">トンネル</text>
   <!-- bottom labels -->
-  <text x="118" y="226" text-anchor="middle" font-family="serif" font-size="12.5" fill="#2b2118">第一の登頂:ℝ_disc</text>
+  <text x="118" y="226" text-anchor="middle" font-family="serif" font-size="12.5" fill="#2b2118">第一の登頂:ℝ<tspan baseline-shift="-0.3em" font-size="75%">disc</tspan></text>
   <text x="118" y="241" text-anchor="middle" font-family="serif" font-size="11.5" fill="#6b5d44">可算生成フレーム → 不可能</text>
   <text x="362" y="226" text-anchor="middle" font-family="serif" font-size="12.5" fill="#2b2118">第二の登頂:Zariski→étale</text>
   <text x="362" y="241" text-anchor="middle" font-family="serif" font-size="11.5" fill="#6b5d44">被覆を再定義 → 豊穣化</text>
@@ -139,7 +139,7 @@ $$\operatorname{Spec}\mathbb C\ \longrightarrow\ \operatorname{Spec}\mathbb R\qq
 <figcaption><b>図1 ─ 同じ山の両側.</b> 「位相は何を解像できるか」という一つの尾根を、第一の登頂は<b>壁</b>(可算生成フレームによる不可能性)として、第二の登頂は<b>トンネル</b>(被覆の再定義による豊穣化)として、逆向きに突く。両者を一つの山にしているのが、底を貫く locale/topos の母言語。<i>(概念図)</i></figcaption>
 </figure>
 
-| | 第一の登頂(ℝ_disc) | 第二の登頂(Zariski→étale) |
+| | 第一の登頂($\mathbb R_{\mathrm{disc}}$) | 第二の登頂(Zariski→étale) |
 |---|---|---|
 | 問い | 位相は非可算な孤立を解像できるか | 位相は被覆・Galois を解像できるか |
 | 粗さの正体 | フレームが**可算生成** | 開集合が零点の補で**少なすぎる** |

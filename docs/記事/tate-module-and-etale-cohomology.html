@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -354,9 +390,9 @@ window.Quarto = {
   <li><a href="#フロベニウスの幾何的意味" id="toc-フロベニウスの幾何的意味" class="nav-link" data-scroll-target="#フロベニウスの幾何的意味">4.2 フロベニウスの幾何的意味</a></li>
   <li><a href="#l-非依存性" id="toc-l-非依存性" class="nav-link" data-scroll-target="#l-非依存性">4.3 l 非依存性</a></li>
   </ul></li>
-  <li><a href="#l-進局所系と-π_1" id="toc-l-進局所系と-π_1" class="nav-link" data-scroll-target="#l-進局所系と-π_1">5. l 進局所系と π_1</a>
+  <li><a href="#l-進局所系と-π_1" id="toc-l-進局所系と-π_1" class="nav-link" data-scroll-target="#l-進局所系と-π_1">5. l 進局所系と <span class="math inline">π_1</span></a>
   <ul class="collapse">
-  <li><a href="#π_1ét" id="toc-π_1ét" class="nav-link" data-scroll-target="#π_1ét">5.1 π_1^ét</a></li>
+  <li><a href="#π_1textét" id="toc-π_1textét" class="nav-link" data-scroll-target="#π_1textét">5.1 <span class="math inline">π_1^{\text{ét}}</span></a></li>
   <li><a href="#l-進局所系" id="toc-l-進局所系" class="nav-link" data-scroll-target="#l-進局所系">5.2 l 進局所系</a></li>
   <li><a href="#六関手主義" id="toc-六関手主義" class="nav-link" data-scroll-target="#六関手主義">5.3 六関手主義</a></li>
   </ul></li>
@@ -406,23 +442,23 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="動機-なぜtate-加群が要るのか">1. 動機 — なぜ「Tate 加群」が要るのか</h2>
 <p>楕円曲線 E/K の n 等分点</p>
 <p><span class="math display"> E[n] := \{P \in E(\bar K) \mid nP = O\} </span></p>
-<p>は、char(K) ∤ n のとき (ℤ/nℤ)^2 と同型な有限アーベル群で、絶対ガロワ群 G_K = Gal(K^sep/K) が自然に作用する。すなわち各 n に対して</p>
+<p>は、char(K) ∤ n のとき <span class="math inline">(\mathbb{Z}/n\mathbb{Z})^2</span> と同型な有限アーベル群で、絶対ガロワ群 <span class="math inline">G_K = \operatorname{Gal}(K^{\mathrm{sep}}/K)</span> が自然に作用する。すなわち各 n に対して</p>
 <p><span class="math display"> \rho_{E,n} \colon G_K \to \operatorname{GL}_2(\mathbb{Z}/n\mathbb{Z}) </span></p>
 <p>が得られる。これは mod n ガロワ表現と呼ばれ、数論的に重要(Serre の保型性予想、その Khare-Wintenberger による証明の出発点はここ)。</p>
 <p>しかし mod n の情報だけを見ていると、n の異なる値を「縦に統一して」追跡できない。たとえば</p>
 <ul>
 <li>L 関数のオイラー因子は、フロベニウスの固有値を要する</li>
 <li>BSD 予想は、E(K) の階数を Selmer 群経由で議論する</li>
-<li>Faltings の同型定理は、Tate 加群 T_l(A) の G_K 加群としての構造を使う(§2.3)</li>
+<li>Faltings の同型定理は、Tate 加群 <span class="math inline">T_l(A)</span> の <span class="math inline">G_K</span> 加群としての構造を使う(§2.3)</li>
 </ul>
 <p>そこで n を l のべき乗に限り、射影極限を取って統一する:</p>
 <p><span class="math display"> T_l(E) := \varprojlim_n E[l^n], \qquad V_l(E) := T_l(E) \otimes_{\mathbb{Z}_l} \mathbb{Q}_l. </span></p>
-<p>これが Tate 加群 / Tate ベクトル空間で、G_K の連続表現</p>
+<p>これが Tate 加群 / Tate ベクトル空間で、<span class="math inline">G_K</span> の連続表現</p>
 <p><span class="math display"> \rho_{E,l} \colon G_K \to \operatorname{GL}_2(\mathbb{Z}_l) \hookrightarrow \operatorname{GL}_2(\mathbb{Q}_l) </span></p>
 <p>を与える。これが「楕円曲線の l 進ガロワ表現」の出発点である。</p>
 <figure class="figure">
 <svg viewbox="0 0 470 152" width="100%" style="max-width:470px;display:block;margin:8px auto" role="img" aria-label="Tate加群は等分点の射影極限">
-<defs><marker id="tm1" markerwidth="8" markerheight="8" refx="6" refy="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"></path></marker></defs> <g font-family="serif" font-size="11" fill="#2b2118"> <text x="56" y="56" text-anchor="middle">E[l]</text> <text x="146" y="56" text-anchor="middle">E[l²]</text> <text x="240" y="56" text-anchor="middle">E[l³]</text> <text x="312" y="56" text-anchor="middle">⋯</text> <!-- inverse limit arrows (pointing left: multiplication by l) --> <line x1="100" y1="52" x2="78" y2="52" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#tm1)"></line><text x="89" y="42" font-size="8" fill="#8a7f6c">×l</text> <line x1="196" y1="52" x2="170" y2="52" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#tm1)"></line><text x="183" y="42" font-size="8" fill="#8a7f6c">×l</text> <line x1="286" y1="52" x2="264" y2="52" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#tm1)"></line> <text x="56" y="76" text-anchor="middle" font-size="8.5" fill="#8a7f6c">(ℤ/l)²</text> <text x="146" y="76" text-anchor="middle" font-size="8.5" fill="#8a7f6c">(ℤ/l²)²</text> <text x="240" y="76" text-anchor="middle" font-size="8.5" fill="#8a7f6c">(ℤ/l³)²</text> <line x1="350" y1="52" x2="386" y2="52" stroke="#2f5d7c" stroke-width="1.4" marker-end="url(#tm1)" transform="scale(-1,1) translate(-736,0)"></line> <rect x="364" y="38" width="92" height="30" rx="4" fill="#f0e3c4" stroke="#c89b3c"></rect><text x="410" y="58" text-anchor="middle">T_l(E)=ℤ_l²</text> <text x="235" y="108" text-anchor="middle" font-size="10.5" fill="#b1342a">射影極限 lim← E[lⁿ]。G_K が全段に作用 → 連続表現 ρ:G_K→GL₂(ℤ_l)</text> <text x="235" y="126" text-anchor="middle" font-size="9.5" fill="#8a7f6c">Weil ペアリングより det ρ = χ_l(円分指標)</text> </g>
+<defs><marker id="tm1" markerwidth="8" markerheight="8" refx="6" refy="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#5a4f3f"></path></marker></defs> <g font-family="serif" font-size="11" fill="#2b2118"> <text x="56" y="56" text-anchor="middle">E[l]</text> <text x="146" y="56" text-anchor="middle">E[l²]</text> <text x="240" y="56" text-anchor="middle">E[l³]</text> <text x="312" y="56" text-anchor="middle">⋯</text> <!-- inverse limit arrows (pointing left: multiplication by l) --> <line x1="100" y1="52" x2="78" y2="52" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#tm1)"></line><text x="89" y="42" font-size="8" fill="#8a7f6c">×l</text> <line x1="196" y1="52" x2="170" y2="52" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#tm1)"></line><text x="183" y="42" font-size="8" fill="#8a7f6c">×l</text> <line x1="286" y1="52" x2="264" y2="52" stroke="#5a4f3f" stroke-width="1.3" marker-end="url(#tm1)"></line> <text x="56" y="76" text-anchor="middle" font-size="8.5" fill="#8a7f6c">(ℤ/l)²</text> <text x="146" y="76" text-anchor="middle" font-size="8.5" fill="#8a7f6c">(ℤ/l²)²</text> <text x="240" y="76" text-anchor="middle" font-size="8.5" fill="#8a7f6c">(ℤ/l³)²</text> <line x1="350" y1="52" x2="386" y2="52" stroke="#2f5d7c" stroke-width="1.4" marker-end="url(#tm1)" transform="scale(-1,1) translate(-736,0)"></line> <rect x="364" y="38" width="92" height="30" rx="4" fill="#f0e3c4" stroke="#c89b3c"></rect><text x="410" y="58" text-anchor="middle">T<tspan baseline-shift="-0.3em" font-size="75%">l</tspan>(E)=ℤ<tspan baseline-shift="-0.3em" font-size="75%">l</tspan>²</text> <text x="235" y="108" text-anchor="middle" font-size="10.5" fill="#b1342a">射影極限 lim← E[lⁿ]。G<tspan baseline-shift="-0.3em" font-size="75%">K</tspan> が全段に作用 → 連続表現 ρ:G<tspan baseline-shift="-0.3em" font-size="75%">K</tspan>→GL₂(ℤ<tspan baseline-shift="-0.3em" font-size="75%">l</tspan>)</text> <text x="235" y="126" text-anchor="middle" font-size="9.5" fill="#8a7f6c">Weil ペアリングより det ρ = χ<tspan baseline-shift="-0.3em" font-size="75%">l</tspan>(円分指標)</text> </g>
 </svg>
 <figcaption>
 <b>図1 ─ Tate 加群は等分点の射影極限.</b> <span class="math inline">E[l^n]\cong(\mathbb Z/l^n)^2</span> を <span class="math inline">\times l</span> で繋いだ逆系の極限が <span class="math inline">T_l(E)\cong\mathbb Z_l^2</span>。各段に絶対 Galois 群 <span class="math inline">G_K</span> が作用し、連続表現 <span class="math inline">\rho:G_K\to\mathrm{GL}_2(\mathbb Z_l)</span> を与える。Weil ペアリングから <span class="math inline">\det\rho=\chi_l</span>(円分指標)。<i>(概念図)</i>
@@ -434,22 +470,22 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="tate-加群の構造">2. Tate 加群の構造</h2>
 <section id="階数" class="level3">
 <h3 class="anchored" data-anchor-id="階数">2.1 階数</h3>
-<p>E/K が char(K) ∤ l なら、E[l^n] ≅ (ℤ/l^n ℤ)^2(基礎体の代数閉包上で)。射影極限を取ると</p>
+<p>E/K が char(K) ∤ l なら、<span class="math inline">E[l^n] ≅ (\mathbb{Z}/l^n \mathbb{Z})^2</span>(基礎体の代数閉包上で)。射影極限を取ると</p>
 <p><span class="math display"> T_l(E) \cong \mathbb{Z}_l^2 </span></p>
-<p>がガロワ作用付きの ℤ_l 加群として得られる(自由ランク 2)。</p>
+<p>がガロワ作用付きの <span class="math inline">\mathbb{Z}_l</span> 加群として得られる(自由ランク 2)。</p>
 <p>特殊な状況:</p>
 <ul>
-<li>char(K) = p, l = p の場合: Ep^n は ordinary なら ℤ/p^n ℤ、supersingular なら 0 となる。このとき T_p(E) は階数 1 か 0 で、構造が全く違う</li>
-<li>アーベル多様体 A/K の場合: dim A = g として T_l(A) ≅ ℤ_l^{2g}</li>
+<li>char(K) = p, l = p の場合: <span class="math inline">E[p^n]</span>(K̄) は ordinary なら <span class="math inline">\mathbb{Z}/p^n \mathbb{Z}</span>、supersingular なら 0 となる。このとき <span class="math inline">T_p(E)</span> は階数 1 か 0 で、構造が全く違う</li>
+<li>アーベル多様体 A/K の場合: dim A = g として <span class="math inline">T_l(A) ≅ \mathbb{Z}_l^{2g}</span></li>
 </ul>
 </section>
 <section id="円分指標との接続" class="level3">
 <h3 class="anchored" data-anchor-id="円分指標との接続">2.2 円分指標との接続</h3>
 <p>Weil ペアリング</p>
 <p><span class="math display"> e_n \colon E[n] \times E[n] \to \mu_n </span></p>
-<p>は G_K-同変な非退化交代形式である。これより determinant が</p>
+<p>は <span class="math inline">G_K</span>-同変な非退化交代形式である。これより determinant が</p>
 <p><span class="math display"> \det \rho_{E,l} = \chi_l </span></p>
-<p>(円分指標)となる。これは Tate 加群が「単なる」 ℚ_l^2 ではなく、円分指標と整合した特別な構造を持つことを意味する。</p>
+<p>(円分指標)となる。これは Tate 加群が「単なる」 <span class="math inline">\mathbb{Q}_l^2</span> ではなく、円分指標と整合した特別な構造を持つことを意味する。</p>
 </section>
 <section id="楕円曲線の同種と-tate-加群の同型" class="level3">
 <h3 class="anchored" data-anchor-id="楕円曲線の同種と-tate-加群の同型">2.3 楕円曲線の同種と Tate 加群の同型</h3>
@@ -457,7 +493,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>K を数体、A, B を K 上のアーベル多様体とする。任意の l に対し <span class="math display"> \operatorname{Hom}_K(A, B) \otimes_\mathbb{Z} \mathbb{Z}_l \cong \operatorname{Hom}_{G_K}(T_l(A), T_l(B)) </span> ガロワ同変射が幾何的射からのみ来る。</p>
 </blockquote>
-<p>これは「Tate 加群と Galois 作用込みでアーベル多様体が同種(isogenous)かどうかを判定できる」という強力な主張であり(同型までは判定できない。次数が l と素な同種で結ばれた二つは、同型でなくても T_l が G_K 加群として同型になる)、Mordell 予想(Faltings の定理)の証明の核心部分でもある。</p>
+<p>これは「Tate 加群と Galois 作用込みでアーベル多様体が同種(isogenous)かどうかを判定できる」という強力な主張であり(同型までは判定できない。次数が l と素な同種で結ばれた二つは、同型でなくても <span class="math inline">T_l</span> が <span class="math inline">G_K</span> 加群として同型になる)、Mordell 予想(Faltings の定理)の証明の核心部分でもある。</p>
 <hr>
 </section>
 </section>
@@ -466,8 +502,8 @@ window.Quarto = {
 <p>Tate 加群は楕円曲線(あるいはアーベル多様体)に特化した構成だった。一般の代数多様体 X/K に対しては、対応物を作る一般化が必要になる。これがエタールコホモロジーである。</p>
 <section id="出発点-特異コホモロジー" class="level3">
 <h3 class="anchored" data-anchor-id="出発点-特異コホモロジー">3.1 出発点: 特異コホモロジー</h3>
-<p>K = ℂ のとき、X(ℂ) は位相空間として特異コホモロジー H^i(X(ℂ), ℤ) を持つ。</p>
-<p>問題: 一般の体 K (たとえば有限体 𝔽_q) では「位相空間」がない。Zariski 位相は粗すぎる(Zariski 開集合は globalに大きすぎて H^1 が消える)。</p>
+<p>K = ℂ のとき、X(ℂ) は位相空間として特異コホモロジー <span class="math inline">H^i(X(\mathbb{C}), \mathbb{Z})</span> を持つ。</p>
+<p>問題: 一般の体 K (たとえば有限体 <span class="math inline">\mathbb{F}_q</span>) では「位相空間」がない。Zariski 位相は粗すぎる(Zariski 開集合は globalに大きすぎて <span class="math inline">H^1</span> が消える)。</p>
 </section>
 <section id="grothendieck-の発想" class="level3">
 <h3 class="anchored" data-anchor-id="grothendieck-の発想">3.2 Grothendieck の発想</h3>
@@ -479,7 +515,7 @@ window.Quarto = {
 </ul>
 <p>エタール射の全体を「位相」と思って sheaf cohomology を計算する。これがエタールコホモロジー</p>
 <p><span class="math display"> H^i_{\text{ét}}(X, \mathscr{F}) </span></p>
-<p>である。係数として有限群 ℤ/n、l 進 ℤ_l、ℚ_l などを使う。</p>
+<p>である。係数として有限群 ℤ/n、l 進 <span class="math inline">\mathbb{Z}_l</span>、<span class="math inline">\mathbb{Q}_l</span> などを使う。</p>
 </section>
 <section id="比較定理" class="level3">
 <h3 class="anchored" data-anchor-id="比較定理">3.3 比較定理</h3>
@@ -506,19 +542,19 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="weil-予想の-statement">4.1 Weil 予想の statement</h3>
 <p>A. Weil (1949) が予想し、Grothendieck 学派(Deligne 1974 で完結)が証明した:</p>
 <blockquote class="blockquote">
-<p>X を有限体 𝔽_q 上の滑らかな射影多様体とする。ゼータ関数 <span class="math display"> Z(X, t) := \exp\left( \sum_{n \geq 1} \frac{|X(\mathbb{F}_{q^n})|}{n} t^n \right) </span> は次の性質を持つ: 1. 有理関数 Z(X, t) = ∏ P_i(t)<sup>{(-1)</sup>{i+1}}, P_i ∈ ℤ[t] 2. 関数等式 Z(X, 1/(q^d t)) = ±q^{dχ/2} t^χ Z(X, t) 3. Riemann hypothesis: P_i(t) の零点の絶対値は q^{-i/2}</p>
+<p>X を有限体 <span class="math inline">\mathbb{F}_q</span> 上の滑らかな射影多様体とする。ゼータ関数 <span class="math display"> Z(X, t) := \exp\left( \sum_{n \geq 1} \frac{|X(\mathbb{F}_{q^n})|}{n} t^n \right) </span> は次の性質を持つ: 1. 有理関数 <span class="math inline">Z(X, t) = ∏ P_i(t)^{(-1)^{i+1}}, P_i ∈ \mathbb{Z}[t]</span> 2. 関数等式 <span class="math inline">Z(X, 1/(q^d t)) = ±q^{dχ/2} t^χ Z(X, t)</span> 3. Riemann hypothesis: <span class="math inline">P_i(t)</span> の零点の絶対値は <span class="math inline">q^{-i/2}</span></p>
 </blockquote>
-<p>これはエタールコホモロジーで P_i(t) = det(1 - Frob_q t | H^i_ét(X_{{𝔽}_q}, ℚ_l)) と書くことで証明される。</p>
+<p>これはエタールコホモロジーで <span class="math inline">P_i(t) = \det(1 - \operatorname{Frob}_q t | H^i_{\text{ét}}(X_{\bar{\mathbb{F}}_q}, \mathbb{Q}_l))</span> と書くことで証明される。</p>
 </section>
 <section id="フロベニウスの幾何的意味" class="level3">
 <h3 class="anchored" data-anchor-id="フロベニウスの幾何的意味">4.2 フロベニウスの幾何的意味</h3>
-<p>X/𝔽_q に対し、𝔽_q 上のフロベニウス F: X → X (x ↦ x^q on coordinates) が定義される。これは l-進エタールコホモロジー H^i_ét(X_{{𝔽}_q}, ℚ_l) に作用し、その固有値が Weil 予想の対象となる。</p>
+<p><span class="math inline">X/\mathbb{F}_q</span> に対し、<span class="math inline">\mathbb{F}_q</span> 上のフロベニウス <span class="math inline">F: X → X</span> (<span class="math inline">x ↦ x^q</span> on coordinates) が定義される。これは l-進エタールコホモロジー <span class="math inline">H^i_{\text{ét}}(X_{\bar{\mathbb{F}}_q}, \mathbb{Q}_l)</span> に作用し、その固有値が Weil 予想の対象となる。</p>
 <p>特に X = E が楕円曲線なら</p>
 <p><span class="math display"> \det(1 - \operatorname{Frob}_q t | H^1_{\text{ét}}(E_{\bar{\mathbb{F}}_q}, \mathbb{Q}_l)) = 1 - a_q t + q t^2 </span></p>
-<p>ここで a_q = q + 1 - |E(𝔽_q)|。これが楕円曲線の L 因子の主項である。</p>
+<p>ここで <span class="math inline">a_q = q + 1 - |E(\mathbb{F}_q)|</span>。これが楕円曲線の L 因子の主項である。</p>
 <figure class="figure">
 <svg viewbox="0 0 380 220" width="100%" style="max-width:380px;display:block;margin:8px auto" role="img" aria-label="Frobenius固有値とRiemann仮説">
-<g font-family="serif" font-size="10.5" fill="#2b2118"> <line x1="40" y1="110" x2="340" y2="110" stroke="#b9ac95" stroke-width="1"></line> <line x1="190" y1="20" x2="190" y2="200" stroke="#b9ac95" stroke-width="1"></line> <circle cx="190" cy="110" r="74" fill="none" stroke="#2f5d7c" stroke-width="2"></circle> <text x="270" y="58" font-size="10" fill="#2f5d7c">|α|=√q</text> <!-- eigenvalues α, β = conjugates on circle --> <circle cx="246" cy="62" r="4" fill="#b1342a"></circle><text x="252" y="58" font-size="10" fill="#b1342a">α</text> <circle cx="246" cy="158" r="4" fill="#b1342a"></circle><text x="252" y="172" font-size="10" fill="#b1342a">β=ᾱ</text> <text x="190" y="216" text-anchor="middle" font-size="9.5" fill="#8a7f6c">H¹_ét(E) 上の Frob 固有値:α+β=a_q, αβ=q, |α|=|β|=√q(Riemann 仮説)</text> <text x="190" y="14" text-anchor="middle" font-size="10" fill="#2b2118">複素平面・半径 √q の円</text> </g>
+<g font-family="serif" font-size="10.5" fill="#2b2118"> <line x1="40" y1="110" x2="340" y2="110" stroke="#b9ac95" stroke-width="1"></line> <line x1="190" y1="20" x2="190" y2="200" stroke="#b9ac95" stroke-width="1"></line> <circle cx="190" cy="110" r="74" fill="none" stroke="#2f5d7c" stroke-width="2"></circle> <text x="270" y="58" font-size="10" fill="#2f5d7c">|α|=√q</text> <!-- eigenvalues α, β = conjugates on circle --> <circle cx="246" cy="62" r="4" fill="#b1342a"></circle><text x="252" y="58" font-size="10" fill="#b1342a">α</text> <circle cx="246" cy="158" r="4" fill="#b1342a"></circle><text x="252" y="172" font-size="10" fill="#b1342a">β=ᾱ</text> <text x="190" y="216" text-anchor="middle" font-size="9.5" fill="#8a7f6c">H¹<tspan baseline-shift="-0.3em" font-size="75%">ét</tspan>(E) 上の Frob 固有値:α+β=a<tspan baseline-shift="-0.3em" font-size="75%">q</tspan>, αβ=q, |α|=|β|=√q(Riemann 仮説)</text> <text x="190" y="14" text-anchor="middle" font-size="10" fill="#2b2118">複素平面・半径 √q の円</text> </g>
 </svg>
 <figcaption>
 <b>図2 ─ Frobenius 固有値は半径 <span class="math inline">\sqrt q</span> の円に乗る.</b> 点の個数 <span class="math inline">|E(\mathbb F_{q^n})|</span> は <span class="math inline">H^1_{\text{ét}}</span> 上の Frobenius 固有値 <span class="math inline">\alpha,\beta</span> で決まり、<span class="math inline">\alpha+\beta=a_q,\ \alpha\beta=q</span>。Weil 予想の Riemann 仮説は「<span class="math inline">|\alpha|=|\beta|=\sqrt q</span>」── 固有値がちょうど半径 <span class="math inline">\sqrt q</span> の円上に乗ることを言う。点を数える算術が、コホモロジー上の線形代数(固有値)に化けた。<i>(概念図)</i>
@@ -529,7 +565,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="l-非依存性">4.3 l 非依存性</h3>
 <p>Weil 予想の主要部分のひとつは「結果が l に依らない」ことである:</p>
 <ul>
-<li>多項式 P_i(t) は有理整数係数</li>
+<li>多項式 <span class="math inline">P_i(t)</span> は有理整数係数</li>
 <li>フロベニウスの固有値、トレースは l に依らない</li>
 <li>次元(= Betti 数)も l に依らない</li>
 </ul>
@@ -538,64 +574,64 @@ window.Quarto = {
 </section>
 </section>
 <section id="l-進局所系と-π_1" class="level2">
-<h2 class="anchored" data-anchor-id="l-進局所系と-π_1">5. l 進局所系と π_1</h2>
-<section id="π_1ét" class="level3">
-<h3 class="anchored" data-anchor-id="π_1ét">5.1 π_1^ét</h3>
-<p>エタール基本群 π_1^ét(X, x) は Galois 理論を「被覆空間」の概念に翻訳する:</p>
+<h2 class="anchored" data-anchor-id="l-進局所系と-π_1">5. l 進局所系と <span class="math inline">π_1</span></h2>
+<section id="π_1textét" class="level3">
+<h3 class="anchored" data-anchor-id="π_1textét">5.1 <span class="math inline">π_1^{\text{ét}}</span></h3>
+<p>エタール基本群 <span class="math inline">π_1^{\text{ét}}(X, \bar x)</span> は Galois 理論を「被覆空間」の概念に翻訳する:</p>
 <ul>
 <li>連結 étale 射の有限 Galois 被覆全体の射影極限の自己同型群</li>
-<li>体 K に対しては π_1^ét(Spec K) = G_K</li>
-<li>滑らかな代数曲線 C/ℂ に対しては π_1^ét(C) = π_1<sup>top(C(ℂ))</sup>{プロ有限完備化}</li>
+<li>体 K に対しては <span class="math inline">π_1^{\text{ét}}(\operatorname{Spec} K) = G_K</span></li>
+<li>滑らかな代数曲線 C/ℂ に対しては <span class="math inline">π_1^{\text{ét}}(C) = \widehat{π_1^{\mathrm{top}}(C(\mathbb{C}))}</span>(プロ有限完備化)</li>
 </ul>
 </section>
 <section id="l-進局所系" class="level3">
 <h3 class="anchored" data-anchor-id="l-進局所系">5.2 l 進局所系</h3>
-<p>X の上の l 進 lisse(局所自由)層は、π_1^ét(X) → GL_n(ℚ_l) の連続表現と等価である:</p>
+<p>X の上の l 進 lisse(局所自由)層は、<span class="math inline">π_1^{\text{ét}}(X) → \operatorname{GL}_n(\mathbb{Q}_l)</span> の連続表現と等価である:</p>
 <p><span class="math display"> \{\text{l 進 lisse sheaves on } X\} \xleftrightarrow{\sim} \{\text{連続 } \pi_1^{\text{ét}}(X) \to \operatorname{GL}_n(\mathbb{Q}_l) \} </span></p>
 <p>これは局所定数化された Galois 表現と層が同じものであることを示しており、Galois 表現の「幾何化」の出発点である。</p>
-<p>E/K が楕円曲線、l ≠ char(K) のときは、Tate 加群 T_l(E) が Spec K 上の canonical な l 進 lisse sheaf に対応する。</p>
+<p>E/K が楕円曲線、l ≠ char(K) のときは、Tate 加群 <span class="math inline">T_l(E)</span> が Spec K 上の canonical な l 進 lisse sheaf に対応する。</p>
 </section>
 <section id="六関手主義" class="level3">
 <h3 class="anchored" data-anchor-id="六関手主義">5.3 六関手主義</h3>
-<p>Grothendieck-Verdier の六関手主義により、l 進層の圏 D^b_c(X, ℚ_l) には</p>
+<p>Grothendieck-Verdier の六関手主義により、l 進層の圏 <span class="math inline">D^b_c(X, \mathbb{Q}_l)</span> には</p>
 <p><span class="math display"> f^*, f_*, f^!, f_!, \otimes, \mathcal{H}om </span></p>
 <p>が完備に振る舞う。これによって perverse sheaf 論、Lefschetz の不動点公式、Deligne の Weil II 証明、Lafforgue の Langlands などが体系化される。</p>
-<p>X が標数 p の上にあって係数に l = p を取る場合、この形式主義はそのままでは働かない(たとえば代数閉体上の 𝔸^1 の ℤ/p 係数の H^1 は、Artin–Schreier 列から無限次元になる)。p 進係数の側の対応物は結晶コホモロジーや prismatic cohomology が受け持つ。数体のような標数 0 の体の上では、係数に l = p を取ってもエタールコホモロジーは普通に働く。</p>
+<p>X が標数 p の上にあって係数に l = p を取る場合、この形式主義はそのままでは働かない(たとえば代数閉体上の <span class="math inline">\mathbb{A}^1</span> の ℤ/p 係数の <span class="math inline">H^1</span> は、Artin–Schreier 列から無限次元になる)。p 進係数の側の対応物は結晶コホモロジーや prismatic cohomology が受け持つ。数体のような標数 0 の体の上では、係数に l = p を取ってもエタールコホモロジーは普通に働く。</p>
 <hr>
 </section>
 </section>
 <section id="大域への接続-chebotarev-とテンソル積定理" class="level2">
 <h2 class="anchored" data-anchor-id="大域への接続-chebotarev-とテンソル積定理">6. 大域への接続 — Chebotarev とテンソル積定理</h2>
-<p>K = 数体上の Galois 表現 ρ_{E,l}: G_K → GL_2(ℚ_l) は、ほとんどの素点で不分岐(E が good reduction を持ち、v ∤ l である素点 v で)。各不分岐素点 v でのフロベニウス Frob_v は、v の上の素点の選び方で共役だけ動くので、共役類としてしか決まらない。その共役類について</p>
+<p>K = 数体上の Galois 表現 <span class="math inline">ρ_{E,l}: G_K → \operatorname{GL}_2(\mathbb{Q}_l)</span> は、ほとんどの素点で不分岐(E が good reduction を持ち、v ∤ l である素点 v で)。各不分岐素点 v でのフロベニウス <span class="math inline">\operatorname{Frob}_v</span> は、v の上の素点の選び方で共役だけ動くので、共役類としてしか決まらない。その共役類について</p>
 <ul>
-<li>共役類 ρ(Frob_v) の和集合が ρ(G_K) の中で稠密(Chebotarev 密度定理。ρ(G_K) のどの有限商のどの共役類にも、無限個の v のフロベニウス類が現れる。代表元を一つずつ選んだだけの集合が稠密になるとは限らない)</li>
-<li>a_v := tr(ρ(Frob_v)) は l に依らない有理整数(トレースは共役で変わらないので、代表元の取り方によらない)</li>
+<li>共役類 <span class="math inline">ρ(\operatorname{Frob}_v)</span> の和集合が <span class="math inline">ρ(G_K)</span> の中で稠密(Chebotarev 密度定理。<span class="math inline">ρ(G_K)</span> のどの有限商のどの共役類にも、無限個の v のフロベニウス類が現れる。代表元を一つずつ選んだだけの集合が稠密になるとは限らない)</li>
+<li><span class="math inline">a_v := \operatorname{tr}(ρ(\operatorname{Frob}_v))</span> は l に依らない有理整数(トレースは共役で変わらないので、代表元の取り方によらない)</li>
 </ul>
 <p>を満たす。L 関数</p>
 <p><span class="math display"> L(E, s) := \prod_v \det(1 - \operatorname{Frob}_v q_v^{-s} | T_{l_v}(E)^{I_v})^{-1} </span></p>
-<p>(I_v は v の惰性群。各 v ごとに、v の剰余標数と異なる素数 l_v を選ぶ(この行列式は l_v の選び方によらない。v | l では l 進表現の惰性作用が一般に非自明なので、同じ l は使えない)。不分岐な v では T_{l_v}(E)^{I_v} = T_{l_v}(E))は (a_v) の族から直接構成される。</p>
-<p>Faltings の同型定理(§2.3 で述べた)は、E と E’ が K-同種(K-isogenous)であることと、すべての a_v が一致することが同値であることを示し、楕円曲線の数論的同種類は L 関数で決まることが示される。</p>
+<p>(<span class="math inline">I_v</span> は v の惰性群。各 v ごとに、v の剰余標数と異なる素数 <span class="math inline">l_v</span> を選ぶ(この行列式は <span class="math inline">l_v</span> の選び方によらない。v | l では l 進表現の惰性作用が一般に非自明なので、同じ l は使えない)。不分岐な v では <span class="math inline">T_{l_v}(E)^{I_v} = T_{l_v}(E)</span>)は <span class="math inline">(a_v)</span> の族から直接構成される。</p>
+<p>Faltings の同型定理(§2.3 で述べた)は、E と E’ が K-同種(K-isogenous)であることと、すべての <span class="math inline">a_v</span> が一致することが同値であることを示し、楕円曲線の数論的同種類は L 関数で決まることが示される。</p>
 <hr>
 </section>
 <section id="まとめ-l-進ガロワ表現の典型的供給源" class="level2">
 <h2 class="anchored" data-anchor-id="まとめ-l-進ガロワ表現の典型的供給源">7. まとめ — l 進ガロワ表現の典型的供給源</h2>
 <ol type="1">
-<li>楕円曲線 E/K の <strong>Tate 加群</strong> T_l(E) ≅ ℤ_l^2(char ≠ l)</li>
-<li>アーベル多様体 A/K の Tate 加群 T_l(A) ≅ ℤ_l^{2g}</li>
-<li>滑らかな射影多様体 X/K の <strong>エタールコホモロジー</strong> H^i_ét(X_{K}, ℚ_l)</li>
-<li>一般に、X 上の <strong>l 進局所系</strong> = π_1^ét(X) の連続表現</li>
+<li>楕円曲線 E/K の <strong>Tate 加群</strong> <span class="math inline">T_l(E) ≅ \mathbb{Z}_l^2</span>(char ≠ l)</li>
+<li>アーベル多様体 A/K の Tate 加群 <span class="math inline">T_l(A) ≅ \mathbb{Z}_l^{2g}</span></li>
+<li>滑らかな射影多様体 X/K の <strong>エタールコホモロジー</strong> <span class="math inline">H^i_{\text{ét}}(X_{\bar K}, \mathbb{Q}_l)</span></li>
+<li>一般に、X 上の <strong>l 進局所系</strong> = <span class="math inline">π_1^{\text{ét}}(X)</span> の連続表現</li>
 </ol>
 <p>これらは l ≠ p の世界(p は基底の体の標数、または局所的に見る素点の剰余標数)で線型代数の延長として扱える。L 関数、Weil 予想、Faltings の定理、Mordell 予想、すべてここを舞台とする。</p>
 <p>l = p の世界、つまり標数 p の多様体を p 進係数で見るときは結晶・prismatic コホモロジーが、数体上の l 進表現を l の上の素点で局所的に見るときは p 進ホッジ理論が必要になる。「係数の素数とガロワ表現 — l 進と p 進の差異、p 進ホッジ理論への入口」を参照。</p>
 <hr>
 <blockquote class="blockquote">
-<p><strong>横断メモ(on-mission・Galois/étale 中核).</strong> 本記事は庭の数論・Galois 側の深部ハブだ。π_1^ét=G_K とエタール位相は別記事「点ではなく、開集合の代数で登る」の étale 基本群の深掘り版。l 進ガロワ表現 ρ:G_K→GL₂ は「Galois 群が線形に作用する」そのもので、<span class="math inline">\det\rho=\chi_l</span>(円分指標)は別記事「Galois 理論を線形代数として見る」の固有値=指標(Dirichlet 指標)を l 進・2 次元へ持ち上げたもの(K=ℚ のとき、法 <span class="math inline">l^n</span> の Dirichlet 指標は、<span class="math inline">\chi_l</span> を <span class="math inline">\bmod l^n</span> に落とした <span class="math inline">G_{\mathbb Q}\to(\mathbb Z/l^n)^\times</span> と合成して <span class="math inline">G_{\mathbb Q}</span> の指標になる。<span class="math inline">\chi_l</span> 自身は像が <span class="math inline">\mathbb Z_l^\times</span> で無限なので、Dirichlet 指標そのものではない)。Tate 加群 <span class="math inline">T_l=\varprojlim E[l^n]</span> という pro-finite 逆系の塔は、別記事「確率空間を Stone 的に読み替える」の filtration↔︎Galois 塔(第一論文の起点)と同じ pro-finite 構造で、l 進(Iwasawa 的)に各段を追う所作も共通。L 関数 <span class="math inline">\prod_v</span> の素点ごとの Euler 因子は「有限素点と無限素点」の積公式・素点の言語、Frobenius の不分岐性は局所大域(「ハッセ原理」)と地続きだ。<strong>この記事は第一論文(filtration↔︎Galois)の到達したい地平の一つ</strong>を、線形代数(Galois 表現・固有値)の延長として描いている。</p>
+<p><strong>横断メモ(on-mission・Galois/étale 中核).</strong> 本記事は庭の数論・Galois 側の深部ハブだ。<span class="math inline">π_1^{\text{ét}}=G_K</span> とエタール位相は別記事「点ではなく、開集合の代数で登る」の étale 基本群の深掘り版。l 進ガロワ表現 <span class="math inline">ρ:G_K→\operatorname{GL}_2</span> は「Galois 群が線形に作用する」そのもので、<span class="math inline">\det\rho=\chi_l</span>(円分指標)は別記事「Galois 理論を線形代数として見る」の固有値=指標(Dirichlet 指標)を l 進・2 次元へ持ち上げたもの(K=ℚ のとき、法 <span class="math inline">l^n</span> の Dirichlet 指標は、<span class="math inline">\chi_l</span> を <span class="math inline">\bmod l^n</span> に落とした <span class="math inline">G_{\mathbb Q}\to(\mathbb Z/l^n)^\times</span> と合成して <span class="math inline">G_{\mathbb Q}</span> の指標になる。<span class="math inline">\chi_l</span> 自身は像が <span class="math inline">\mathbb Z_l^\times</span> で無限なので、Dirichlet 指標そのものではない)。Tate 加群 <span class="math inline">T_l=\varprojlim E[l^n]</span> という pro-finite 逆系の塔は、別記事「確率空間を Stone 的に読み替える」の filtration↔︎Galois 塔(第一論文の起点)と同じ pro-finite 構造で、l 進(Iwasawa 的)に各段を追う所作も共通。L 関数 <span class="math inline">\prod_v</span> の素点ごとの Euler 因子は「有限素点と無限素点」の積公式・素点の言語、Frobenius の不分岐性は局所大域(「ハッセ原理」)と地続きだ。<strong>この記事は第一論文(filtration↔︎Galois)の到達したい地平の一つ</strong>を、線形代数(Galois 表現・固有値)の延長として描いている。</p>
 </blockquote>
 </section>
 <section id="査読限界解説モード" class="level2">
 <h2 class="anchored" data-anchor-id="査読限界解説モード">査読・限界(解説モード)</h2>
 <ul>
-<li><strong>依拠する標準事実(深い定理群)</strong>:<span class="math inline">E[n]\cong(\mathbb Z/n)^2</span> と <span class="math inline">T_l\cong\mathbb Z_l^2</span>、Weil ペアリングと <span class="math inline">\det\rho=\chi_l</span>、Faltings の同型定理(1983)、Artin の比較定理、Weil 予想(Deligne 1974/Weil II 1980)、<span class="math inline">\pi_1^{\text{ét}}(\operatorname{Spec}K)=G_K</span>、l 進 lisse 層 ⇄ π_1^ét の連続表現、Chebotarev 密度定理。いずれも引用であって本記事は証明しない(参考文献参照)。</li>
+<li><strong>依拠する標準事実(深い定理群)</strong>:<span class="math inline">E[n]\cong(\mathbb Z/n)^2</span> と <span class="math inline">T_l\cong\mathbb Z_l^2</span>、Weil ペアリングと <span class="math inline">\det\rho=\chi_l</span>、Faltings の同型定理(1983)、Artin の比較定理、Weil 予想(Deligne 1974/Weil II 1980)、<span class="math inline">\pi_1^{\text{ét}}(\operatorname{Spec}K)=G_K</span>、l 進 lisse 層 ⇄ <span class="math inline">π_1^{\text{ét}}</span> の連続表現、Chebotarev 密度定理。いずれも引用であって本記事は証明しない(参考文献参照)。</li>
 <li><strong>境界(否定形)</strong>:理論は <span class="math inline">l\neq\mathrm{char}(K)</span> で働く。<span class="math inline">l=p=\mathrm{char}(K)</span> では <span class="math inline">E[p^n]</span> の階数が落ち(supersingular で <span class="math inline">0</span>)、六関手形式主義もそのままでは働かず、結晶・prismatic コホモロジーが要る(数体上の表現を <span class="math inline">l</span> の上の素点で局所的に見るときに要るのは p 進ホッジ理論)。</li>
 <li>院生向けの advanced サーベイ。新規定理の主張はなく、l 進ガロワ表現の供給源を一望する地図。</li>
 </ul>

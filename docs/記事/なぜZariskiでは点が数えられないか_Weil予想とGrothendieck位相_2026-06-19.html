@@ -75,6 +75,42 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script>
+/* 庭の KaTeX に、サイト全体のマクロを足す（2026-10-14）。
+ * 理由：pandoc が出す KaTeX の描画ループは macros を空（var macros = []）で呼ぶので、
+ *   KaTeX に無い \Sha が赤字の「\Sha」のまま出ていた（LAOX の3本と iwasawa-selmer で39か所）。
+ *   記事の本文の \Sha は書き換えない（MathJax の教科書と同じ書き方のまま通す）。
+ * 仕組み：katex.min.js は defer で読まれ、DOMContentLoaded の前に実行される。
+ *   window の capture の段の DOMContentLoaded は、document に付いた pandoc のループより先に走る
+ *   （置かれた順に関係なく）ので、ここで katex.render を包み、渡された macros に既定の定義を足す。
+ *   渡された macros の入れ物はそのまま使う（\gdef が描画をまたいで残る KaTeX の動きを変えない）。
+ *   Quarto の Quarto.typesetMath（脚注・相互参照の吹き出し）も katex.render を呼ぶので、同じく効く。
+ * 足すときはここの GARDEN_KATEX_MACROS に1行足す。MathJax に切り替えたときは何もしない。
+ */
+(function () {
+  var GARDEN_KATEX_MACROS = {
+    "\\Sha": "\\text{\u0428}"   /* Ш（キリル文字の大文字 Sha）。教科書の MathJax の \unicode{x0428} と同じ字 */
+  };
+  window.addEventListener("DOMContentLoaded", function () {
+    var k = window.katex;
+    if (!k || typeof k.render !== "function" || k.__gardenMacros) return;
+    var render = k.render;
+    var has = Object.prototype.hasOwnProperty;
+    k.render = function (tex, el, opts) {
+      opts = opts || {};
+      var m = opts.macros || {};
+      for (var name in GARDEN_KATEX_MACROS) {
+        if (has.call(GARDEN_KATEX_MACROS, name) && !has.call(m, name)) {
+          m[name] = GARDEN_KATEX_MACROS[name];
+        }
+      }
+      opts.macros = m;
+      return render.call(this, tex, el, opts);
+    };
+    k.__gardenMacros = true;
+  }, true);
+})();
+</script>
 
   <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
@@ -400,7 +436,7 @@ window.Quarto = {
 <p><span class="math display">\operatorname{Tr}(\mathrm{Frob}^n\mid H^0_{\mathrm{Zar}})=1</span></p>
 <p>しか出せず、「<span class="math inline">\mathbb P^1</span> の点は <span class="math inline">1</span> 個」と答える。<span class="math inline">q^n</span> が丸ごと消えた。<strong>Zariski では点が数えられない。</strong></p>
 <svg viewbox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="P¹の点の数の内訳：H⁰が1、H²がqⁿ。Zariskiはコ²を消すのでqⁿが欠落">
-<rect x="0" y="0" width="720" height="250" fill="#fbfaf7"></rect> <text x="20" y="28" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">#P¹(F_{qⁿ}) = qⁿ + 1 の内訳（跡公式の帳簿）</text> <!-- columns header --> <text x="60" y="66" font-family="Georgia, serif" font-size="13" fill="#7a6a4f">コホモロジー</text> <text x="270" y="66" font-family="Georgia, serif" font-size="13" fill="#7a6a4f">Frob の寄与</text> <text x="470" y="66" font-family="Georgia, serif" font-size="13" fill="#2f6258">étale で</text> <text x="590" y="66" font-family="Georgia, serif" font-size="13" fill="#a23b2e">Zariski で</text> <line x1="40" y1="74" x2="690" y2="74" stroke="#9a8b6f" stroke-width="1"></line> <g font-family="Georgia, serif" font-size="13" fill="#2b2b2b"> <text x="60" y="104">H⁰</text><text x="270" y="104">+1ⁿ = 1</text><text x="470" y="104" fill="#2f6258">1 ✓</text><text x="590" y="104" fill="#2f6258">1 ✓</text> <text x="60" y="138">H¹</text><text x="270" y="138">0</text><text x="470" y="138" fill="#2f6258">0</text><text x="590" y="138" fill="#7a6a4f">0</text> <text x="60" y="172">H²</text><text x="270" y="172">+qⁿ</text><text x="470" y="172" fill="#2f6258">qⁿ ✓</text><text x="590" y="172" fill="#a23b2e">0 ✗（消える）</text> </g> <line x1="40" y1="186" x2="690" y2="186" stroke="#9a8b6f" stroke-width="1"></line> <g font-family="Georgia, serif" font-size="13"> <text x="60" y="210" fill="#2b2b2b">合計</text><text x="270" y="210" fill="#2b2b2b">1 + qⁿ</text><text x="470" y="210" fill="#2f6258">1+qⁿ ✓ 正しい</text><text x="590" y="210" fill="#a23b2e">1 だけ ✗</text> </g> <text x="20" y="240" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">(概念図) 点の数の主要項 qⁿ は H² から来る。Zariski は H²=0 を返すのでこの項を供給できない。</text>
+<rect x="0" y="0" width="720" height="250" fill="#fbfaf7"></rect> <text x="20" y="28" font-family="Georgia, serif" font-size="15" fill="#2b2b2b">#P¹(F<tspan baseline-shift="-0.3em" font-size="75%">qⁿ</tspan>) = qⁿ + 1 の内訳（跡公式の帳簿）</text> <!-- columns header --> <text x="60" y="66" font-family="Georgia, serif" font-size="13" fill="#7a6a4f">コホモロジー</text> <text x="270" y="66" font-family="Georgia, serif" font-size="13" fill="#7a6a4f">Frob の寄与</text> <text x="470" y="66" font-family="Georgia, serif" font-size="13" fill="#2f6258">étale で</text> <text x="590" y="66" font-family="Georgia, serif" font-size="13" fill="#a23b2e">Zariski で</text> <line x1="40" y1="74" x2="690" y2="74" stroke="#9a8b6f" stroke-width="1"></line> <g font-family="Georgia, serif" font-size="13" fill="#2b2b2b"> <text x="60" y="104">H⁰</text><text x="270" y="104">+1ⁿ = 1</text><text x="470" y="104" fill="#2f6258">1 ✓</text><text x="590" y="104" fill="#2f6258">1 ✓</text> <text x="60" y="138">H¹</text><text x="270" y="138">0</text><text x="470" y="138" fill="#2f6258">0</text><text x="590" y="138" fill="#7a6a4f">0</text> <text x="60" y="172">H²</text><text x="270" y="172">+qⁿ</text><text x="470" y="172" fill="#2f6258">qⁿ ✓</text><text x="590" y="172" fill="#a23b2e">0 ✗（消える）</text> </g> <line x1="40" y1="186" x2="690" y2="186" stroke="#9a8b6f" stroke-width="1"></line> <g font-family="Georgia, serif" font-size="13"> <text x="60" y="210" fill="#2b2b2b">合計</text><text x="270" y="210" fill="#2b2b2b">1 + qⁿ</text><text x="470" y="210" fill="#2f6258">1+qⁿ ✓ 正しい</text><text x="590" y="210" fill="#a23b2e">1 だけ ✗</text> </g> <text x="20" y="240" font-family="Georgia, serif" font-size="11.5" fill="#7a6a4f">(概念図) 点の数の主要項 qⁿ は H² から来る。Zariski は H²=0 を返すのでこの項を供給できない。</text>
 </svg>
 <hr>
 </section>
