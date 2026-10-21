@@ -136,6 +136,26 @@ foreach ($f in $public) {
 Write-Host "コピー: $copied / $($public.Count) 本" -ForegroundColor Green
 Write-Host "保留中(非公開): $($held.Count) 本" -ForegroundColor Yellow
 
+# --- サニタイズ0: 保留中（$held）の記事へのリンクは、題ごと「（未公開の記事）」に置き換える ---
+# ⚠️ 2026-10-21 Fable の関所：下のサニタイズはリンクを外して【題を平文で残す】ので、
+#   公開中の「実構造は非可換でmodular共役Jになる」の本文に保留中の2本の題が出ていた（8月から）。
+#   萩野「推しは全部 Yes」（10/21 夜）＝公開の写しだけ置き換える（墓場の原稿は変えない）。
+$heldSet = @{}; foreach ($f in $held) { $heldSet[$f] = $true }
+$heldRe = [regex]'「?\[(?<t>[^\]]+)\]\((?<u>[^)]+)\)」?'
+$script:heldHit = 0
+foreach ($file in Get-ChildItem $dst -Filter *.md) {
+  $text = Get-Content $file.FullName -Raw
+  $new = $heldRe.Replace($text, {
+    param($m)
+    $u = $m.Groups['u'].Value.Trim() -replace '^<','' -replace '>$','' -replace '^\./',''
+    $u = ($u -split '#')[0]
+    if ($heldSet.ContainsKey($u)) { $script:heldHit++; return '（未公開の記事）' }
+    return $m.Value
+  })
+  if ($new -ne $text) { Set-Content -Path $file.FullName -Value $new -NoNewline -Encoding utf8 }
+}
+Write-Host "サニタイズ0: 保留中の記事へのリンク $script:heldHit か所を（未公開の記事）に" -ForegroundColor Cyan
+
 # --- サニタイズ: 許可リスト外ファイルへの内部リンクを無害化 ---
 # 公開セット(basename)を作る。リンク先がここに無い .md は「未公開」。
 $pubSet = @{}; foreach ($f in $public) { $pubSet[$f] = $true }
