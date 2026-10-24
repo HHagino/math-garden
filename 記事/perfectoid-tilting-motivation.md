@@ -1,5 +1,5 @@
 ---
-title: "Perfectoid と tilting — 混標数と等標数を架橋する"
+title: "Perfectoid と tilting"
 date: 2026-05-23
 updated: 2026-06-02
 status: 墓場

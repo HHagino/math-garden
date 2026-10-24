@@ -1,5 +1,5 @@
 ---
-title: "岩澤理論と Selmer 群 — p 進 L 関数と BSD 予想の橋渡し"
+title: "岩澤理論と Selmer 群"
 date: 2026-05-23
 status: 墓場
 audience: 楕円曲線・類体論の基礎を一度通った人向け

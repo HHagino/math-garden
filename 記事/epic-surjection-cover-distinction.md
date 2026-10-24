@@ -1,12 +1,12 @@
 ---
-title: epic・全射・cover はなぜ一致しないのか ── 右消去・到達・再構成
+title: "epic・全射・cover の違い"
 date: 2026-05-15
 tags: [圏論, epic, 全射, cover, monic, 右消去可能性, CRing, 局所化, Spec, faithfully flat, Top, 商写像, 降下理論]
 status: done
 level: 数学解説(圏論初学者〜代数幾何・トポス・降下理論に関心のある読者)
 ---
 
-# epic・全射・cover はなぜ一致しないのか ── 右消去・到達・再構成
+# epic・全射・cover の違い
 
 ## 1. 導入:Set の直観に引きずられる
 

@@ -1,5 +1,5 @@
 ---
-title: "なぜ Zariski では点が数えられないのか ── Grothendieck 位相を要請した Weil 予想"
+title: "Weil 予想と Grothendieck 位相"
 date: 2026-06-19
 lang: ja
 tags: [代数幾何, Zariski位相, Grothendieck位相, étale位相, étaleコホモロジー, Weil予想, Frobenius, Lefschetz跡公式, ゼータ関数, Deligne, l進コホモロジー, 数論]
@@ -7,7 +7,7 @@ status: done
 level: 数学解説(代数幾何・数論に関心がある読者。コホモロジーと有限体の語に触れていれば十分)
 ---
 
-# なぜ Zariski では点が数えられないのか ── Grothendieck 位相を要請した Weil 予想
+# Weil 予想と Grothendieck 位相
 
 > 無所属の独立研究者による解説ノート。庭の隣家 [点ではなく、開集合の代数で登る ── Zariski→étale](<開集合の代数で登る_Rdiscと Zariski étale_2026-06-02.md>) は、なぜ étale が**自然な一般化か**(locale/topos の母言語)を扱った。本稿はその**裏面** ── なぜ étale が**歴史的に要請されたか**(具体的な計算上の必要)を扱う。事実は末尾で一次照合する。
 

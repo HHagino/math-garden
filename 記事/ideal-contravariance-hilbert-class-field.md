@@ -1,12 +1,12 @@
 ---
-title: 割り切りから対称性へ ── イデアル・Galois・Hilbert 類体をつなぐ反変性
+title: "イデアル・Galois 群・Hilbert 類体の反変性"
 date: 2026-05-15
 tags: [イデアル, 理想数, Dedekind, 反変性, Galois理論, イデアル類群, Hilbert類体, 類体論, Artin相互法則, Frobenius, 代数的整数論]
 status: done
 level: 数学解説(大学上級〜大学院初級)
 ---
 
-# 割り切りから対称性へ ── イデアル・Galois・Hilbert 類体をつなぐ反変性
+# イデアル・Galois 群・Hilbert 類体の反変性
 
 ## 1. 導入:イデアルはなぜ「変な部分集合」に見えるのか
 

@@ -1,5 +1,5 @@
 ---
-title: "Poisson 和公式は格子で割った Peter–Weyl である ── 関数等式はどこから来るのか"
+title: "Poisson 和公式と Peter–Weyl"
 date: 2026-08-15
 lang: ja
 tags: [Poisson和公式, Peter-Weyl, Pontryagin双対, テータ関数, ゼータ関数, 関数等式, Mellin変換, 双対格子, Selberg跡公式, 調和解析]
@@ -7,7 +7,7 @@ status: done
 level: 数学解説(フーリエ級数と広義積分。ゼータの知識は仮定しない)
 ---
 
-# Poisson 和公式は格子で割った Peter–Weyl である ── 関数等式はどこから来るのか
+# Poisson 和公式と Peter–Weyl
 
 ## 1. 導入：$\zeta$ の関数等式は、総和公式の系である
 

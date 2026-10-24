@@ -1,12 +1,12 @@
 ---
-title: 距離とは何か ── Frank Nielsen の距離・発散地図を読む
+title: "Frank Nielsen の距離・発散の地図を読む"
 date: 2026-05-20
 tags: [距離, 発散, エントロピー, KL_divergence, Fisher_Rao, Bregman, Wasserstein, 情報幾何, 最適輸送, 量子情報, Nielsen, taxonomy]
 status: done
 level: 数学解説(情報幾何・機械学習・数理物理に関心のある読者向け)
 ---
 
-# 距離とは何か ── Frank Nielsen の距離・発散地図を読む
+# Frank Nielsen の距離・発散の地図を読む
 
 ## 0. 入口
 

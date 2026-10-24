@@ -1,4 +1,8 @@
-# 最尤推定が軌道閉包の問題になるとき ── Derksen–Makam の Kronecker quiver
+---
+title: "最尤推定と軌道閉包（Derksen–Makam）"
+---
+
+# 最尤推定と軌道閉包（Derksen–Makam）
 
 ## 1. 導入 ── Kronecker covariance を見ていたら quiver が出てきた
 

@@ -1,5 +1,5 @@
 ---
-title: "CM 楕円曲線と Kronecker の青春の夢 — 虚二次体の Abel 拡大の明示構成"
+title: "CM 楕円曲線で虚二次体の Abel 拡大を作る"
 date: 2026-05-23
 updated: 2026-06-02
 status: 墓場

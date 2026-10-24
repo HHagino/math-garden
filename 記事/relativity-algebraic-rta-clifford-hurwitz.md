@@ -1,12 +1,12 @@
 ---
-title: 相対論を代数から眺める別ルートRTA ── 光速不変、Clifford代数、Hurwitz剛性、そして曲率へ
+title: "代数から入る相対論（RTA）"
 date: 2026-05-21
 tags: [相対論, Lorentz変換, Clifford代数, geometric_algebra, Spin群, スピノル, R_C_H_O, 八元数, Hurwitz定理, G2, Albert代数, 例外群, 曲率, 一般相対論, ガロア的視点]
 status: done
 level: 数学解説(線形代数・群・多様体・相対論の初歩を知っているが Clifford 代数や八元数には詳しくない読者向け)
 ---
 
-# 相対論を代数から眺める別ルートRTA ── 光速不変、Clifford代数、Hurwitz剛性、そして曲率へ
+# 代数から入る相対論（RTA）
 
 > 光速不変から Lorentz 二次形式へ。
 > Lorentz 二次形式から Clifford 代数へ。

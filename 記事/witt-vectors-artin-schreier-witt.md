@@ -1,5 +1,5 @@
 ---
-title: "Witt ベクトルと Artin-Schreier-Witt — 標数 p の p^n 巡回拡大の明示的構成"
+title: "Witt ベクトルと Artin–Schreier–Witt 理論"
 date: 2026-05-23
 updated: 2026-06-02
 status: 墓場

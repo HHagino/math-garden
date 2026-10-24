@@ -1,5 +1,5 @@
 ---
-title: "伊藤補正は幾何ではない ── Fisher 弧長で単体を歩き、Dirichlet 重みで境界を読む"
+title: "伊藤補正と Fisher 弧長"
 date: 2026-08-03
 updated: 2026-10-14
 lang: ja
@@ -8,7 +8,7 @@ status: done
 level: 数学解説(確率微分方程式の記法・多様体上の微分形式・Gamma/Beta 関数を知っている読者向け)
 ---
 
-# 伊藤補正は幾何ではない ── Fisher 弧長で単体を歩き、Dirichlet 重みで境界を読む
+# 伊藤補正と Fisher 弧長
 
 ## 1. 導入：単体の上で、何が構造で何が表示か
 

@@ -1,5 +1,5 @@
 ---
-title: "Euler 因子は局所 Mellin 変換である ── Γ 因子だけ形が違って見える理由"
+title: "Euler 因子を局所 Mellin 変換として見る"
 date: 2026-08-15
 lang: ja
 tags: [Tateの学位論文, Euler因子, ガンマ因子, p進数, 局所ゼータ積分, Mellin変換, 自己双対, アデール, 素点, ゼータ関数]
@@ -7,7 +7,7 @@ status: done
 level: 数学解説(広義積分と等比級数。p 進数は定義から使う)
 ---
 
-# Euler 因子は局所 Mellin 変換である ── Γ 因子だけ形が違って見える理由
+# Euler 因子を局所 Mellin 変換として見る
 
 ## 1. 導入：$\xi(s)$ の二種類の因子は、同じ積分の値である
 
