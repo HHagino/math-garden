@@ -1,5 +1,6 @@
 ---
 title: "Witt ベクトルと Artin–Schreier–Witt 理論"
+description: "Witt ベクトルが Zp の標数 p 版になる事情から、Frobenius と Verschiebung を整理し、Artin–Schreier–Witt 完全列につなぐ。"
 date: 2026-05-23
 updated: 2026-06-02
 status: 墓場

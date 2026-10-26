@@ -1,5 +1,6 @@
 ---
 title: "有限群のフーリエ解析と指標表"
+description: "指標表を、群環 C[G] を行列環の直積に分解した結果の目録として読む。S₃ の群環が 6 = 1 + 1 + 4 に割れる計算から始める。"
 date: 2026-08-15
 lang: ja
 tags: [表現論, 有限群, Peter-Weyl, Wedderburn, Schur直交関係, 指標表, フーリエ変換, 群環, 同時対角化, Maschke, モジュラー表現, von Neumann環]

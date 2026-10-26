@@ -1,5 +1,6 @@
 ---
 title: "Weil 予想と Grothendieck 位相"
+description: "Zariski 位相では有限体上の点の数が説明できないことを P¹ で確かめ、Weil 予想が étale 位相を求めた経緯をたどる。"
 date: 2026-06-19
 lang: ja
 tags: [代数幾何, Zariski位相, Grothendieck位相, étale位相, étaleコホモロジー, Weil予想, Frobenius, Lefschetz跡公式, ゼータ関数, Deligne, l進コホモロジー, 数論]

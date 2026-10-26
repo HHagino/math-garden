@@ -1,5 +1,6 @@
 ---
 title: "イデアル・Galois 群・Hilbert 類体の反変性"
+description: "イデアルを何かで割り切れる元の全体とみると、包含と割り切りの向きが逆になる。この反変性を、Galois 理論とイデアル類群を経て Hilbert 類体まで追う。"
 date: 2026-05-15
 tags: [イデアル, 理想数, Dedekind, 反変性, Galois理論, イデアル類群, Hilbert類体, 類体論, Artin相互法則, Frobenius, 代数的整数論]
 status: done

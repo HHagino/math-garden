@@ -1,5 +1,6 @@
 ---
 title: "Frank Nielsen の距離・発散の地図を読む"
+description: "Frank Nielsen が作った距離と発散の分類図を、領域ごとに読み解く。ユークリッド、リーマン、情報幾何にまたがる代表的な量が、どうつながるかを整理する。"
 date: 2026-05-20
 tags: [距離, 発散, エントロピー, KL_divergence, Fisher_Rao, Bregman, Wasserstein, 情報幾何, 最適輸送, 量子情報, Nielsen, taxonomy]
 status: done

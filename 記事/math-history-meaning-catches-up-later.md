@@ -1,5 +1,6 @@
 ---
 title: "数学史の中の「整合性への信仰」"
+description: "複素数の受け入れられ方と、数理論理学や再帰理論の発展を並べ、意味や存在の説明が、記号操作の整合性より後から追いついてきた歴史をたどる。"
 date: 2026-05-20
 tags: [数学史, 数理論理学, 複素数, 三次方程式, casus_irreducibilis, Bombelli, 四元数, Hamilton, ゲーデル, 完全性定理, Tarski, 再帰理論, Kleene, Rice, 意味論]
 status: done

@@ -1,5 +1,6 @@
 ---
 title: "epic・全射・cover の違い"
+description: "epic、全射、cover が一般の圏では別物になることを、Z から Q への包含と、離散位相から密着位相への恒等写像の二つの例で確かめる。"
 date: 2026-05-15
 tags: [圏論, epic, 全射, cover, monic, 右消去可能性, CRing, 局所化, Spec, faithfully flat, Top, 商写像, 降下理論]
 status: done

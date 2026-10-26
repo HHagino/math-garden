@@ -1,5 +1,6 @@
 ---
 title: "有限切断多重ゼータ和の二つの双対性"
+description: "多重ゼータ値の双対性と、有限多重ゼータ値の Hoffman 双対性を、有限切断多重ゼータ和という一つの母体から並べて眺める。証明には立ち入らない見取り図。"
 date: 2026-05-15
 tags: [多重ゼータ値, MZV, 有限多重ゼータ値, Hoffman双対性, 反復積分, 多重調和和, shuffle関係, stuffle関係, Kaneko-Zagier, 数論]
 status: done

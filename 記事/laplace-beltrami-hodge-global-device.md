@@ -1,5 +1,6 @@
 ---
 title: "ラプラス＝ベルトラミ作用素の大域的な役割"
+description: "ラプラス＝ベルトラミ作用素は、計算を楽にする道具ではなく、調和形式と Hodge の定理を通じて大域的な構造を見る道具であることを説明する。"
 date: 2026-05-20
 tags: [Hodge理論, ラプラスベルトラミ作用素, Hodge_Laplacian, 微分形式, 外微分, Hodge_star, 調和形式, de_Rham_cohomology, Hodge_decomposition, ASD方程式, 4次元幾何, ゲージ理論]
 status: done

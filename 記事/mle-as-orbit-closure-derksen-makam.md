@@ -1,5 +1,6 @@
 ---
 title: "最尤推定と軌道閉包（Derksen–Makam）"
+description: "Derksen–Makam の論文を読み、最尤推定の存在が quiver 表現の GIT 安定性と対応することを紹介する。matrix normal model の条件も扱う。"
 ---
 
 # 最尤推定と軌道閉包（Derksen–Makam）

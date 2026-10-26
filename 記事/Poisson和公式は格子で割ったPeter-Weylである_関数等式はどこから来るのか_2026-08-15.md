@@ -1,5 +1,6 @@
 ---
 title: "Poisson 和公式と Peter–Weyl"
+description: "ゼータ関数の関数等式が、Poisson 和公式に Mellin 変換を施した形であることを示す。Poisson 和公式は、有限群のフーリエ解析を格子で割ったものと読む。"
 date: 2026-08-15
 lang: ja
 tags: [Poisson和公式, Peter-Weyl, Pontryagin双対, テータ関数, ゼータ関数, 関数等式, Mellin変換, 双対格子, Selberg跡公式, 調和解析]

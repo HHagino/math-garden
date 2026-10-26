@@ -1,5 +1,6 @@
 ---
 title: "代数から入る相対論（RTA）"
+description: "光速不変から Lorentz 二次形式、Clifford 代数、Spin 群へと、代数の側から相対論を組み立て直す。背後に、実ノルム多元体が四つしかないという事実が控える。"
 date: 2026-05-21
 tags: [相対論, Lorentz変換, Clifford代数, geometric_algebra, Spin群, スピノル, R_C_H_O, 八元数, Hurwitz定理, G2, Albert代数, 例外群, 曲率, 一般相対論, ガロア的視点]
 status: done

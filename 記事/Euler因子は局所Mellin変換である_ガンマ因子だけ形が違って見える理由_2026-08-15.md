@@ -1,5 +1,6 @@
 ---
 title: "Euler 因子を局所 Mellin 変換として見る"
+description: "完備ゼータ関数のガンマ因子と Euler 因子が、同じ局所 Mellin 変換の値であることを、有限素点と無限素点のそれぞれで手計算して示す。"
 date: 2026-08-15
 lang: ja
 tags: [Tateの学位論文, Euler因子, ガンマ因子, p進数, 局所ゼータ積分, Mellin変換, 自己双対, アデール, 素点, ゼータ関数]

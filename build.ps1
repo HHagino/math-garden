@@ -58,7 +58,7 @@ $public = @(
   'de-morgan-as-categorical-complement-duality.md',
   'epic-surjection-cover-distinction.md',
   'simultaneous-diagonalization-commuting-matrices.md',
-  'tsurukame-k-theory-special-class-math.md',
+  # （鶴亀算の K 理論は 2026-10-26 に $held へ移した＝萩野「41は外して」・冗談の読み物）
   '開集合の代数で登る_Rdiscと Zariski étale_2026-06-02.md',
   '離散直線はRnに埋め込めない_2026-06-02.md',
   '何を解と呼ぶのか_2026-06-02.md',
@@ -109,7 +109,11 @@ $held = @(
   #     ★ 公開しない（$public に戻さない）。墓場の原稿は残す。
   'LAOX性とは何か何でないか_隣接概念との微差_2026-06-19.md',
   'LAOX曲線_局所在庫あり大域在庫なし_2026-06-19.md',
-  'LAOX多様体_次元を上げると障害が増える_2026-06-19.md'
+  'LAOX多様体_次元を上げると障害が増える_2026-06-19.md',
+
+  # --- 2026-10-26 萩野「41は外して」（一覧の説明文の表で担当が「冗談の読み物」と書いた記事）---
+  #     ★ 公開しない（$public に戻さない）。墓場の原稿は残す。
+  'tsurukame-k-theory-special-class-math.md'
 )
 
 # 【10/13】確実な数学の誤りが見つかった13本は、直しが済むまで公開から外す（検算記録/庭_*_2026-10-12.md）。

@@ -1,5 +1,6 @@
 ---
 title: "Strichartz 評価入門"
+description: "自由 Schrödinger 方程式の解に対する Strichartz 評価の紹介。必要な予備知識、非線形 PDE に効く理由、学び直しの順序を整理する。"
 ---
 
 # Strichartz 評価入門

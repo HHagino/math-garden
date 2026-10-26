@@ -1,5 +1,6 @@
 ---
 title: "CM 楕円曲線で虚二次体の Abel 拡大を作る"
+description: "CM を持つ楕円曲線の等分点から、虚二次体の最大 abelian 拡大が作れることを説明する。Hilbert の第 12 問題のうち、解けている部分を扱う。"
 date: 2026-05-23
 updated: 2026-06-02
 status: 墓場

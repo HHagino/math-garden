@@ -1,5 +1,6 @@
 ---
 title: "KPZ 普遍性クラス入門"
+description: "界面の揺らぎが時間の 1/3 乗で伸びる KPZ 普遍性クラスの入門。KPZ 方程式と Tracy–Widom 分布を、証明済みの部分と予想を分けて紹介する。"
 author: "萩野裕正"
 date: "2026-06-01"
 tags: [数学解説, 確率論, 数理物理, KPZ普遍性, ランダム行列, Tracy-Widom, 統計力学]

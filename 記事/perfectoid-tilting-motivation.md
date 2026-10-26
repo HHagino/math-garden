@@ -1,5 +1,6 @@
 ---
 title: "Perfectoid と tilting"
+description: "混標数と等標数の p 進体をつなぐ道具として、ノルム体から perfectoid 体、tilting までを順に紹介する。ガロワ群の同型が出てくる。"
 date: 2026-05-23
 updated: 2026-06-02
 status: 墓場

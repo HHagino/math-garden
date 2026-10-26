@@ -1,5 +1,6 @@
 ---
 title: "伊藤補正と Fisher 弧長"
+description: "確率単体の上で、伊藤補正は座標表示の産物だが、分散安定化の変換と Dirichlet 分布の正規化定数は Fisher 計量の体積測度の別の顔だと示す。"
 date: 2026-08-03
 updated: 2026-10-14
 lang: ja

@@ -1,5 +1,6 @@
 ---
 title: "岩澤理論と Selmer 群"
+description: "円分 Zp 塔の岩澤代数と構造定理から、p 進 L 関数、岩澤の主予想へ進む。後半は Selmer 群と BSD 予想、Euler system との関わりを概観する。"
 date: 2026-05-23
 status: 墓場
 audience: 楕円曲線・類体論の基礎を一度通った人向け

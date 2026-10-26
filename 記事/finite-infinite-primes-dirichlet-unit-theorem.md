@@ -1,5 +1,6 @@
 ---
 title: "有限素点と無限素点"
+description: "数体の有限素点と無限素点を、有理数体から始めて並べて眺める。積公式と Dirichlet の単数定理をたどり、Arakelov 的な見方への入口まで進む。"
 date: 2026-05-15
 tags: [代数的整数論, 有限素点, 無限素点, 付値, 完備化, 積公式, Dirichlet単数定理, 単元群, Arakelov幾何, 局所大域]
 status: done
