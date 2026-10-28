@@ -51,6 +51,7 @@ $public = @(
   'nielsen-taxonomy-distances-divergences-map.md',
   'mle-as-orbit-closure-derksen-makam.md',
   'kpz-universality-class-introduction.md',
+  'elo-rating-as-stochastic-gradient-logistic.md',
   'strichartz-confluence-of-modern-analysis.md',
   # 代数・圏論・基礎
   'linear-algebra-as-k-theory-of-point.md',
