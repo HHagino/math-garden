@@ -3,7 +3,7 @@
 # 使い方（研究ノート/公開サイト/ で）:
 #   pwsh ./暗号化して組む.ps1                 # 組む → 関所（暗号化の前）→ 暗号化 → 確かめ → docs/ を差し替え
 #   pwsh ./暗号化して組む.ps1 -SkipByHead     # build.ps1 の $publicByHead（頭の語で書いた記事）を除いて試す
-#   pwsh ./暗号化して組む.ps1 -RenderCheck    # ↑の後に、描画の点検（Edge で 1 ページずつ 7 ページ＝鍵なしの対照 1・入口・棚 3・前の記事 1・教科書 1。
+#   pwsh ./暗号化して組む.ps1 -RenderCheck    # ↑の後に、描画の点検（Edge で 1 ページずつ 9 ページ＝鍵なしの対照 1・入口・棚 3・前の記事 1・2周目の記事 2・教科書 1。
 #                                             #   復号してから数式と図を数える。URL の # に鍵を入れるのは 127.0.0.1 の点検だけ・出力には残さない）
 #   pwsh ./暗号化して組む.ps1 -KeepPlain      # 暗号化の前の平文 _plain/ を消さずに残す（既定は最後に消す）
 # 何度でも打ち直せる（毎回 _plain/・docs/ を作り直す）。途中で止まったら docs/ は前のまま（平文は docs/ に置かない）。
@@ -107,6 +107,14 @@ try {
   Say '① build.ps1 で組む（出力は _plain/）' 'Cyan'
   & (Join-Path $root 'build.ps1') -SkipByHead:$SkipByHead
   if (-not (Test-Path -LiteralPath (Join-Path $plain 'index.html'))) { Fail '_plain/index.html が無い（組み立てが出力しなかった）' }
+  # 2026-11-22：_quarto.yml の resources「教科書/**」が前回の docs/教科書/（暗号化済み）にも当たり、_plain/docs/ に写される
+  #   （12:12・13:29 の回が関所 ③「暗号化と平文が混ざる」で止まった原因）。docs/ の入れ子は出すものではないので消す。
+  $nested = Join-Path $plain 'docs'
+  if (Test-Path -LiteralPath $nested) {
+    $nn = @(Get-ChildItem -LiteralPath $nested -Recurse -File).Count
+    Remove-Dir $nested
+    Say "  消した：_plain/docs/（前回の docs の写し・ファイル $nn 個）"
+  }
   $artMd = @(Get-ChildItem -LiteralPath (Join-Path $root '記事') -File -Filter *.md)
   $artHtml = @(Get-ChildItem -LiteralPath (Join-Path $plain '記事') -File -Filter *.html)
   if ($artHtml.Count -ne $artMd.Count) { Fail "記事の写し $($artMd.Count) 本に対して HTML が $($artHtml.Count) 本" }
@@ -324,6 +332,8 @@ if ($ok -and $RenderCheck) {
       @{ label = '棚：ゲナン＝ヴェイユの明示公式'; rel = (& $pick 'ゲナン＝ヴェイユの明示公式'); key = $true },
       @{ label = '棚：ガウス和の2乗は±p（数式の中の [..](..) をリンクと取り違えた所）'; rel = (& $pick 'ガウス和の2乗は±p'); key = $true },
       @{ label = '前から：Poisson和公式は格子で割ったPeter-Weyl'; rel = (& $pick 'Poisson和公式は格子で割ったPeter-Weylである'); key = $true },
+      @{ label = '2周目：有限体上のグラスマン多様体Gr24（図 2 枚の注の重なりを直した記事）'; rel = (& $pick '有限体上のグラスマン多様体Gr24'); key = $true },
+      @{ label = '2周目：局所化は分母に許すものを選ぶ操作（図の札に Z_(3) の平文）'; rel = (& $pick '局所化は分母に許すものを選ぶ操作'); key = $true },
       @{ label = '教科書：量子力学から場の量子論へ 第1章'; rel = '教科書/ja/qm-to-qft/ch01.html'; key = $true }
     )
     $list = @()
