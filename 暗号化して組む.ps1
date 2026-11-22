@@ -115,6 +115,11 @@ try {
     Remove-Dir $nested
     Say "  消した：_plain/docs/（前回の docs の写し・ファイル $nn 個）"
   }
+  # 2026-11-22：GitHub Pages（Linux）はファイル名を UTF-8 で 255 バイトまでしか取り出せない（a83740a の配備が
+  #   「File name too long」で落ちた。Windows は文字数で数えるので手元では通る）。.md→.html で 2 バイト伸びる。
+  $u8 = [Text.Encoding]::UTF8
+  $tooLong = @(Get-ChildItem -LiteralPath $plain -Recurse | Where-Object { $u8.GetByteCount($_.Name) -gt 255 })
+  if ($tooLong.Count) { Fail "名前が UTF-8 で 255 バイトを超えるファイルが $($tooLong.Count) 個（Pages で取り出せない・例：$($tooLong[0].Name.Substring(0, [Math]::Min(30, $tooLong[0].Name.Length)))…）。墓場の元の名前を縮める" }
   $artMd = @(Get-ChildItem -LiteralPath (Join-Path $root '記事') -File -Filter *.md)
   $artHtml = @(Get-ChildItem -LiteralPath (Join-Path $plain '記事') -File -Filter *.html)
   if ($artHtml.Count -ne $artMd.Count) { Fail "記事の写し $($artMd.Count) 本に対して HTML が $($artHtml.Count) 本" }
